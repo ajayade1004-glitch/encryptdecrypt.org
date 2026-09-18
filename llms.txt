@@ -1,0 +1,233 @@
+# encryptdecrypt.org - LLM & AI Crawler Tools Directory
+# Free, 100% Client-Side Developer Cryptography, Encoding & Utility Tools
+
+- [Base64 Encode/Decode](https://encryptdecrypt.org/tools/encoding-decoding/base64-encode-decode/): Encode or decode strings and binary files to Base64 format instantly.
+- [URL Encode/Decode](https://encryptdecrypt.org/tools/encoding-decoding/url-encode-decode/): Percent-encode or decode URL query strings and URI components safely.
+- [HTML Entities Encode/Decode](https://encryptdecrypt.org/tools/encoding-decoding/html-encode-decode/): Convert special characters to HTML entities and back to prevent XSS.
+- [Base32 Encode/Decode](https://encryptdecrypt.org/tools/encoding-decoding/base32-encode-decode/): Encode and decode RFC 4648 Base32 strings and authenticator keys.
+- [Base16 Hex Encode/Decode](https://encryptdecrypt.org/tools/encoding-decoding/base16-hex-encode-decode/): Convert ASCII/UTF-8 text into hexadecimal byte values and reverse.
+- [Base58 Encode/Decode](https://encryptdecrypt.org/tools/encoding-decoding/base58-encode-decode/): Bitcoin and IPFS standard Base58 string encoder and decoder tool.
+- [Base85 (Ascii85) Encode/Decode](https://encryptdecrypt.org/tools/encoding-decoding/base85-ascii85-encode/): Adobe PostScript and Git binary diff standard Base85 converter.
+- [URL-Safe Base64 Encode/Decode](https://encryptdecrypt.org/tools/encoding-decoding/url-safe-base64/): Base64 encoding replacing + and / with - and _ without padding.
+- [UTF-8 Bytes Encoder/Decoder](https://encryptdecrypt.org/tools/encoding-decoding/utf8-encode-decode/): Inspect UTF-8 byte representation, code units, and Unicode points.
+- [Binary to Text Translator](https://encryptdecrypt.org/tools/encoding-decoding/binary-translator/): Convert 8-bit binary 0s and 1s to human-readable text and ASCII.
+- [Morse Code Translator](https://encryptdecrypt.org/tools/encoding-decoding/morse-code-translator/): Convert international Morse code dots and dashes to text audio-ready.
+- [Punycode IDN Converter](https://encryptdecrypt.org/tools/encoding-decoding/punycode-converter/): Convert international domain names with Unicode characters to Punycode.
+- [UUEncode / UUDecode](https://encryptdecrypt.org/tools/encoding-decoding/uuencode-uudecode/): Legacy Unix-to-Unix historical encoding format encoder and decoder.
+- [Quoted-Printable Encode/Decode](https://encryptdecrypt.org/tools/encoding-decoding/quoted-printable/): MIME email format quoted-printable transfer encoding decoder.
+- [Base64 to Image Data URI](https://encryptdecrypt.org/tools/encoding-decoding/base64-to-image/): Convert raw Base64 data strings into visual images and preview inline.
+- [Image to Base64 Converter](https://encryptdecrypt.org/tools/encoding-decoding/image-to-base64/): Generate data:image/png;base64 URI strings from any uploaded file.
+- [Base91 Encode/Decode](https://encryptdecrypt.org/tools/encoding-decoding/base91-encode-decode/): High-density binary-to-ASCII Base91 byte packer algorithm.
+- [Percent Encoding Decoder](https://encryptdecrypt.org/tools/encoding-decoding/percent-encoding-decoder/): Strict RFC 3986 percent-encoding and component parsing tool.
+- [Hex to Binary Converter](https://encryptdecrypt.org/tools/encoding-decoding/hex-to-binary/): Translate hex digits directly to raw 4-bit nibble binary streams.
+- [Binary to Hex Converter](https://encryptdecrypt.org/tools/encoding-decoding/binary-to-hex/): Group binary 8-bit bytes into clean hexadecimal string values.
+- [Octal to Text String](https://encryptdecrypt.org/tools/encoding-decoding/octal-to-text/): Convert 3-digit octal byte representations back into plain ASCII.
+- [Decimal to Binary & Hex](https://encryptdecrypt.org/tools/encoding-decoding/decimal-to-binary-hex/): Convert arbitrary base 10 integers into binary, octal, and hex.
+- [ROT47 Cipher & Encoder](https://encryptdecrypt.org/tools/encoding-decoding/rot47-cipher/): Rotate all 94 printable ASCII characters by 47 positions.
+- [AES 256 Encrypt & Decrypt](https://encryptdecrypt.org/tools/encryption-ciphers/aes-encrypt-decrypt/): Military-grade AES-GCM and AES-CBC symmetric encryption in browser.
+- [RSA Keypair & Encryption](https://encryptdecrypt.org/tools/encryption-ciphers/rsa-encrypt-decrypt/): Generate 2048/4096-bit RSA keys and encrypt messages with public key.
+- [ChaCha20-Poly1305 Cipher](https://encryptdecrypt.org/tools/encryption-ciphers/chacha20-poly1305/): High-speed authenticated stream cipher encryption per RFC 8439.
+- [Triple DES (3DES) Cipher](https://encryptdecrypt.org/tools/encryption-ciphers/triple-des-3des/): Legacy Triple Data Encryption Standard cipher encoder and tester.
+- [Blowfish Cipher Tool](https://encryptdecrypt.org/tools/encryption-ciphers/blowfish-encrypt/): Bruce Schneier symmetric 64-bit block cipher encryptor.
+- [Twofish 256-bit Cipher](https://encryptdecrypt.org/tools/encryption-ciphers/twofish-cipher/): AES finalist Twofish symmetric encryption implementation.
+- [RC4 Stream Cipher](https://encryptdecrypt.org/tools/encryption-ciphers/rc4-stream-cipher/): Rivest Cipher 4 variable key-size stream cipher generator.
+- [Caesar Cipher Decoder](https://encryptdecrypt.org/tools/encryption-ciphers/caesar-cipher-decoder/): Classic Roman shift cipher solver with automatic shift brute-force.
+- [Vigenère Cipher Solver](https://encryptdecrypt.org/tools/encryption-ciphers/vigenere-cipher-solver/): Polyalphabetic substitution cipher encryption and cryptanalysis tool.
+- [ROT13 Cipher](https://encryptdecrypt.org/tools/encryption-ciphers/rot13-cipher/): Standard 13-character Caesar alphabet rotation cipher for spoilers.
+- [Atbash Hebrew Cipher](https://encryptdecrypt.org/tools/encryption-ciphers/atbash-cipher/): Hebrew alphabet reversal substitution cipher encoder and decoder.
+- [Affine Mathematical Cipher](https://encryptdecrypt.org/tools/encryption-ciphers/affine-cipher/): Monoalphabetic substitution using linear congruence (ax + b) mod 26.
+- [Rail Fence Cipher](https://encryptdecrypt.org/tools/encryption-ciphers/rail-fence-cipher/): Zig-zag transposition cipher encryptor with variable rails.
+- [Playfair Digraph Cipher](https://encryptdecrypt.org/tools/encryption-ciphers/playfair-cipher/): Historic 5x5 key matrix polygraphic substitution cipher.
+- [Simple Substitution Cipher](https://encryptdecrypt.org/tools/encryption-ciphers/substitution-cipher/): Custom alphabet mapping substitution cipher generator and solver.
+- [Polybius Square Cipher](https://encryptdecrypt.org/tools/encryption-ciphers/polybius-square/): Fractionating grid cipher converting letters to 2-digit coordinates.
+- [Baconian Steganography Cipher](https://encryptdecrypt.org/tools/encryption-ciphers/baconian-cipher/): Sir Francis Bacon 5-character binary steganography encoder.
+- [XOR Stream Cipher](https://encryptdecrypt.org/tools/encryption-ciphers/xor-cipher/): Bitwise XOR binary key encryption and stream masking utility.
+- [Hill Matrix Cipher 2x2 / 3x3](https://encryptdecrypt.org/tools/encryption-ciphers/hill-cipher/): Lester Hill linear algebra matrix modular arithmetic cipher.
+- [Enigma Machine Simulator](https://encryptdecrypt.org/tools/encryption-ciphers/enigma-machine-simulator/): WWII Wehrmacht M3/M4 Enigma cryptographic rotor machine emulator.
+- [Bifid Delastelle Cipher](https://encryptdecrypt.org/tools/encryption-ciphers/bifid-cipher/): Fractionation plus transposition polygraphic cipher.
+- [Beaufort Reciprocal Cipher](https://encryptdecrypt.org/tools/encryption-ciphers/beaufort-cipher/): Variant of Vigenère cipher where ciphertext = key - plaintext.
+- [One-Time Pad (OTP) Tool](https://encryptdecrypt.org/tools/encryption-ciphers/one-time-pad/): Information-theoretically secure unbreakable Vernam cipher.
+- [Columnar Transposition Cipher](https://encryptdecrypt.org/tools/encryption-ciphers/columnar-transposition/): Rearrange message characters into tabular key columns.
+- [SHA-256 Hash Generator](https://encryptdecrypt.org/tools/hashing-security/sha256-hash-generator/): Cryptographic 256-bit hash generator using native Web Crypto API.
+- [SHA-512 Hash Generator](https://encryptdecrypt.org/tools/hashing-security/sha512-hash-generator/): Generate 512-bit SHA-2 secure cryptographic hashes for files and text.
+- [MD5 Hash Generator](https://encryptdecrypt.org/tools/hashing-security/md5-hash-generator/): Calculate 128-bit MD5 checksum digests for verification.
+- [SHA-1 Hash Generator](https://encryptdecrypt.org/tools/hashing-security/sha1-hash-generator/): Generate 160-bit SHA-1 hash values for legacy and Git commit checks.
+- [SHA-3 (Keccak) Hasher](https://encryptdecrypt.org/tools/hashing-security/sha3-keccak-generator/): FIPS 202 SHA-3 and Ethereum Keccak-256 cryptographic sponge hash.
+- [SHA-384 Hash Generator](https://encryptdecrypt.org/tools/hashing-security/sha384-hash-generator/): NIST FIPS 180-4 384-bit truncated SHA-2 hash calculator.
+- [HMAC Generator (SHA-256/512)](https://encryptdecrypt.org/tools/hashing-security/hmac-generator/): Hash-based Message Authentication Code keyed digest generator.
+- [BLAKE2b / BLAKE2s Hasher](https://encryptdecrypt.org/tools/hashing-security/blake2b-blake2s/): High performance cryptographic hash faster than MD5 on modern CPUs.
+- [BLAKE3 Tree Hasher](https://encryptdecrypt.org/tools/hashing-security/blake3-hasher/): Tree-hashing BLAKE3 algorithm generator for ultra-fast throughput.
+- [RIPEMD-160 Hash Tool](https://encryptdecrypt.org/tools/hashing-security/ripemd160-hasher/): Bitcoin address generation standard 160-bit cryptographic hash.
+- [CRC32 Checksum Calculator](https://encryptdecrypt.org/tools/hashing-security/crc32-checksum/): Cyclic Redundancy Check 32-bit polynomial error detection.
+- [CRC16 Checksum Calculator](https://encryptdecrypt.org/tools/hashing-security/crc16-calculator/): Modbus, CCITT, and USB standard 16-bit CRC checksum generator.
+- [Whirlpool 512-bit Hasher](https://encryptdecrypt.org/tools/hashing-security/whirlpool-hash/): ISO/IEC 10118-3 NESSIE recommended 512-bit block cipher hash.
+- [Argon2 Password Hash Simulator](https://encryptdecrypt.org/tools/hashing-security/argon2-hasher/): Password Hashing Competition winner Argon2i/Argon2d/Argon2id.
+- [bcrypt Hash Generator & Check](https://encryptdecrypt.org/tools/hashing-security/bcrypt-generator/): Blowfish-derived adaptive salted password hashing algorithm.
+- [PBKDF2 Key Derivation Tool](https://encryptdecrypt.org/tools/hashing-security/pbkdf2-key-derivation/): RFC 2898 Password-Based Key Derivation Function with iterations.
+- [scrypt Key Derivation](https://encryptdecrypt.org/tools/hashing-security/scrypt-hash-simulator/): Memory-hard cryptographic hash designed to thwart custom ASIC attacks.
+- [Adler-32 Checksum](https://encryptdecrypt.org/tools/hashing-security/adler32-checksum/): Mark Adler zlib compression checksum algorithm calculator.
+- [MurmurHash3 Calculator](https://encryptdecrypt.org/tools/hashing-security/murmurhash3-calculator/): Fast non-cryptographic hash function for hash table lookups.
+- [FNV-1a Hash Generator](https://encryptdecrypt.org/tools/hashing-security/fnv1a-hash/): Fowler-Noll-Vo 32-bit and 64-bit non-cryptographic hash.
+- [NTLM Hash Generator](https://encryptdecrypt.org/tools/hashing-security/ntlm-hash-generator/): Windows NT LAN Manager MD4 Unicode authentication password hash.
+- [Secure Password Generator](https://encryptdecrypt.org/tools/generators-tokens/secure-password-generator/): Generate cryptographically secure random passwords with entropy metrics.
+- [UUID / GUID v4 & v7 Generator](https://encryptdecrypt.org/tools/generators-tokens/uuid-guid-generator/): Generate random RFC 4122 v4 and timestamped v7 UUID tokens.
+- [NanoID Token Generator](https://encryptdecrypt.org/tools/generators-tokens/nanoid-generator/): Compact, URL-friendly unique string identifier generator for JS.
+- [JWT Token Generator & Debugger](https://encryptdecrypt.org/tools/generators-tokens/jwt-token-generator/): Create, sign, decode, and verify JSON Web Tokens in browser.
+- [API Key & Bearer Generator](https://encryptdecrypt.org/tools/generators-tokens/api-key-generator/): Generate hex, base64, or prefixed API keys (sk_live_...) instantly.
+- [Cryptographic Random String](https://encryptdecrypt.org/tools/generators-tokens/crypto-random-string/): CSPRNG powered random alphanumeric strings using crypto.getRandomValues.
+- [TOTP 2FA Authenticator Code](https://encryptdecrypt.org/tools/generators-tokens/totp-token-generator/): Simulate Google Authenticator 6-digit TOTP codes from secret keys.
+- [HOTP Counter Token Generator](https://encryptdecrypt.org/tools/generators-tokens/hotp-token-generator/): RFC 4226 HMAC-based one-time password generator with counter.
+- [DiceWare Passphrase Generator](https://encryptdecrypt.org/tools/generators-tokens/diceware-passphrase/): Generate memorable high-entropy multi-word passphrases per EFF lists.
+- [ULID Generator](https://encryptdecrypt.org/tools/generators-tokens/ulid-generator/): Universally Unique Lexicographically Sortable Identifier creator.
+- [CUID2 Identifier Generator](https://encryptdecrypt.org/tools/generators-tokens/cuid2-generator/): Collision-resistant unique IDs optimized for horizontal scale.
+- [Random Hex Byte Generator](https://encryptdecrypt.org/tools/generators-tokens/random-hex-bytes/): Generate raw random hex strings of any byte length for crypto seeds.
+- [CSRF Token Generator](https://encryptdecrypt.org/tools/generators-tokens/csrf-token-generator/): Generate secure cryptographic tokens for cross-site request forgery defense.
+- [Strong PIN Code Generator](https://encryptdecrypt.org/tools/generators-tokens/pin-code-generator/): Generate 4 to 12 digit cryptographically random PIN codes.
+- [MAC Address Generator](https://encryptdecrypt.org/tools/generators-tokens/mac-address-generator/): Generate unicast or multicast random IEEE 802 MAC hardware addresses.
+- [AES Encryption Key Generator](https://encryptdecrypt.org/tools/generators-tokens/encryption-key-generator/): Generate random 128-bit, 192-bit, and 256-bit symmetric encryption keys.
+- [Salt & Nonce Generator](https://encryptdecrypt.org/tools/generators-tokens/salt-nonce-generator/): Generate random cryptographic salt and initialization nonce buffers.
+- [Luhn Test Card Generator](https://encryptdecrypt.org/tools/generators-tokens/luhn-test-card-generator/): Generate synthetic test payment card numbers valid under Luhn checks.
+- [BIP-39 Mnemonic Seed Generator](https://encryptdecrypt.org/tools/generators-tokens/bip39-seed-generator/): Generate 12 and 24-word cryptographic mnemonic passphrases.
+- [Random IV (Vector) Generator](https://encryptdecrypt.org/tools/generators-tokens/random-iv-generator/): Generate 96-bit and 128-bit Initialization Vectors for AES-GCM.
+- [Snowflake ID Generator](https://encryptdecrypt.org/tools/generators-tokens/snowflake-id-generator/): Generate Twitter Snowflake-compatible 64-bit distributed IDs.
+- [JSON Formatter & Validator](https://encryptdecrypt.org/tools/dev-tools-formatters/json-formatter/): Beautify, indent, minify, and validate JSON data structures.
+- [XML Formatter & Beautifier](https://encryptdecrypt.org/tools/dev-tools-formatters/xml-formatter/): Format messy XML markup with custom indentation and tag validation.
+- [YAML to JSON Converter](https://encryptdecrypt.org/tools/dev-tools-formatters/yaml-to-json/): Convert YAML configuration files to valid structured JSON format.
+- [JSON to YAML Converter](https://encryptdecrypt.org/tools/dev-tools-formatters/json-to-yaml/): Convert JSON documents to clean, readable YAML syntax.
+- [SQL Query Formatter](https://encryptdecrypt.org/tools/dev-tools-formatters/sql-formatter/): Beautify SQL queries with standardized keywords, joins, and indentation.
+- [HTML Minifier & Formatter](https://encryptdecrypt.org/tools/dev-tools-formatters/html-minifier/): Strip whitespace, comments, and compress HTML payloads for production.
+- [CSS Minifier & Formatter](https://encryptdecrypt.org/tools/dev-tools-formatters/css-minifier/): Minify stylesheet rules or beautify nested CSS with clean tabs.
+- [JS Deobfuscator & Beautifier](https://encryptdecrypt.org/tools/dev-tools-formatters/js-deobfuscator/): Unpack and pretty-print minified JavaScript code cleanly.
+- [RegEx Tester & Debugger](https://encryptdecrypt.org/tools/dev-tools-formatters/regex-tester/): Test regular expressions in real-time with full match groups.
+- [Cron Expression Parser](https://encryptdecrypt.org/tools/dev-tools-formatters/cron-expression-parser/): Explain cron syntax in English and compute the next 10 execution dates.
+- [Unix Timestamp Converter](https://encryptdecrypt.org/tools/dev-tools-formatters/timestamp-epoch-converter/): Convert epoch seconds and milliseconds to human ISO-8601 dates.
+- [Diff Checker & Text Compare](https://encryptdecrypt.org/tools/dev-tools-formatters/diff-checker/): Side-by-side text difference comparison highlighting changes.
+- [Markdown to HTML Converter](https://encryptdecrypt.org/tools/dev-tools-formatters/markdown-to-html/): Convert CommonMark Markdown to clean HTML with live preview.
+- [GraphQL Query Beautifier](https://encryptdecrypt.org/tools/dev-tools-formatters/graphql-query-beautifier/): Format GraphQL queries, mutations, and fragments with correct nesting.
+- [TypeScript Preview Tool](https://encryptdecrypt.org/tools/dev-tools-formatters/typescript-transpiler-preview/): Strip TypeScript type annotations to view pure JavaScript output.
+- [JSON Schema Validator](https://encryptdecrypt.org/tools/dev-tools-formatters/json-schema-validator/): Validate JSON documents against draft-07 and draft-2020-12 schemas.
+- [CSV to JSON Converter](https://encryptdecrypt.org/tools/file-data-converters/csv-to-json/): Convert comma and tab-separated values into JSON arrays and objects.
+- [JSON to CSV Converter](https://encryptdecrypt.org/tools/file-data-converters/json-to-csv/): Flatten structured JSON array documents into downloadable CSV tables.
+- [XML to JSON Converter](https://encryptdecrypt.org/tools/file-data-converters/xml-to-json/): Convert XML element hierarchies to modern JSON representations.
+- [JSON to XML Converter](https://encryptdecrypt.org/tools/file-data-converters/json-to-xml/): Serialize JSON objects into standard well-formed XML strings.
+- [Base64 to PDF Converter](https://encryptdecrypt.org/tools/file-data-converters/base64-to-pdf/): Decode Base64 strings to downloadable PDF files with preview.
+- [PDF to Base64 Converter](https://encryptdecrypt.org/tools/file-data-converters/pdf-to-base64/): Encode local PDF documents into raw Base64 data strings.
+- [Image to WebP Converter](https://encryptdecrypt.org/tools/file-data-converters/image-to-webp/): Compress PNG and JPEG files to WebP format inside your browser.
+- [SVG to PNG Converter](https://encryptdecrypt.org/tools/file-data-converters/svg-to-png/): Render vector SVG markup into raster PNG images with custom scaling.
+- [Text to Hex Dump Viewer](https://encryptdecrypt.org/tools/file-data-converters/text-to-hex-dump/): Display classical 16-byte hex dump offset views with ASCII sidebar.
+- [Hex Dump to Binary File](https://encryptdecrypt.org/tools/file-data-converters/hex-dump-to-binary/): Reconstruct binary files from hex dump strings and download.
+- [TSV to Markdown Table](https://encryptdecrypt.org/tools/file-data-converters/excel-tsv-to-markdown/): Convert copied spreadsheet rows into GitHub Markdown tables.
+- [JSON to TypeScript Interface](https://encryptdecrypt.org/tools/file-data-converters/json-to-typescript/): Auto-generate TypeScript type interfaces from sample JSON data.
+- [cURL to Fetch & Axios Converter](https://encryptdecrypt.org/tools/file-data-converters/curl-to-fetch/): Convert raw cURL command lines into modern JavaScript Fetch code.
+- [File Checksum Verifier](https://encryptdecrypt.org/tools/file-data-converters/file-checksum-verifier/): Compute SHA-256 and MD5 hashes of local files with zero upload.
+- [Gzip Decompressor](https://encryptdecrypt.org/tools/file-data-converters/gzip-deflate-decompressor/): Decompress Gzip, Deflate, and zlib binary files in browser.
+- [Brotli Stream Decompressor](https://encryptdecrypt.org/tools/file-data-converters/brotli-decompressor/): Decompress Brotli compressed payload files client-side.
+- [JWT Token Signature Validator](https://encryptdecrypt.org/tools/validators-checkers/jwt-validator/): Check expiration, claims, and verify HMAC/RSA signatures of JWTs.
+- [SSL / TLS Certificate Decoder](https://encryptdecrypt.org/tools/validators-checkers/ssl-cert-decoder/): Parse X.509 PEM certificates to inspect SAN, issuer, and expiry dates.
+- [Credit Card Luhn Validator](https://encryptdecrypt.org/tools/validators-checkers/credit-card-luhn-validator/): Verify card checksums using Mod 10 Luhn formula algorithm.
+- [IPv4 & IPv6 Address Validator](https://encryptdecrypt.org/tools/validators-checkers/ip-address-validator/): Validate IP address formats, private ranges, and subnet boundaries.
+- [Email Address Syntax Checker](https://encryptdecrypt.org/tools/validators-checkers/email-syntax-checker/): Verify RFC 5322 email formatting, TLDs, and domain structures.
+- [Domain Name Syntax Validator](https://encryptdecrypt.org/tools/validators-checkers/domain-syntax-validator/): Check FQDN domain validity against ICANN RFC specifications.
+- [Password Strength Meter](https://encryptdecrypt.org/tools/validators-checkers/password-strength-meter/): Measure password entropy, crack times, and dictionary vulnerabilities.
+- [JSON Syntax Checker](https://encryptdecrypt.org/tools/validators-checkers/json-syntax-checker/): Pinpoint exact line and column numbers of JSON syntax parse errors.
+- [URL & Query Parameter Parser](https://encryptdecrypt.org/tools/validators-checkers/url-query-parser/): Deconstruct URLs into protocol, hostname, path, and param keys.
+- [IBAN Bank Account Validator](https://encryptdecrypt.org/tools/validators-checkers/iban-validator/): Validate International Bank Account Numbers using MOD 97-10.
+- [UUID Format Validator](https://encryptdecrypt.org/tools/validators-checkers/uuid-format-validator/): Check UUID version (v1-v7) and variant conformance.
+- [SEMVER Version Validator](https://encryptdecrypt.org/tools/validators-checkers/semver-validator/): Verify Semantic Versioning 2.0.0 strings and version comparisons.
+- [ISBN-10 & ISBN-13 Validator](https://encryptdecrypt.org/tools/validators-checkers/isbn-validator/): Calculate and verify book ISBN check digits.
+- [MIME Type Lookup & Checker](https://encryptdecrypt.org/tools/validators-checkers/mime-type-lookup/): Search MIME types and corresponding canonical file extensions.
+- [Word, Character & Byte Counter](https://encryptdecrypt.org/tools/text-utilities/word-character-counter/): Count characters, words, sentences, UTF-8 bytes, and reading time.
+- [Case Converter](https://encryptdecrypt.org/tools/text-utilities/case-converter/): Convert text to camelCase, snake_case, PascalCase, kebab-case, UPPER.
+- [Clean URL Slug Generator](https://encryptdecrypt.org/tools/text-utilities/slugify-generator/): Transform arbitrary headings and strings into SEO-friendly URL slugs.
+- [Remove Duplicate Lines Tool](https://encryptdecrypt.org/tools/text-utilities/remove-duplicate-lines/): Deduplicate text rows with optional case sensitivity and whitespace trim.
+- [Sort Text Lines Tool](https://encryptdecrypt.org/tools/text-utilities/sort-text-lines/): Sort lines alphabetically, naturally, by string length, or reverse.
+- [Reverse Text & String Inverter](https://encryptdecrypt.org/tools/text-utilities/reverse-text-inverter/): Invert character strings, words, or full multi-line paragraphs.
+- [Strip HTML Tags from Text](https://encryptdecrypt.org/tools/text-utilities/strip-html-tags/): Remove all HTML and XML element tags leaving clean plain text.
+- [Add Line Numbers / Prefix](https://encryptdecrypt.org/tools/text-utilities/add-line-numbers/): Prepend sequential numbers or custom prefix/suffix strings to lines.
+- [Find & Replace with RegEx](https://encryptdecrypt.org/tools/text-utilities/find-replace-regex/): Perform multi-pattern global regular expression text substitutions.
+- [Whitespace & Empty Line Cleaner](https://encryptdecrypt.org/tools/text-utilities/whitespace-cleaner/): Remove redundant spaces, tabs, and excess blank lines from text.
+- [Levenshtein Distance Calculator](https://encryptdecrypt.org/tools/text-utilities/levenshtein-distance/): Calculate edit distance and string similarity percentage.
+- [Lorem Ipsum Text Generator](https://encryptdecrypt.org/tools/text-utilities/lorem-ipsum-generator/): Generate placeholder Latin dummy text by words, sentences, or paras.
+- [Text to ASCII Banner Generator](https://encryptdecrypt.org/tools/text-utilities/text-to-ascii-art/): Convert words into stylish ASCII banner art fonts.
+- [Bulk Case Transformer](https://encryptdecrypt.org/tools/text-utilities/bulk-case-transformer/): Batch transform lines into title case, sentence case, and screaming case.
+- [Zero-Width Character Cleaner](https://encryptdecrypt.org/tools/text-utilities/zero-width-space-detector/): Detect and remove invisible zero-width spaces (ZWSP, ZWNJ, BOM).
+- [JavaScript String Escape](https://encryptdecrypt.org/tools/escape-network/js-string-escape/): Escape quotes, newlines, and control codes for JS string literals.
+- [SQL String & Query Escaper](https://encryptdecrypt.org/tools/escape-network/sql-string-escape/): Escape single quotes and special characters for safe SQL queries.
+- [HTML Special Characters Escaper](https://encryptdecrypt.org/tools/escape-network/html-special-chars/): Escape &, <, >, ", ' into safe HTML entities.
+- [JSON String Escaper](https://encryptdecrypt.org/tools/escape-network/json-string-escaper/): Escape text for safe inclusion inside JSON string fields.
+- [RegEx Special Character Escaper](https://encryptdecrypt.org/tools/escape-network/regex-char-escaper/): Escape regex metacharacters [ ] ( ) { } * + ? ^ $ \ |.
+- [Shell & Bash Argument Escaper](https://encryptdecrypt.org/tools/escape-network/shell-argument-escaper/): Quote and escape shell parameters to prevent command injection.
+- [XML Attribute Escaper](https://encryptdecrypt.org/tools/escape-network/xml-attribute-escaper/): Escape XML attribute value delimiters and special entities.
+- [CSV Field Escaper](https://encryptdecrypt.org/tools/escape-network/csv-field-escaper/): Wrap fields with quotes and escape internal delimiters per RFC 4180.
+- [URL Path vs Query Escaper](https://encryptdecrypt.org/tools/escape-network/url-path-query-escaper/): Differentiate encodeURI vs encodeURIComponent escaping rules.
+- [Markdown Syntax Escaper](https://encryptdecrypt.org/tools/escape-network/markdown-syntax-escaper/): Backslash-escape Markdown formatting markers.
+- [LDAP Filter Escaper](https://encryptdecrypt.org/tools/escape-network/ldap-filter-escaper/): RFC 4515 LDAP search filter special character escaper.
+- [C / C++ String Literal Escaper](https://encryptdecrypt.org/tools/escape-network/cpp-string-literal-escaper/): Format strings into escaped C/C++ char arrays with octal/hex codes.
+- [Java Unicode Escaper](https://encryptdecrypt.org/tools/escape-network/java-unicode-escaper/): Convert non-ASCII characters to \uXXXX Java escape sequences.
+- [Python Raw String Escaper](https://encryptdecrypt.org/tools/escape-network/python-raw-string-escaper/): Format text for Python raw strings and unicode escapes.
+- [HTTP Header Value Escaper](https://encryptdecrypt.org/tools/escape-network/postman-header-escaper/): Sanitize HTTP headers to prevent header injection vulnerabilities.
+- [Robots.txt Generator & Tester](https://encryptdecrypt.org/tools/seo-webmaster/robots-txt-generator/): Create and validate robots.txt crawl directives and sitemap URLs.
+- [XML Sitemap Syntax Validator](https://encryptdecrypt.org/tools/seo-webmaster/xml-sitemap-validator/): Validate sitemaps against Google sitemap.xsd specifications.
+- [Open Graph Meta Tag Builder](https://encryptdecrypt.org/tools/seo-webmaster/open-graph-generator/): Generate Facebook OG and Twitter card social share tags.
+- [Google SERP Snippet Preview](https://encryptdecrypt.org/tools/seo-webmaster/serp-preview-tool/): Preview search engine title and description truncation on desktop & mobile.
+- [Hreflang & Canonical Tag Builder](https://encryptdecrypt.org/tools/seo-webmaster/hreflang-tag-builder/): Generate multi-language ISO hreflang tags and self-referential canonicals.
+- [Schema.org JSON-LD Generator](https://encryptdecrypt.org/tools/seo-webmaster/schema-org-generator/): Create Organization, FAQPage, Article, and Product structured data.
+- [HTTP Status Code Reference](https://encryptdecrypt.org/tools/seo-webmaster/http-status-code-lookup/): Search HTTP status codes (200, 301, 404, 500) and caching behavior.
+- [.htaccess 301 Redirect Builder](https://encryptdecrypt.org/tools/seo-webmaster/htaccess-redirect-generator/): Generate Apache mod_rewrite rules for SSL, www, and clean paths.
+- [Keyword Density Analyzer](https://encryptdecrypt.org/tools/seo-webmaster/keyword-density-analyzer/): Measure word frequency and 1-word/2-word/3-word phrase density.
+- [Heading Hierarchy Checker](https://encryptdecrypt.org/tools/seo-webmaster/heading-structure-checker/): Validate semantic H1 to H6 heading structure for SEO and accessibility.
+- [Redirect Chain Mapper](https://encryptdecrypt.org/tools/seo-webmaster/url-redirect-chain-mapper/): Analyze 301, 302, and 307 redirect hops to avoid SEO penalty.
+- [Security Headers Evaluator](https://encryptdecrypt.org/tools/seo-webmaster/security-headers-tester/): Check CSP, HSTS, X-Content-Type-Options, and Referrer-Policy headers.
+- [Favicon HTML Tag Generator](https://encryptdecrypt.org/tools/seo-webmaster/favicon-meta-generator/): Generate complete favicon and Apple touch icon link tags.
+- [Readability Score Calculator](https://encryptdecrypt.org/tools/seo-webmaster/readability-calculator/): Calculate Flesch-Kincaid grade level and reading ease scores.
+- [User-Agent Header Simulator](https://encryptdecrypt.org/tools/seo-webmaster/googlebot-simulator/): Simulate Googlebot and search crawler user-agent headers.
+- [CSR (Signing Request) Decoder](https://encryptdecrypt.org/tools/security-certificates/csr-decoder/): Inspect Certificate Signing Requests (CSR) for CN, SAN, and key specs.
+- [X.509 Certificate Parser](https://encryptdecrypt.org/tools/security-certificates/x509-cert-parser/): View detailed cryptographic attributes of PEM SSL certificates.
+- [PEM to DER Certificate Converter](https://encryptdecrypt.org/tools/security-certificates/pem-to-der-converter/): Convert ASCII PEM base64 certificates to binary DER format.
+- [DER to PEM Certificate Converter](https://encryptdecrypt.org/tools/security-certificates/der-to-pem-converter/): Convert binary DER certificates to readable ASCII PEM format.
+- [PKCS#7 / PFX Certificate Viewer](https://encryptdecrypt.org/tools/security-certificates/pkcs7-pkcs12-inspector/): Inspect certificate chains and bundle files client-side.
+- [SSH Public Key Fingerprint](https://encryptdecrypt.org/tools/security-certificates/ssh-fingerprint-calculator/): Calculate SHA-256 and MD5 fingerprints of OpenSSH public keys.
+- [OpenSSH to PEM Key Converter](https://encryptdecrypt.org/tools/security-certificates/openssh-to-pem-converter/): Convert modern OpenSSH keys to PKCS#8 or traditional PEM format.
+- [PGP / GPG Key Fingerprint](https://encryptdecrypt.org/tools/security-certificates/pgp-key-inspector/): Extract key ID, fingerprint, and user IDs from ASCII-armored PGP keys.
+- [SRI Subresource Integrity Hash](https://encryptdecrypt.org/tools/security-certificates/sri-hash-generator/): Generate sha384 and sha512 integrity hashes for CDN scripts.
+- [CSP (Content Security Policy) Builder](https://encryptdecrypt.org/tools/security-certificates/csp-builder-analyzer/): Construct directive-based CSP headers with nonce and sha256 hashes.
+- [HSTS Preload Header Evaluator](https://encryptdecrypt.org/tools/security-certificates/hsts-header-evaluator/): Verify max-age, includeSubDomains, and preload eligibility.
+- [DNSSEC Record Analyzer](https://encryptdecrypt.org/tools/security-certificates/dnssec-analyzer/): Inspect DS, DNSKEY, and RRSIG records for domain verification.
+- [DKIM & SPF Record Validator](https://encryptdecrypt.org/tools/security-certificates/dkim-spf-validator/): Verify email authentication DNS TXT record syntax.
+- [DMARC Policy Generator](https://encryptdecrypt.org/tools/security-certificates/dmarc-policy-evaluator/): Generate DMARC p=reject/quarantine policies and reporting addresses.
+- [TLS Cipher Suite Inspector](https://encryptdecrypt.org/tools/security-certificates/tls-cipher-inspector/): Lookup cipher suite security status, forward secrecy, and key exchange.
+- [Color HEX to RGB & HSL Converter](https://encryptdecrypt.org/tools/math-design/hex-to-rgb-hsl/): Convert colors between HEX, RGB, HSL, HSV, and modern OKLCH.
+- [Color Contrast Checker (WCAG)](https://encryptdecrypt.org/tools/math-design/color-contrast-checker/): Calculate contrast ratios and test WCAG 2.1 AA / AAA compliance.
+- [Bitwise Operations Calculator](https://encryptdecrypt.org/tools/math-design/bitwise-calculator/): Compute AND, OR, XOR, NOT, left and right bit shift operations.
+- [Prime Number Checker & Factors](https://encryptdecrypt.org/tools/math-design/prime-number-checker/): Check primality and find prime factors for arbitrary integers.
+- [Modulo & Modular Calculator](https://encryptdecrypt.org/tools/math-design/modulo-arithmetic/): Compute modular arithmetic, modular inverses, and powers.
+- [GCD & LCM Calculator](https://encryptdecrypt.org/tools/math-design/gcd-lcm-calculator/): Calculate Greatest Common Divisor and Least Common Multiple.
+- [Aspect Ratio & Screen Calculator](https://encryptdecrypt.org/tools/math-design/aspect-ratio-calculator/): Calculate 16:9, 4:3, 21:9 image dimensions and scaling.
+- [Golden Ratio Dimension Generator](https://encryptdecrypt.org/tools/math-design/golden-ratio-generator/): Compute phi (1.618) proportional layout scales for UI design.
+- [CSS Box Shadow Generator](https://encryptdecrypt.org/tools/math-design/css-box-shadow-generator/): Design multi-layer smooth elevation drop shadows with clean code.
+- [PX to REM & EM Calculator](https://encryptdecrypt.org/tools/math-design/px-to-rem-converter/): Convert pixels to REM units based on configurable root font size.
+- [BigInt Arbitrary Calculator](https://encryptdecrypt.org/tools/math-design/bigint-calculator/): Perform arbitrary precision integer arithmetic without overflow.
+- [Matrix Operations & Determinant](https://encryptdecrypt.org/tools/math-design/matrix-multiplication/): Multiply 2x2, 3x3 matrices and compute determinants.
+- [Random Number Generator (CSPRNG)](https://encryptdecrypt.org/tools/math-design/crypto-random-number/): Generate uniformly distributed random numbers using Web Crypto.
+- [Boolean Logic Truth Table](https://encryptdecrypt.org/tools/math-design/boolean-truth-table/): Generate truth tables for propositional logic formulas.
+- [Angle Degrees to Radians](https://encryptdecrypt.org/tools/math-design/degrees-to-radians/): Convert degrees, radians, and gradians with exact pi fractions.
+- [Percentage Change Calculator](https://encryptdecrypt.org/tools/math-design/percentage-calculator/): Calculate percentage increase, decrease, discount, and portions.
+- [Roman Numeral Converter](https://encryptdecrypt.org/tools/math-design/roman-numeral-converter/): Convert Roman numerals to Arabic numbers (I - MMMCMXCIX) and back.
+- [Base Converter (Base 2 to 36)](https://encryptdecrypt.org/tools/math-design/base-conversion-calculator/): Convert numbers across arbitrary radix bases from binary to base 36.
+- [Standard Deviation & Variance](https://encryptdecrypt.org/tools/math-design/standard-deviation-calc/): Calculate mean, median, variance, and standard deviation of dataset.
+- [IP Subnet CIDR Calculator](https://encryptdecrypt.org/tools/network-online/ip-subnet-cidr-calc/): Calculate network range, broadcast, wildcard mask, and host count.
+- [DNS Record Inspector](https://encryptdecrypt.org/tools/network-online/dns-lookup-tool/): Inspect standard DNS records (A, AAAA, CNAME, MX, TXT) syntax.
+- [Port Number & Protocol Lookup](https://encryptdecrypt.org/tools/network-online/port-number-lookup/): Search IANA standard TCP/UDP port assignments and vulnerabilities.
+- [User-Agent String Parser](https://encryptdecrypt.org/tools/network-online/user-agent-parser/): Parse browser, OS, engine, and device architecture from client strings.
+- [WebRTC Local IP Leak Checker](https://encryptdecrypt.org/tools/network-online/webrtc-ip-leak-checker/): Test whether STUN/WebRTC exposes private local IP addresses.
+- [HTTP Request Header Inspector](https://encryptdecrypt.org/tools/network-online/http-headers-inspector/): Inspect and analyze incoming browser request headers client-side.
+- [MAC Vendor OUI Lookup](https://encryptdecrypt.org/tools/network-online/mac-vendor-oui-lookup/): Lookup hardware manufacturer from IEEE MAC Organizationally Unique ID.
+- [Ping & ICMP Diagnostic Tool](https://encryptdecrypt.org/tools/network-online/ping-diagnostic-simulator/): Simulate network round-trip latency and packet delay variance.
+- [Traceroute Route Visualizer](https://encryptdecrypt.org/tools/network-online/traceroute-hop-visualizer/): Parse and visualize traceroute terminal outputs into clean hops.
+- [WHOIS Domain Inspector](https://encryptdecrypt.org/tools/network-online/whois-syntax-inspector/): Analyze WHOIS record output fields, registrars, and status flags.
+- [Unix Chmod Calculator](https://encryptdecrypt.org/tools/converters-utilities/chmod-permissions-calculator/): Calculate octal (755, 644) and symbolic (rwxr-xr-x) Linux permissions.
+- [Data Storage Units Converter](https://encryptdecrypt.org/tools/converters-utilities/data-storage-units-converter/): Convert bytes, KB, MB, GB, TB between binary (1024) and decimal (1000).
+- [Number to Words Converter](https://encryptdecrypt.org/tools/converters-utilities/number-to-words-converter/): Convert numerals to English words for checks, invoices, and contracts.
+- [UTC Offset & Timezone Tool](https://encryptdecrypt.org/tools/converters-utilities/utc-timezone-difference/): Compare time offsets and calculate UTC conversions across zones.
+- [ASCII Code Table Reference](https://encryptdecrypt.org/tools/converters-utilities/ascii-table-reference/): Complete 7-bit ASCII reference chart with hex, octal, and HTML codes.
+- [QR Code Generator (Client-Side)](https://encryptdecrypt.org/tools/converters-utilities/qr-code-generator/): Generate custom QR codes instantly with error correction and SVG download.

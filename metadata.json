@@ -1,0 +1,6 @@
+{
+  "name": "EncryptDecrypt.org",
+  "description": "Free client-side developer security, encryption, hashing, and encoding tools. 100% private and browser-based.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
