@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 export interface SeoHeadProps {
   title: string;
   description: string;
-  canonicalUrl: string;
+  canonicalUrl?: string;
   keywords?: string[];
   ogType?: 'website' | 'article';
   schemas?: object[];
@@ -13,7 +13,7 @@ export interface SeoHeadProps {
 export const SeoHead: React.FC<SeoHeadProps> = ({
   title,
   description,
-  canonicalUrl,
+  canonicalUrl = 'https://encryptdecrypt.org/',
   keywords = [],
   ogType = 'website',
   schemas = [],

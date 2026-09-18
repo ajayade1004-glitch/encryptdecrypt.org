@@ -45,7 +45,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({
             Our Core Guarantee: Zero Client-Side Data Storage or Transmission
           </h3>
           <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-            When you enter sensitive text, passwords, AES secret keys, RSA private credentials, or JWT tokens into any of our 250+ tools, <strong>that data is never transmitted across the internet to our servers or any third-party infrastructure</strong>. All processing is computed in your device's local memory (RAM) via standard client-side JavaScript and the W3C Web Cryptography API.
+            When you enter sensitive text, passwords, AES secret keys, RSA private credentials, or JWT tokens into any of our 300+ tools, <strong>that data is never transmitted across the internet to our servers or any third-party infrastructure</strong>. All processing is computed in your device's local memory (RAM) via standard client-side JavaScript and the W3C Web Cryptography API.
           </p>
         </div>
       </div>
@@ -80,7 +80,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({
             3. Cookies, Advertising & Third-Party Vendors (Google AdSense)
           </h2>
           <p>
-            To provide our 250+ utilities as a completely free, unrestricted service, we display digital advertisements through third-party advertising networks, including Google AdSense. In accordance with Google&rsquo;s required publisher policy disclosures:
+            To provide our 300+ utilities as a completely free, unrestricted service, we display digital advertisements through third-party advertising networks, including Google AdSense. In accordance with Google&rsquo;s required publisher policy disclosures:
           </p>
           <ul className="list-disc pl-5 space-y-2 text-xs sm:text-sm">
             <li>

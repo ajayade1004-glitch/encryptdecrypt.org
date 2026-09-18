@@ -16,7 +16,16 @@ export const AdUnit: React.FC<AdUnitProps> = ({
 
   useEffect(() => {
     // Re-check ads settings on mount
-    setAdsConfig(getAdsSettings());
+    const cfg = getAdsSettings();
+    setAdsConfig(cfg);
+
+    if (cfg.enabled && cfg.adsensePublisherId && !cfg.adsensePublisherId.includes('XXXXX')) {
+      try {
+        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+      } catch (err) {
+        // Suppress AdSense push error if script is still loading
+      }
+    }
   }, []);
 
   if (!adsConfig.enabled || !adsConfig.adsensePublisherId || adsConfig.adsensePublisherId.includes('XXXXX')) {

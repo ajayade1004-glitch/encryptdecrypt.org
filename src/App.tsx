@@ -237,6 +237,13 @@ export default function App() {
   // Keyboard shortcut '/' to focus search, Escape to close
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Secret owner shortcut: Ctrl+Shift+A or Cmd+Shift+A to open restricted admin console
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+        e.preventDefault();
+        handleNavigateView('admin');
+        return;
+      }
+
       // If user presses '/' while not typing in an input or textarea
       if (e.key === '/' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
         e.preventDefault();
@@ -371,7 +378,7 @@ export default function App() {
       if (activeCategory === 'all') return tools;
       return tools.filter(t => t.category === activeCategory);
     }
-    // When a search query is active, search ALL 250+ tools across all categories!
+    // When a search query is active, search ALL 300+ tools across all categories!
     return searchTools(tools, searchQuery, 'all');
   }, [tools, activeCategory, searchQuery]);
 
@@ -438,45 +445,50 @@ export default function App() {
             </div>
           </button>
 
-          {/* Header Search Box with Instant Live Lookup */}
+          {/* Header Search Box with Instant Live Lookup - Search Icon Outside */}
           <div className="relative flex-1 max-w-xs sm:max-w-md mx-1 sm:mx-4" ref={searchDropdownRef}>
-            <div className="relative flex items-center w-full">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[var(--text-muted)]">
-                <Search size={15} className="shrink-0" />
+            <div className="flex items-center gap-1.5 w-full">
+              <div 
+                className="hidden xs:flex shrink-0 items-center justify-center w-8 h-8 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[#2E9BFF] shadow-xs"
+                title="Search Tools"
+              >
+                <Search size={15} />
               </div>
-              <input
-                ref={headerSearchInputRef}
-                type="text"
-                value={searchQuery}
-                onFocus={() => setSearchFocused(true)}
-                onKeyDown={handleSearchKeyDown}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  setSearchFocused(true);
-                  setSearchHighlightIndex(-1);
-                }}
-                placeholder="Search all 250+ tools (Press '/' to focus)..."
-                className="w-full h-9 bg-[var(--bg-input)] border border-[var(--border-subtle)] rounded-lg pl-9 pr-9 text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[#2E9BFF] focus:ring-1 focus:ring-[#2E9BFF] transition leading-normal"
-                id="global-search-input"
-              />
-              <div className="absolute inset-y-0 right-0 pr-2.5 flex items-center">
-                {searchQuery ? (
-                  <button
-                    onClick={() => {
-                      setSearchQuery('');
-                      setSearchHighlightIndex(-1);
-                      if (headerSearchInputRef.current) headerSearchInputRef.current.focus();
-                    }}
-                    className="text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer p-1 rounded-md transition flex items-center justify-center"
-                    title="Clear search"
-                  >
-                    <X size={14} />
-                  </button>
-                ) : (
-                  <kbd className="hidden md:flex items-center justify-center h-5 min-w-[20px] px-1.5 text-[10px] font-mono text-[var(--text-muted)] bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] rounded pointer-events-none select-none">
-                    /
-                  </kbd>
-                )}
+              <div className="relative flex-1 flex items-center">
+                <input
+                  ref={headerSearchInputRef}
+                  type="text"
+                  value={searchQuery}
+                  onFocus={() => setSearchFocused(true)}
+                  onKeyDown={handleSearchKeyDown}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setSearchFocused(true);
+                    setSearchHighlightIndex(-1);
+                  }}
+                  placeholder="Search all 330+ tools (Press '/' to focus)..."
+                  className="w-full h-9 bg-[var(--bg-input)] border border-[var(--border-subtle)] rounded-lg px-3 pr-9 text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[#2E9BFF] focus:ring-1 focus:ring-[#2E9BFF] transition leading-normal"
+                  id="global-search-input"
+                />
+                <div className="absolute inset-y-0 right-0 pr-2.5 flex items-center">
+                  {searchQuery ? (
+                    <button
+                      onClick={() => {
+                        setSearchQuery('');
+                        setSearchHighlightIndex(-1);
+                        if (headerSearchInputRef.current) headerSearchInputRef.current.focus();
+                      }}
+                      className="text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer p-1 rounded-md transition flex items-center justify-center"
+                      title="Clear search"
+                    >
+                      <X size={14} />
+                    </button>
+                  ) : (
+                    <kbd className="hidden md:flex items-center justify-center h-5 min-w-[20px] px-1.5 text-[10px] font-mono text-[var(--text-muted)] bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] rounded pointer-events-none select-none">
+                      /
+                    </kbd>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -574,7 +586,7 @@ export default function App() {
               }}
               className="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)] transition cursor-pointer"
             >
-              All Tools ({tools.length || '250+'})
+              All Tools ({tools.length || '300+'})
             </button>
             <button
               onClick={() => handleNavigateView('guides')}
@@ -608,21 +620,8 @@ export default function App() {
             </button>
           </nav>
 
-          {/* Action Controls (Theme + Admin + Mobile Hamburger) */}
+          {/* Action Controls (Theme + Mobile Hamburger) */}
           <div className="flex items-center gap-2">
-            {/* Admin Panel Button */}
-            <button
-              onClick={() => handleNavigateView('admin')}
-              className={`p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[#2E9BFF] hover:border-[#2E9BFF] transition cursor-pointer flex items-center gap-1.5 shadow-sm ${
-                currentView === 'admin' ? 'border-[#2E9BFF] text-[#2E9BFF] bg-blue-500/10' : ''
-              }`}
-              title="Admin Control Panel (Restricted Ajay Ade Access)"
-              id="admin-panel-btn"
-            >
-              <Lock size={15} className="text-[#2E9BFF]" />
-              <span className="text-[11px] font-semibold hidden sm:inline">Admin</span>
-            </button>
-
             {/* Theme Toggle Button */}
             <button
               onClick={toggleAppTheme}
@@ -675,7 +674,7 @@ export default function App() {
               }}
               className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)] flex items-center justify-between cursor-pointer"
             >
-              <span>All 250+ Tools Catalog</span>
+              <span>All 300+ Tools Catalog</span>
               <ChevronRight size={14} className="text-[var(--text-muted)]" />
             </button>
             <button
@@ -698,13 +697,6 @@ export default function App() {
             >
               <span>Contact Us & Technical Support</span>
               <ChevronRight size={14} className="text-[var(--text-muted)]" />
-            </button>
-            <button
-              onClick={() => handleNavigateView('admin')}
-              className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-[#2E9BFF] hover:bg-blue-500/10 flex items-center justify-between cursor-pointer"
-            >
-              <span className="flex items-center gap-2"><Lock size={13} /> Admin Control Panel</span>
-              <ChevronRight size={14} className="text-[#2E9BFF]" />
             </button>
             <div className="pt-2 border-t border-[var(--border-subtle)] flex items-center justify-around text-xs text-[var(--text-muted)]">
               <button onClick={() => handleNavigateView('privacy')} className="hover:text-[#2E9BFF] cursor-pointer py-1">Privacy</button>
@@ -1017,7 +1009,7 @@ export default function App() {
                       : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-[var(--accent)] hover:text-[var(--text-primary)]'
                   }`}
                 >
-                  All Tools ({tools.length || '250+'})
+                  All Tools ({tools.length || '300+'})
                 </button>
                 {CATEGORY_HUBS_CONFIG.map(hub => (
                   <button
@@ -1036,7 +1028,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Tools Catalog Grid with 250+ Dedicated Tools */}
+            {/* Tools Catalog Grid with 330+ Dedicated Tools */}
             <div className="my-6" id="catalog-grid">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
                 <div>
@@ -1050,24 +1042,27 @@ export default function App() {
                   </h3>
                   <span className="text-xs text-[var(--text-muted)] mt-0.5 block">
                     {searchQuery.trim()
-                      ? `Showing results matching "${searchQuery}" across all 250+ utilities`
+                      ? `Showing results matching "${searchQuery}" across all 330+ utilities`
                       : 'Instant client-side execution · Click to open any isolated tool'}
                   </span>
                 </div>
 
-                {/* Dedicated In-Catalog Live Search Box */}
+                {/* Dedicated In-Catalog Live Search Box - Search Icon Outside */}
                 <div className="flex items-center gap-2 w-full md:w-80">
-                  <div className="relative w-full flex items-center">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[var(--text-muted)]">
-                      <Search size={15} className="shrink-0" />
-                    </div>
+                  <div 
+                    className="shrink-0 flex items-center justify-center w-8 h-8 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[#2E9BFF] shadow-xs"
+                    title="Search Catalog"
+                  >
+                    <Search size={15} />
+                  </div>
+                  <div className="relative flex-1 flex items-center">
                     <input
                       ref={catalogSearchInputRef}
                       type="text"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Search 250+ tools (e.g. aes, qr, sha256)..."
-                      className="w-full h-9 bg-[var(--bg-input)] border border-[var(--border-subtle)] rounded-lg pl-9 pr-9 text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[#2E9BFF] focus:ring-1 focus:ring-[#2E9BFF] transition leading-normal"
+                      placeholder="Search 330+ tools (e.g. aes, qr, sha256)..."
+                      className="w-full h-9 bg-[var(--bg-input)] border border-[var(--border-subtle)] rounded-lg px-3 pr-9 text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[#2E9BFF] focus:ring-1 focus:ring-[#2E9BFF] transition leading-normal"
                       id="catalog-search-input"
                     />
                     {searchQuery && (
@@ -1099,7 +1094,7 @@ export default function App() {
                   <div className="flex items-center gap-2 text-[var(--text-primary)] font-medium">
                     <Search size={14} className="text-[#2E9BFF]" />
                     <span>
-                      Searching all 250+ tools for: <strong className="text-[#2E9BFF]">&ldquo;{searchQuery}&rdquo;</strong> — <strong>{filteredTools.length}</strong> matching tools found
+                      Searching all 330+ tools for: <strong className="text-[#2E9BFF]">&ldquo;{searchQuery}&rdquo;</strong> — <strong>{filteredTools.length}</strong> matching tools found
                     </span>
                   </div>
                   <button
@@ -1154,7 +1149,7 @@ export default function App() {
                     }}
                     className="btn btn-primary text-xs py-2 px-5 inline-flex items-center gap-1.5"
                   >
-                    <RefreshCw size={14} /> View All 250+ Tools Catalog
+                    <RefreshCw size={14} /> View All 330+ Tools Catalog
                   </button>
                 </div>
               ) : (
@@ -1211,7 +1206,7 @@ export default function App() {
               <span>EncryptDecrypt.org</span>
             </div>
             <p className="leading-relaxed mb-3 text-[var(--text-secondary)]">
-              Free, private, zero-log cryptographic tools and developer utilities. 250+ utilities executing 100% inside your web browser via standard Web Cryptography algorithms. Your data never touches a server.
+              Free, private, zero-log cryptographic tools and developer utilities. 330+ utilities executing 100% inside your web browser via standard Web Cryptography algorithms. Your data never touches a server.
             </p>
             <div className="flex flex-wrap gap-2 text-[11px] font-mono">
               <span className="px-2 py-1 rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 font-semibold">
@@ -1294,10 +1289,6 @@ export default function App() {
             <button onClick={() => handleNavigateView('about')} className="hover:text-[#2E9BFF] cursor-pointer transition">About Us</button>
             <span>|</span>
             <button onClick={() => handleNavigateView('contact')} className="hover:text-[#2E9BFF] cursor-pointer transition">Contact Us</button>
-            <span>|</span>
-            <button onClick={() => handleNavigateView('admin')} className="hover:text-[#2E9BFF] cursor-pointer transition flex items-center gap-1 font-semibold text-[var(--text-secondary)]">
-              <Lock size={11} className="text-[#2E9BFF]" /> Admin Panel
-            </button>
           </div>
 
           <div className="flex items-center gap-4 font-mono text-[11px] shrink-0 text-[var(--text-muted)]">

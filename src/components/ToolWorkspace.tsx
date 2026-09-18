@@ -457,7 +457,7 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
         if (recResult !== null) {
           result = recResult;
         }
-        // 2. CATEGORY-BASED FULL WORKING ENGINES (ALL 250+ TOOLS)
+        // 2. CATEGORY-BASED FULL WORKING ENGINES (ALL 300+ TOOLS)
         else if (cat === 'encoding-decoding') {
           result = allEngines.runEncodingTool(slug, inputText, mode === 'decrypt' ? 'decode' : (mode as any));
         }
@@ -1170,7 +1170,7 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
               onClick={onBack}
               className="text-xs font-semibold text-[#2E9BFF] hover:underline cursor-pointer"
             >
-              All 250+ Tools →
+              All 300+ Tools →
             </button>
           </div>
 

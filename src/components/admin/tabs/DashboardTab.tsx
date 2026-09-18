@@ -40,7 +40,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
             EncryptDecrypt.org Control Hub
           </h2>
           <p className="text-xs text-[var(--text-secondary)] max-w-2xl leading-relaxed">
-            Manage all 250+ cryptographic utilities, category taxonomy, long-form SEO content, Google AdSense unit positions, and security audit logs from one unified master dashboard.
+            Manage all 300+ cryptographic utilities, category taxonomy, long-form SEO content, Google AdSense unit positions, and security audit logs from one unified master dashboard.
           </p>
         </div>
 
@@ -253,7 +253,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
           className="p-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] hover:border-[#2E9BFF] transition cursor-pointer"
         >
           <h4 className="text-xs font-bold text-[var(--text-primary)] mb-1">Robots.txt & Sitemap</h4>
-          <p className="text-[11px] text-[var(--text-muted)]">Regenerate 250+ tool XML sitemaps and update crawler rules.</p>
+          <p className="text-[11px] text-[var(--text-muted)]">Regenerate 300+ tool XML sitemaps and update crawler rules.</p>
         </div>
 
         <div 

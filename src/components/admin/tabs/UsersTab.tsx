@@ -144,7 +144,7 @@ export const UsersTab: React.FC<UsersTabProps> = ({
                 type="password"
                 value={currentPass}
                 onChange={(e) => setCurrentPass(e.target.value)}
-                placeholder="Enter current password (default: EncryptAdmin@2026#)"
+                placeholder="Enter current master password"
                 required
                 className="w-full bg-[var(--bg-input)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none focus:border-[#2E9BFF]"
               />

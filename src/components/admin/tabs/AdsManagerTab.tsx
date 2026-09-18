@@ -232,7 +232,7 @@ export const AdsManagerTab: React.FC<AdsManagerTabProps> = ({ showToast }) => {
           </li>
           <li className="flex items-center gap-2">
             <CheckCircle2 size={13} className="text-emerald-500 shrink-0" />
-            <span><strong>High-Value Content:</strong> 250+ genuine client-side functional utilities with zero fake placeholder content.</span>
+            <span><strong>High-Value Content:</strong> 300+ genuine client-side functional utilities with zero fake placeholder content.</span>
           </li>
           <li className="flex items-center gap-2">
             <CheckCircle2 size={13} className="text-emerald-500 shrink-0" />

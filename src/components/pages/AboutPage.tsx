@@ -33,14 +33,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({
           Empowering Developers with 100% Client-Side Cryptographic Tools
         </h1>
         <p className="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed max-w-3xl mb-6">
-          EncryptDecrypt.org was created to solve a critical security dilemma: developers and IT professionals frequently need to encode, hash, decode, and encrypt sensitive payloads—yet conventional web tools quietly stream plaintext tokens to remote servers. We set out to build an uncompromising suite of 250+ browser-native utilities where zero data ever leaves your device.
+          EncryptDecrypt.org was created to solve a critical security dilemma: developers and IT professionals frequently need to encode, hash, decode, and encrypt sensitive payloads—yet conventional web tools quietly stream plaintext tokens to remote servers. We set out to build an uncompromising suite of 300+ browser-native utilities where zero data ever leaves your device.
         </p>
         <div className="flex flex-wrap gap-3">
           <button
             onClick={onNavigateHome}
             className="btn btn-primary text-xs py-2.5 px-5 inline-flex items-center gap-2 cursor-pointer"
           >
-            <Terminal size={14} /> Explore 250+ Tools Catalog
+            <Terminal size={14} /> Explore 300+ Tools Catalog
           </button>
           <button
             onClick={onNavigateContact}
@@ -106,7 +106,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
           Our Solution: Client-Side Isolated Execution
         </h2>
         <p>
-          EncryptDecrypt.org provides over 250+ purpose-built utilities spanning symmetric ciphers, asymmetric keys, hash functions, encoders, token inspectors, and network calculators. You can verify our privacy guarantee yourself: disconnect your workstation from the internet or open Developer Tools (`F12`), monitor the <strong>Network</strong> tab, and run any tool. You will observe exactly <strong>zero outgoing HTTP requests</strong>.
+          EncryptDecrypt.org provides over 300+ purpose-built utilities spanning symmetric ciphers, asymmetric keys, hash functions, encoders, token inspectors, and network calculators. You can verify our privacy guarantee yourself: disconnect your workstation from the internet or open Developer Tools (`F12`), monitor the <strong>Network</strong> tab, and run any tool. You will observe exactly <strong>zero outgoing HTTP requests</strong>.
         </p>
 
         <div className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)] font-mono text-xs text-[var(--text-primary)]">
@@ -120,7 +120,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
           Standards & Algorithmic Rigor
         </h2>
         <p>
-          We take cryptographic accuracy seriously. Every engine implemented across our 250+ utilities is tested against official NIST Known Answer Tests (KAT) and RFC reference vectors:
+          We take cryptographic accuracy seriously. Every engine implemented across our 300+ utilities is tested against official NIST Known Answer Tests (KAT) and RFC reference vectors:
         </p>
         <ul className="list-disc pl-5 space-y-1.5">
           <li><strong>NIST FIPS 197:</strong> Advanced Encryption Standard (AES) in GCM, CBC, and CTR operational modes.</li>

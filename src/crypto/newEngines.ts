@@ -631,7 +631,7 @@ export function runSchemaValidator(input: string): string {
 
 export function runOpenGraphPreview(input: string): string {
   const lines = input.split('\n');
-  let title = 'EncryptDecrypt.org – 250+ Client-Side Developer Tools';
+  let title = 'EncryptDecrypt.org – 300+ Client-Side Developer Tools';
   let desc = '100% Client-Side developer utilities with zero server logs.';
   let image = 'https://encryptdecrypt.org/assets/og-preview.png';
 

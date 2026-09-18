@@ -41,7 +41,7 @@ export const DEFAULT_SEO_SETTINGS: SeoSettings = {
   defaultDescription: '100% private, client-side cryptographic and developer utilities. AES, SHA-256, RSA, Base64, UUID, JWT without server uploads.',
   keywords: ['cryptography', 'encryption', 'decryption', 'sha256', 'base64', 'aes-256', 'web crypto', 'developer tools'],
   canonicalBase: 'https://encryptdecrypt.org',
-  ogTitle: 'EncryptDecrypt.org — 250+ Private Client-Side Tools',
+  ogTitle: 'EncryptDecrypt.org — 300+ Private Client-Side Tools',
   ogDescription: 'Zero-knowledge browser-based cryptographic suite for software developers and cybersecurity engineers.',
   ogImageUrl: 'https://encryptdecrypt.org/assets/og-image.png',
   twitterCard: 'summary_large_image',
@@ -65,12 +65,12 @@ export const DEFAULT_ADS_SETTINGS: AdsSettings = {
 
 // Default Homepage settings
 export const DEFAULT_HOMEPAGE_SETTINGS: HomepageSettings = {
-  heroTitle: '250+ Zero-Knowledge Developer Tools',
+  heroTitle: '300+ Zero-Knowledge Developer Tools',
   heroSubtitle: 'High-performance cryptographic encoders, ciphers, hashes, formatters, and network utilities running 100% in your local browser.',
   featuredCategorySlugs: ['encoding-decoding', 'encryption-ciphers', 'hashing-security', 'generators-tokens'],
   quickRunnerSlugs: ['base64-encode-decode', 'url-encode-decode', 'sha-256-hash-generator', 'secure-password-generator'],
   bannerEnabled: false,
-  bannerMessage: 'Welcome to EncryptDecrypt.org v2.5 — All 250+ utilities operate strictly client-side via W3C WebCrypto API.',
+  bannerMessage: 'Welcome to EncryptDecrypt.org v2.5 — All 300+ utilities operate strictly client-side via W3C WebCrypto API.',
   bannerType: 'info',
 };
 
@@ -162,7 +162,7 @@ export function authenticateAdmin(identifier: string, password: string): { succe
   if (!isAjay) {
     return { 
       success: false, 
-      error: 'Access restricted. Only authorized administrator (ajayade1004@gmail.com) can access this control panel.' 
+      error: 'Invalid administrator credentials. Access is restricted.' 
     };
   }
 
@@ -202,7 +202,7 @@ export function authenticateAdmin(identifier: string, password: string): { succe
   if (!isPasswordValid) {
     return { 
       success: false, 
-      error: 'Incorrect password. Default master password is: EncryptAdmin@2026#' 
+      error: 'Invalid administrator credentials. Access is restricted.' 
     };
   }
 
@@ -243,7 +243,7 @@ export function getActivityLogs(): ActivityLogItem[] {
       timestamp: new Date().toISOString(),
       action: 'System Initialized',
       module: 'Core System',
-      details: '250+ client-side tools loaded into administration management console.',
+      details: '300+ client-side tools loaded into administration management console.',
       user: 'System',
     }
   ]);

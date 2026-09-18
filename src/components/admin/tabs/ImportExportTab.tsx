@@ -103,7 +103,7 @@ export const ImportExportTab: React.FC<ImportExportTabProps> = ({
 
   // Bulk Operations
   const handleBulkEnableAll = () => {
-    if (confirm('Enable all 250+ tools across the website?')) {
+    if (confirm('Enable all 300+ tools across the website?')) {
       tools.forEach(t => saveToolOverride(t.id, { disabled: false }));
       onRefreshTools();
       showToast('All tools enabled!');
@@ -136,7 +136,7 @@ export const ImportExportTab: React.FC<ImportExportTabProps> = ({
             Catalog Import, Export & Bulk Orchestration
           </h2>
           <p className="text-xs text-[var(--text-secondary)]">
-            Export all 250+ tools to JSON or Excel/CSV, restore full system backups, or execute bulk batch operations.
+            Export all 300+ tools to JSON or Excel/CSV, restore full system backups, or execute bulk batch operations.
           </p>
         </div>
       </div>
@@ -227,7 +227,7 @@ export const ImportExportTab: React.FC<ImportExportTabProps> = ({
           Fast Bulk Operations
         </h3>
         <p className="text-xs text-[var(--text-muted)]">
-          Instantly apply updates across all 250+ tools simultaneously.
+          Instantly apply updates across all 300+ tools simultaneously.
         </p>
 
         <div className="flex flex-wrap items-center gap-3">
@@ -235,7 +235,7 @@ export const ImportExportTab: React.FC<ImportExportTabProps> = ({
             onClick={handleBulkEnableAll}
             className="px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 font-semibold flex items-center gap-2 cursor-pointer"
           >
-            <Check size={14} /> Enable All 250+ Tools
+            <Check size={14} /> Enable All 300+ Tools
           </button>
           <button
             onClick={handleBulkDisableAll}

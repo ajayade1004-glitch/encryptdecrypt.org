@@ -73,7 +73,7 @@ export const CategoriesTab: React.FC<CategoriesTabProps> = ({
             Category Taxonomy & SEO Hubs
           </h2>
           <p className="text-xs text-[var(--text-secondary)]">
-            Organize all 250+ tools across categorized hubs with customizable meta descriptions and descriptions.
+            Organize all 300+ tools across categorized hubs with customizable meta descriptions and descriptions.
           </p>
         </div>
         <button

@@ -87,7 +87,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
               Contact the Engineering Team
             </h1>
             <p className="text-xs sm:text-sm text-[var(--text-secondary)] mb-6 leading-relaxed">
-              Have a question regarding cryptographic implementation, feature suggestion for our 250+ tools, or partnership inquiry? Send us a message and our technical team will respond promptly.
+              Have a question regarding cryptographic implementation, feature suggestion for our 300+ tools, or partnership inquiry? Send us a message and our technical team will respond promptly.
             </p>
 
             {submitted ? (
@@ -265,7 +265,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
               <span>Coordinated Vulnerability Disclosure</span>
             </div>
             <p className="text-xs text-[var(--text-secondary)] leading-relaxed mb-3">
-              We welcome findings from independent security researchers. If you identify a potential implementation bug in any of our 250+ client-side algorithms:
+              We welcome findings from independent security researchers. If you identify a potential implementation bug in any of our 300+ client-side algorithms:
             </p>
             <ul className="list-disc pl-4 text-xs text-[var(--text-secondary)] space-y-1 mb-3">
               <li>Include reproducible test vectors and browser version details.</li>

@@ -30,7 +30,7 @@ export const SeoManagerTab: React.FC<SeoManagerTabProps> = ({ tools, showToast }
     setTimeout(() => setCopied(null), 2000);
   };
 
-  // Generate dynamic Sitemap XML for all 250+ tools
+  // Generate dynamic Sitemap XML for all 300+ tools
   const sitemapXml = React.useMemo(() => {
     const baseUrl = seo.canonicalBase.replace(/\/+$/, '');
     const today = new Date().toISOString().split('T')[0];
@@ -117,7 +117,7 @@ ${allUrls.map(u => `  <url>
             SEO, Social Cards & Webmaster Crawler Suite
           </h2>
           <p className="text-xs text-[var(--text-secondary)]">
-            Configure global search engine rankings, OpenGraph share previews, robots.txt, and auto-generated 250+ tool sitemaps.
+            Configure global search engine rankings, OpenGraph share previews, robots.txt, and auto-generated 300+ tool sitemaps.
           </p>
         </div>
 
@@ -307,7 +307,7 @@ ${allUrls.map(u => `  <url>
                 Live Dynamic Sitemap XML ({tools.length + 7} indexed URLs)
               </h3>
               <p className="text-xs text-[var(--text-muted)]">
-                Automatically indexes all 250+ tools, category taxonomy hubs, and legal static pages conforming to sitemaps.org protocol.
+                Automatically indexes all 300+ tools, category taxonomy hubs, and legal static pages conforming to sitemaps.org protocol.
               </p>
             </div>
             <div className="flex items-center gap-2">

@@ -75,7 +75,7 @@ export const PagesManagerTab: React.FC<PagesManagerTabProps> = ({ showToast }) =
               </label>
               <textarea
                 rows={4}
-                value={content.aboutBody || 'EncryptDecrypt.org provides an uncompromising suite of 250+ browser-native utilities where zero data ever leaves your device.'}
+                value={content.aboutBody || 'EncryptDecrypt.org provides an uncompromising suite of 300+ browser-native utilities where zero data ever leaves your device.'}
                 onChange={(e) => setContent({ ...content, aboutBody: e.target.value })}
                 className="w-full bg-[var(--bg-input)] border border-[var(--border-subtle)] rounded-lg p-2.5 text-[var(--text-primary)] outline-none"
               />

@@ -1,6 +1,6 @@
 {
   "name": "EncryptDecrypt.org",
-  "description": "Free client-side developer security, encryption, hashing, and encoding tools. 100% private and browser-based.",
+  "description": "Explore 300+ free client-side cryptographic and developer tools. AES-256-GCM, RSA, SHA-256, Base64, JWT, UUID, and zero-log encryption utilities running 100% in your browser.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
