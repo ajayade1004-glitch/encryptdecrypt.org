@@ -620,8 +620,21 @@ export default function App() {
             </button>
           </nav>
 
-          {/* Action Controls (Theme + Mobile Hamburger) */}
+          {/* Action Controls (Donation, Theme + Mobile Hamburger) */}
           <div className="flex items-center gap-2">
+            
+            {/* Buy Me A Coffee Button */}
+            <a
+              href="https://www.buymeacoffee.com/encryptdecrypt" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden xs:flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-lg bg-[#FFDD00] text-black font-bold text-[11px] sm:text-xs hover:bg-[#FFEA4C] transition shadow-sm border border-[#E5C700] cursor-pointer"
+              title="Support this free project"
+            >
+              <span className="text-base leading-none">☕</span>
+              <span className="hidden sm:inline tracking-tight text-black">Buy me a coffee</span>
+            </a>
+
             {/* Theme Toggle Button */}
             <button
               onClick={toggleAppTheme}
