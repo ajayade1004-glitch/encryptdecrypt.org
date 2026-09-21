@@ -7,11 +7,15 @@
     <meta name="description" content="Explore 300+ free client-side cryptographic and developer tools. AES-256-GCM, RSA, SHA-256, Base64, JWT, UUID, and zero-log encryption utilities running 100% in your browser." />
     <meta name="keywords" content="cryptography tools, client side encryption, aes 256 encrypt decrypt, sha256 hash generator, base64 encode decode, jwt token debugger, uuid generator, web crypto, zero knowledge tools" />
     
-    <!-- ✅ Favicon yahan add kar diya gaya hai -->
+    <!-- ✅ Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
 
     <link rel="canonical" href="https://encryptdecrypt.org/" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website" />
@@ -90,13 +94,12 @@
     }
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/main.css" />
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
+    <!-- ✅ Fix: Added defer to Google Analytics to prevent render blocking -->
+    <script async defer src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script defer>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -106,6 +109,7 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- ✅ Fix: External JS files loading deferred -->
     <script src="/assets/js/core.js" defer></script>
     <script src="/assets/js/router-data.js" defer></script>
   </body>
