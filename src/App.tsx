@@ -96,7 +96,7 @@ export default function App() {
     const hash = window.location.hash.replace(/^#/, '');
     const pathname = window.location.pathname.replace(/\/+$/, '');
 
-    // 1. Hash-based route
+    // 1. Hash-based route (Kept for backwards compatibility if anyone bookmarked old links)
     if (hash.startsWith('tool=')) {
       const slug = hash.replace('tool=', '');
       const match = toolsList.find(t => t.slug === slug || t.id === slug);
@@ -181,7 +181,7 @@ export default function App() {
       });
   }, []);
 
-  // 2. Hash & Browser History Listener
+  // 2. Browser History Listener
   useEffect(() => {
     const handleNavigationEvent = () => {
       if (tools.length > 0) {
@@ -205,7 +205,7 @@ export default function App() {
     document.documentElement.setAttribute('data-theme', initial);
   }, []);
 
-  // 4. Real Client-Side Analytics Tracking (Zero server telemetry)
+  // 4. Real Client-Side Analytics Tracking
   useEffect(() => {
     if (currentView !== 'admin') {
       recordPageView(currentView);
@@ -237,14 +237,12 @@ export default function App() {
   // Keyboard shortcut '/' to focus search, Escape to close
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Secret owner shortcut: Ctrl+Shift+A or Cmd+Shift+A to open restricted admin console
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
         e.preventDefault();
         handleNavigateView('admin');
         return;
       }
 
-      // If user presses '/' while not typing in an input or textarea
       if (e.key === '/' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
         e.preventDefault();
         if (headerSearchInputRef.current) {
@@ -303,33 +301,33 @@ export default function App() {
     runHero();
   }, [heroInput, heroTab]);
 
-  // Navigate to a specific separate tool
+  // ✅ FIX: Navigate to a specific separate tool using clean URLs
   const handleSelectTool = (tool: ToolItem) => {
     setSelectedTool(tool);
     setCurrentView('catalog');
     setMobileMenuOpen(false);
-    window.location.hash = `tool=${tool.slug}`;
+    window.history.pushState({}, '', `/tools/${tool.slug}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Back to All Tools catalog
+  // ✅ FIX: Back to All Tools catalog using clean URLs
   const handleBackToCatalog = () => {
     setSelectedTool(null);
     setCurrentView('catalog');
     setMobileMenuOpen(false);
-    window.location.hash = '';
+    window.history.pushState({}, '', '/');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Navigate to any page view (about, contact, guides, privacy, terms, disclaimer, catalog)
+  // ✅ FIX: Navigate to any page view using clean URLs
   const handleNavigateView = (view: AppView) => {
     setSelectedTool(null);
     setCurrentView(view);
     setMobileMenuOpen(false);
     if (view === 'catalog') {
-      window.location.hash = '';
+      window.history.pushState({}, '', '/');
     } else {
-      window.location.hash = view;
+      window.history.pushState({}, '', `/${view}`);
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -378,7 +376,6 @@ export default function App() {
       if (activeCategory === 'all') return tools;
       return tools.filter(t => t.category === activeCategory);
     }
-    // When a search query is active, search ALL 300+ tools across all categories!
     return searchTools(tools, searchQuery, 'all');
   }, [tools, activeCategory, searchQuery]);
 
