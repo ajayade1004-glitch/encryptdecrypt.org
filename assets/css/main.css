@@ -578,3 +578,61 @@ code, pre, kbd, samp {
   background: var(--bg-surface);
   padding: var(--space-12) 0 var(--space-8);
 }
+
+
+/* =========================================
+   LIGHTHOUSE 100% MOBILE & CLS FIXES
+   ========================================= */
+
+/* 1. CLS Fix: Images, Icons aur Media apni jagah gher kar rakhenge */
+img, svg, video, iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Tool load hone se pehle container ki jagah book karna taaki page hile nahi */
+#main-content {
+  min-height: 50vh; 
+}
+
+/* 2. Accessibility Fix: Mobile Touch Targets (Buttons/Inputs ko 48x48px banana) */
+@media (max-width: 768px) {
+  
+  /* Buttons, Links aur Toggles ko thoda bada karna */
+  .btn,
+  .tool-tab-btn,
+  .search-item,
+  a[class*="btn"],
+  button {
+    min-height: 48px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  /* Form Controls ko ungli se type/select karne layaq banana */
+  .form-input, 
+  .form-textarea, 
+  .form-select,
+  .search-input {
+    font-size: 16px !important; /* iOS Safari me auto-zoom hone se rokta hai */
+    min-height: 48px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  
+  /* Textarea ko auto-height dena zaroori hai nahi toh shrink ho jayega */
+  .form-textarea {
+    min-height: 160px;
+  }
+
+  /* Header Icons / Theme Toggles ka hitbox badhana */
+  #theme-toggle-btn, 
+  header button {
+    min-height: 48px;
+    min-width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
