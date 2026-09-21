@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "EncryptDecrypt - Developer Cryptography & Base64 Tools",
+  "version": "1.0.0",
+  "description": "330+ free, offline client-side developer security and encryption tools.",
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Open Dev Tools"
+  },
+  "icons": {
+    "16": "favicon.png",
+    "48": "favicon.png",
+    "128": "favicon.png"
+  }
+}
