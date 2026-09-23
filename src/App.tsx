@@ -99,7 +99,7 @@ export default function App() {
     const hash = window.location.hash.replace(/^#/, '');
     const pathname = window.location.pathname.replace(/\/+$/, '');
 
-    // 1. Hash-based route (Kept for backwards compatibility if anyone bookmarked old links)
+    // 1. Hash-based route
     if (hash.startsWith('tool=')) {
       const slug = hash.replace('tool=', '');
       const match = toolsList.find(t => t.slug === slug || t.id === slug);
@@ -165,9 +165,25 @@ export default function App() {
     if (pathname === '/disclaimer') { setSelectedTool(null); setCurrentView('disclaimer'); return; }
     if (pathname === '/admin') { setSelectedTool(null); setCurrentView('admin'); return; }
 
+    // ✅ FIX FOR OLD WORDPRESS URLs (e.g. /hmac-generator, /css-formatter, ALL 330+ TOOLS)
+    const cleanPath = pathname.replace(/^\//, ''); // Removes starting slash
+    if (cleanPath && !cleanPath.includes('/')) {
+      const match = toolsList.find(t => t.slug === cleanPath || t.id === cleanPath);
+      if (match) {
+        setSelectedTool(match);
+        setCurrentView('catalog');
+        // Auto-redirect URL to the new format so Google learns the new URL
+        window.history.replaceState({}, '', `/tools/${match.slug}`);
+        return;
+      }
+    }
+
     if (!hash && (!pathname || pathname === '/')) {
       setSelectedTool(null);
       setCurrentView('catalog');
+    } else if (pathname !== '/') {
+      setSelectedTool(null);
+      setCurrentView('notfound');
     }
   };
 
@@ -354,25 +370,6 @@ export default function App() {
     return counts;
   }, [tools]);
 
-  // Categories list
-  const categoriesList = useMemo(() => [
-    { slug: 'all', name: 'All Tools', count: tools.length },
-    { slug: 'encoding-decoding', name: 'Encoding & Decoding', count: categoryCounts['encoding-decoding'] || 23 },
-    { slug: 'encryption-ciphers', name: 'Encryption & Ciphers', count: categoryCounts['encryption-ciphers'] || 24 },
-    { slug: 'hashing-security', name: 'Hashing & Security', count: categoryCounts['hashing-security'] || 21 },
-    { slug: 'generators-tokens', name: 'Generators & Tokens', count: categoryCounts['generators-tokens'] || 21 },
-    { slug: 'dev-tools-formatters', name: 'Dev Tools & Formatters', count: categoryCounts['dev-tools-formatters'] || 16 },
-    { slug: 'file-data-converters', name: 'File & Data Converters', count: categoryCounts['file-data-converters'] || 16 },
-    { slug: 'validators-checkers', name: 'Validators & Checkers', count: categoryCounts['validators-checkers'] || 14 },
-    { slug: 'text-utilities', name: 'Text Utilities', count: categoryCounts['text-utilities'] || 15 },
-    { slug: 'escape-network', name: 'Escape & Network', count: categoryCounts['escape-network'] || 15 },
-    { slug: 'seo-webmaster', name: 'SEO & Webmaster', count: categoryCounts['seo-webmaster'] || 15 },
-    { slug: 'security-certificates', name: 'Security & Certificates', count: categoryCounts['security-certificates'] || 15 },
-    { slug: 'math-design', name: 'Math & Design', count: categoryCounts['math-design'] || 19 },
-    { slug: 'network-online', name: 'Network & Online Tools', count: categoryCounts['network-online'] || 10 },
-    { slug: 'converters-utilities', name: 'Converters & Utilities', count: categoryCounts['converters-utilities'] || 6 }
-  ], [tools.length, categoryCounts]);
-
   // Filtered tools by search and category
   const filteredTools = useMemo(() => {
     if (!searchQuery.trim()) {
@@ -445,7 +442,7 @@ export default function App() {
             </div>
           </button>
 
-          {/* Header Search Box with Instant Live Lookup - Search Icon Outside */}
+          {/* Header Search Box */}
           <div className="relative flex-1 max-w-xs sm:max-w-md mx-1 sm:mx-4" ref={searchDropdownRef}>
             <div className="flex items-center gap-1.5 w-full">
               <div 
@@ -620,10 +617,8 @@ export default function App() {
             </button>
           </nav>
 
-          {/* Action Controls (Donation, Theme + Mobile Hamburger) */}
+          {/* Action Controls */}
           <div className="flex items-center gap-2">
-            
-            {/* ✅ FIXED Buy Me A Coffee Button (Will show on both mobile and desktop now) */}
             <a
               href="https://www.buymeacoffee.com/encryptdecrypt" 
               target="_blank"
@@ -635,7 +630,6 @@ export default function App() {
               <span className="hidden sm:inline tracking-tight text-black">Buy me a coffee</span>
             </a>
 
-            {/* Theme Toggle Button */}
             <button
               onClick={toggleAppTheme}
               className="p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)] transition cursor-pointer flex items-center gap-1.5 shadow-sm"
@@ -655,12 +649,10 @@ export default function App() {
               )}
             </button>
 
-            {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(prev => !prev)}
               className="p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] lg:hidden cursor-pointer"
               title="Toggle Menu"
-              aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
@@ -884,7 +876,6 @@ export default function App() {
                   </p>
                 </div>
 
-                {/* Quick Runner Workspace Box */}
                 <div className="theme-subcard rounded-xl p-4 sm:p-6 shadow-xl">
                   <div className="flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-[var(--border-subtle)]">
                     <div className="flex items-center gap-1 bg-[var(--bg-input)] p-1 rounded-lg border border-[var(--border-subtle)] text-xs">
@@ -974,7 +965,6 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* 14 Hubs Visual Cards Grid (All 14 always visible) */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 mb-6">
                   {CATEGORY_HUBS_CONFIG.map(hub => {
                     const Icon = hub.icon;
@@ -1018,7 +1008,6 @@ export default function App() {
                   })}
                 </div>
 
-                {/* All 14 Category Filter Pills (Fully Wrapped - No Hidden Scrolling) */}
                 <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[var(--border-subtle)]">
                   <button
                     onClick={() => setActiveCategory('all')}
@@ -1047,7 +1036,7 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Tools Catalog Grid with 330+ Dedicated Tools */}
+              {/* Tools Catalog Grid */}
               <div className="my-6" id="catalog-grid">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
                   <div>
@@ -1066,7 +1055,6 @@ export default function App() {
                     </span>
                   </div>
 
-                  {/* Dedicated In-Catalog Live Search Box - Search Icon Outside */}
                   <div className="flex items-center gap-2 w-full md:w-80">
                     <div 
                       className="shrink-0 flex items-center justify-center w-8 h-8 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[#2E9BFF] shadow-xs"
@@ -1107,7 +1095,6 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Active Search Notification Banner */}
                 {searchQuery.trim() && (
                   <div className="mb-4 p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 flex flex-wrap items-center justify-between gap-2 text-xs">
                     <div className="flex items-center gap-2 text-[var(--text-primary)] font-medium">
@@ -1125,7 +1112,6 @@ export default function App() {
                   </div>
                 )}
 
-                {/* Empty State when no tools match */}
                 {filteredTools.length === 0 ? (
                   <div className="card-glass p-8 sm:p-12 text-center my-6 max-w-xl mx-auto rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] shadow-xs">
                     <div className="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#2E9BFF] flex items-center justify-center mx-auto mb-3">
@@ -1295,7 +1281,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* Legal Bottom Bar with User-Specified Exact Links */}
+        {/* Legal Bottom Bar */}
         <div className="container border-t border-[var(--border-subtle)] mt-8 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[var(--text-muted)]">
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-2.5 gap-y-1 font-medium">
             <span className="text-[var(--text-secondary)] font-semibold">© 2026 EncryptDecrypt.org</span>
