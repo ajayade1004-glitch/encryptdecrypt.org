@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef, Suspense, lazy } from 'react';
 import { 
-  Shield, Lock, Search, Copy, Download, ArrowRightLeft, 
+  Shield, Lock, Search, Copy, Download, ArrowRightLeft, ArrowRight,
   Check, Moon, Sun, Key, Hash, FileCode, Cpu, Layers,
   Terminal, ShieldCheck, Database, Zap, RefreshCw, X,
   ChevronRight, ArrowLeft, Binary, CheckCircle, FileText,
@@ -17,6 +17,7 @@ import { applyAdminOverrides, recordToolExecution, recordSearchQuery, recordPage
 // --- REACT LAZY IMPORTS FOR OPTIMIZED PAGESPEED (100% Core Web Vitals) ---
 const ToolWorkspace = lazy(() => import('./components/ToolWorkspace').then(module => ({ default: module.ToolWorkspace })));
 const AllToolsPage = lazy(() => import('./components/pages/AllToolsPage').then(module => ({ default: module.AllToolsPage })));
+const CategoryPage = lazy(() => import('./components/pages/CategoryPage').then(module => ({ default: module.CategoryPage })));
 const AboutPage = lazy(() => import('./components/pages/AboutPage').then(module => ({ default: module.AboutPage })));
 const ContactPage = lazy(() => import('./components/pages/ContactPage').then(module => ({ default: module.ContactPage })));
 const TechGuidesPage = lazy(() => import('./components/pages/TechGuidesPage').then(module => ({ default: module.TechGuidesPage })));
@@ -27,7 +28,7 @@ const NotFoundPage = lazy(() => import('./components/pages/NotFoundPage').then(m
 const AdminPanel = lazy(() => import('./components/admin/AdminPanel').then(module => ({ default: module.AdminPanel })));
 // ------------------------------------------------------------------
 
-export type AppView = 'catalog' | 'about' | 'contact' | 'guides' | 'privacy' | 'terms' | 'disclaimer' | 'admin' | 'notfound' | 'all-tools';
+export type AppView = 'catalog' | 'category' | 'about' | 'contact' | 'guides' | 'privacy' | 'terms' | 'disclaimer' | 'admin' | 'notfound' | 'all-tools';
 
 export const CATEGORY_HUBS_CONFIG = [
   { slug: 'json-developer-tools', name: 'JSON & Developer Tools', icon: Code, count: 9, desc: 'Minifier, Diff, Path Tester, Kotlin/Java/C#/Go, Schema' },
@@ -144,7 +145,7 @@ export default function App() {
       const cat = hash.replace('category=', '');
       setActiveCategory(cat);
       setSelectedTool(null);
-      setCurrentView('catalog');
+      setCurrentView('category');
       return;
     }
 
@@ -163,7 +164,7 @@ export default function App() {
         if (isCat) {
           setActiveCategory(slug);
           setSelectedTool(null);
-          setCurrentView('catalog');
+          setCurrentView('category');
           return;
         }
       } else if (parts.length >= 2) {
@@ -375,9 +376,23 @@ export default function App() {
   // Back to All Tools catalog using clean URLs
   const handleBackToCatalog = () => {
     setSelectedTool(null);
+    setActiveCategory('all');
     setCurrentView('catalog');
+    setSearchQuery('');
     setMobileMenuOpen(false);
     window.history.pushState({}, '', '/');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
+
+  // Open dedicated Category Page using clean URLs
+  const handleSelectCategory = (catSlug: string) => {
+    setSelectedTool(null);
+    setActiveCategory(catSlug);
+    setCurrentView('category');
+    setSearchQuery('');
+    setCategorySearchQuery('');
+    setMobileMenuOpen(false);
+    window.history.pushState({}, '', `/tools/${catSlug}/`);
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
@@ -474,6 +489,43 @@ export default function App() {
     }
     return searchTools(tools, searchQuery, 'all');
   }, [tools, activeCategory, searchQuery, starredToolIds]);
+
+  // Curated Top 10 Popular Utilities for the Homepage
+  const top10Tools = useMemo(() => {
+    if (!tools.length) return [];
+    const primarySlugs = [
+      'aes-encrypt-decrypt',
+      'sha256-hash-generator',
+      'jwt-token-generator',
+      'base64-encode-decode',
+      'uuid-guid-generator',
+      'secure-password-generator',
+      'json-formatter',
+      'url-encode-decode',
+      'rsa-encrypt-decrypt',
+      'hmac-generator'
+    ];
+    const curated: ToolItem[] = [];
+    const usedSlugs = new Set<string>();
+
+    primarySlugs.forEach(slug => {
+      const match = tools.find(t => t.slug === slug || t.id === slug);
+      if (match && !usedSlugs.has(match.slug)) {
+        curated.push(match);
+        usedSlugs.add(match.slug);
+      }
+    });
+
+    if (curated.length < 10) {
+      const popular = tools.filter(t => t.popular && !usedSlugs.has(t.slug));
+      for (const t of popular) {
+        if (curated.length >= 10) break;
+        curated.push(t);
+        usedSlugs.add(t.slug);
+      }
+    }
+    return curated.slice(0, 10);
+  }, [tools]);
 
   // Top search quick matches for live header dropdown
   const searchQuickMatches = useMemo(() => {
@@ -826,6 +878,18 @@ export default function App() {
               onBack={handleBackToCatalog}
               onSelectTool={handleSelectTool}
             />
+          ) : currentView === 'category' ? (
+            <CategoryPage 
+              categorySlug={activeCategory}
+              tools={tools}
+              allCategoryHubs={allCategoryHubs}
+              onSelectTool={handleSelectTool}
+              onSelectCategory={handleSelectCategory}
+              onNavigateHome={handleBackToCatalog}
+              onNavigateAllTools={() => handleNavigateView('all-tools')}
+              starredToolIds={starredToolIds}
+              onToggleStar={toggleStarTool}
+            />
           ) : currentView === 'all-tools' ? (
             <>
               <SeoHead
@@ -1096,11 +1160,7 @@ export default function App() {
                     return (
                       <button
                         key={hub.slug}
-                        onClick={() => {
-                          setActiveCategory(isActive ? 'all' : hub.slug);
-                          const el = document.getElementById('catalog-grid');
-                          if (el) el.scrollIntoView({ behavior: 'smooth' });
-                        }}
+                        onClick={() => handleSelectCategory(hub.slug)}
                         className={`p-2.5 rounded-xl text-center transition flex flex-col items-center justify-between border cursor-pointer group shadow-sm ${
                           isActive
                             ? 'bg-blue-600/15 border-[#2E9BFF] shadow-md ring-1 ring-[#2E9BFF]'
@@ -1132,18 +1192,15 @@ export default function App() {
 
                 <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[var(--border-subtle)]">
                   <button
-                    onClick={() => setActiveCategory('all')}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer border ${
-                      activeCategory === 'all'
-                        ? 'bg-[#2E9BFF] text-white border-[#2E9BFF] shadow-sm'
-                        : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-[var(--accent)] hover:text-[var(--text-primary)]'
-                    }`}
+                    onClick={() => handleNavigateView('all-tools')}
+                    className="px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer border bg-[#2E9BFF] text-white border-[#2E9BFF] shadow-sm flex items-center gap-1.5"
                   >
-                    All Tools ({tools.length || '1,380+'})
+                    <Layers size={13} />
+                    <span>View All Tools ({tools.length || '1,380+'})</span>
                   </button>
 
                   <button
-                    onClick={() => setActiveCategory('favorites')}
+                    onClick={() => handleSelectCategory('favorites')}
                     className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer border flex items-center gap-1.5 ${
                       activeCategory === 'favorites'
                         ? 'bg-amber-500 text-black font-bold border-amber-400 shadow-sm'
@@ -1157,7 +1214,7 @@ export default function App() {
                   {allCategoryHubs.map(hub => (
                     <button
                       key={hub.slug}
-                      onClick={() => setActiveCategory(hub.slug)}
+                      onClick={() => handleSelectCategory(hub.slug)}
                       className={`px-3 py-1.5 rounded-lg text-xs whitespace-nowrap transition cursor-pointer border flex items-center gap-1.5 ${
                         activeCategory === hub.slug
                           ? 'bg-[#2E9BFF] text-white border-[#2E9BFF] font-semibold shadow-sm'
@@ -1179,14 +1236,12 @@ export default function App() {
                       <Terminal size={17} className="text-[#2E9BFF]" />
                       {searchQuery.trim() 
                         ? `Search Results (${filteredTools.length} tools found)` 
-                        : activeCategory === 'all' 
-                        ? `All Utilities (${filteredTools.length})` 
-                        : `${CATEGORY_HUBS_CONFIG.find(c => c.slug === activeCategory)?.name || activeCategory} (${filteredTools.length} tools)`}
+                        : `Top 10 Popular Utilities`}
                     </h3>
                     <span className="text-xs text-[var(--text-muted)] mt-0.5 block">
                       {searchQuery.trim()
                         ? `Showing results matching "${searchQuery}" across all 1,380+ utilities`
-                        : 'Instant client-side execution · Click to open any isolated tool'}
+                        : 'Frequently used zero-knowledge cryptographic tools & developer utilities · 100% in-browser RAM'}
                     </span>
                   </div>
 
@@ -1242,12 +1297,12 @@ export default function App() {
                       onClick={() => setSearchQuery('')}
                       className="text-xs text-[#2E9BFF] hover:underline font-semibold cursor-pointer"
                     >
-                      Reset Search (Show All)
+                      Reset Search (Show Top 10)
                     </button>
                   </div>
                 )}
 
-                {filteredTools.length === 0 ? (
+                {searchQuery.trim() && filteredTools.length === 0 ? (
                   <div className="card-glass p-8 sm:p-12 text-center my-6 max-w-xl mx-auto rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] shadow-xs">
                     <div className="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#2E9BFF] flex items-center justify-center mx-auto mb-3">
                       <Search size={24} />
@@ -1293,43 +1348,85 @@ export default function App() {
                     </button>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {filteredTools.map(tool => (
-                      <div 
-                        key={tool.id} 
-                        onClick={() => handleSelectTool(tool)}
-                        className="card-glass flex flex-col justify-between hover:-translate-y-1 hover:border-[#2E9BFF]/60 transition duration-200 cursor-pointer group shadow-sm bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4"
-                      >
-                        <div>
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-[11px] font-semibold px-2 py-0.5 rounded bg-blue-500/10 text-[#2E9BFF] border border-blue-500/20">
-                              {tool.categoryName}
-                            </span>
-                            {tool.popular && (
-                              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20">
-                                Popular
+                  <>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                      {(searchQuery.trim() ? filteredTools : top10Tools).map(tool => (
+                        <div 
+                          key={tool.id} 
+                          onClick={() => handleSelectTool(tool)}
+                          className="card-glass flex flex-col justify-between hover:-translate-y-1 hover:border-[#2E9BFF]/60 transition duration-200 cursor-pointer group shadow-sm bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4"
+                        >
+                          <div>
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-[11px] font-semibold px-2 py-0.5 rounded bg-blue-500/10 text-[#2E9BFF] border border-blue-500/20 truncate max-w-[170px]">
+                                {tool.categoryName}
                               </span>
-                            )}
+                              {tool.popular && (
+                                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20">
+                                  Popular
+                                </span>
+                              )}
+                            </div>
+                            <h3 className="text-sm font-bold text-[var(--text-primary)] group-hover:text-[#2E9BFF] transition mb-1.5 leading-snug">
+                              {tool.name}
+                            </h3>
+                            <p className="text-xs text-[var(--text-muted)] line-clamp-2 leading-relaxed mb-3">
+                              {tool.shortDesc}
+                            </p>
                           </div>
-                          <h3 className="text-sm font-bold text-[var(--text-primary)] group-hover:text-[#2E9BFF] transition mb-1.5 leading-snug">
-                            {tool.name}
-                          </h3>
-                          <p className="text-xs text-[var(--text-muted)] line-clamp-2 leading-relaxed mb-3">
-                            {tool.shortDesc}
-                          </p>
-                        </div>
 
-                        <div className="pt-2 border-t border-[var(--border-subtle)] flex items-center justify-between">
-                          <span className="text-[11px] text-[var(--text-muted)] font-mono">
-                            {tool.inputType}
-                          </span>
-                          <span className="text-xs font-semibold text-[#2E9BFF] group-hover:translate-x-1 transition inline-flex items-center gap-1">
-                            Open Tool →
-                          </span>
+                          <div className="pt-2 border-t border-[var(--border-subtle)] flex items-center justify-between">
+                            <span className="text-[11px] text-[var(--text-muted)] font-mono">
+                              {tool.inputType}
+                            </span>
+                            <span className="text-xs font-semibold text-[#2E9BFF] group-hover:translate-x-1 transition inline-flex items-center gap-1">
+                              Open Tool →
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* ✅ Big Prominent All Tools Button & Category Explorer */}
+                    {!searchQuery.trim() && (
+                      <div className="card-glass p-8 sm:p-10 my-10 rounded-2xl border border-blue-500/30 bg-gradient-to-r from-blue-950/20 via-[#2E9BFF]/10 to-indigo-950/20 shadow-lg relative overflow-hidden flex flex-col items-center justify-center text-center mx-auto w-full">
+                        <div className="absolute -right-10 -bottom-10 w-60 h-60 bg-blue-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                        <div className="absolute -left-10 -top-10 w-60 h-60 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+                        <div className="max-w-2xl mx-auto relative z-10 flex flex-col items-center justify-center text-center">
+                          <div className="inline-flex items-center justify-center p-3.5 rounded-2xl bg-blue-500/15 border border-blue-500/25 text-[#2E9BFF] mb-4 shadow-sm">
+                            <Layers size={28} />
+                          </div>
+                          <h4 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[var(--text-primary)] mb-3 tracking-tight text-center leading-snug">
+                            Explore All {tools.length || '1,380'}+ Developer Utilities &amp; Cryptographic Tools
+                          </h4>
+                          <p className="text-xs sm:text-sm text-[var(--text-secondary)] mb-6 leading-relaxed max-w-xl mx-auto text-center">
+                            Showing top 10 featured tools above. EncryptDecrypt.org features over 1,380+ free client-side tools across {allCategoryHubs.length} categories — calculated 100% in your browser RAM with zero server transmission.
+                          </p>
+
+                          <div className="flex flex-wrap items-center justify-center gap-3">
+                            <button
+                              onClick={() => handleNavigateView('all-tools')}
+                              className="btn btn-primary px-6 py-3 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-xl shadow-blue-500/25 hover:scale-[1.02] active:scale-[0.98] transition cursor-pointer"
+                            >
+                              <Layers size={17} />
+                              <span>View All {tools.length || '1,380'}+ Tools Directory</span>
+                              <ArrowRight size={17} />
+                            </button>
+                            <button
+                              onClick={() => {
+                                const el = document.getElementById('category-hubs');
+                                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                              }}
+                              className="btn btn-secondary px-5 py-3 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 cursor-pointer"
+                            >
+                              <span>Browse by Category ({allCategoryHubs.length})</span>
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    ))}
-                  </div>
+                    )}
+                  </>
                 )}
               </div>
             </div>
