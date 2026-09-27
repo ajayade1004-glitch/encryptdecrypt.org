@@ -1,72 +1,65 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
   <defs>
     <!-- Background Gradient -->
-    <radialGradient id="bgGrad" cx="50%" cy="40%" r="60%">
-      <stop offset="0%" stop-color="#0F172A" />
-      <stop offset="70%" stop-color="#030712" />
-      <stop offset="100%" stop-color="#000000" />
-    </radialGradient>
-
-    <!-- Neon Cyber Gradient -->
-    <linearGradient id="neonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00FF9D" />
-      <stop offset="50%" stop-color="#00F0FF" />
-      <stop offset="100%" stop-color="#818CF8" />
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080E1A" />
+      <stop offset="50%" stop-color="#040711" />
+      <stop offset="100%" stop-color="#02040A" />
     </linearGradient>
 
-    <!-- Glowing Accent -->
-    <filter id="cyberGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="12" result="blur" />
-      <feMerge>
-        <feMergeNode in="blur" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
+    <!-- Cyber Shield Outer Gradient -->
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="50%" stop-color="#2E9BFF" />
+      <stop offset="100%" stop-color="#0051FF" />
+    </linearGradient>
+
+    <!-- Padlock Body Gradient -->
+    <linearGradient id="lockGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
-
-    <linearGradient id="shieldFill" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.8" />
-      <stop offset="100%" stop-color="#0B0F19" stop-opacity="0.95" />
-    </linearGradient>
   </defs>
 
-  <!-- Rounded App Icon Base -->
-  <rect width="512" height="512" rx="128" fill="url(#bgGrad)" stroke="#1E293B" stroke-width="8" />
+  <!-- App Icon Background: Smooth Rounded Squircle -->
+  <rect x="4" y="4" width="120" height="120" rx="28" fill="url(#bgGrad)" stroke="#1E293B" stroke-width="2" />
 
-  <!-- Subtle Cyber Grid in Icon Background -->
-  <path d="M 96 0 V 512 M 192 0 V 512 M 288 0 V 512 M 384 0 V 512 M 0 96 H 512 M 0 192 H 512 M 0 288 H 512 M 0 384 H 512" 
-        stroke="rgba(0, 240, 255, 0.05)" stroke-width="2" />
+  <!-- Subtle Cyber Grid in Background -->
+  <path d="M4 64h120M64 4v120" stroke="#00F0FF" stroke-opacity="0.08" stroke-width="1.5" />
+  <circle cx="64" cy="64" r="44" fill="none" stroke="#2E9BFF" stroke-opacity="0.12" stroke-width="1.5" stroke-dasharray="4 4" />
 
-  <!-- Outer Cyber Shield Contour -->
-  <path d="M 256 64 
-           L 416 128 
-           C 416 288 352 400 256 448 
-           C 160 400 96 288 96 128 
-           Z" 
-        fill="url(#shieldFill)" 
-        stroke="url(#neonGrad)" 
-        stroke-width="18" 
+  <!-- Shield Outline -->
+  <path d="M64 16 L100 32 C100 70 82 96 64 108 C46 96 28 70 28 32 Z" 
+        fill="#0B132B" 
+        fill-opacity="0.7"
+        stroke="url(#shieldGrad)" 
+        stroke-width="4" 
         stroke-linejoin="round"
-        stroke-linecap="round"
-        filter="url(#cyberGlow)" />
+        filter="url(#neonGlow)" />
 
-  <!-- Inner Cyber Terminal Prompt >_ -->
-  <!-- Greater-Than Chevron '>' -->
-  <path d="M 190 200 L 260 256 L 190 312" 
-        fill="none" 
-        stroke="#00FF9D" 
-        stroke-width="24" 
-        stroke-linecap="round" 
-        stroke-linejoin="round" 
-        filter="url(#cyberGlow)" />
-
-  <!-- Terminal Underscore Cursor '_' -->
-  <path d="M 285 312 L 345 312" 
+  <!-- Inner Shackle of Padlock -->
+  <path d="M52 54 V44 C52 37.37 57.37 32 64 32 C70.63 32 76 37.37 76 44 V54" 
         fill="none" 
         stroke="#00F0FF" 
-        stroke-width="24" 
-        stroke-linecap="round" 
-        filter="url(#cyberGlow)" />
+        stroke-width="5" 
+        stroke-linecap="round" />
 
-  <!-- Micro Cryptographic Keyhole Lock Shackle at Top -->
-  <circle cx="256" cy="144" r="16" fill="#00FF9D" />
+  <!-- Padlock Main Body -->
+  <rect x="46" y="52" width="36" height="30" rx="7" fill="url(#lockGrad)" stroke="#38BDF8" stroke-width="2" />
+
+  <!-- Keyhole Cutout -->
+  <circle cx="64" cy="64" r="3.5" fill="#040711" />
+  <polygon points="62.5,65 65.5,65 67,74 61,74" fill="#040711" />
+
+  <!-- Binary / Digital Nodes Accents -->
+  <circle cx="38" cy="46" r="2" fill="#00F0FF" opacity="0.8" />
+  <circle cx="90" cy="46" r="2" fill="#00F0FF" opacity="0.8" />
+  <circle cx="64" cy="98" r="2.5" fill="#00F0FF" />
+  <line x1="64" y1="84" x2="64" y2="95" stroke="#00F0FF" stroke-width="1.5" stroke-dasharray="2 2" />
 </svg>

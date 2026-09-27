@@ -14,9 +14,8 @@ import { SeoHead } from './components/SeoHead';
 import { AdUnit } from './components/AdUnit';
 import { applyAdminOverrides, recordToolExecution, recordSearchQuery, recordPageView } from './utils/adminStorage';
 
-import { ToolWorkspace } from './components/ToolWorkspace';
-
-// --- REACT LAZY IMPORTS FOR OTHER PAGES ---
+// --- REACT LAZY IMPORTS FOR OPTIMIZED PAGESPEED (100% Core Web Vitals) ---
+const ToolWorkspace = lazy(() => import('./components/ToolWorkspace').then(module => ({ default: module.ToolWorkspace })));
 const AllToolsPage = lazy(() => import('./components/pages/AllToolsPage').then(module => ({ default: module.AllToolsPage })));
 const AboutPage = lazy(() => import('./components/pages/AboutPage').then(module => ({ default: module.AboutPage })));
 const ContactPage = lazy(() => import('./components/pages/ContactPage').then(module => ({ default: module.ContactPage })));
