@@ -84,15 +84,15 @@ export function searchTools(
     // we search everything unless filtered
     const matchesCategory = categoryFilter === 'all' || tool.category === categoryFilter;
 
-    const nameLower = tool.name.toLowerCase();
-    const nameNorm = normalize(tool.name);
-    const slugLower = tool.slug.toLowerCase();
-    const slugNorm = normalize(tool.slug);
-    const descLower = tool.shortDesc.toLowerCase();
-    const catNameLower = tool.categoryName.toLowerCase();
+    const nameLower = (tool.name || '').toLowerCase();
+    const nameNorm = normalize(tool.name || '');
+    const slugLower = (tool.slug || '').toLowerCase();
+    const slugNorm = normalize(tool.slug || '');
+    const descLower = (tool.shortDesc || (tool as any).description || '').toLowerCase();
+    const catNameLower = (tool.categoryName || tool.category || '').toLowerCase();
     const primaryKw = (tool.primaryKeyword || '').toLowerCase();
-    const secKws = (tool.secondaryKeywords || []).map(k => k.toLowerCase());
-    const lsiKws = (tool.lsiKeywords || []).map(k => k.toLowerCase());
+    const secKws = (tool.secondaryKeywords || (tool as any).keywords || []).map(k => (k || '').toLowerCase());
+    const lsiKws = (tool.lsiKeywords || []).map(k => (k || '').toLowerCase());
 
     let score = 0;
 

@@ -1,8 +1,54 @@
+# robots.txt for EncryptDecrypt.org
+# Optimized for Universal Search & AI Citation Engines (ChatGPT, Perplexity, Google Gemini, Claude, Copilot, Apple Intelligence)
+
 User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /#admin
-Disallow: /search?
-Disallow: /*?*
 
+# OpenAI / ChatGPT Web Search & Indexing Bots
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+
+# Google Gemini & Google Search AI Overviews
+User-agent: Googlebot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity AI Citation Bot
+User-agent: PerplexityBot
+Allow: /
+
+# Anthropic Claude Indexer
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
+# Microsoft Copilot & Bing Search
+User-agent: Bingbot
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+# Other Major AI Knowledge Crawlers
+User-agent: CCBot
+Allow: /
+User-agent: Diffbot
+Allow: /
+User-agent: cohere-ai
+Allow: /
+
+# Sitemap & LLM Discovery Indices
 Sitemap: https://encryptdecrypt.org/sitemap.xml
+LLM: https://encryptdecrypt.org/llms.txt
+LLM-Full: https://encryptdecrypt.org/llms-full.txt

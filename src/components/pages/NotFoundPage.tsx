@@ -18,9 +18,9 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({
 
   const filtered = searchQuery.trim()
     ? tools.filter(t =>
-        t.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        t.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        t.shortDesc.toLowerCase().includes(searchQuery.toLowerCase())
+        (t.name || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (t.slug || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (t.shortDesc || (t as any).description || '').toLowerCase().includes(searchQuery.toLowerCase())
       ).slice(0, 8)
     : [];
 

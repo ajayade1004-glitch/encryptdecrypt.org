@@ -1,0 +1,1408 @@
+[
+  {
+    "slug": "encoding-decoding",
+    "code": "ENC-01",
+    "name": "Encoding & Decoding",
+    "icon": "Wrench",
+    "count": 23,
+    "desc": "Base64 Encode/Decode, URL Encode/Decode, HTML Entities Encode/Decode",
+    "tags": [
+      "Base64",
+      "URL",
+      "HTML"
+    ]
+  },
+  {
+    "slug": "encryption-ciphers",
+    "code": "ENC-02",
+    "name": "Encryption & Ciphers",
+    "icon": "Wrench",
+    "count": 44,
+    "desc": "AES 256 Encrypt & Decrypt, RSA Keypair & Encryption, ChaCha20-Poly1305 Cipher",
+    "tags": [
+      "AES",
+      "RSA",
+      "ChaCha20-Poly1305"
+    ]
+  },
+  {
+    "slug": "hashing-security",
+    "code": "HAS-03",
+    "name": "Hashing & Security",
+    "icon": "Wrench",
+    "count": 20,
+    "desc": "SHA-256 Hash Generator, SHA-512 Hash Generator, MD5 Hash Generator",
+    "tags": [
+      "SHA-256",
+      "SHA-512",
+      "MD5"
+    ]
+  },
+  {
+    "slug": "generators-tokens",
+    "code": "GEN-04",
+    "name": "Generators & Tokens",
+    "icon": "Wrench",
+    "count": 19,
+    "desc": "Secure Password Generator, UUID / GUID v4 & v7 Generator, NanoID Token Generator",
+    "tags": [
+      "Secure",
+      "UUID",
+      "NanoID"
+    ]
+  },
+  {
+    "slug": "dev-tools-formatters",
+    "code": "DEV-05",
+    "name": "Dev Tools & Formatters",
+    "icon": "Wrench",
+    "count": 16,
+    "desc": "JSON Formatter & Validator, XML Formatter & Beautifier, YAML to JSON Converter",
+    "tags": [
+      "JSON",
+      "XML",
+      "YAML"
+    ]
+  },
+  {
+    "slug": "file-data-converters",
+    "code": "FIL-06",
+    "name": "File & Data Converters",
+    "icon": "Wrench",
+    "count": 16,
+    "desc": "CSV to JSON Converter, JSON to CSV Converter, XML to JSON Converter",
+    "tags": [
+      "CSV",
+      "JSON",
+      "XML"
+    ]
+  },
+  {
+    "slug": "validators-checkers",
+    "code": "VAL-07",
+    "name": "Validators & Checkers",
+    "icon": "Wrench",
+    "count": 14,
+    "desc": "JWT Token Signature Validator, SSL / TLS Certificate Decoder, Credit Card Luhn Validator",
+    "tags": [
+      "JWT",
+      "SSL",
+      "Credit"
+    ]
+  },
+  {
+    "slug": "text-utilities",
+    "code": "TEX-08",
+    "name": "Text Utilities",
+    "icon": "Wrench",
+    "count": 15,
+    "desc": "Word, Character & Byte Counter, Case Converter, Clean URL Slug Generator",
+    "tags": [
+      "Word,",
+      "Case",
+      "Clean"
+    ]
+  },
+  {
+    "slug": "escape-network",
+    "code": "ESC-09",
+    "name": "Escape & Network",
+    "icon": "Wrench",
+    "count": 15,
+    "desc": "JavaScript String Escape, SQL String & Query Escaper, HTML Special Characters Escaper",
+    "tags": [
+      "JavaScript",
+      "SQL",
+      "HTML"
+    ]
+  },
+  {
+    "slug": "seo-webmaster",
+    "code": "SEO-10",
+    "name": "SEO & Webmaster",
+    "icon": "Wrench",
+    "count": 48,
+    "desc": "Robots.txt Generator & Tester, XML Sitemap Syntax Validator, Open Graph Meta Tag Builder",
+    "tags": [
+      "Robots.txt",
+      "XML",
+      "Open"
+    ]
+  },
+  {
+    "slug": "security-certificates",
+    "code": "SEC-11",
+    "name": "Security & Certificates",
+    "icon": "Wrench",
+    "count": 15,
+    "desc": "CSR (Signing Request) Decoder, X.509 Certificate Parser, PEM to DER Certificate Converter",
+    "tags": [
+      "CSR",
+      "X.509",
+      "PEM"
+    ]
+  },
+  {
+    "slug": "math-design",
+    "code": "MAT-12",
+    "name": "Math & Design",
+    "icon": "Wrench",
+    "count": 19,
+    "desc": "Color HEX to RGB & HSL Converter, Color Contrast Checker (WCAG), Bitwise Operations Calculator",
+    "tags": [
+      "Color",
+      "Color",
+      "Bitwise"
+    ]
+  },
+  {
+    "slug": "network-online",
+    "code": "NET-13",
+    "name": "Network & Online Tools",
+    "icon": "Network",
+    "count": 10,
+    "desc": "IP Subnet CIDR Calculator, DNS Record Inspector, Port Number & Protocol Lookup",
+    "tags": [
+      "IP",
+      "DNS",
+      "Port"
+    ]
+  },
+  {
+    "slug": "converters-utilities",
+    "code": "CON-14",
+    "name": "Converters & Utilities",
+    "icon": "RefreshCw",
+    "count": 6,
+    "desc": "Unix Chmod Calculator, Data Storage Units Converter, Number to Words Converter",
+    "tags": [
+      "Unix",
+      "Data",
+      "Number"
+    ]
+  },
+  {
+    "slug": "json-developer-tools",
+    "code": "JSO-15",
+    "name": "JSON & Developer Tools",
+    "icon": "Wrench",
+    "count": 34,
+    "desc": "JSON Minifier, JSON Diff, JSON Path Tester",
+    "tags": [
+      "JSON",
+      "JSON",
+      "JSON"
+    ]
+  },
+  {
+    "slug": "api-web-development",
+    "code": "API-16",
+    "name": "API & Web Development",
+    "icon": "Code",
+    "count": 7,
+    "desc": "HTTP Status Checker, REST API Request Builder, cURL Builder",
+    "tags": [
+      "HTTP",
+      "REST",
+      "cURL"
+    ]
+  },
+  {
+    "slug": "website-performance",
+    "code": "WEB-17",
+    "name": "Website Performance",
+    "icon": "Gauge",
+    "count": 6,
+    "desc": "Page Load Calculator, Image Size Analyzer, JS Minifier",
+    "tags": [
+      "Page",
+      "Image",
+      "JS"
+    ]
+  },
+  {
+    "slug": "accessibility",
+    "code": "ACC-18",
+    "name": "Accessibility",
+    "icon": "Eye",
+    "count": 6,
+    "desc": "WCAG Contrast Checker, Alt Text Checker, Heading Checker",
+    "tags": [
+      "WCAG",
+      "Alt",
+      "Heading"
+    ]
+  },
+  {
+    "slug": "text-writing-utilities",
+    "code": "TEX-19",
+    "name": "Text & Writing Utilities",
+    "icon": "Type",
+    "count": 7,
+    "desc": "Sentence Counter, Reading Time Calculator, Keyword Counter",
+    "tags": [
+      "Sentence",
+      "Reading",
+      "Keyword"
+    ]
+  },
+  {
+    "slug": "file-data-tools",
+    "code": "FIL-20",
+    "name": "File & Data Tools",
+    "icon": "FileSpreadsheet",
+    "count": 8,
+    "desc": "CSV Viewer, CSV Cleaner, TSV to CSV",
+    "tags": [
+      "CSV",
+      "CSV",
+      "TSV"
+    ]
+  },
+  {
+    "slug": "date-time",
+    "code": "DAT-21",
+    "name": "Date & Time",
+    "icon": "Clock",
+    "count": 7,
+    "desc": "Unix Timestamp, Date Difference, Age Calculator",
+    "tags": [
+      "Unix",
+      "Date",
+      "Age"
+    ]
+  },
+  {
+    "slug": "math-science",
+    "code": "MAT-22",
+    "name": "Math & Science",
+    "icon": "Sigma",
+    "count": 8,
+    "desc": "Scientific Calculator, Fraction Calculator, Ratio Calculator",
+    "tags": [
+      "Scientific",
+      "Fraction",
+      "Ratio"
+    ]
+  },
+  {
+    "slug": "color-design",
+    "code": "COL-23",
+    "name": "Color & Design",
+    "icon": "Palette",
+    "count": 8,
+    "desc": "HEX Picker, RGB to HEX, HSL to HEX",
+    "tags": [
+      "HEX",
+      "RGB",
+      "HSL"
+    ]
+  },
+  {
+    "slug": "network-dns",
+    "code": "NET-24",
+    "name": "Network & DNS",
+    "icon": "Network",
+    "count": 7,
+    "desc": "DNS Record Lookup, IPv4 Calculator, IPv6 Calculator",
+    "tags": [
+      "DNS",
+      "IPv4",
+      "IPv6"
+    ]
+  },
+  {
+    "slug": "security-defensive",
+    "code": "SEC-25",
+    "name": "Security — Defensive",
+    "icon": "CheckCheck",
+    "count": 9,
+    "desc": "Password Strength Checker, Hash Generator, File Checksum",
+    "tags": [
+      "Password",
+      "Hash",
+      "File"
+    ]
+  },
+  {
+    "slug": "developer-generators",
+    "code": "DEV-26",
+    "name": "Developer Generators",
+    "icon": "Code",
+    "count": 7,
+    "desc": "UUID Generator, NanoID Generator, Mock JSON Generator",
+    "tags": [
+      "UUID",
+      "NanoID",
+      "Mock"
+    ]
+  },
+  {
+    "slug": "image-web-optimization",
+    "code": "IMA-27",
+    "name": "Image/Web Optimization",
+    "icon": "Image",
+    "count": 6,
+    "desc": "Image Dimension Calculator, Image to WebP Converter, SVG Optimizer",
+    "tags": [
+      "Image",
+      "Image",
+      "SVG"
+    ]
+  },
+  {
+    "slug": "pdf-document-utilities",
+    "code": "PDF-28",
+    "name": "PDF & Document Utilities",
+    "icon": "Wrench",
+    "count": 15,
+    "desc": "PDF Page Number Generator, PDF Page Extractor, PDF Page Reorder Tool",
+    "tags": [
+      "PDF",
+      "PDF",
+      "PDF"
+    ]
+  },
+  {
+    "slug": "image-utilities",
+    "code": "IMA-29",
+    "name": "Image Utilities",
+    "icon": "Wrench",
+    "count": 37,
+    "desc": "Image Background Color Changer, Image DPI Calculator, Image Print Size Calculator",
+    "tags": [
+      "Image",
+      "Image",
+      "Image"
+    ]
+  },
+  {
+    "slug": "excel-spreadsheet-tools",
+    "code": "EXC-30",
+    "name": "Excel & Spreadsheet Tools",
+    "icon": "Wrench",
+    "count": 30,
+    "desc": "Excel Formula Generator, Excel Formula Explainer, Excel Formula Debugger",
+    "tags": [
+      "Excel",
+      "Excel",
+      "Excel"
+    ]
+  },
+  {
+    "slug": "csv-data-cleaning",
+    "code": "CSV-31",
+    "name": "CSV & Data Cleaning Tools",
+    "icon": "Wrench",
+    "count": 30,
+    "desc": "CSV Column Renamer, CSV Column Reorder Tool, CSV Column Splitter",
+    "tags": [
+      "CSV",
+      "CSV",
+      "CSV"
+    ]
+  },
+  {
+    "slug": "business-office-calculators",
+    "code": "BUS-32",
+    "name": "Business & Office Calculators",
+    "icon": "Wrench",
+    "count": 29,
+    "desc": "Invoice Total Calculator, Invoice Discount Calculator, Invoice Tax Calculator",
+    "tags": [
+      "Invoice",
+      "Invoice",
+      "Invoice"
+    ]
+  },
+  {
+    "slug": "time-productivity-tools",
+    "code": "TIM-33",
+    "name": "Time & Productivity Tools",
+    "icon": "Wrench",
+    "count": 20,
+    "desc": "Work Hours Calculator, Pomodoro Timer, Countdown Timer",
+    "tags": [
+      "Work",
+      "Pomodoro",
+      "Countdown"
+    ]
+  },
+  {
+    "slug": "student-education-tools",
+    "code": "STU-34",
+    "name": "Student & Education Tools",
+    "icon": "Wrench",
+    "count": 25,
+    "desc": "GPA Calculator, CGPA Calculator, CGPA to Percentage Converter",
+    "tags": [
+      "GPA",
+      "CGPA",
+      "CGPA"
+    ]
+  },
+  {
+    "slug": "web-developer-css-tools",
+    "code": "WEB-35",
+    "name": "Web Developer & CSS Tools",
+    "icon": "Wrench",
+    "count": 30,
+    "desc": "CSS Clamp Generator, CSS Grid Layout Generator, CSS Flexbox Layout Generator",
+    "tags": [
+      "CSS",
+      "CSS",
+      "CSS"
+    ]
+  },
+  {
+    "slug": "git-github-tools",
+    "code": "GIT-36",
+    "name": "Git & GitHub Tools",
+    "icon": "Wrench",
+    "count": 20,
+    "desc": "Git Branch Name Generator, Git Commit Message Generator, Git Reset Command Builder",
+    "tags": [
+      "Git",
+      "Git",
+      "Git"
+    ]
+  },
+  {
+    "slug": "url-utm-tools",
+    "code": "URL-37",
+    "name": "URL & UTM Tools",
+    "icon": "Wrench",
+    "count": 20,
+    "desc": "URL Character Counter, URL Structure Inspector, URL Parameter Cleaner",
+    "tags": [
+      "URL",
+      "URL",
+      "URL"
+    ]
+  },
+  {
+    "slug": "email-tools",
+    "code": "EMA-38",
+    "name": "Email Tools",
+    "icon": "Wrench",
+    "count": 20,
+    "desc": "Email Header Parser, Email Header Analyzer, Email Date Converter",
+    "tags": [
+      "Email",
+      "Email",
+      "Email"
+    ]
+  },
+  {
+    "slug": "data-cleaning-analysis",
+    "code": "DAT-39",
+    "name": "Data Cleaning & Analysis",
+    "icon": "Wrench",
+    "count": 25,
+    "desc": "Duplicate Data Finder, Duplicate Email Finder, Duplicate Phone Number Finder",
+    "tags": [
+      "Duplicate",
+      "Duplicate",
+      "Duplicate"
+    ]
+  },
+  {
+    "slug": "printing-paper-tools",
+    "code": "PRI-40",
+    "name": "Printing & Paper Tools",
+    "icon": "Wrench",
+    "count": 20,
+    "desc": "A4 Paper Size Calculator, A3 Paper Size Calculator, A5 Paper Size Calculator",
+    "tags": [
+      "A4",
+      "A3",
+      "A5"
+    ]
+  },
+  {
+    "slug": "qr-barcode-tools",
+    "code": "QR--41",
+    "name": "QR & Barcode Tools",
+    "icon": "Wrench",
+    "count": 20,
+    "desc": "QR Code Size Calculator, QR Error Correction Level Guide, QR Data Capacity Calculator",
+    "tags": [
+      "QR",
+      "QR",
+      "QR"
+    ]
+  },
+  {
+    "slug": "documentation-writing-tools",
+    "code": "DOC-42",
+    "name": "Documentation & Writing Tools",
+    "icon": "Wrench",
+    "count": 20,
+    "desc": "README Generator, API Documentation Generator, Changelog Generator",
+    "tags": [
+      "README",
+      "API",
+      "Changelog"
+    ]
+  },
+  {
+    "slug": "file-binary-tools",
+    "code": "FIL-43",
+    "name": "File & Binary Tools",
+    "icon": "Wrench",
+    "count": 28,
+    "desc": "File Extension Extractor, Filename Cleaner, File Path Normalizer",
+    "tags": [
+      "File",
+      "Filename",
+      "File"
+    ]
+  },
+  {
+    "slug": "defensive-security-tools",
+    "code": "DEF-44",
+    "name": "Defensive Security Tools",
+    "icon": "Wrench",
+    "count": 20,
+    "desc": "Password Entropy Calculator, Password Policy Checker, Passphrase Strength Analyzer",
+    "tags": [
+      "Password",
+      "Password",
+      "Passphrase"
+    ]
+  },
+  {
+    "slug": "accessibility-tools",
+    "code": "ACC-45",
+    "name": "Accessibility Tools",
+    "icon": "Wrench",
+    "count": 20,
+    "desc": "Accessible Button Checker, Accessible Form Label Checker, Keyboard Navigation Checklist",
+    "tags": [
+      "Accessible",
+      "Accessible",
+      "Keyboard"
+    ]
+  },
+  {
+    "slug": "developer-error-debugging-tools",
+    "code": "DEV-46",
+    "name": "Developer Error & Debugging Tools",
+    "icon": "Wrench",
+    "count": 25,
+    "desc": "Stack Trace Formatter, Stack Trace Extractor, Error Message Analyzer",
+    "tags": [
+      "Stack",
+      "Stack",
+      "Error"
+    ]
+  },
+  {
+    "slug": "configuration-devops-tools",
+    "code": "CON-47",
+    "name": "Configuration & DevOps Tools",
+    "icon": "Wrench",
+    "count": 25,
+    "desc": "Dockerfile Generator, Docker Compose Generator, Nginx Configuration Generator",
+    "tags": [
+      "Dockerfile",
+      "Docker",
+      "Nginx"
+    ]
+  },
+  {
+    "slug": "finance-budget-tools",
+    "code": "FIN-48",
+    "name": "Finance & Personal Budget Tools",
+    "icon": "Wrench",
+    "count": 25,
+    "desc": "Monthly Budget Planner, Household Expense Splitter, Savings Goal Calculator",
+    "tags": [
+      "Monthly",
+      "Household",
+      "Savings"
+    ]
+  },
+  {
+    "slug": "business-operations-tools",
+    "code": "BUS-49",
+    "name": "Business Operations Tools",
+    "icon": "Wrench",
+    "count": 20,
+    "desc": "Purchase Order Generator, Quotation Generator, Delivery Note Generator",
+    "tags": [
+      "Purchase",
+      "Quotation",
+      "Delivery"
+    ]
+  },
+  {
+    "slug": "text-language-tools",
+    "code": "TEX-50",
+    "name": "Text & Language Tools",
+    "icon": "Wrench",
+    "count": 25,
+    "desc": "Text Readability Analyzer, Paragraph Counter, Syllable Counter",
+    "tags": [
+      "Text",
+      "Paragraph",
+      "Syllable"
+    ]
+  },
+  {
+    "slug": "web-content-social-tools",
+    "code": "WEB-51",
+    "name": "Web Content & Social Media Tools",
+    "icon": "Wrench",
+    "count": 20,
+    "desc": "Social Media Caption Length Checker, Instagram Bio Character Counter, YouTube Title Length Checker",
+    "tags": [
+      "Social",
+      "Instagram",
+      "YouTube"
+    ]
+  },
+  {
+    "slug": "date-calendar-time-tools",
+    "code": "DAT-52",
+    "name": "Date, Calendar & Time Tools",
+    "icon": "Wrench",
+    "count": 20,
+    "desc": "Date to Unix Timestamp Batch Converter, Unix Timestamp Batch Converter, Date Format Normalizer",
+    "tags": [
+      "Date",
+      "Unix",
+      "Date"
+    ]
+  },
+  {
+    "slug": "network-dns-tools",
+    "code": "NET-53",
+    "name": "Network & DNS Tools",
+    "icon": "Wrench",
+    "count": 20,
+    "desc": "IPv4 Range to CIDR Converter, CIDR to IP Range Converter, IPv6 Compression Tool",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "IPv6"
+    ]
+  },
+  {
+    "slug": "qr-barcode-label-tools",
+    "code": "QR--54",
+    "name": "QR, Barcode & Product Label Tools",
+    "icon": "Wrench",
+    "count": 15,
+    "desc": "QR Code Batch Generator, QR Code Text Length Analyzer, QR Code Print Sheet Maker",
+    "tags": [
+      "QR",
+      "QR",
+      "QR"
+    ]
+  },
+  {
+    "slug": "file-conversion-data-formats",
+    "code": "FIL-55",
+    "name": "File Conversion & Data Formats",
+    "icon": "Wrench",
+    "count": 19,
+    "desc": "JSON to TOML Converter, TOML to JSON Converter, JSON to INI Converter",
+    "tags": [
+      "JSON",
+      "TOML",
+      "JSON"
+    ]
+  },
+  {
+    "slug": "web-forms-ui-generators",
+    "code": "WEB-56",
+    "name": "Web Forms & UI Generators",
+    "icon": "Wrench",
+    "count": 20,
+    "desc": "HTML Form Generator, Contact Form HTML Generator, Login Form UI Generator",
+    "tags": [
+      "HTML",
+      "Contact",
+      "Login"
+    ]
+  },
+  {
+    "slug": "mobile-app-development-tools",
+    "code": "MOB-57",
+    "name": "Mobile & App Development Tools",
+    "icon": "Wrench",
+    "count": 20,
+    "desc": "Android dp to px Converter, Android px to dp Converter, Android sp to px Converter",
+    "tags": [
+      "Android",
+      "Android",
+      "Android"
+    ]
+  },
+  {
+    "slug": "education-exam-planning-tools",
+    "code": "EDU-58",
+    "name": "Education & Exam Planning Tools",
+    "icon": "Wrench",
+    "count": 20,
+    "desc": "Exam Marks Percentage Calculator, Subject-Wise Average Calculator, Required Marks Calculator",
+    "tags": [
+      "Exam",
+      "Subject-Wise",
+      "Required"
+    ]
+  },
+  {
+    "slug": "additional-utility-tools",
+    "code": "ADD-59",
+    "name": "Additional Utility Tools",
+    "icon": "Wrench",
+    "count": 20,
+    "desc": "Number to Ordinal Converter, Ordinal to Number Converter, Number Range Generator",
+    "tags": [
+      "Number",
+      "Ordinal",
+      "Number"
+    ]
+  },
+  {
+    "slug": "games-puzzles",
+    "code": "GAM-60",
+    "name": "Games & Logic Puzzles",
+    "icon": "Wrench",
+    "count": 8,
+    "desc": "Sudoku Generator & Solver, Wordle-Style Word Game Generator, Tic-Tac-Toe AI (Minimax Algorithm)",
+    "tags": [
+      "Sudoku",
+      "Wordle-Style",
+      "Tic-Tac-Toe"
+    ]
+  },
+  {
+    "slug": "advanced-math",
+    "code": "ADV-61",
+    "name": "Advanced Mathematics",
+    "icon": "Wrench",
+    "count": 10,
+    "desc": "Quadratic Equation Solver, Linear Equation System Solver, Polynomial Root Finder",
+    "tags": [
+      "Quadratic",
+      "Linear",
+      "Polynomial"
+    ]
+  },
+  {
+    "slug": "creative-design",
+    "code": "CRE-62",
+    "name": "Creative & Design Tools",
+    "icon": "Wrench",
+    "count": 7,
+    "desc": "Pixel Art Editor (Offline Canvas), ASCII Art Image Converter, Symmetry & Kaleidoscope Pattern Generator",
+    "tags": [
+      "Pixel",
+      "ASCII",
+      "Symmetry"
+    ]
+  },
+  {
+    "slug": "geometry-engineering",
+    "code": "GEO-63",
+    "name": "Geometry & Engineering",
+    "icon": "Wrench",
+    "count": 8,
+    "desc": "Triangle Solver (SSS, SAS, ASA), Circle, Sphere & Cylinder Geometry Calculator, Pythagorean Theorem Step-by-Step Solver",
+    "tags": [
+      "Triangle",
+      "Circle,",
+      "Pythagorean"
+    ]
+  },
+  {
+    "slug": "science-physics",
+    "code": "SCI-64",
+    "name": "Science & Physics",
+    "icon": "Wrench",
+    "count": 8,
+    "desc": "Projectile Motion Calculator, Free Fall Time & Velocity Calculator, Density, Mass & Volume Calculator",
+    "tags": [
+      "Projectile",
+      "Free",
+      "Density,"
+    ]
+  },
+  {
+    "slug": "music-audio",
+    "code": "MUS-65",
+    "name": "Music & Audio Theory",
+    "icon": "Wrench",
+    "count": 7,
+    "desc": "Musical Note Frequency Calculator, BPM to Millisecond Delay & Reverb Calculator, Chord Progression Generator (Music Theory)",
+    "tags": [
+      "Musical",
+      "BPM",
+      "Chord"
+    ]
+  },
+  {
+    "slug": "logic-brain",
+    "code": "LOG-66",
+    "name": "Logic & Brain Tools",
+    "icon": "Wrench",
+    "count": 8,
+    "desc": "Boolean Algebra Simplifier (K-Map Grouping), Truth Table to Logic Gate Diagram Generator, Syllogism Validity Checker (Formal Logic)",
+    "tags": [
+      "Boolean",
+      "Truth",
+      "Syllogism"
+    ]
+  },
+  {
+    "slug": "random-chance",
+    "code": "RAN-67",
+    "name": "Random & Chance Tools",
+    "icon": "Wrench",
+    "count": 6,
+    "desc": "Dice Roller Simulator (CSPRNG Cryptographic), Coin Flip Simulator (Weighted & Fair CSPRNG), Random Name & Number Picker Wheel",
+    "tags": [
+      "Dice",
+      "Coin",
+      "Random"
+    ]
+  },
+  {
+    "slug": "everyday-conversion",
+    "code": "EVE-68",
+    "name": "Everyday Conversions",
+    "icon": "Wrench",
+    "count": 6,
+    "desc": "Shoe Size Converter (US, UK, EU, CM), Clothing Size Converter (US, UK, EU, International), Cooking Measurement Converter (Cups, Grams, ML)",
+    "tags": [
+      "Shoe",
+      "Clothing",
+      "Cooking"
+    ]
+  },
+  {
+    "slug": "hashing-checksums",
+    "code": "HAS-69",
+    "name": "Hashing & Checksums",
+    "icon": "Code",
+    "count": 10,
+    "desc": "SHA-224 Hash Generator, SM3 Hash Generator (Chinese National Standard), Tiger Hash Generator (192-bit)",
+    "tags": [
+      "SHA-224",
+      "SM3",
+      "Tiger"
+    ]
+  },
+  {
+    "slug": "identifier-generators",
+    "code": "IDE-70",
+    "name": "Identifier & Token Generators",
+    "icon": "Tag",
+    "count": 8,
+    "desc": "KSUID Generator (K-Sortable Unique ID), XID Generator (Globally Unique ID), Sqids (Hashids Alternative) Encoder & Decoder",
+    "tags": [
+      "KSUID",
+      "XID",
+      "Sqids"
+    ]
+  },
+  {
+    "slug": "formatters-minifiers",
+    "code": "FOR-71",
+    "name": "Formatters & Minifiers",
+    "icon": "FormInput",
+    "count": 12,
+    "desc": "Protobuf Schema Formatter (.proto), GraphQL Schema (SDL) Formatter, HCL (Terraform) Formatter",
+    "tags": [
+      "Protobuf",
+      "GraphQL",
+      "HCL"
+    ]
+  },
+  {
+    "slug": "encoding-number-systems",
+    "code": "ENC-72",
+    "name": "Encoding & Number Systems",
+    "icon": "Sigma",
+    "count": 8,
+    "desc": "IEEE 754 Float ↔ Binary/Hex Converter, Two's Complement Calculator (8, 16, 32-bit), Gray Code ↔ Binary Converter",
+    "tags": [
+      "IEEE",
+      "Two's",
+      "Gray"
+    ]
+  },
+  {
+    "slug": "web-api-tools",
+    "code": "WEB-73",
+    "name": "Web & API Dev Tools",
+    "icon": "Globe",
+    "count": 8,
+    "desc": "GraphQL Query to cURL Converter, gRPC Text Format Message Formatter, WebSocket URL Builder (ws:// & wss://)",
+    "tags": [
+      "GraphQL",
+      "gRPC",
+      "WebSocket"
+    ]
+  },
+  {
+    "slug": "code-utilities",
+    "code": "COD-74",
+    "name": "Code & Dev Utilities",
+    "icon": "Code",
+    "count": 6,
+    "desc": "Semantic JSON Diff (Order-Insensitive), Code Minifier Compression Ratio Calculator, Cyclomatic Complexity Estimator",
+    "tags": [
+      "Semantic",
+      "Code",
+      "Cyclomatic"
+    ]
+  },
+  {
+    "slug": "security-privacy",
+    "code": "SEC-75",
+    "name": "Security & Privacy Tools",
+    "icon": "CheckCheck",
+    "count": 4,
+    "desc": "OWASP Top 10 Quick Reference & Checklist, Common Password Blocklist Checker (Offline Static), Secure HTTP Header Recommendation Generator",
+    "tags": [
+      "OWASP",
+      "Common",
+      "Secure"
+    ]
+  },
+  {
+    "slug": "astronomy-space",
+    "code": "AST-76",
+    "name": "Astronomy & Space",
+    "icon": "Wrench",
+    "count": 8,
+    "desc": "Moon Phase Calculator (Date-Based Formula), Sunrise & Sunset Time Calculator (No API), Kepler's Planet Orbit Period Calculator",
+    "tags": [
+      "Moon",
+      "Sunrise",
+      "Kepler's"
+    ]
+  },
+  {
+    "slug": "geography-maps",
+    "code": "GEO-77",
+    "name": "Geography & Maps",
+    "icon": "Wrench",
+    "count": 8,
+    "desc": "Haversine Distance Calculator (Lat/Long to Distance), Bearing & Direction Calculator (Coordinate to Coordinate), Latitude/Longitude DMS ↔ Decimal Converter",
+    "tags": [
+      "Haversine",
+      "Bearing",
+      "Latitude/Longitude"
+    ]
+  },
+  {
+    "slug": "chemistry-science",
+    "code": "CHE-78",
+    "name": "Chemistry & Science",
+    "icon": "Wrench",
+    "count": 7,
+    "desc": "Chemical Equation Balancer, Molarity & Molality Calculator, Dilution Calculator (C1V1 = C2V2)",
+    "tags": [
+      "Chemical",
+      "Molarity",
+      "Dilution"
+    ]
+  },
+  {
+    "slug": "physics-extended",
+    "code": "PHY-79",
+    "name": "Physics Extended",
+    "icon": "Wrench",
+    "count": 8,
+    "desc": "Ohm’s Law & Power Triangle Calculator, Torque & Rotational Force Calculator, Momentum & Impulse Calculator (p = mv, J = FΔt)",
+    "tags": [
+      "Ohm’s",
+      "Torque",
+      "Momentum"
+    ]
+  },
+  {
+    "slug": "sports-stats",
+    "code": "SPO-80",
+    "name": "Sports Stats & Formulas",
+    "icon": "Wrench",
+    "count": 7,
+    "desc": "Cricket Run Rate & Required Run Rate Calculator, Batting & Bowling Average Calculator, Football xG (Expected Goals) Explainer Calculator",
+    "tags": [
+      "Cricket",
+      "Batting",
+      "Football"
+    ]
+  },
+  {
+    "slug": "parenting-child",
+    "code": "PAR-81",
+    "name": "Parenting & Child Care",
+    "icon": "Wrench",
+    "count": 4,
+    "desc": "Pregnancy Due Date Calculator (Naegele Rule), Ovulation & Fertility Cycle Calculator, Child Height Prediction Calculator (Mid-Parental)",
+    "tags": [
+      "Pregnancy",
+      "Ovulation",
+      "Child"
+    ]
+  },
+  {
+    "slug": "weather-formulas",
+    "code": "WEA-82",
+    "name": "Weather & Meteorology",
+    "icon": "Wrench",
+    "count": 6,
+    "desc": "Heat Index Calculator (Apparent Temp), Wind Chill Calculator (Apparent Cold), Dew Point Temperature Calculator",
+    "tags": [
+      "Heat",
+      "Wind",
+      "Dew"
+    ]
+  },
+  {
+    "slug": "language-linguistics",
+    "code": "LAN-83",
+    "name": "Language & Linguistics",
+    "icon": "Wrench",
+    "count": 4,
+    "desc": "Phonetic Alphabet Converter (NATO Standard), Language & Script Pattern Detector (Offline), Braille Alphabet Converter (UEB Grade 1)",
+    "tags": [
+      "Phonetic",
+      "Language",
+      "Braille"
+    ]
+  },
+  {
+    "slug": "test-prep",
+    "code": "TES-84",
+    "name": "Standardized Test Prep",
+    "icon": "Wrench",
+    "count": 3,
+    "desc": "SAT ↔ ACT Score Concordance Converter, IELTS ↔ TOEFL Band Score & CEFR Converter, Curve Grading Calculator (Bell Curve Normalization)",
+    "tags": [
+      "SAT",
+      "IELTS",
+      "Curve"
+    ]
+  },
+  {
+    "slug": "agriculture-gardening",
+    "code": "AGR-85",
+    "name": "Agriculture & Gardening",
+    "icon": "Wrench",
+    "count": 3,
+    "desc": "Crop Yield Estimator (Area × Density), Fertilizer NPK Ratio & Application Calculator, Irrigation Water Requirement Calculator",
+    "tags": [
+      "Crop",
+      "Fertilizer",
+      "Irrigation"
+    ]
+  },
+  {
+    "slug": "tax-reference",
+    "code": "TAX-86",
+    "name": "Tax & Financial Reference",
+    "icon": "Wrench",
+    "count": 3,
+    "desc": "Income Tax Bracket Calculator (Static Slabs), Property & Asset Depreciation Calculator, VAT & Sales Tax Reverse Calculator",
+    "tags": [
+      "Income",
+      "Property",
+      "VAT"
+    ]
+  },
+  {
+    "slug": "genealogy-family",
+    "code": "GEN-87",
+    "name": "Genealogy & Family",
+    "icon": "Wrench",
+    "count": 3,
+    "desc": "Family Tree Relationship Calculator, Generation Gap Year Calculator, Family Tree Visual Chart Builder (Client-Side)",
+    "tags": [
+      "Family",
+      "Generation",
+      "Family"
+    ]
+  },
+  {
+    "slug": "typography-fonts",
+    "code": "TYP-88",
+    "name": "Typography & Fonts",
+    "icon": "Wrench",
+    "count": 5,
+    "desc": "Font Pairing Suggester & Combinations, Typographic Scale & Ratio Generator, Kerning & Letter-Spacing Calculator",
+    "tags": [
+      "Font",
+      "Typographic",
+      "Kerning"
+    ]
+  },
+  {
+    "slug": "browser-hardware",
+    "code": "BRO-89",
+    "name": "Browser & Hardware Info",
+    "icon": "Wrench",
+    "count": 3,
+    "desc": "Browser Feature Support Checker (Navigator API), Screen Resolution & DPI / DPR Detector, Dark Mode System Preference Detector",
+    "tags": [
+      "Browser",
+      "Screen",
+      "Dark"
+    ]
+  },
+  {
+    "slug": "cooking-recipe-math",
+    "code": "COO-90",
+    "name": "Cooking & Recipe Math",
+    "icon": "Wrench",
+    "count": 4,
+    "desc": "Recipe Unit Converter (Metric ↔ Imperial), Baking Ratio Calculator (Baker's Percentage), Oven Temperature Converter (°F ↔ °C ↔ Gas Mark)",
+    "tags": [
+      "Recipe",
+      "Baking",
+      "Oven"
+    ]
+  },
+  {
+    "slug": "civic-reference",
+    "code": "CIV-91",
+    "name": "Civic & Reference Tools",
+    "icon": "Wrench",
+    "count": 2,
+    "desc": "Country Calling Code & ISO Reference Lookup, Postal / ZIP Code Format Validator",
+    "tags": [
+      "Country",
+      "Postal"
+    ]
+  },
+  {
+    "slug": "seo-content-extras",
+    "code": "SEO-92",
+    "name": "SEO & Content Extras",
+    "icon": "Wrench",
+    "count": 3,
+    "desc": "Keyword Stuffing Detector, Duplicate Content Similarity Estimator, Meta Tag Character & Pixel-Width Estimator",
+    "tags": [
+      "Keyword",
+      "Duplicate",
+      "Meta"
+    ]
+  },
+  {
+    "slug": "data-science-prep",
+    "code": "DAT-93",
+    "name": "Data Science Prep",
+    "icon": "Wrench",
+    "count": 3,
+    "desc": "Z-Score & Normal Percentile Calculator, Pearson Correlation Coefficient (r) Calculator, A/B Test Statistical Significance Calculator",
+    "tags": [
+      "Z-Score",
+      "Pearson",
+      "A/B"
+    ]
+  },
+  {
+    "slug": "project-management",
+    "code": "PRO-94",
+    "name": "Project Management",
+    "icon": "Wrench",
+    "count": 3,
+    "desc": "Story Point to Hour Estimator (Fibonacci), Risk Priority Number (RPN) FMEA Calculator, RACI Matrix Template Generator",
+    "tags": [
+      "Story",
+      "Risk",
+      "RACI"
+    ]
+  },
+  {
+    "slug": "hr-recruitment",
+    "code": "HR--95",
+    "name": "HR & Recruitment",
+    "icon": "Wrench",
+    "count": 2,
+    "desc": "Employee Turnover Rate & Retention Calculator, Offer Letter Total Compensation Calculator",
+    "tags": [
+      "Employee",
+      "Offer"
+    ]
+  },
+  {
+    "slug": "cad-engineering",
+    "code": "CAD-96",
+    "name": "CAD & Engineering Reference",
+    "icon": "Wrench",
+    "count": 2,
+    "desc": "Gear Ratio & Output RPM Calculator, Beam Bending Stress Calculator (Flexural Formula)",
+    "tags": [
+      "Gear",
+      "Beam"
+    ]
+  },
+  {
+    "slug": "design-system",
+    "code": "DES-97",
+    "name": "Design System Tools",
+    "icon": "Wrench",
+    "count": 1,
+    "desc": "8-Point Grid Spacing Scale Generator",
+    "tags": [
+      "8-Point"
+    ]
+  },
+  {
+    "slug": "number-theory",
+    "code": "NUM-98",
+    "name": "Number Theory & Puzzle Math",
+    "icon": "Wrench",
+    "count": 2,
+    "desc": "Collatz Conjecture Step Counter & Peak Solver, Narcissistic (Armstrong) Number Checker",
+    "tags": [
+      "Collatz",
+      "Narcissistic"
+    ]
+  },
+  {
+    "slug": "sysadmin-it",
+    "code": "SYS-99",
+    "name": "IT & Sysadmin Reference",
+    "icon": "Wrench",
+    "count": 2,
+    "desc": "Server Uptime Percentage ↔ Downtime Calculator, RAID Storage Capacity Calculator (0/1/5/6/10)",
+    "tags": [
+      "Server",
+      "RAID"
+    ]
+  },
+  {
+    "slug": "content-creator",
+    "code": "CON-100",
+    "name": "Content Creator Reference",
+    "icon": "Wrench",
+    "count": 1,
+    "desc": "Video Export Bitrate & Livestream Bandwidth Calculator",
+    "tags": [
+      "Video"
+    ]
+  },
+  {
+    "slug": "dev-utility-extras",
+    "code": "DEV-101",
+    "name": "Developer Utility Extras",
+    "icon": "Wrench",
+    "count": 5,
+    "desc": "SemVer Range Satisfier Tester (^1.2.3), NPM Package Name Syntax Validator, HTTP Cache-Control Directive Header Builder",
+    "tags": [
+      "SemVer",
+      "NPM",
+      "HTTP"
+    ]
+  },
+  {
+    "slug": "math-number-extras",
+    "code": "MAT-102",
+    "name": "Math & Number Extras",
+    "icon": "Wrench",
+    "count": 6,
+    "desc": "Harmonic Mean Calculator, Geometric Mean Calculator, Compound Annual Growth Rate (CAGR) Calculator",
+    "tags": [
+      "Harmonic",
+      "Geometric",
+      "Compound"
+    ]
+  },
+  {
+    "slug": "measurement-conversions",
+    "code": "MEA-103",
+    "name": "Measurement & Conversion Extras",
+    "icon": "Wrench",
+    "count": 4,
+    "desc": "Nautical Mile ↔ KM / Statute Mile Converter, Torque to Horsepower Calculator (RPM Based), Screen Size to Viewing Distance Calculator (THX / 4K)",
+    "tags": [
+      "Nautical",
+      "Torque",
+      "Screen"
+    ]
+  },
+  {
+    "slug": "construction-home",
+    "code": "CON-104",
+    "name": "Construction & Home Extras",
+    "icon": "Wrench",
+    "count": 5,
+    "desc": "Concrete Mix Ratio & Volume Calculator, Tile Quantity & Wastage Box Calculator, Paint Coverage & Liters Required Calculator",
+    "tags": [
+      "Concrete",
+      "Tile",
+      "Paint"
+    ]
+  },
+  {
+    "slug": "food-nutrition",
+    "code": "FOO-105",
+    "name": "Food & Nutrition Reference",
+    "icon": "Wrench",
+    "count": 3,
+    "desc": "Recipe Cost Per Serving Calculator, Alcohol Proof ↔ ABV (Alcohol By Volume) Converter, Coffee-to-Water Brew Ratio Calculator",
+    "tags": [
+      "Recipe",
+      "Alcohol",
+      "Coffee-to-Water"
+    ]
+  },
+  {
+    "slug": "academic-research",
+    "code": "ACA-106",
+    "name": "Academic & Research Extras",
+    "icon": "Wrench",
+    "count": 2,
+    "desc": "Survey Research Sample Size Calculator (Cochran), Likert Scale Score Aggregator & Mean Calculator",
+    "tags": [
+      "Survey",
+      "Likert"
+    ]
+  },
+  {
+    "slug": "logistics-supply-chain",
+    "code": "LOG-107",
+    "name": "Logistics & Supply Chain",
+    "icon": "Wrench",
+    "count": 4,
+    "desc": "Container Loading Volume (CBM) Calculator, Shipping Dimensional Weight vs Actual Weight Calculator, Economic Order Quantity (EOQ) Inventory Calculator",
+    "tags": [
+      "Container",
+      "Shipping",
+      "Economic"
+    ]
+  },
+  {
+    "slug": "wellness-reference",
+    "code": "WEL-108",
+    "name": "Wellness Reference",
+    "icon": "Wrench",
+    "count": 5,
+    "desc": "Waist-to-Hip Ratio (WHR) Health Calculator, US Navy Body Fat Percentage Calculator, Ideal Body Weight (IBW) Calculator (Devine & Hamwi)",
+    "tags": [
+      "Waist-to-Hip",
+      "US",
+      "Ideal"
+    ]
+  },
+  {
+    "slug": "global-reference",
+    "code": "GLO-109",
+    "name": "Miscellaneous Global Reference",
+    "icon": "Wrench",
+    "count": 2,
+    "desc": "Time to Destination & Travel Duration Calculator, Currency Denomination Breakdown Calculator",
+    "tags": [
+      "Time",
+      "Currency"
+    ]
+  }
+]

@@ -1,0 +1,337 @@
+const fs = require('fs');
+const path = require('path');
+
+const toolsPath = path.join(__dirname, '../public/assets/data/tools.json');
+const tools = JSON.parse(fs.readFileSync(toolsPath, 'utf8'));
+
+const existingSlugs = new Set(tools.map(t => t.slug));
+
+const newTools = [
+  // --- 🧬 Genealogy / Family ---
+  {
+    id: 'family-tree-relationship-calculator',
+    name: 'Family Tree Relationship Calculator',
+    slug: 'family-tree-relationship-calculator',
+    category: 'genealogy-family',
+    categoryName: 'Genealogy & Family',
+    shortDesc: 'Determine kinship terms (1st cousin once removed, aunt, uncle) and shared DNA ancestry percentage.',
+    metaTitle: 'Family Tree Relationship Calculator Online - Kinship & DNA %',
+    metaDescription: 'Determine kinship terms and shared DNA ancestry percentages between family relatives.',
+    primaryKeyword: 'family tree relationship calculator online',
+    secondaryKeywords: ['cousin relationship calculator', 'shared dna percentage calculator', 'kinship term finder'],
+    lsiKeywords: ['first cousin once removed', 'shared dna percentage', 'genealogy relationship solver'],
+    inputType: 'text',
+    hasFileSupport: false,
+    icon: 'Heart',
+    related: ['generation-gap-year-calculator', 'family-tree-chart-builder'],
+    popular: true
+  },
+  {
+    id: 'generation-gap-year-calculator',
+    name: 'Generation Gap Year Calculator',
+    slug: 'generation-gap-year-calculator',
+    category: 'genealogy-family',
+    categoryName: 'Genealogy & Family',
+    shortDesc: 'Calculate total years, estimated generation count, and generational era spans.',
+    metaTitle: 'Generation Gap Year Calculator Online - Ancestry Span',
+    metaDescription: 'Calculate generation count and total year spans across family heritage timelines.',
+    primaryKeyword: 'generation gap year calculator online',
+    secondaryKeywords: ['calculate generation count years', 'family era timeline solver', 'ancestry generation span'],
+    lsiKeywords: ['average generation length', 'genealogy era span', 'family generation timeline'],
+    inputType: 'text',
+    hasFileSupport: false,
+    icon: 'Heart',
+    related: ['family-tree-relationship-calculator', 'family-tree-chart-builder'],
+    popular: false
+  },
+  {
+    id: 'family-tree-chart-builder',
+    name: 'Family Tree Visual Chart Builder (Client-Side)',
+    slug: 'family-tree-chart-builder',
+    category: 'genealogy-family',
+    categoryName: 'Genealogy & Family',
+    shortDesc: 'Build and render visual family tree hierarchy diagrams 100% in browser memory.',
+    metaTitle: 'Family Tree Visual Chart Builder Online - 100% Client-Side',
+    metaDescription: 'Build visual family tree diagrams online without uploading sensitive family data.',
+    primaryKeyword: 'family tree chart builder online',
+    secondaryKeywords: ['client side family tree maker', 'visual genealogy diagram generator', 'private family tree builder'],
+    lsiKeywords: ['visual pedigree chart', 'genealogy tree diagram', 'client side family chart'],
+    inputType: 'textarea',
+    hasFileSupport: false,
+    icon: 'Heart',
+    related: ['family-tree-relationship-calculator', 'generation-gap-year-calculator'],
+    popular: true
+  },
+
+  // --- ⌨️ Typography & Fonts ---
+  {
+    id: 'font-pairing-suggester',
+    name: 'Font Pairing Suggester & Combinations',
+    slug: 'font-pairing-suggester',
+    category: 'typography-fonts',
+    categoryName: 'Typography & Fonts',
+    shortDesc: 'Get curated typography pairings for headings and body copy with contrast ratings.',
+    metaTitle: 'Font Pairing Suggester Online - Curated Web Typography',
+    metaDescription: 'Discover elegant Google Fonts pairings for headings and body copy with CSS stacks.',
+    primaryKeyword: 'font pairing suggester online',
+    secondaryKeywords: ['curated font combinations web', 'google fonts pairing tool', 'heading body font pairing'],
+    lsiKeywords: ['typographic contrast', 'heading body font match', 'web typography pairing'],
+    inputType: 'text',
+    hasFileSupport: false,
+    icon: 'Type',
+    related: ['typographic-scale-generator', 'web-safe-font-stack-generator'],
+    popular: true
+  },
+  {
+    id: 'typographic-scale-generator',
+    name: 'Typographic Scale & Ratio Generator',
+    slug: 'typographic-scale-generator',
+    category: 'typography-fonts',
+    categoryName: 'Typography & Fonts',
+    shortDesc: 'Generate modular font size scales using Major Third, Golden Ratio, or Perfect Fourth ratios.',
+    metaTitle: 'Typographic Scale Generator Online - Modular Ratios (rem/px)',
+    metaDescription: 'Generate modular typographic scales (Major Third, Golden Ratio) in rem and px units.',
+    primaryKeyword: 'typographic scale generator online',
+    secondaryKeywords: ['modular font scale calculator', 'golden ratio typography generator', 'font size rem scale'],
+    lsiKeywords: ['modular scale ratio', 'major third font scale', 'px rem font hierarchy'],
+    inputType: 'number',
+    hasFileSupport: false,
+    icon: 'Type',
+    related: ['line-length-cpl-optimizer', 'font-pairing-suggester'],
+    popular: true
+  },
+  {
+    id: 'kerning-letter-spacing-calculator',
+    name: 'Kerning & Letter-Spacing Calculator',
+    slug: 'kerning-letter-spacing-calculator',
+    category: 'typography-fonts',
+    categoryName: 'Typography & Fonts',
+    shortDesc: 'Calculate optimal CSS letter-spacing (em / tracking) for heading caps and body copy.',
+    metaTitle: 'Kerning & Letter-Spacing Calculator Online - CSS Tracking',
+    metaDescription: 'Calculate recommended CSS letter-spacing values in em units for all-caps and body text.',
+    primaryKeyword: 'kerning letter spacing calculator online',
+    secondaryKeywords: ['css letter spacing calculator em', 'typography tracking to em converter', 'kerning optimizer css'],
+    lsiKeywords: ['css letter spacing em', 'typography kerning tracking', 'all caps letter spacing'],
+    inputType: 'number',
+    hasFileSupport: false,
+    icon: 'Type',
+    related: ['line-length-cpl-optimizer', 'typographic-scale-generator'],
+    popular: false
+  },
+  {
+    id: 'line-length-cpl-optimizer',
+    name: 'Line Length (Characters Per Line) Optimizer',
+    slug: 'line-length-cpl-optimizer',
+    category: 'typography-fonts',
+    categoryName: 'Typography & Fonts',
+    shortDesc: 'Calculate characters per line (CPL) readability for container widths and font sizes.',
+    metaTitle: 'Line Length CPL Optimizer Online - Optimal 65-Char Measure',
+    metaDescription: 'Calculate characters per line (CPL) to achieve optimal 60-75 CPL body copy readability.',
+    primaryKeyword: 'line length cpl optimizer online',
+    secondaryKeywords: ['characters per line calculator', 'optimal body copy container width', 'typographic measure solver'],
+    lsiKeywords: ['characters per line cpl', 'optimal typographic measure', 'body text readability width'],
+    inputType: 'text',
+    hasFileSupport: false,
+    icon: 'Type',
+    related: ['typographic-scale-generator', 'web-safe-font-stack-generator'],
+    popular: true
+  },
+  {
+    id: 'web-safe-font-stack-generator',
+    name: 'Web Safe Font Stack Generator',
+    slug: 'web-safe-font-stack-generator',
+    category: 'typography-fonts',
+    categoryName: 'Typography & Fonts',
+    shortDesc: 'Generate fallback CSS font stacks across Windows, macOS, iOS, Android, and Linux.',
+    metaTitle: 'Web Safe Font Stack Generator Online - CSS System Fallbacks',
+    metaDescription: 'Generate cross-platform web-safe CSS font stacks with system fallbacks.',
+    primaryKeyword: 'web safe font stack generator online',
+    secondaryKeywords: ['css font family fallback generator', 'cross platform system font stack', 'web safe fonts css'],
+    lsiKeywords: ['system font stack css', 'cross platform font fallback', 'web safe typography'],
+    inputType: 'text',
+    hasFileSupport: false,
+    icon: 'Type',
+    related: ['font-pairing-suggester', 'line-length-cpl-optimizer'],
+    popular: true
+  },
+
+  // --- 🖥️ Browser / Hardware Info ---
+  {
+    id: 'browser-feature-support-checker',
+    name: 'Browser Feature Support Checker (Navigator API)',
+    slug: 'browser-feature-support-checker',
+    category: 'browser-hardware',
+    categoryName: 'Browser & Hardware Info',
+    shortDesc: 'Inspect browser API capabilities (WebCrypto, LocalStorage, WebAssembly, Cores).',
+    metaTitle: 'Browser Feature Support Checker Online - Navigator API Audit',
+    metaDescription: 'Inspect browser web API support (WebCrypto, LocalStorage, WebAssembly, Cores) client-side.',
+    primaryKeyword: 'browser feature support checker online',
+    secondaryKeywords: ['navigator api capability inspector', 'web crypto support checker', 'localstorage webassembly test'],
+    lsiKeywords: ['navigator object inspection', 'hardware concurrency cores', 'browser capabilities audit'],
+    inputType: 'text',
+    hasFileSupport: false,
+    icon: 'Smartphone',
+    related: ['screen-resolution-dpi-detector', 'dark-mode-preference-detector'],
+    popular: true
+  },
+  {
+    id: 'screen-resolution-dpi-detector',
+    name: 'Screen Resolution & DPI / DPR Detector',
+    slug: 'screen-resolution-dpi-detector',
+    category: 'browser-hardware',
+    categoryName: 'Browser & Hardware Info',
+    shortDesc: 'Detect screen width/height, Device Pixel Ratio (DPR), and estimated DPI in real-time.',
+    metaTitle: 'Screen Resolution & DPI / DPR Detector Online',
+    metaDescription: 'Detect real-time screen resolution, window viewport size, DPR, and estimated DPI.',
+    primaryKeyword: 'screen resolution dpi detector online',
+    secondaryKeywords: ['detect device pixel ratio dpr', 'viewport size resolution checker', 'screen dpi detector'],
+    lsiKeywords: ['device pixel ratio dpr', 'screen resolution viewport', 'retina display dpr'],
+    inputType: 'text',
+    hasFileSupport: false,
+    icon: 'Smartphone',
+    related: ['dark-mode-preference-detector', 'browser-feature-support-checker'],
+    popular: true
+  },
+  {
+    id: 'dark-mode-preference-detector',
+    name: 'Dark Mode System Preference Detector',
+    slug: 'dark-mode-preference-detector',
+    category: 'browser-hardware',
+    categoryName: 'Browser & Hardware Info',
+    shortDesc: 'Detect OS prefers-color-scheme setting and test dark/light CSS media query triggers.',
+    metaTitle: 'Dark Mode System Preference Detector Online - prefers-color-scheme',
+    metaDescription: 'Detect OS dark mode or light mode preferences via CSS prefers-color-scheme media queries.',
+    primaryKeyword: 'dark mode system preference detector online',
+    secondaryKeywords: ['prefers color scheme detector', 'os dark mode detector tool', 'css dark mode media query test'],
+    lsiKeywords: ['prefers color scheme dark', 'os color mode preference', 'css media query test'],
+    inputType: 'text',
+    hasFileSupport: false,
+    icon: 'Smartphone',
+    related: ['screen-resolution-dpi-detector', 'browser-feature-support-checker'],
+    popular: true
+  },
+
+  // --- 🧑🍳 Cooking / Recipe Math ---
+  {
+    id: 'recipe-unit-converter-precise',
+    name: 'Recipe Unit Converter (Metric ↔ Imperial)',
+    slug: 'recipe-unit-converter-precise',
+    category: 'cooking-recipe-math',
+    categoryName: 'Cooking & Recipe Math',
+    shortDesc: 'Convert grams, ounces, cups, tablespoons, teaspoons, and fluid ounces with volume-to-mass conversions.',
+    metaTitle: 'Recipe Unit Converter Online - Metric ↔ Imperial Culinary Units',
+    metaDescription: 'Convert baking and cooking measurements (grams, cups, oz, tbsp, tsp, ml) with high precision.',
+    primaryKeyword: 'recipe unit converter online',
+    secondaryKeywords: ['cooking unit converter metric imperial', 'grams to cups baking converter', 'tablespoon teaspoon ml converter'],
+    lsiKeywords: ['culinary unit conversion', 'grams to cups conversion', 'baking metric imperial'],
+    inputType: 'text',
+    hasFileSupport: false,
+    icon: 'Coffee',
+    related: ['bakers-percentage-calculator', 'oven-temperature-converter'],
+    popular: true
+  },
+  {
+    id: 'bakers-percentage-calculator',
+    name: "Baking Ratio Calculator (Baker's Percentage)",
+    slug: 'bakers-percentage-calculator',
+    category: 'cooking-recipe-math',
+    categoryName: 'Cooking & Recipe Math',
+    shortDesc: "Calculate Baker's Percentages and hydration ratios relative to total flour weight.",
+    metaTitle: "Baking Ratio Calculator Online - Baker's Percentage & Hydration",
+    metaDescription: "Calculate sourdough dough hydration %, salt %, and yeast % relative to 100% flour weight.",
+    primaryKeyword: 'baking ratio calculator online',
+    secondaryKeywords: ['bakers percentage calculator', 'sourdough hydration calculator', 'flour ratio sourdough solver'],
+    lsiKeywords: ['bakers percentage formula', 'dough hydration percentage', 'flour total weight ratio'],
+    inputType: 'text',
+    hasFileSupport: false,
+    icon: 'Coffee',
+    related: ['recipe-unit-converter-precise', 'oven-temperature-converter'],
+    popular: true
+  },
+  {
+    id: 'oven-temperature-converter',
+    name: 'Oven Temperature Converter (°F ↔ °C ↔ Gas Mark)',
+    slug: 'oven-temperature-converter',
+    category: 'cooking-recipe-math',
+    categoryName: 'Cooking & Recipe Math',
+    shortDesc: 'Convert oven temperatures between Fahrenheit, Celsius, Gas Mark, and Fan-Forced convection settings.',
+    metaTitle: 'Oven Temperature Converter Online - °F, °C, Gas Mark & Fan',
+    metaDescription: 'Convert baking oven temperatures across °F, °C, Gas Mark 1-10, and fan-assisted convection.',
+    primaryKeyword: 'oven temperature converter online',
+    secondaryKeywords: ['fahrenheit celsius gas mark converter', 'fan forced oven temperature calculator', 'baking oven gas mark table'],
+    lsiKeywords: ['gas mark conversion', 'fan forced oven temp', 'fahrenheit to celsius baking'],
+    inputType: 'number',
+    hasFileSupport: false,
+    icon: 'Coffee',
+    related: ['recipe-unit-converter-precise', 'bakers-percentage-calculator'],
+    popular: true
+  },
+  {
+    id: 'recipe-batch-scaling-calculator',
+    name: 'Recipe Batch Scaling Calculator (2x, 0.5x, Custom)',
+    slug: 'recipe-batch-scaling-calculator',
+    category: 'cooking-recipe-math',
+    categoryName: 'Cooking & Recipe Math',
+    shortDesc: 'Scale recipe ingredient quantities linearly for double batches, half batches, or custom serving multipliers.',
+    metaTitle: 'Recipe Batch Scaling Calculator Online - Scale Ingredient Amounts',
+    metaDescription: 'Scale recipe ingredient quantities up or down (2x, 3x, 0.5x) for any serving size.',
+    primaryKeyword: 'recipe batch scaling calculator online',
+    secondaryKeywords: ['scale recipe ingredients 2x 0.5x', 'double recipe multiplier tool', 'half batch recipe scaling'],
+    lsiKeywords: ['recipe scaling factor', 'double batch recipe', 'ingredient multiplier'],
+    inputType: 'text',
+    hasFileSupport: false,
+    icon: 'Coffee',
+    related: ['recipe-unit-converter-precise', 'bakers-percentage-calculator'],
+    popular: true
+  },
+
+  // --- 🏛️ Civic / Reference Tools ---
+  {
+    id: 'country-calling-code-lookup',
+    name: 'Country Calling Code & ISO Reference Lookup',
+    slug: 'country-calling-code-lookup',
+    category: 'civic-reference',
+    categoryName: 'Civic & Reference Tools',
+    shortDesc: 'Lookup international ISD calling codes (+91, +1, +44), ISO Alpha-2/Alpha-3 codes, and official currencies.',
+    metaTitle: 'Country Calling Code & ISO Reference Lookup Online',
+    metaDescription: 'Lookup international phone calling codes (+ISD), ISO Alpha-2/3 country codes, and currency symbols.',
+    primaryKeyword: 'country calling code lookup online',
+    secondaryKeywords: ['international ISD code finder', 'iso alpha 2 alpha 3 lookup', 'country currency symbol reference'],
+    lsiKeywords: ['isd dial code', 'iso country code', 'international calling prefix'],
+    inputType: 'text',
+    hasFileSupport: false,
+    icon: 'Globe',
+    related: ['postal-code-format-validator'],
+    popular: true
+  },
+  {
+    id: 'postal-code-format-validator',
+    name: 'Postal / ZIP Code Format Validator',
+    slug: 'postal-code-format-validator',
+    category: 'civic-reference',
+    categoryName: 'Civic & Reference Tools',
+    shortDesc: 'Validate national postal code and ZIP code formatting rules across major countries.',
+    metaTitle: 'Postal / ZIP Code Format Validator Online',
+    metaDescription: 'Validate national postal code and ZIP code formatting rules for US, India, UK, and Canada.',
+    primaryKeyword: 'postal zip code format validator online',
+    secondaryKeywords: ['validate zip code pattern', 'pincode syntax checker', 'international postal code format'],
+    lsiKeywords: ['pincode format validation', 'postal code regex', 'zip code syntax check'],
+    inputType: 'text',
+    hasFileSupport: false,
+    icon: 'Globe',
+    related: ['country-calling-code-lookup'],
+    popular: true
+  }
+];
+
+let addedCount = 0;
+newTools.forEach(tool => {
+  if (!existingSlugs.has(tool.slug)) {
+    tools.push(tool);
+    existingSlugs.add(tool.slug);
+    addedCount++;
+  }
+});
+
+fs.writeFileSync(toolsPath, JSON.stringify(tools, null, 2), 'utf8');
+console.log(`Successfully added ${addedCount} new tools. Total tools count: ${tools.length}`);
