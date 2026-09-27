@@ -1,0 +1,656 @@
+[
+  {
+    "slug": "encoding-decoding",
+    "name": "Encoding & Decoding",
+    "count": 23,
+    "desc": "Encode or decode strings and binary files to Base64 format instantly."
+  },
+  {
+    "slug": "encryption-ciphers",
+    "name": "Encryption & Ciphers",
+    "count": 44,
+    "desc": "Military-grade AES-GCM and AES-CBC symmetric encryption in browser."
+  },
+  {
+    "slug": "hashing-security",
+    "name": "Hashing & Security",
+    "count": 20,
+    "desc": "Cryptographic 256-bit hash generator using native Web Crypto API."
+  },
+  {
+    "slug": "generators-tokens",
+    "name": "Generators & Tokens",
+    "count": 19,
+    "desc": "Generate cryptographically secure random passwords with entropy metrics."
+  },
+  {
+    "slug": "dev-tools-formatters",
+    "name": "Dev Tools & Formatters",
+    "count": 16,
+    "desc": "Beautify, indent, minify, and validate JSON data structures."
+  },
+  {
+    "slug": "file-data-converters",
+    "name": "File & Data Converters",
+    "count": 16,
+    "desc": "Convert comma and tab-separated values into JSON arrays and objects."
+  },
+  {
+    "slug": "validators-checkers",
+    "name": "Validators & Checkers",
+    "count": 14,
+    "desc": "Check expiration, claims, and verify HMAC/RSA signatures of JWTs."
+  },
+  {
+    "slug": "text-utilities",
+    "name": "Text Utilities",
+    "count": 15,
+    "desc": "Count characters, words, sentences, UTF-8 bytes, and reading time."
+  },
+  {
+    "slug": "escape-network",
+    "name": "Escape & Network",
+    "count": 15,
+    "desc": "Escape quotes, newlines, and control codes for JS string literals."
+  },
+  {
+    "slug": "seo-webmaster",
+    "name": "SEO & Webmaster",
+    "count": 48,
+    "desc": "Create and validate robots.txt crawl directives and sitemap URLs."
+  },
+  {
+    "slug": "security-certificates",
+    "name": "Security & Certificates",
+    "count": 15,
+    "desc": "Inspect Certificate Signing Requests (CSR) for CN, SAN, and key specs."
+  },
+  {
+    "slug": "math-design",
+    "name": "Math & Design",
+    "count": 19,
+    "desc": "Convert colors between HEX, RGB, HSL, HSV, and modern OKLCH."
+  },
+  {
+    "slug": "network-online",
+    "name": "Network & Online Tools",
+    "count": 10,
+    "desc": "Calculate network range, broadcast, wildcard mask, and host count."
+  },
+  {
+    "slug": "converters-utilities",
+    "name": "Converters & Utilities",
+    "count": 6,
+    "desc": "Calculate octal (755, 644) and symbolic (rwxr-xr-x) Linux permissions."
+  },
+  {
+    "slug": "json-developer-tools",
+    "name": "JSON & Developer Tools",
+    "count": 34,
+    "desc": "Minify and compress JSON data by stripping whitespace and comments."
+  },
+  {
+    "slug": "api-web-development",
+    "name": "API & Web Development",
+    "count": 7,
+    "desc": "Look up HTTP status codes (1xx-5xx) with RFC details and caching rules."
+  },
+  {
+    "slug": "website-performance",
+    "name": "Website Performance",
+    "count": 6,
+    "desc": "Calculate page download times across 5G, 4G, 3G, and fiber networks."
+  },
+  {
+    "slug": "accessibility",
+    "name": "Accessibility",
+    "count": 6,
+    "desc": "Check color contrast ratio against WCAG 2.1 AA and AAA standards."
+  },
+  {
+    "slug": "text-writing-utilities",
+    "name": "Text & Writing Utilities",
+    "count": 7,
+    "desc": "Count total sentences and compute average words per sentence."
+  },
+  {
+    "slug": "file-data-tools",
+    "name": "File & Data Tools",
+    "count": 8,
+    "desc": "View, format, and inspect CSV records in a clean tabular ASCII layout."
+  },
+  {
+    "slug": "date-time",
+    "name": "Date & Time",
+    "count": 7,
+    "desc": "Convert Unix epoch timestamps to human-readable dates and vice versa."
+  },
+  {
+    "slug": "math-science",
+    "name": "Math & Science",
+    "count": 8,
+    "desc": "Evaluate trigonometric, logarithmic, and algebraic expressions safely."
+  },
+  {
+    "slug": "color-design",
+    "name": "Color & Design",
+    "count": 8,
+    "desc": "Pick and inspect colors with instant HEX, RGB, and CSS code output."
+  },
+  {
+    "slug": "network-dns",
+    "name": "Network & DNS",
+    "count": 7,
+    "desc": "Lookup DNS records (A, AAAA, MX, CNAME, TXT) in BIND zone format."
+  },
+  {
+    "slug": "security-defensive",
+    "name": "Security — Defensive",
+    "count": 9,
+    "desc": "Test password entropy and estimated crack time with zero server uploads."
+  },
+  {
+    "slug": "developer-generators",
+    "name": "Developer Generators",
+    "count": 7,
+    "desc": "Generate cryptographically random UUID v4 and v7 identifiers."
+  },
+  {
+    "slug": "image-web-optimization",
+    "name": "Image/Web Optimization",
+    "count": 6,
+    "desc": "Calculate image pixel density, aspect ratio, and print sizing at 300 DPI."
+  },
+  {
+    "slug": "pdf-document-utilities",
+    "name": "PDF & Document Utilities",
+    "count": 15,
+    "desc": "Add customizable page numbers to your PDF documents with custom positions, fonts, numbering formats, and margins."
+  },
+  {
+    "slug": "image-utilities",
+    "name": "Image Utilities",
+    "count": 37,
+    "desc": "Replace transparent backgrounds in PNG/SVG/WebP images with any custom hex, RGB, or solid color."
+  },
+  {
+    "slug": "excel-spreadsheet-tools",
+    "name": "Excel & Spreadsheet Tools",
+    "count": 30,
+    "desc": "Generate complex Excel formulas from plain English prompts with automatic delimiter and syntax adaptation."
+  },
+  {
+    "slug": "csv-data-cleaning",
+    "name": "CSV & Data Cleaning Tools",
+    "count": 30,
+    "desc": "Rename CSV headers using mapping syntax (old=new) or auto-format to snake_case, camelCase, Title Case, or UPPERCASE."
+  },
+  {
+    "slug": "business-office-calculators",
+    "name": "Business & Office Calculators",
+    "count": 29,
+    "desc": "Compute invoice totals with line item subtotals, percentage/fixed discounts, shipping costs, and multi-tier tax rates."
+  },
+  {
+    "slug": "time-productivity-tools",
+    "name": "Time & Productivity Tools",
+    "count": 20,
+    "desc": "Calculate net daily billable working hours after deducting unpaid lunch and breaks."
+  },
+  {
+    "slug": "student-education-tools",
+    "name": "Student & Education Tools",
+    "count": 25,
+    "desc": "Calculate standard Grade Point Average (GPA) on 4.0 or 5.0 scale with credit weights, honors grading, letter grade distribution, and Latin honors standing."
+  },
+  {
+    "slug": "web-developer-css-tools",
+    "name": "Web Developer & CSS Tools",
+    "count": 30,
+    "desc": "Generate fluid responsive CSS clamp(min, val, max) formulas for typography and spacing."
+  },
+  {
+    "slug": "git-github-tools",
+    "name": "Git & GitHub Tools",
+    "count": 20,
+    "desc": "Format standardized team git branch names with issue tracker tickets and conventional prefixes."
+  },
+  {
+    "slug": "url-utm-tools",
+    "name": "URL & UTM Tools",
+    "count": 20,
+    "desc": "Count total URL characters and component breakdown to avoid SERP snippet truncation."
+  },
+  {
+    "slug": "email-tools",
+    "name": "Email Tools",
+    "count": 20,
+    "desc": "Parse RFC 822/5322 email headers into structured sender, recipient, subject, and relay fields."
+  },
+  {
+    "slug": "data-cleaning-analysis",
+    "name": "Data Cleaning & Analysis",
+    "count": 25,
+    "desc": "Scan datasets to identify repeated rows, identical records, and frequency counts."
+  },
+  {
+    "slug": "printing-paper-tools",
+    "name": "Printing & Paper Tools",
+    "count": 20,
+    "desc": "Calculate exact A4 paper dimensions across millimeters, inches, pixels, and DPI resolutions."
+  },
+  {
+    "slug": "qr-barcode-tools",
+    "name": "QR & Barcode Tools",
+    "count": 20,
+    "desc": "Calculate minimum scannable QR code print dimensions based on 10:1 distance-to-size rules."
+  },
+  {
+    "slug": "documentation-writing-tools",
+    "name": "Documentation & Writing Tools",
+    "count": 20,
+    "desc": "Generate professional, comprehensive GitHub and open-source README.md files instantly."
+  },
+  {
+    "slug": "file-binary-tools",
+    "name": "File & Binary Tools",
+    "count": 28,
+    "desc": "Extract and parse primary and compound file extensions from single and batch filenames."
+  },
+  {
+    "slug": "defensive-security-tools",
+    "name": "Defensive Security Tools",
+    "count": 20,
+    "desc": "Calculate mathematical password entropy in bits and estimate GPU cluster crack times."
+  },
+  {
+    "slug": "accessibility-tools",
+    "name": "Accessibility Tools",
+    "count": 20,
+    "desc": "Audit HTML button elements for accessible names, types, and screen reader labels."
+  },
+  {
+    "slug": "developer-error-debugging-tools",
+    "name": "Developer Error & Debugging Tools",
+    "count": 25,
+    "desc": "Format, parse, and beautify dense multi-language error stack traces into clear hierarchy."
+  },
+  {
+    "slug": "configuration-devops-tools",
+    "name": "Configuration & DevOps Tools",
+    "count": 25,
+    "desc": "Generate optimized multi-stage Dockerfile configurations for Node.js, Python, and Go."
+  },
+  {
+    "slug": "finance-budget-tools",
+    "name": "Finance & Personal Budget Tools",
+    "count": 25,
+    "desc": "Plan zero-based monthly budgets using the proven 50/30/20 needs, wants, and savings rule."
+  },
+  {
+    "slug": "business-operations-tools",
+    "name": "Business Operations Tools",
+    "count": 20,
+    "desc": "Generate professional commercial purchase orders (PO) with itemized line totals."
+  },
+  {
+    "slug": "text-language-tools",
+    "name": "Text & Language Tools",
+    "count": 25,
+    "desc": "Calculate Flesch Reading Ease, Flesch-Kincaid grade level, and reading difficulty."
+  },
+  {
+    "slug": "web-content-social-tools",
+    "name": "Web Content & Social Media Tools",
+    "count": 20,
+    "desc": "Audit post character limits across X/Twitter, Instagram, LinkedIn, and Facebook."
+  },
+  {
+    "slug": "date-calendar-time-tools",
+    "name": "Date, Calendar & Time Tools",
+    "count": 20,
+    "desc": "Convert multiple calendar dates and ISO strings to Unix epoch seconds and milliseconds in batch."
+  },
+  {
+    "slug": "network-dns-tools",
+    "name": "Network & DNS Tools",
+    "count": 20,
+    "desc": "Calculate the matching CIDR prefix block and host capacity for an IPv4 address range."
+  },
+  {
+    "slug": "qr-barcode-label-tools",
+    "name": "QR, Barcode & Product Label Tools",
+    "count": 15,
+    "desc": "Generate multi-item manifests for batch QR code generation with custom error correction levels."
+  },
+  {
+    "slug": "file-conversion-data-formats",
+    "name": "File Conversion & Data Formats",
+    "count": 19,
+    "desc": "Convert structured JSON configurations into clean, human-readable TOML files."
+  },
+  {
+    "slug": "web-forms-ui-generators",
+    "name": "Web Forms & UI Generators",
+    "count": 20,
+    "desc": "Generate complete, semantic HTML5 forms with accessible labels, inputs, selects, and submit buttons."
+  },
+  {
+    "slug": "mobile-app-development-tools",
+    "name": "Mobile & App Development Tools",
+    "count": 20,
+    "desc": "Calculate physical pixel dimensions from Android density-independent pixels (dp) across ldpi to xxxhdpi."
+  },
+  {
+    "slug": "education-exam-planning-tools",
+    "name": "Education & Exam Planning Tools",
+    "count": 20,
+    "desc": "Calculate aggregate exam marks, overall percentages, and letter grades across multiple subjects."
+  },
+  {
+    "slug": "additional-utility-tools",
+    "name": "Additional Utility Tools",
+    "count": 20,
+    "desc": "Convert cardinal numbers into ordinal notation (1st, 2nd, 3rd, 4th, 21st, 101st)."
+  },
+  {
+    "slug": "games-puzzles",
+    "name": "Games & Logic Puzzles",
+    "count": 8,
+    "desc": "Generate unique solvable Sudoku puzzles and solve any 9x9 board with client-side backtracking."
+  },
+  {
+    "slug": "advanced-math",
+    "name": "Advanced Mathematics",
+    "count": 10,
+    "desc": "Solve quadratic equations (ax² + bx + c = 0) with step-by-step discriminant, vertex, and complex root breakdown."
+  },
+  {
+    "slug": "creative-design",
+    "name": "Creative & Design Tools",
+    "count": 7,
+    "desc": "Create retro pixel art, 8-bit sprites, and game assets with custom grid sizes, color palettes, and PNG export."
+  },
+  {
+    "slug": "geometry-engineering",
+    "name": "Geometry & Engineering",
+    "count": 8,
+    "desc": "Solve all angles, sides, perimeter, area (Heron’s formula), and classifications for any triangle with step-by-step trigonometry."
+  },
+  {
+    "slug": "science-physics",
+    "name": "Science & Physics",
+    "count": 8,
+    "desc": "Calculate parabolic trajectory, maximum flight height, flight time, and horizontal range from launch velocity and angle."
+  },
+  {
+    "slug": "music-audio",
+    "name": "Music & Audio Theory",
+    "count": 7,
+    "desc": "Calculate exact pitch frequencies (Hz), MIDI note numbers, and acoustic air wavelengths for all notes across octaves (A0 to C8)."
+  },
+  {
+    "slug": "logic-brain",
+    "name": "Logic & Brain Tools",
+    "count": 8,
+    "desc": "Simplify Boolean expressions using Karnaugh maps (K-Map), Quine-McCluskey minimization, and truth tables."
+  },
+  {
+    "slug": "random-chance",
+    "name": "Random & Chance Tools",
+    "count": 6,
+    "desc": "Roll multiple polyhedral dice (d4, d6, d8, d10, d12, d20, d100) powered by hardware Web Crypto CSPRNG entropy."
+  },
+  {
+    "slug": "everyday-conversion",
+    "name": "Everyday Conversions",
+    "count": 6,
+    "desc": "Convert footwear sizes between US Men/Women, UK, European (EU), and Centimeters (CM) with static international conversion tables."
+  },
+  {
+    "slug": "hashing-checksums",
+    "name": "Hashing & Checksums",
+    "count": 10,
+    "desc": "Compute 224-bit SHA-2 cryptographic message digests from text strings."
+  },
+  {
+    "slug": "identifier-generators",
+    "name": "Identifier & Token Generators",
+    "count": 8,
+    "desc": "Generate Segment KSUIDs (K-Sortable Unique Identifiers) with 27-character base62 encoding."
+  },
+  {
+    "slug": "formatters-minifiers",
+    "name": "Formatters & Minifiers",
+    "count": 12,
+    "desc": "Format and indent Protocol Buffers (.proto) schema files cleanly."
+  },
+  {
+    "slug": "encoding-number-systems",
+    "name": "Encoding & Number Systems",
+    "count": 8,
+    "desc": "Inspect 32-bit single-precision float sign bit, 8-bit exponent, and 23-bit mantissa."
+  },
+  {
+    "slug": "web-api-tools",
+    "name": "Web & API Dev Tools",
+    "count": 8,
+    "desc": "Convert GraphQL query strings into ready-to-run cURL terminal commands."
+  },
+  {
+    "slug": "code-utilities",
+    "name": "Code & Dev Utilities",
+    "count": 6,
+    "desc": "Compare two JSON objects semantically, ignoring key ordering and whitespace differences."
+  },
+  {
+    "slug": "security-privacy",
+    "name": "Security & Privacy Tools",
+    "count": 4,
+    "desc": "Interactive static offline reference and audit checklist for OWASP Top 10 web vulnerabilities."
+  },
+  {
+    "slug": "astronomy-space",
+    "name": "Astronomy & Space",
+    "count": 8,
+    "desc": "Calculate exact lunar phase, age in days, and illumination percentage for any past or future date."
+  },
+  {
+    "slug": "geography-maps",
+    "name": "Geography & Maps",
+    "count": 8,
+    "desc": "Calculate great-circle distance between two latitude/longitude coordinate points in Kilometers, Miles, and Nautical Miles."
+  },
+  {
+    "slug": "chemistry-science",
+    "name": "Chemistry & Science",
+    "count": 7,
+    "desc": "Balance chemical reaction equations and determine stoichiometric integer coefficients."
+  },
+  {
+    "slug": "physics-extended",
+    "name": "Physics Extended",
+    "count": 8,
+    "desc": "Solve Voltage (V), Current (I), Resistance (R), and Power (P) relationships."
+  },
+  {
+    "slug": "sports-stats",
+    "name": "Sports Stats & Formulas",
+    "count": 7,
+    "desc": "Calculate current run rate (CRR), required run rate (RRR), runs needed, and 50-over projected scores."
+  },
+  {
+    "slug": "parenting-child",
+    "name": "Parenting & Child Care",
+    "count": 4,
+    "desc": "Calculate estimated due date (EDD), gestational age in weeks, and trimester milestones."
+  },
+  {
+    "slug": "weather-formulas",
+    "name": "Weather & Meteorology",
+    "count": 6,
+    "desc": "Calculate NWS apparent heat index temperature and human heat risk category from temperature and humidity."
+  },
+  {
+    "slug": "language-linguistics",
+    "name": "Language & Linguistics",
+    "count": 4,
+    "desc": "Convert alphanumeric text into ICAO / NATO phonetic radio spelling (Alpha, Bravo, Charlie)."
+  },
+  {
+    "slug": "test-prep",
+    "name": "Standardized Test Prep",
+    "count": 3,
+    "desc": "Convert official College Board SAT composite scores to ACT composite equivalents and percentile ranks."
+  },
+  {
+    "slug": "agriculture-gardening",
+    "name": "Agriculture & Gardening",
+    "count": 3,
+    "desc": "Estimate total harvest crop yields in kilograms and metric tons from field area and planting density."
+  },
+  {
+    "slug": "tax-reference",
+    "name": "Tax & Financial Reference",
+    "count": 3,
+    "desc": "Calculate total tax owed, effective tax rate, and marginal tax bracket using static income tax slabs."
+  },
+  {
+    "slug": "genealogy-family",
+    "name": "Genealogy & Family",
+    "count": 3,
+    "desc": "Determine kinship terms (1st cousin once removed, aunt, uncle) and shared DNA ancestry percentage."
+  },
+  {
+    "slug": "typography-fonts",
+    "name": "Typography & Fonts",
+    "count": 5,
+    "desc": "Get curated typography pairings for headings and body copy with contrast ratings."
+  },
+  {
+    "slug": "browser-hardware",
+    "name": "Browser & Hardware Info",
+    "count": 3,
+    "desc": "Inspect browser API capabilities (WebCrypto, LocalStorage, WebAssembly, Cores)."
+  },
+  {
+    "slug": "cooking-recipe-math",
+    "name": "Cooking & Recipe Math",
+    "count": 4,
+    "desc": "Convert grams, ounces, cups, tablespoons, teaspoons, and fluid ounces with volume-to-mass conversions."
+  },
+  {
+    "slug": "civic-reference",
+    "name": "Civic & Reference Tools",
+    "count": 2,
+    "desc": "Lookup international ISD calling codes (+91, +1, +44), ISO Alpha-2/Alpha-3 codes, and official currencies."
+  },
+  {
+    "slug": "seo-content-extras",
+    "name": "SEO & Content Extras",
+    "count": 3,
+    "desc": "Check keyword density percentages to prevent search engine keyword stuffing penalties."
+  },
+  {
+    "slug": "data-science-prep",
+    "name": "Data Science Prep",
+    "count": 3,
+    "desc": "Calculate statistical Z-Scores, normal distribution CDF percentages, and standard deviations."
+  },
+  {
+    "slug": "project-management",
+    "name": "Project Management",
+    "count": 3,
+    "desc": "Estimate agile development hours from Fibonacci story points (1, 2, 3, 5, 8, 13) and developer experience."
+  },
+  {
+    "slug": "hr-recruitment",
+    "name": "HR & Recruitment",
+    "count": 2,
+    "desc": "Calculate monthly and annualized employee turnover rates % and staff retention metrics."
+  },
+  {
+    "slug": "cad-engineering",
+    "name": "CAD & Engineering Reference",
+    "count": 2,
+    "desc": "Calculate driver-to-driven gear ratios, output RPM speeds, and mechanical torque multipliers."
+  },
+  {
+    "slug": "design-system",
+    "name": "Design System Tools",
+    "count": 1,
+    "desc": "Generate 8-point modular grid spacing scale tokens (8px, 16px, 24px, 32px) in px and rem."
+  },
+  {
+    "slug": "number-theory",
+    "name": "Number Theory & Puzzle Math",
+    "count": 2,
+    "desc": "Calculate step counts, peak maximum values, and Hailstone sequence steps for the 3n + 1 problem."
+  },
+  {
+    "slug": "sysadmin-it",
+    "name": "IT & Sysadmin Reference",
+    "count": 2,
+    "desc": "Convert SLA uptime percentages (99.9%, 99.99%) into allowed downtime minutes per year, month, and day."
+  },
+  {
+    "slug": "content-creator",
+    "name": "Content Creator Reference",
+    "count": 1,
+    "desc": "Get recommended export bitrates (Mbps) and livestream upload bandwidth requirements for 1080p and 4K video."
+  },
+  {
+    "slug": "dev-utility-extras",
+    "name": "Developer Utility Extras",
+    "count": 5,
+    "desc": "Test whether a target package version satisfies caret (^), tilde (~), or exact SemVer range operators."
+  },
+  {
+    "slug": "math-number-extras",
+    "name": "Math & Number Extras",
+    "count": 6,
+    "desc": "Calculate harmonic mean averages for datasets, ratios, and rates of speed."
+  },
+  {
+    "slug": "measurement-conversions",
+    "name": "Measurement & Conversion Extras",
+    "count": 4,
+    "desc": "Convert maritime nautical miles (nmi) to kilometers (km) and statute miles (mi)."
+  },
+  {
+    "slug": "construction-home",
+    "name": "Construction & Home Extras",
+    "count": 5,
+    "desc": "Calculate required 50kg cement bags, sand, and gravel cubic meters for concrete slab volumes."
+  },
+  {
+    "slug": "food-nutrition",
+    "name": "Food & Nutrition Reference",
+    "count": 3,
+    "desc": "Calculate total recipe costs and individual portion cost per serving for meal planning and catering."
+  },
+  {
+    "slug": "academic-research",
+    "name": "Academic & Research Extras",
+    "count": 2,
+    "desc": "Calculate statistically representative survey sample sizes using Cochran's formula and 95%/99% confidence."
+  },
+  {
+    "slug": "logistics-supply-chain",
+    "name": "Logistics & Supply Chain",
+    "count": 4,
+    "desc": "Calculate total shipment volume in Cubic Meters (CBM) and 20ft container space utilization %."
+  },
+  {
+    "slug": "wellness-reference",
+    "name": "Wellness Reference",
+    "count": 5,
+    "desc": "Calculate waist-to-hip ratio (WHR) and evaluate abdominal fat distribution health risk categories."
+  },
+  {
+    "slug": "global-reference",
+    "name": "Miscellaneous Global Reference",
+    "count": 2,
+    "desc": "Calculate total travel driving duration (hours and minutes) from road distance (km/mi) and average speed."
+  }
+]

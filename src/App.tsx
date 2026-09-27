@@ -5,7 +5,7 @@ import {
   Terminal, ShieldCheck, Database, Zap, RefreshCw, X,
   ChevronRight, ArrowLeft, Binary, CheckCircle, FileText,
   Sliders, Wifi, Code, Sparkles, Menu, BookOpen, Info, Mail,
-  Globe, Clock, Palette, Eye, Gauge, Image, Calculator
+  Globe, Clock, Palette, Eye, Gauge, Image, Calculator, Star, HelpCircle, Command, RotateCcw
 } from 'lucide-react';
 import { ToolItem, CategoryInfo } from './types';
 import * as engines from './crypto/toolEngines';
@@ -14,8 +14,10 @@ import { SeoHead } from './components/SeoHead';
 import { AdUnit } from './components/AdUnit';
 import { applyAdminOverrides, recordToolExecution, recordSearchQuery, recordPageView } from './utils/adminStorage';
 
-// --- REACT LAZY IMPORTS (Code Splitting for 100% Mobile Score) ---
-const ToolWorkspace = lazy(() => import('./components/ToolWorkspace').then(module => ({ default: module.ToolWorkspace })));
+import { ToolWorkspace } from './components/ToolWorkspace';
+
+// --- REACT LAZY IMPORTS FOR OTHER PAGES ---
+const AllToolsPage = lazy(() => import('./components/pages/AllToolsPage').then(module => ({ default: module.AllToolsPage })));
 const AboutPage = lazy(() => import('./components/pages/AboutPage').then(module => ({ default: module.AboutPage })));
 const ContactPage = lazy(() => import('./components/pages/ContactPage').then(module => ({ default: module.ContactPage })));
 const TechGuidesPage = lazy(() => import('./components/pages/TechGuidesPage').then(module => ({ default: module.TechGuidesPage })));
@@ -26,7 +28,7 @@ const NotFoundPage = lazy(() => import('./components/pages/NotFoundPage').then(m
 const AdminPanel = lazy(() => import('./components/admin/AdminPanel').then(module => ({ default: module.AdminPanel })));
 // ------------------------------------------------------------------
 
-export type AppView = 'catalog' | 'about' | 'contact' | 'guides' | 'privacy' | 'terms' | 'disclaimer' | 'admin' | 'notfound';
+export type AppView = 'catalog' | 'about' | 'contact' | 'guides' | 'privacy' | 'terms' | 'disclaimer' | 'admin' | 'notfound' | 'all-tools';
 
 export const CATEGORY_HUBS_CONFIG = [
   { slug: 'json-developer-tools', name: 'JSON & Developer Tools', icon: Code, count: 9, desc: 'Minifier, Diff, Path Tester, Kotlin/Java/C#/Go, Schema' },
@@ -70,6 +72,28 @@ export default function App() {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [toastMsg, setToastMsg] = useState<string | null>(null);
+  const [categorySearchQuery, setCategorySearchQuery] = useState<string>('');
+
+  // Pro Feature States: Favorites, Recently Used, Keyboard Shortcuts
+  const [starredToolIds, setStarredToolIds] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem('ed_starred_tools');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const [recentToolIds, setRecentToolIds] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem('ed_recent_tools');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const [showShortcutsModal, setShowShortcutsModal] = useState<boolean>(false);
 
   const headerSearchInputRef = useRef<HTMLInputElement>(null);
   const catalogSearchInputRef = useRef<HTMLInputElement>(null);
@@ -112,7 +136,7 @@ export default function App() {
       setCurrentView('notfound');
       return;
     }
-    if (['about', 'contact', 'guides', 'privacy', 'terms', 'disclaimer', 'admin'].includes(hash)) {
+    if (['about', 'contact', 'guides', 'privacy', 'terms', 'disclaimer', 'admin', 'all-tools'].includes(hash)) {
       setSelectedTool(null);
       setCurrentView(hash as AppView);
       return;
@@ -157,6 +181,7 @@ export default function App() {
       return;
     }
 
+    if (pathname === '/all-tools' || pathname === '/tools') { setSelectedTool(null); setCurrentView('all-tools'); return; }
     if (pathname === '/about') { setSelectedTool(null); setCurrentView('about'); return; }
     if (pathname === '/contact') { setSelectedTool(null); setCurrentView('contact'); return; }
     if (pathname === '/guides') { setSelectedTool(null); setCurrentView('guides'); return; }
@@ -326,7 +351,26 @@ export default function App() {
     setCurrentView('catalog');
     setMobileMenuOpen(false);
     window.history.pushState({}, '', `/tools/${tool.slug}`);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    // Track recently used tool
+    setRecentToolIds(prev => {
+      const filtered = prev.filter(id => id !== tool.slug && id !== tool.id);
+      const updated = [tool.slug, ...filtered].slice(0, 8);
+      localStorage.setItem('ed_recent_tools', JSON.stringify(updated));
+      return updated;
+    });
+  };
+
+  const toggleStarTool = (e: React.MouseEvent, toolSlug: string) => {
+    e.stopPropagation();
+    setStarredToolIds(prev => {
+      const isStarred = prev.includes(toolSlug);
+      const updated = isStarred ? prev.filter(id => id !== toolSlug) : [...prev, toolSlug];
+      localStorage.setItem('ed_starred_tools', JSON.stringify(updated));
+      triggerToast(isStarred ? 'Removed from Favorites' : '⭐ Added to Favorites');
+      return updated;
+    });
   };
 
   // Back to All Tools catalog using clean URLs
@@ -335,7 +379,7 @@ export default function App() {
     setCurrentView('catalog');
     setMobileMenuOpen(false);
     window.history.pushState({}, '', '/');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   // Navigate to any page view using clean URLs
@@ -365,19 +409,72 @@ export default function App() {
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = {};
     tools.forEach(t => {
-      counts[t.category] = (counts[t.category] || 0) + 1;
+      if (t.category) {
+        counts[t.category] = (counts[t.category] || 0) + 1;
+      }
     });
     return counts;
   }, [tools]);
 
+  // Dynamically compute all 109 categories from tools array
+  const allCategoryHubs = useMemo(() => {
+    const map = new Map<string, { slug: string; name: string; count: number; desc: string; icon: any }>();
+
+    // 1. Seed with icons & configs from CATEGORY_HUBS_CONFIG
+    CATEGORY_HUBS_CONFIG.forEach(c => {
+      map.set(c.slug, { ...c });
+    });
+
+    // 2. Populate all categories present in tools array
+    tools.forEach(t => {
+      const slug = t.category || 'general';
+      const name = t.categoryName || slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      if (!map.has(slug)) {
+        map.set(slug, {
+          slug,
+          name,
+          count: 0,
+          desc: t.shortDesc || `${name} developer tools`,
+          icon: Code
+        });
+      }
+      const item = map.get(slug)!;
+      item.count = categoryCounts[slug] || item.count || 0;
+    });
+
+    const list = Array.from(map.values());
+    if (!categorySearchQuery.trim()) return list;
+
+    const q = categorySearchQuery.toLowerCase();
+    return list.filter(c => 
+      c.name.toLowerCase().includes(q) || 
+      c.slug.toLowerCase().includes(q) || 
+      c.desc.toLowerCase().includes(q)
+    );
+  }, [tools, categoryCounts, categorySearchQuery]);
+
+  // Recently used tool objects
+  const recentToolsObjects = useMemo(() => {
+    if (!recentToolIds.length || !tools.length) return [];
+    return recentToolIds
+      .map(id => tools.find(t => t.slug === id || t.id === id))
+      .filter((t): t is ToolItem => Boolean(t));
+  }, [tools, recentToolIds]);
+
   // Filtered tools by search and category
   const filteredTools = useMemo(() => {
+    if (activeCategory === 'favorites') {
+      const favSet = new Set(starredToolIds);
+      const list = tools.filter(t => favSet.has(t.slug) || favSet.has(t.id));
+      if (!searchQuery.trim()) return list;
+      return searchTools(list, searchQuery, 'all');
+    }
     if (!searchQuery.trim()) {
       if (activeCategory === 'all') return tools;
       return tools.filter(t => t.category === activeCategory);
     }
     return searchTools(tools, searchQuery, 'all');
-  }, [tools, activeCategory, searchQuery]);
+  }, [tools, activeCategory, searchQuery, starredToolIds]);
 
   // Top search quick matches for live header dropdown
   const searchQuickMatches = useMemo(() => {
@@ -463,7 +560,7 @@ export default function App() {
                     setSearchFocused(true);
                     setSearchHighlightIndex(-1);
                   }}
-                  placeholder="Search all 330+ tools (Press '/' to focus)..."
+                  placeholder="Search tools..."
                   className="w-full h-9 bg-[var(--bg-input)] border border-[var(--border-subtle)] rounded-lg px-3 pr-9 text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[#2E9BFF] focus:ring-1 focus:ring-[#2E9BFF] transition leading-normal"
                   id="global-search-input"
                 />
@@ -574,16 +671,15 @@ export default function App() {
               Home
             </button>
             <button
-              onClick={() => {
-                handleNavigateView('catalog');
-                setTimeout(() => {
-                  const el = document.getElementById('catalog-grid');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }, 50);
-              }}
-              className="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)] transition cursor-pointer"
+              onClick={() => handleNavigateView('all-tools')}
+              className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer flex items-center gap-1.5 ${
+                currentView === 'all-tools'
+                  ? 'text-[#2E9BFF] bg-blue-500/10 font-bold border border-blue-500/20'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]'
+              }`}
             >
-              All Tools ({tools.length || '300+'})
+              <Terminal size={13} className="text-[#2E9BFF]" />
+              <span>All Tools Directory ({tools.length || '1,380+'})</span>
             </button>
             <button
               onClick={() => handleNavigateView('guides')}
@@ -670,16 +766,17 @@ export default function App() {
               <ChevronRight size={14} className="text-[var(--text-muted)]" />
             </button>
             <button
-              onClick={() => {
-                handleNavigateView('catalog');
-                setTimeout(() => {
-                  const el = document.getElementById('catalog-grid');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }, 50);
-              }}
-              className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)] flex items-center justify-between cursor-pointer"
+              onClick={() => handleNavigateView('all-tools')}
+              className={`w-full text-left px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-between cursor-pointer ${
+                currentView === 'all-tools'
+                  ? 'text-[#2E9BFF] bg-blue-500/15'
+                  : 'text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]'
+              }`}
             >
-              <span>All 300+ Tools Catalog</span>
+              <span className="flex items-center gap-2">
+                <Terminal size={14} className="text-[#2E9BFF]" />
+                <span>All Tools Directory ({tools.length || '1,380+'})</span>
+              </span>
               <ChevronRight size={14} className="text-[var(--text-muted)]" />
             </button>
             <button
@@ -730,6 +827,20 @@ export default function App() {
               onBack={handleBackToCatalog}
               onSelectTool={handleSelectTool}
             />
+          ) : currentView === 'all-tools' ? (
+            <>
+              <SeoHead
+                title="Best Website for Cryptographic Tools & Developer Utilities | 1,380+ Free Tools Directory"
+                description="The #1 best website for cryptographic tools and developer utilities. Complete directory of 1,380+ free client-side AES-256, RSA, SHA-256, Base64, JWT, UUID, URL, CSS, JSON, and WebCrypto API tools running 100% in browser RAM."
+                canonicalUrl="https://encryptdecrypt.org/all-tools"
+                keywords={['best website for cryptographic tools and developer utilities', 'cryptography directory', 'developer tools catalog', '1380 tools', 'web crypto']}
+              />
+              <AllToolsPage 
+                tools={tools}
+                onSelectTool={handleSelectTool}
+                onNavigateHome={handleBackToCatalog}
+              />
+            </>
           ) : currentView === 'admin' ? (
             <>
               <SeoHead
@@ -747,7 +858,7 @@ export default function App() {
             <>
               <SeoHead
                 title="About Us & Zero-Knowledge Architecture | EncryptDecrypt.org"
-                description="Learn about EncryptDecrypt.org's mission: providing 330+ enterprise-grade, browser-native developer utilities with 100% client-side privacy via the W3C Web Cryptography API."
+                description="Learn about EncryptDecrypt.org's mission: providing 1,380+ enterprise-grade, browser-native developer utilities with 100% client-side privacy via the W3C Web Cryptography API."
                 canonicalUrl="https://encryptdecrypt.org/about"
                 ogType="article"
               />
@@ -829,24 +940,24 @@ export default function App() {
               <SeoHead
                 title={activeCategory !== 'all'
                   ? `${CATEGORY_HUBS_CONFIG.find(c => c.slug === activeCategory)?.name || activeCategory} Tools | EncryptDecrypt.org`
-                  : "EncryptDecrypt.org | 330+ Free Online Cryptography, Encoding & Developer Tools"
+                  : "EncryptDecrypt.org - Best Website for Cryptographic Tools & Developer Utilities | 1,380+ Free Tools"
                 }
                 description={activeCategory !== 'all'
                   ? `Explore free client-side ${CATEGORY_HUBS_CONFIG.find(c => c.slug === activeCategory)?.name || activeCategory} developer utilities. 100% private, zero server transmissions, WebCrypto API powered.`
-                  : "Free, client-side cryptography, encoding, decoding, hash generation, and developer tools. 100% private and offline-capable via the W3C Web Cryptography API."
+                  : "The #1 best website for cryptographic tools and developer utilities. 1,380+ free client-side AES-256, RSA, SHA-256, Base64, JWT, UUID, URL, CSS, JSON, and WebCrypto API tools running 100% in your browser."
                 }
                 canonicalUrl={activeCategory !== 'all'
                   ? `https://encryptdecrypt.org/tools/${activeCategory}/`
                   : "https://encryptdecrypt.org/"
                 }
-                keywords={['cryptography', 'base64', 'aes-256', 'sha-256', 'jwt debugger', 'developer tools', 'web crypto']}
+                keywords={['best website for cryptographic tools and developer utilities', 'cryptography', 'base64', 'aes-256', 'sha-256', 'jwt debugger', 'developer tools', 'web crypto']}
                 schemas={[
                   {
                     '@context': 'https://schema.org',
                     '@type': 'WebSite',
                     'name': 'EncryptDecrypt.org',
                     'url': 'https://encryptdecrypt.org/',
-                    'description': 'Free client-side developer security, encryption, hashing, and encoding tools.',
+                    'description': 'The #1 best website for cryptographic tools and developer utilities. Free client-side security, encryption, hashing, and encoding tools.',
                     'potentialAction': {
                       '@type': 'SearchAction',
                       'target': {
@@ -866,13 +977,13 @@ export default function App() {
                 <div className="max-w-3xl mb-6">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#2E9BFF] text-xs font-mono mb-3">
                     <ShieldCheck size={14} />
-                    <span>NIST & RFC Compliant · {tools.length || 330}+ Separate Developer Utilities</span>
+                    <span>NIST & RFC Compliant · {tools.length || '1,380'}+ Separate Developer Utilities</span>
                   </div>
                   <h1 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight leading-tight">
-                    Free Client-Side Cryptography, Encoding & Developer Tools
+                    Best Website for Cryptographic Tools &amp; Developer Utilities
                   </h1>
                   <p className="text-[var(--text-secondary)] text-sm sm:text-base mt-2 leading-relaxed">
-                    Every tool runs 100% inside your web browser via the W3C Web Cryptography API. Nothing is ever transmitted to a server. Click on any of the <strong>{tools.length || 330}+ separate tools</strong> below to open its dedicated workspace.
+                    Every tool runs 100% inside your web browser via the W3C Web Cryptography API. Nothing is ever transmitted to a server. Click on any of the <strong>{tools.length || '1,380'}+ separate tools</strong> below to open its dedicated workspace.
                   </p>
                 </div>
 
@@ -944,32 +1055,44 @@ export default function App() {
                   <div>
                     <h2 className="text-xl font-bold text-[var(--text-primary)] flex items-center gap-2 m-0">
                       <Layers size={22} className="text-[#2E9BFF]" />
-                      Browse Categories
+                      Browse Categories ({allCategoryHubs.length} Categories)
                     </h2>
                     <p className="text-xs text-[var(--text-muted)] mt-1">
-                      Select any hub to view its dedicated utilities, or click directly on any tool below.
+                      Organized across {allCategoryHubs.length} specialized domain hubs. Select any category to filter tools.
                     </p>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 w-full sm:w-auto">
+                    <input
+                      type="text"
+                      value={categorySearchQuery}
+                      onChange={(e) => setCategorySearchQuery(e.target.value)}
+                      placeholder="Search categories..."
+                      className="w-full sm:w-56 h-8 bg-[var(--bg-input)] border border-[var(--border-subtle)] focus:border-[#2E9BFF] rounded-lg px-2.5 text-[11px] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] font-mono"
+                    />
+                    {categorySearchQuery && (
+                      <button onClick={() => setCategorySearchQuery('')} className="text-[var(--text-muted)] hover:text-[var(--text-primary)]">
+                        <X size={14} />
+                      </button>
+                    )}
                     {activeCategory !== 'all' && (
                       <button
                         onClick={() => setActiveCategory('all')}
-                        className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-blue-500/20 text-[#2E9BFF] border border-blue-500/30 hover:bg-blue-500/30 transition flex items-center gap-1.5 cursor-pointer"
+                        className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-blue-500/20 text-[#2E9BFF] border border-blue-500/30 hover:bg-blue-500/30 transition flex items-center gap-1.5 cursor-pointer shrink-0"
                       >
-                        <X size={14} /> Clear Filter (Show All {tools.length || '330'})
+                        <X size={14} /> Clear Filter
                       </button>
                     )}
-                    <span className="text-xs text-[var(--text-muted)] font-mono bg-[var(--bg-surface)] px-2.5 py-1 rounded-md border border-[var(--border-subtle)]">
-                      {filteredTools.length} of {tools.length || '330'} Tools
+                    <span className="text-xs text-[var(--text-muted)] font-mono bg-[var(--bg-surface)] px-2.5 py-1 rounded-md border border-[var(--border-subtle)] shrink-0">
+                      {filteredTools.length} of {tools.length || '1,380'} Tools
                     </span>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 mb-6">
-                  {CATEGORY_HUBS_CONFIG.map(hub => {
-                    const Icon = hub.icon;
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-2.5 mb-6">
+                  {allCategoryHubs.map(hub => {
+                    const Icon = hub.icon || Code;
                     const isActive = activeCategory === hub.slug;
-                    const count = categoryCounts[hub.slug] || hub.count;
+                    const count = categoryCounts[hub.slug] || hub.count || 0;
 
                     return (
                       <button
@@ -979,29 +1102,29 @@ export default function App() {
                           const el = document.getElementById('catalog-grid');
                           if (el) el.scrollIntoView({ behavior: 'smooth' });
                         }}
-                        className={`p-3 rounded-xl text-left transition flex flex-col justify-between border cursor-pointer group shadow-sm ${
+                        className={`p-2.5 rounded-xl text-center transition flex flex-col items-center justify-between border cursor-pointer group shadow-sm ${
                           isActive
                             ? 'bg-blue-600/15 border-[#2E9BFF] shadow-md ring-1 ring-[#2E9BFF]'
                             : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] hover:border-[var(--accent)] hover:bg-[var(--bg-surface-hover)]'
                         }`}
                       >
-                        <div>
-                          <div className="flex items-center justify-between mb-2">
+                        <div className="w-full flex flex-col items-center">
+                          <div className="flex items-center justify-center gap-1.5 mb-1.5 w-full">
                             <div className={`p-1.5 rounded-lg ${isActive ? 'bg-[#2E9BFF] text-white' : 'bg-blue-500/10 text-[#2E9BFF] group-hover:bg-blue-500/20'}`}>
-                              <Icon size={18} />
+                              <Icon size={15} />
                             </div>
-                            <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
+                            <span className={`text-[9.5px] font-mono px-1.5 py-0.5 rounded ${
                               isActive ? 'bg-[#2E9BFF] text-white font-bold' : 'bg-[var(--bg-surface-hover)] text-[var(--text-muted)] border border-[var(--border-subtle)]'
                             }`}>
                               {count}
                             </span>
                           </div>
-                          <h3 className={`text-xs font-bold leading-tight line-clamp-2 ${isActive ? 'text-[#2E9BFF]' : 'text-[var(--text-primary)] group-hover:text-[#2E9BFF]'}`}>
+                          <h3 className={`text-[10.5px] font-bold leading-tight text-center line-clamp-2 w-full ${isActive ? 'text-[#2E9BFF]' : 'text-[var(--text-primary)] group-hover:text-[#2E9BFF]'}`}>
                             {hub.name}
                           </h3>
                         </div>
-                        <span className="text-[10px] text-[var(--text-muted)] line-clamp-1 mt-2 font-mono">
-                          {hub.desc.split(',')[0]}...
+                        <span className="text-[9.5px] text-[var(--text-muted)] text-center line-clamp-1 mt-1 font-mono w-full">
+                          {hub.desc ? hub.desc.split(',')[0] : 'Tools'}
                         </span>
                       </button>
                     );
@@ -1017,9 +1140,22 @@ export default function App() {
                         : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-[var(--accent)] hover:text-[var(--text-primary)]'
                     }`}
                   >
-                    All Tools ({tools.length || '300+'})
+                    All Tools ({tools.length || '1,380+'})
                   </button>
-                  {CATEGORY_HUBS_CONFIG.map(hub => (
+
+                  <button
+                    onClick={() => setActiveCategory('favorites')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer border flex items-center gap-1.5 ${
+                      activeCategory === 'favorites'
+                        ? 'bg-amber-500 text-black font-bold border-amber-400 shadow-sm'
+                        : 'bg-[var(--bg-surface)] text-amber-400 border-amber-500/30 hover:border-amber-400'
+                    }`}
+                  >
+                    <Star size={13} className={activeCategory === 'favorites' ? 'fill-black' : 'fill-amber-400'} />
+                    <span>Favorites ({starredToolIds.length})</span>
+                  </button>
+
+                  {allCategoryHubs.map(hub => (
                     <button
                       key={hub.slug}
                       onClick={() => setActiveCategory(hub.slug)}
@@ -1050,7 +1186,7 @@ export default function App() {
                     </h3>
                     <span className="text-xs text-[var(--text-muted)] mt-0.5 block">
                       {searchQuery.trim()
-                        ? `Showing results matching "${searchQuery}" across all 330+ utilities`
+                        ? `Showing results matching "${searchQuery}" across all 1,380+ utilities`
                         : 'Instant client-side execution · Click to open any isolated tool'}
                     </span>
                   </div>
@@ -1068,7 +1204,7 @@ export default function App() {
                         type="text"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Search 330+ tools (e.g. aes, qr, sha256)..."
+                        placeholder="Search 1,380+ tools (e.g. aes, qr, sha256)..."
                         className="w-full h-9 bg-[var(--bg-input)] border border-[var(--border-subtle)] rounded-lg px-3 pr-9 text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[#2E9BFF] focus:ring-1 focus:ring-[#2E9BFF] transition leading-normal"
                         id="catalog-search-input"
                       />
@@ -1100,7 +1236,7 @@ export default function App() {
                     <div className="flex items-center gap-2 text-[var(--text-primary)] font-medium">
                       <Search size={14} className="text-[#2E9BFF]" />
                       <span>
-                        Searching all 330+ tools for: <strong className="text-[#2E9BFF]">&ldquo;{searchQuery}&rdquo;</strong> — <strong>{filteredTools.length}</strong> matching tools found
+                        Searching all 1,380+ tools for: <strong className="text-[#2E9BFF]">&ldquo;{searchQuery}&rdquo;</strong> — <strong>{filteredTools.length}</strong> matching tools found
                       </span>
                     </div>
                     <button
@@ -1154,7 +1290,7 @@ export default function App() {
                       }}
                       className="btn btn-primary text-xs py-2 px-5 inline-flex items-center gap-1.5"
                     >
-                      <RefreshCw size={14} /> View All 330+ Tools Catalog
+                      <RefreshCw size={14} /> View All 1,380+ Tools Catalog
                     </button>
                   </div>
                 ) : (
@@ -1212,7 +1348,7 @@ export default function App() {
               <span>EncryptDecrypt.org</span>
             </div>
             <p className="leading-relaxed mb-3 text-[var(--text-secondary)]">
-              Free, private, zero-log cryptographic tools and developer utilities. 330+ utilities executing 100% inside your web browser via standard Web Cryptography algorithms. Your data never touches a server.
+              The #1 best website for cryptographic tools and developer utilities. 1,380+ utilities executing 100% inside your web browser via standard Web Cryptography algorithms. Your data never touches a server.
             </p>
             <div className="flex flex-wrap gap-2 text-[11px] font-mono">
               <span className="px-2 py-1 rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 font-semibold">
@@ -1231,6 +1367,11 @@ export default function App() {
               <li>
                 <button onClick={handleBackToCatalog} className="hover:text-[#2E9BFF] cursor-pointer transition">
                   Home (All Tools)
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleNavigateView('all-tools')} className="hover:text-[#2E9BFF] cursor-pointer transition font-semibold text-[#2E9BFF]">
+                  All Tools Directory (1,380+)
                 </button>
               </li>
               <li>

@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "EncryptDecrypt - Developer Cryptography & Base64 Tools",
-  "version": "1.0.0",
-  "description": "330+ free offline client-side developer tools. Base64, AES, JWT, UUID, and hash generators.",
+  "name": "EncryptDecrypt.org - Best Cryptographic Tools & Developer Utilities | 1,380+ Tools",
+  "version": "2.0.0",
+  "description": "1,380+ free offline client-side developer tools. AES-256, RSA, SHA-256, Base64, JWT, UUID, URL, CSS, JSON, and hash generators.",
   "action": {
     "default_popup": "index.html",
-    "default_title": "Open Dev Tools"
+    "default_title": "Open 1,380+ Dev Tools"
   },
   "icons": {
     "16": "favicon.png",

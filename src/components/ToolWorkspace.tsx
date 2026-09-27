@@ -2250,7 +2250,7 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
         version: "2.5.0",
         clientSideOnly: true,
         zeroDataRetention: true,
-        toolsCount: 330,
+        toolsCount: 1380,
         encryption: ["AES-256-GCM", "ChaCha20-Poly1305", "RSA-OAEP"],
         verified: true
       }, null, 2));
@@ -2378,7 +2378,7 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
     } else if (slug === 'base64-image-converter') {
       setInputText('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgMkwyIDdMMTIgMTJMMjIgN0wxMiAyWiIgc3Ryb2tlPSIjMkU5QkZGIiBzdHJva2Utd2lkdGg9IjIiLz48L3N2Zz4=');
     } else if (cat === 'text-writing-utilities' || cat === 'text-utilities' || slug.includes('sentence-') || slug.includes('reading-time') || slug.includes('keyword-') || slug.includes('word-char')) {
-      setInputText('EncryptDecrypt.org delivers 330+ browser-native privacy tools. Every calculation executes in local client memory using the W3C Web Cryptography API. No packets leave your device. All operations are private, confidential, and instant.');
+      setInputText('EncryptDecrypt.org delivers 1,380+ browser-native privacy tools. Every calculation executes in local client memory using the W3C Web Cryptography API. No packets leave your device. All operations are private, confidential, and instant.');
     } else if (slug.includes('user-agent')) {
       setInputText('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36');
     } else if (slug.includes('mac-address-lookup') || slug.includes('mac-vendor') || slug.includes('oui')) {
@@ -6336,7 +6336,7 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
 
   // Programmatic SEO data & JSON-LD schemas
   const seoData = useMemo(() => getToolSeoData(tool), [tool]);
-  const { softwareAppSchema, breadcrumbSchema, faqSchema } = useMemo(
+  const { softwareAppSchema, breadcrumbSchema, faqSchema, howToSchema } = useMemo(
     () => buildToolSchemas(seoData),
     [seoData]
   );
@@ -6350,7 +6350,7 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
         canonicalUrl={seoData.canonicalUrl}
         keywords={seoData.keywords}
         ogType="article"
-        schemas={[softwareAppSchema, breadcrumbSchema, faqSchema]}
+        schemas={[softwareAppSchema, breadcrumbSchema, faqSchema, howToSchema]}
       />
 
       {/* Sleek, Compact Cyber Breadcrumb & Toolbar */}

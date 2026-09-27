@@ -87,7 +87,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
               Contact the Engineering Team
             </h1>
             <p className="text-xs sm:text-sm text-[var(--text-secondary)] mb-6 leading-relaxed">
-              Have a question regarding cryptographic implementation, feature suggestion for our 300+ tools, or partnership inquiry? Send us a message and our technical team will respond promptly.
+              Have a question regarding cryptographic implementation, feature suggestion for our 1,380+ tools, or partnership inquiry? Send us a message and our technical team will respond promptly.
             </p>
 
             {submitted ? (
@@ -232,8 +232,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                 <div>
                   <strong className="block text-[var(--text-primary)] mb-0.5">Technical Support & General Inquiries</strong>
                   <div className="space-y-0.5">
-                    <span className="font-mono text-[11px] text-[#2E9BFF] block">support@encryptdecrypt.org</span>
-                    <span className="font-mono text-[11px] text-[#2E9BFF] block">ajayade1004@gmail.com</span>
+                    <a href="mailto:admin@EncryptDecrypt.org" className="font-mono text-[11px] text-[#2E9BFF] hover:underline block">admin@EncryptDecrypt.org</a>
+                    <a href="mailto:ajay.rathod8796@gmail.com" className="font-mono text-[11px] text-[#2E9BFF] hover:underline block">ajay.rathod8796@gmail.com</a>
                   </div>
                   <p className="text-[11px] text-[var(--text-muted)] mt-1">For general utility troubleshooting, feedback, or custom tool requests.</p>
                 </div>
@@ -243,7 +243,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                 <Shield size={16} className="text-emerald-500 shrink-0 mt-0.5" />
                 <div>
                   <strong className="block text-[var(--text-primary)] mb-0.5">Security & Vulnerability Reports</strong>
-                  <span className="font-mono text-[11px] text-emerald-500">security@encryptdecrypt.org</span>
+                  <a href="mailto:admin@EncryptDecrypt.org" className="font-mono text-[11px] text-emerald-500 hover:underline block">admin@EncryptDecrypt.org</a>
                   <p className="text-[11px] text-[var(--text-muted)] mt-1">For responsible security disclosures conforming to RFC 9116.</p>
                 </div>
               </div>
@@ -265,7 +265,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
               <span>Coordinated Vulnerability Disclosure</span>
             </div>
             <p className="text-xs text-[var(--text-secondary)] leading-relaxed mb-3">
-              We welcome findings from independent security researchers. If you identify a potential implementation bug in any of our 300+ client-side algorithms:
+              We welcome findings from independent security researchers. If you identify a potential implementation bug in any of our 1,380+ client-side algorithms:
             </p>
             <ul className="list-disc pl-4 text-xs text-[var(--text-secondary)] space-y-1 mb-3">
               <li>Include reproducible test vectors and browser version details.</li>

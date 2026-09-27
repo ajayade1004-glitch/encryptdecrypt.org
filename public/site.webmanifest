@@ -1,16 +1,16 @@
 {
-  "name": "EncryptDecrypt.org",
+  "name": "EncryptDecrypt.org - Best Cryptographic Tools & Developer Utilities",
   "short_name": "EncryptDecrypt",
-  "description": "1,000+ Free Client-Side Developer, SEO & Cryptography Tools",
+  "description": "1,380+ Free Client-Side Developer, SEO & Cryptography Tools",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#030712",
-  "theme_color": "#00FF9D",
+  "theme_color": "#2E9BFF",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "/favicon.png",
       "sizes": "192x192 512x512",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ]

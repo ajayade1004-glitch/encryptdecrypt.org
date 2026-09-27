@@ -167,8 +167,8 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({
             If you have questions, inquiries, or privacy rights requests regarding this Privacy Policy, please contact our privacy desk:
           </p>
           <div className="p-4 rounded-xl bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] text-xs font-mono">
-            <div>Email: privacy@encryptdecrypt.org</div>
-            <div>Support: support@encryptdecrypt.org</div>
+            <div>Email: <a href="mailto:admin@EncryptDecrypt.org" className="text-[#2E9BFF] hover:underline">admin@EncryptDecrypt.org</a></div>
+            <div>Support: <a href="mailto:ajay.rathod8796@gmail.com" className="text-[#2E9BFF] hover:underline">ajay.rathod8796@gmail.com</a></div>
             <div>Postal: EncryptDecrypt.org Privacy Team, Global Operations</div>
           </div>
           <button
