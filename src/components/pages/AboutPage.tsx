@@ -16,9 +16,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({
     <div className="container py-8 max-w-5xl mx-auto">
       {/* Breadcrumb Navigation */}
       <nav className="flex items-center gap-2 text-xs text-[var(--text-muted)] mb-6">
-        <button onClick={onNavigateHome} className="hover:text-[#2E9BFF] cursor-pointer">
+        <a href="/" onClick={(e) => { e.preventDefault(); onNavigateHome(); }} className="hover:text-[#2E9BFF] cursor-pointer">
           Home
-        </button>
+        </a>
         <span>/</span>
         <span className="text-[var(--text-primary)] font-semibold">About Us</span>
       </nav>
@@ -139,13 +139,42 @@ export const AboutPage: React.FC<AboutPageProps> = ({
         </p>
 
         <div className="flex flex-wrap gap-4 pt-4 border-t border-[var(--border-subtle)]">
-          <button
-            onClick={onNavigateGuides}
+          <a
+            href="/guides"
+            onClick={(e) => { e.preventDefault(); onNavigateGuides(); }}
             className="text-xs font-semibold text-[#2E9BFF] hover:underline inline-flex items-center gap-1 cursor-pointer"
           >
             Read our Technical Cryptography Guides <ArrowRight size={14} />
-          </button>
+          </a>
         </div>
+
+        {/* Semantic Internal Linking Cluster */}
+        <section className="space-y-3 pt-6 border-t border-[var(--border-subtle)]">
+          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Related Platform &amp; Legal Pages</h3>
+          <div className="flex flex-wrap gap-2 text-xs">
+            <a href="/" onClick={(e) => { e.preventDefault(); onNavigateHome(); }} className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+              Home
+            </a>
+            <a href="/all-tools" className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+              All 1,380+ Tools Directory
+            </a>
+            <a href="/privacy" className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+              Privacy Policy
+            </a>
+            <a href="/terms" className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+              Terms of Service
+            </a>
+            <a href="/disclaimer" className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+              Legal Disclaimer
+            </a>
+            <a href="/guides" onClick={(e) => { e.preventDefault(); onNavigateGuides(); }} className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+              Technical Guides &amp; Whitepapers
+            </a>
+            <a href="/contact" onClick={(e) => { e.preventDefault(); onNavigateContact(); }} className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+              Contact Desk
+            </a>
+          </div>
+        </section>
       </article>
     </div>
   );

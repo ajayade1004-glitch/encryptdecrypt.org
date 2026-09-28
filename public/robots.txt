@@ -4,19 +4,21 @@
 User-agent: *
 Allow: /
 Disallow: /admin
-Disallow: /#admin
 
 # OpenAI / ChatGPT Web Search & Indexing Bots
 User-agent: GPTBot
 Allow: /
+
 User-agent: ChatGPT-User
 Allow: /
+
 User-agent: OAI-SearchBot
 Allow: /
 
 # Google Gemini & Google Search AI Overviews
 User-agent: Googlebot
 Allow: /
+
 User-agent: Google-Extended
 Allow: /
 
@@ -27,6 +29,7 @@ Allow: /
 # Anthropic Claude Indexer
 User-agent: ClaudeBot
 Allow: /
+
 User-agent: anthropic-ai
 Allow: /
 
@@ -37,18 +40,19 @@ Allow: /
 # Apple Intelligence
 User-agent: Applebot
 Allow: /
+
 User-agent: Applebot-Extended
 Allow: /
 
 # Other Major AI Knowledge Crawlers
 User-agent: CCBot
 Allow: /
+
 User-agent: Diffbot
 Allow: /
+
 User-agent: cohere-ai
 Allow: /
 
-# Sitemap & LLM Discovery Indices
-Sitemap: https://encryptdecrypt.org/sitemap.xml
-LLM: https://encryptdecrypt.org/llms.txt
-LLM-Full: https://encryptdecrypt.org/llms-full.txt
+# Canonical Sitemaps
+Sitemap: https://www.encryptdecrypt.org/sitemap.xml

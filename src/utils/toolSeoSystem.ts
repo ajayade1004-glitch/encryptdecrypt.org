@@ -1075,7 +1075,7 @@ export function getToolSeoData(tool: ToolItem): ToolSeoData {
     ]
   };
 
-  const canonicalUrl = `https://encryptdecrypt.org/tools/${tool.category}/${tool.slug}/`;
+  const canonicalUrl = `https://www.encryptdecrypt.org/tools/${tool.category}/${tool.slug}/`;
 
   const howToUse = [
     {
@@ -1116,8 +1116,8 @@ export function getToolSeoData(tool: ToolItem): ToolSeoData {
   ];
 
   const breadcrumbList = [
-    { name: 'Home', url: 'https://encryptdecrypt.org/' },
-    { name: tool.categoryName, url: `https://encryptdecrypt.org/category/${tool.category}` },
+    { name: 'Home', url: 'https://www.encryptdecrypt.org/' },
+    { name: tool.categoryName, url: `https://www.encryptdecrypt.org/tools/${tool.category}/` },
     { name: tool.name, url: canonicalUrl }
   ];
 
@@ -1209,7 +1209,7 @@ export function buildToolSchemas(toolData: ToolSeoData) {
     'author': {
       '@type': 'Organization',
       'name': 'EncryptDecrypt.org',
-      'url': 'https://encryptdecrypt.org'
+      'url': 'https://www.encryptdecrypt.org'
     }
   };
 

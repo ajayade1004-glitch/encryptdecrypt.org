@@ -14,9 +14,9 @@ export const TermsPage: React.FC<TermsPageProps> = ({
     <div className="container py-8 max-w-4xl mx-auto">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs text-[var(--text-muted)] mb-6">
-        <button onClick={onNavigateHome} className="hover:text-[#2E9BFF] cursor-pointer">
+        <a href="/" onClick={(e) => { e.preventDefault(); onNavigateHome(); }} className="hover:text-[#2E9BFF] cursor-pointer">
           Home
-        </button>
+        </a>
         <span>/</span>
         <span className="text-[var(--text-primary)] font-semibold">Terms of Service</span>
       </nav>
@@ -98,12 +98,41 @@ export const TermsPage: React.FC<TermsPageProps> = ({
             These Terms shall be construed and governed by applicable commercial laws. We reserve the right to revise or replace these Terms at our sole discretion. Continued usage of the site following notice of modifications constitutes acceptance of the amended Terms.
           </p>
           <div className="pt-4">
-            <button
-              onClick={onNavigateContact}
+            <a
+              href="/contact"
+              onClick={(e) => { e.preventDefault(); onNavigateContact(); }}
               className="text-xs font-semibold text-[#2E9BFF] hover:underline cursor-pointer"
             >
               Questions regarding our Terms? Contact our legal desk →
-            </button>
+            </a>
+          </div>
+        </section>
+
+        {/* Semantic Internal Linking Cluster */}
+        <section className="space-y-3 pt-6 border-t border-[var(--border-subtle)]">
+          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Related Legal &amp; Platform Pages</h3>
+          <div className="flex flex-wrap gap-2 text-xs">
+            <a href="/" onClick={(e) => { e.preventDefault(); onNavigateHome(); }} className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+              Home
+            </a>
+            <a href="/all-tools" className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+              All 1,380+ Tools Directory
+            </a>
+            <a href="/privacy" className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+              Privacy Policy
+            </a>
+            <a href="/disclaimer" className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+              Legal Disclaimer
+            </a>
+            <a href="/about" className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+              About EncryptDecrypt.org
+            </a>
+            <a href="/guides" className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+              Technical Guides &amp; Whitepapers
+            </a>
+            <a href="/contact" onClick={(e) => { e.preventDefault(); onNavigateContact(); }} className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+              Contact Desk
+            </a>
           </div>
         </section>
       </article>

@@ -236,9 +236,9 @@ export const TechGuidesPage: React.FC<TechGuidesPageProps> = ({
     <div className="container py-8 max-w-5xl mx-auto">
       {/* Breadcrumb Navigation */}
       <nav className="flex items-center gap-2 text-xs text-[var(--text-muted)] mb-6">
-        <button onClick={onNavigateHome} className="hover:text-[#2E9BFF] cursor-pointer">
+        <a href="/" onClick={(e) => { e.preventDefault(); onNavigateHome(); }} className="hover:text-[#2E9BFF] cursor-pointer">
           Home
-        </button>
+        </a>
         <span>/</span>
         {selectedGuide ? (
           <>
@@ -254,7 +254,7 @@ export const TechGuidesPage: React.FC<TechGuidesPageProps> = ({
             </span>
           </>
         ) : (
-          <span className="text-[var(--text-primary)] font-semibold">Tech Guides & Cryptography Documentation</span>
+          <span className="text-[var(--text-primary)] font-semibold">Tech Guides &amp; Cryptography Documentation</span>
         )}
       </nav>
 
@@ -393,6 +393,34 @@ export const TechGuidesPage: React.FC<TechGuidesPageProps> = ({
           </div>
         </div>
       )}
+
+      {/* Semantic Internal Linking Cluster */}
+      <div className="card-glass p-6 mt-8 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl shadow-xs space-y-3">
+        <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Explore Platform &amp; Legal Resources</h3>
+        <div className="flex flex-wrap gap-2 text-xs">
+          <a href="/" onClick={(e) => { e.preventDefault(); onNavigateHome(); }} className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+            Home
+          </a>
+          <a href="/all-tools" className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+            All 1,380+ Tools Directory
+          </a>
+          <a href="/privacy" className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+            Privacy Policy
+          </a>
+          <a href="/terms" className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+            Terms of Service
+          </a>
+          <a href="/disclaimer" className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+            Legal Disclaimer
+          </a>
+          <a href="/about" className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+            About EncryptDecrypt.org
+          </a>
+          <a href="/contact" className="px-3 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:text-[#2E9BFF] transition">
+            Contact Desk
+          </a>
+        </div>
+      </div>
     </div>
   );
 };

@@ -928,10 +928,10 @@ export default function App() {
           ) : currentView === 'all-tools' ? (
             <>
               <SeoHead
-                title="Best Website for Cryptographic Tools & Developer Utilities | 1,380+ Free Tools Directory"
+                title="Cryptographic & Developer Tools Directory | 1,380+ Tools"
                 description="The #1 best website for cryptographic tools and developer utilities. Complete directory of 1,380+ free client-side AES-256, RSA, SHA-256, Base64, JWT, UUID, URL, CSS, JSON, and WebCrypto API tools running 100% in browser RAM."
-                canonicalUrl="https://encryptdecrypt.org/all-tools"
-                keywords={['best website for cryptographic tools and developer utilities', 'cryptography directory', 'developer tools catalog', '1380 tools', 'web crypto']}
+                canonicalUrl="https://www.encryptdecrypt.org/all-tools"
+                keywords={['cryptography directory', 'developer tools catalog', '1380 tools', 'web crypto']}
               />
               <AllToolsPage 
                 tools={tools}
@@ -957,7 +957,7 @@ export default function App() {
               <SeoHead
                 title="About Us & Zero-Knowledge Architecture | EncryptDecrypt.org"
                 description="Learn about EncryptDecrypt.org's mission: providing 1,380+ enterprise-grade, browser-native developer utilities with 100% client-side privacy via the W3C Web Cryptography API."
-                canonicalUrl="https://encryptdecrypt.org/about"
+                canonicalUrl="https://www.encryptdecrypt.org/about"
                 ogType="article"
               />
               <AboutPage 
@@ -971,7 +971,7 @@ export default function App() {
               <SeoHead
                 title="Contact Us & Engineering Support | EncryptDecrypt.org"
                 description="Get in touch with the EncryptDecrypt.org engineering team. Inquire about cryptographic specifications, report edge cases, or suggest developer utilities."
-                canonicalUrl="https://encryptdecrypt.org/contact"
+                canonicalUrl="https://www.encryptdecrypt.org/contact"
               />
               <ContactPage 
                 onNavigateHome={handleBackToCatalog}
@@ -981,9 +981,9 @@ export default function App() {
           ) : currentView === 'guides' ? (
             <>
               <SeoHead
-                title="Technical Guides & Cryptography Specifications | EncryptDecrypt.org"
+                title="Technical Guides & Cryptography Specifications"
                 description="Explore in-depth technical documentation, NIST FIPS guidelines, RFC standards, and code examples for AES-GCM, RSA, SHA-2, SHA-3, and zero-knowledge data pipelines."
-                canonicalUrl="https://encryptdecrypt.org/guides"
+                canonicalUrl="https://www.encryptdecrypt.org/guides"
               />
               <TechGuidesPage 
                 onNavigateHome={handleBackToCatalog}
@@ -993,9 +993,9 @@ export default function App() {
           ) : currentView === 'privacy' ? (
             <>
               <SeoHead
-                title="Privacy Policy & Zero-Telemetry Architecture | EncryptDecrypt.org"
+                title="Privacy Policy & Zero-Telemetry Architecture"
                 description="Read our zero-telemetry privacy policy. EncryptDecrypt.org operates strictly inside your web browser. No plaintexts, keys, or passwords ever leave your machine."
-                canonicalUrl="https://encryptdecrypt.org/privacy"
+                canonicalUrl="https://www.encryptdecrypt.org/privacy"
               />
               <PrivacyPage 
                 onNavigateHome={handleBackToCatalog}
@@ -1007,7 +1007,7 @@ export default function App() {
               <SeoHead
                 title="Terms of Service | EncryptDecrypt.org"
                 description="Review the terms of service governing usage of EncryptDecrypt.org developer utilities and client-side cryptographic functions."
-                canonicalUrl="https://encryptdecrypt.org/terms"
+                canonicalUrl="https://www.encryptdecrypt.org/terms"
               />
               <TermsPage 
                 onNavigateHome={handleBackToCatalog}
@@ -1019,7 +1019,7 @@ export default function App() {
               <SeoHead
                 title="Cryptographic Disclaimer & Compliance | EncryptDecrypt.org"
                 description="Operational limits, security guidelines, and cryptographic compliance disclaimers for EncryptDecrypt.org."
-                canonicalUrl="https://encryptdecrypt.org/disclaimer"
+                canonicalUrl="https://www.encryptdecrypt.org/disclaimer"
               />
               <DisclaimerPage 
                 onNavigateHome={handleBackToCatalog}
@@ -1038,30 +1038,27 @@ export default function App() {
               <SeoHead
                 title={activeCategory !== 'all'
                   ? `${CATEGORY_HUBS_CONFIG.find(c => c.slug === activeCategory)?.name || activeCategory} Tools | EncryptDecrypt.org`
-                  : "EncryptDecrypt.org - Best Website for Cryptographic Tools & Developer Utilities | 1,380+ Free Tools"
+                  : "EncryptDecrypt.org - Free Cryptographic & Developer Tools"
                 }
                 description={activeCategory !== 'all'
                   ? `Explore free client-side ${CATEGORY_HUBS_CONFIG.find(c => c.slug === activeCategory)?.name || activeCategory} developer utilities. 100% private, zero server transmissions, WebCrypto API powered.`
                   : "The #1 best website for cryptographic tools and developer utilities. 1,380+ free client-side AES-256, RSA, SHA-256, Base64, JWT, UUID, URL, CSS, JSON, and WebCrypto API tools running 100% in your browser."
                 }
                 canonicalUrl={activeCategory !== 'all'
-                  ? `https://encryptdecrypt.org/tools/${activeCategory}/`
-                  : "https://encryptdecrypt.org/"
+                  ? `https://www.encryptdecrypt.org/tools/${activeCategory}/`
+                  : "https://www.encryptdecrypt.org/"
                 }
-                keywords={['best website for cryptographic tools and developer utilities', 'cryptography', 'base64', 'aes-256', 'sha-256', 'jwt debugger', 'developer tools', 'web crypto']}
+                keywords={['cryptography', 'base64', 'aes-256', 'sha-256', 'jwt debugger', 'developer tools', 'web crypto']}
                 schemas={[
                   {
                     '@context': 'https://schema.org',
                     '@type': 'WebSite',
                     'name': 'EncryptDecrypt.org',
-                    'url': 'https://encryptdecrypt.org/',
+                    'url': 'https://www.encryptdecrypt.org/',
                     'description': 'The #1 best website for cryptographic tools and developer utilities. Free client-side security, encryption, hashing, and encoding tools.',
                     'potentialAction': {
                       '@type': 'SearchAction',
-                      'target': {
-                        '@type': 'EntryPoint',
-                        'urlTemplate': 'https://encryptdecrypt.org/#search={search_term_string}'
-                      },
+                      'target': 'https://www.encryptdecrypt.org/?search={search_term_string}',
                       'query-input': 'required name=search_term_string'
                     }
                   }
@@ -1496,34 +1493,44 @@ export default function App() {
             <h4 className="font-bold text-[var(--text-primary)] uppercase tracking-wider mb-3">Site & Guides</h4>
             <ul className="space-y-2">
               <li>
-                <button onClick={handleBackToCatalog} className="hover:text-[#2E9BFF] cursor-pointer transition">
+                <a href="/" onClick={(e) => { e.preventDefault(); handleBackToCatalog(); }} className="hover:text-[#2E9BFF] cursor-pointer transition">
                   Home (All Tools)
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNavigateView('all-tools')} className="hover:text-[#2E9BFF] cursor-pointer transition font-semibold text-[#2E9BFF]">
+                <a href="/all-tools" onClick={(e) => { e.preventDefault(); handleNavigateView('all-tools'); }} className="hover:text-[#2E9BFF] cursor-pointer transition font-semibold text-[#2E9BFF]">
                   All Tools Directory (1,380+)
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNavigateView('guides')} className="hover:text-[#2E9BFF] cursor-pointer transition">
+                <a href="/guides" onClick={(e) => { e.preventDefault(); handleNavigateView('guides'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">
                   Tech Guides
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNavigateView('about')} className="hover:text-[#2E9BFF] cursor-pointer transition">
+                <a href="/about" onClick={(e) => { e.preventDefault(); handleNavigateView('about'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">
                   About Us
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNavigateView('contact')} className="hover:text-[#2E9BFF] cursor-pointer transition">
+                <a href="/contact" onClick={(e) => { e.preventDefault(); handleNavigateView('contact'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">
                   Contact Us
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNavigateView('privacy')} className="hover:text-[#2E9BFF] cursor-pointer transition">
+                <a href="/privacy" onClick={(e) => { e.preventDefault(); handleNavigateView('privacy'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">
                   Privacy Policy
-                </button>
+                </a>
+              </li>
+              <li>
+                <a href="/terms" onClick={(e) => { e.preventDefault(); handleNavigateView('terms'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">
+                  Terms of Service
+                </a>
+              </li>
+              <li>
+                <a href="/disclaimer" onClick={(e) => { e.preventDefault(); handleNavigateView('disclaimer'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">
+                  Legal Disclaimer
+                </a>
               </li>
             </ul>
           </div>
@@ -1532,11 +1539,11 @@ export default function App() {
           <div>
             <h4 className="font-bold text-[var(--text-primary)] uppercase tracking-wider mb-3">Popular Encoders</h4>
             <ul className="space-y-2">
-              <li><button onClick={() => handleSelectToolBySlug('base64-encode-decode')} className="hover:text-[#2E9BFF] cursor-pointer transition">Base64 Encode/Decode</button></li>
-              <li><button onClick={() => handleSelectToolBySlug('url-encode-decode')} className="hover:text-[#2E9BFF] cursor-pointer transition">URL Encode/Decode</button></li>
-              <li><button onClick={() => handleSelectToolBySlug('base16-hex-encode-decode')} className="hover:text-[#2E9BFF] cursor-pointer transition">Hex to Text</button></li>
-              <li><button onClick={() => handleSelectToolBySlug('base58-encode-decode')} className="hover:text-[#2E9BFF] cursor-pointer transition">Base58 Bitcoin</button></li>
-              <li><button onClick={() => handleSelectToolBySlug('qr-code-generator')} className="hover:text-[#2E9BFF] cursor-pointer transition">QR Code Generator</button></li>
+              <li><a href="/tools/encoding-decoding/base64-encode-decode/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base64-encode-decode'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">Base64 Encode/Decode</a></li>
+              <li><a href="/tools/url-web/url-encode-decode/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('url-encode-decode'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">URL Encode/Decode</a></li>
+              <li><a href="/tools/encoding-decoding/base16-hex-encode-decode/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base16-hex-encode-decode'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">Hex to Text</a></li>
+              <li><a href="/tools/encoding-decoding/base58-encode-decode/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base58-encode-decode'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">Base58 Bitcoin</a></li>
+              <li><a href="/tools/qr-barcodes/qr-code-generator/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('qr-code-generator'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">QR Code Generator</a></li>
             </ul>
           </div>
 
@@ -1544,11 +1551,11 @@ export default function App() {
           <div>
             <h4 className="font-bold text-[var(--text-primary)] uppercase tracking-wider mb-3">Security & Ciphers</h4>
             <ul className="space-y-2">
-              <li><button onClick={() => handleSelectToolBySlug('aes-encryption-decryption')} className="hover:text-[#2E9BFF] cursor-pointer transition">AES-256-GCM Encrypt</button></li>
-              <li><button onClick={() => handleSelectToolBySlug('sha-256-hash-generator')} className="hover:text-[#2E9BFF] cursor-pointer transition">SHA-256 Hash</button></li>
-              <li><button onClick={() => handleSelectToolBySlug('md5-hash-generator')} className="hover:text-[#2E9BFF] cursor-pointer transition">MD5 Hash</button></li>
-              <li><button onClick={() => handleSelectToolBySlug('jwt-token-debugger-generator')} className="hover:text-[#2E9BFF] cursor-pointer transition">JWT Debugger</button></li>
-              <li><button onClick={() => handleSelectToolBySlug('secure-password-generator')} className="hover:text-[#2E9BFF] cursor-pointer transition">Password Generator</button></li>
+              <li><a href="/tools/encryption-ciphers/aes-encrypt-decrypt/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('aes-encrypt-decrypt'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">AES-256-GCM Encrypt</a></li>
+              <li><a href="/tools/hashing-security/sha256-hash-generator/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('sha256-hash-generator'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">SHA-256 Hash</a></li>
+              <li><a href="/tools/hashing-security/md5-hash-generator/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('md5-hash-generator'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">MD5 Hash</a></li>
+              <li><a href="/tools/tokens-keys/jwt-token-generator/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('jwt-token-generator'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">JWT Debugger</a></li>
+              <li><a href="/tools/security-privacy/secure-password-generator/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('secure-password-generator'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">Password Generator</a></li>
             </ul>
           </div>
         </div>
@@ -1558,15 +1565,15 @@ export default function App() {
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-2.5 gap-y-1 font-medium">
             <span className="text-[var(--text-secondary)] font-semibold">© 2026 EncryptDecrypt.org</span>
             <span>|</span>
-            <button onClick={() => handleNavigateView('privacy')} className="hover:text-[#2E9BFF] cursor-pointer transition">Privacy</button>
+            <a href="/privacy" onClick={(e) => { e.preventDefault(); handleNavigateView('privacy'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">Privacy</a>
             <span>|</span>
-            <button onClick={() => handleNavigateView('terms')} className="hover:text-[#2E9BFF] cursor-pointer transition">Terms</button>
+            <a href="/terms" onClick={(e) => { e.preventDefault(); handleNavigateView('terms'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">Terms</a>
             <span>|</span>
-            <button onClick={() => handleNavigateView('disclaimer')} className="hover:text-[#2E9BFF] cursor-pointer transition">Disclaimer</button>
+            <a href="/disclaimer" onClick={(e) => { e.preventDefault(); handleNavigateView('disclaimer'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">Disclaimer</a>
             <span>|</span>
-            <button onClick={() => handleNavigateView('about')} className="hover:text-[#2E9BFF] cursor-pointer transition">About Us</button>
+            <a href="/about" onClick={(e) => { e.preventDefault(); handleNavigateView('about'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">About Us</a>
             <span>|</span>
-            <button onClick={() => handleNavigateView('contact')} className="hover:text-[#2E9BFF] cursor-pointer transition">Contact Us</button>
+            <a href="/contact" onClick={(e) => { e.preventDefault(); handleNavigateView('contact'); }} className="hover:text-[#2E9BFF] cursor-pointer transition">Contact Us</a>
           </div>
 
           <div className="flex items-center gap-4 font-mono text-[11px] shrink-0 text-[var(--text-muted)]">
