@@ -929,7 +929,7 @@ export default function App() {
             <>
               <SeoHead
                 title="Cryptographic & Developer Tools Directory | 1,380+ Tools"
-                description="The #1 best website for cryptographic tools and developer utilities. Complete directory of 1,380+ free client-side AES-256, RSA, SHA-256, Base64, JWT, UUID, URL, CSS, JSON, and WebCrypto API tools running 100% in browser RAM."
+                description="Directory of 1,380+ free client-side cryptographic & developer tools. AES-256, RSA, SHA-256, Base64, JWT, UUID & WebCrypto running 100% in browser RAM."
                 canonicalUrl="https://www.encryptdecrypt.org/all-tools"
                 keywords={['cryptography directory', 'developer tools catalog', '1380 tools', 'web crypto']}
               />
@@ -956,7 +956,7 @@ export default function App() {
             <>
               <SeoHead
                 title="About Us & Zero-Knowledge Architecture | EncryptDecrypt.org"
-                description="Learn about EncryptDecrypt.org's mission: providing 1,380+ enterprise-grade, browser-native developer utilities with 100% client-side privacy via the W3C Web Cryptography API."
+                description="Learn about EncryptDecrypt.org: 1,380+ free client-side developer utilities with 100% browser privacy via the W3C Web Cryptography API. Zero logs."
                 canonicalUrl="https://www.encryptdecrypt.org/about"
                 ogType="article"
               />
@@ -982,7 +982,7 @@ export default function App() {
             <>
               <SeoHead
                 title="Technical Guides & Cryptography Specifications"
-                description="Explore in-depth technical documentation, NIST FIPS guidelines, RFC standards, and code examples for AES-GCM, RSA, SHA-2, SHA-3, and zero-knowledge data pipelines."
+                description="In-depth technical guides, NIST FIPS specs, RFC standards, and code examples for AES-GCM, RSA, SHA-2, SHA-3, and zero-knowledge cryptography."
                 canonicalUrl="https://www.encryptdecrypt.org/guides"
               />
               <TechGuidesPage 
@@ -994,7 +994,7 @@ export default function App() {
             <>
               <SeoHead
                 title="Privacy Policy & Zero-Telemetry Architecture"
-                description="Read our zero-telemetry privacy policy. EncryptDecrypt.org operates strictly inside your web browser. No plaintexts, keys, or passwords ever leave your machine."
+                description="Read our zero-telemetry privacy policy. EncryptDecrypt.org operates strictly in your browser. No plaintexts, keys, or data ever leave your machine."
                 canonicalUrl="https://www.encryptdecrypt.org/privacy"
               />
               <PrivacyPage 
@@ -1041,8 +1041,8 @@ export default function App() {
                   : "EncryptDecrypt.org - Free Cryptographic & Developer Tools"
                 }
                 description={activeCategory !== 'all'
-                  ? `Explore free client-side ${CATEGORY_HUBS_CONFIG.find(c => c.slug === activeCategory)?.name || activeCategory} developer utilities. 100% private, zero server transmissions, WebCrypto API powered.`
-                  : "The #1 best website for cryptographic tools and developer utilities. 1,380+ free client-side AES-256, RSA, SHA-256, Base64, JWT, UUID, URL, CSS, JSON, and WebCrypto API tools running 100% in your browser."
+                  ? `Explore free client-side ${CATEGORY_HUBS_CONFIG.find(c => c.slug === activeCategory)?.name || activeCategory} developer utilities. 100% private, WebCrypto API powered with zero logs.`
+                  : "1,380+ free client-side cryptographic & developer tools. AES-256, RSA, SHA-256, Base64, JWT, UUID & WebCrypto running 100% in your browser with zero logs."
                 }
                 canonicalUrl={activeCategory !== 'all'
                   ? `https://www.encryptdecrypt.org/tools/${activeCategory}/`

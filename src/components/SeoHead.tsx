@@ -13,7 +13,7 @@ export interface SeoHeadProps {
 export const SeoHead: React.FC<SeoHeadProps> = ({
   title,
   description,
-  canonicalUrl = 'https://encryptdecrypt.org/',
+  canonicalUrl = 'https://www.encryptdecrypt.org/',
   keywords = [],
   ogType = 'website',
   schemas = [],

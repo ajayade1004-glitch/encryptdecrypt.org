@@ -1121,8 +1121,20 @@ export function getToolSeoData(tool: ToolItem): ToolSeoData {
     { name: tool.name, url: canonicalUrl }
   ];
 
-  const title = tool.metaTitle || `${tool.name} - Free Online Client-Side Developer Tool | EncryptDecrypt.org`;
-  const metaDescription = tool.metaDescription || `${tool.shortDesc} 100% private, client-side Web Crypto tool. Zero server uploads. Fast, confidential and free.`;
+  // Ensure Title adheres strictly to <= 60 characters for SEO / Semrush
+  let title = tool.metaTitle || `${tool.name} - Free Online Tool | EncryptDecrypt.org`;
+  if (title.length > 60) {
+    const compact = `${tool.name} | EncryptDecrypt.org`;
+    title = compact.length <= 60 ? compact : (tool.name.length <= 57 ? tool.name : tool.name.slice(0, 57) + '...');
+  }
+
+  // Ensure Meta Description adheres strictly to <= 160 characters for SEO / Semrush
+  let metaDescription = tool.metaDescription || `${tool.shortDesc} 100% private client-side tool. Zero server uploads. Fast & free.`;
+  if (metaDescription.length > 160) {
+    const trimmed = metaDescription.slice(0, 157);
+    const lastSpace = trimmed.lastIndexOf(' ');
+    metaDescription = (lastSpace > 120 ? trimmed.slice(0, lastSpace) : trimmed) + '...';
+  }
 
   return {
     name: tool.name,

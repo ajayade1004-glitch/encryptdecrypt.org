@@ -80,7 +80,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
       {/* Category SEO Head */}
       <SeoHead
         title={`${categoryInfo.name} Tools (${categoryTools.length} Free Utilities) | EncryptDecrypt.org`}
-        description={`Explore all ${categoryTools.length} free client-side ${categoryInfo.name} developer utilities. 100% private in browser RAM with W3C Web Cryptography API and zero server logging.`}
+        description={`Explore ${categoryTools.length}+ free client-side ${categoryInfo.name} developer utilities. 100% private in browser RAM via WebCrypto API with zero server logs.`}
         canonicalUrl={`https://www.encryptdecrypt.org/tools/${categorySlug}/`}
         keywords={[
           `${categoryInfo.name} tools`,
