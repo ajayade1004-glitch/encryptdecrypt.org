@@ -13,6 +13,7 @@ import { getToolOverrides, recordToolExecution, recordPageView } from '../utils/
 import { getToolSeoData, buildToolSchemas } from '../utils/toolSeoSystem';
 import { SeoHead } from './SeoHead';
 import { AdUnit } from './AdUnit';
+import { ToolShareBar } from './ToolShareBar';
 import * as engines from '../crypto/toolEngines';
 import * as allEngines from '../crypto/allEngines';
 import * as newEngines from '../crypto/newEngines';
@@ -7837,6 +7838,9 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
         </div>
       </div>
 
+      {/* ✅ Tool Social Share Bar (Facebook, X, Pinterest, WhatsApp, All Share) */}
+      <ToolShareBar tool={tool} className="my-6" />
+
       {/* Compliance-safe AdSense Placement */}
       <AdUnit slot="tool-page-middle" className="my-6" />
 
@@ -8076,7 +8080,7 @@ echo -n "${inputText.substring(0, 40) || 'sample-data'}" | wc -c`}
                 onClick={onBack}
                 className="text-xs text-[#2E9BFF] hover:underline cursor-pointer"
               >
-                Back to All 330+ Tools →
+                Back to All 1,380+ Tools →
               </button>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">

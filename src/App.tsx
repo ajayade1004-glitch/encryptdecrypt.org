@@ -8,6 +8,7 @@ import {
   Globe, Clock, Palette, Eye, Gauge, Image, Calculator, Star, HelpCircle, Command, RotateCcw
 } from 'lucide-react';
 import { ToolItem, CategoryInfo } from './types';
+import { INITIAL_TOP_TOOLS } from './data/initialTools';
 import * as engines from './crypto/toolEngines';
 import { searchTools } from './utils/searchTools';
 import { SeoHead } from './components/SeoHead';
@@ -61,7 +62,7 @@ export const CATEGORY_HUBS_CONFIG = [
 ];
 
 export default function App() {
-  const [tools, setTools] = useState<ToolItem[]>([]);
+  const [tools, setTools] = useState<ToolItem[]>(INITIAL_TOP_TOOLS);
   const [selectedTool, setSelectedTool] = useState<ToolItem | null>(null);
   const [currentView, setCurrentView] = useState<AppView>('catalog');
   const [activeCategory, setActiveCategory] = useState<string>('all');
@@ -107,9 +108,15 @@ export default function App() {
 
   // 1. Fetch tools.json on startup & reload
   const reloadToolsCatalog = () => {
+    try {
+      sessionStorage.removeItem('ed_tools_catalog_cache');
+    } catch {}
     fetch('/assets/data/tools.json')
       .then(res => res.json())
       .then((data: ToolItem[]) => {
+        try {
+          sessionStorage.setItem('ed_tools_catalog_cache', JSON.stringify(data));
+        } catch {}
         const enhanced = applyAdminOverrides(data);
         setTools(enhanced);
       })
@@ -213,16 +220,44 @@ export default function App() {
   };
 
   useEffect(() => {
-    fetch('/assets/data/tools.json')
-      .then(res => res.json())
-      .then((data: ToolItem[]) => {
-        const enhanced = applyAdminOverrides(data);
-        setTools(enhanced);
-        resolveLocationRoute(enhanced);
-      })
-      .catch(err => {
-        console.warn('Fallback loading tools:', err);
-      });
+    // 1. Instant check for initial top tools route
+    resolveLocationRoute(INITIAL_TOP_TOOLS);
+
+    // 2. High-performance background loading with sessionStorage cache
+    const loadFullCatalog = () => {
+      try {
+        const cached = sessionStorage.getItem('ed_tools_catalog_cache');
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 50) {
+            const enhanced = applyAdminOverrides(parsed);
+            setTools(enhanced);
+            resolveLocationRoute(enhanced);
+            return;
+          }
+        }
+      } catch {}
+
+      fetch('/assets/data/tools.json')
+        .then(res => res.json())
+        .then((data: ToolItem[]) => {
+          try {
+            sessionStorage.setItem('ed_tools_catalog_cache', JSON.stringify(data));
+          } catch {}
+          const enhanced = applyAdminOverrides(data);
+          setTools(enhanced);
+          resolveLocationRoute(enhanced);
+        })
+        .catch(err => {
+          console.warn('Fallback loading tools:', err);
+        });
+    };
+
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(loadFullCatalog, { timeout: 1000 });
+    } else {
+      setTimeout(loadFullCatalog, 30);
+    }
   }, []);
 
   // 2. Browser History Listener
