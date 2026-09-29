@@ -851,9 +851,12 @@ export default function App() {
               </div>
             </div>
 
-            {/* Instant Live Search Results Dropdown - Full Width & Full Tool Names */}
+            {/* Instant Live Search Results Dropdown - Full width and non-collapsing layout */}
             {searchFocused && searchQuery.trim().length > 0 && (
-              <div className="absolute left-0 right-0 sm:left-auto sm:right-0 sm:w-[500px] md:w-[600px] max-w-[95vw] top-full mt-1.5 bg-[var(--bg-surface)] border border-blue-500/30 rounded-xl shadow-2xl overflow-hidden z-50 max-h-[420px] overflow-y-auto divide-y divide-[var(--border-subtle)]">
+              <div 
+                style={{ minWidth: 'min(480px, calc(100vw - 32px))', width: 'max(480px, 100%)', maxWidth: 'min(580px, calc(100vw - 24px))' }}
+                className="absolute left-0 top-full mt-1.5 bg-[var(--bg-surface)] border border-blue-500/30 rounded-xl shadow-2xl overflow-hidden z-50 max-h-[440px] overflow-y-auto divide-y divide-[var(--border-subtle)]"
+              >
                 <div className="p-2.5 text-[11px] font-mono text-[var(--text-muted)] bg-[var(--bg-surface-hover)] flex items-center justify-between">
                   <span className="font-semibold text-[var(--text-secondary)]">
                     Found {filteredTools.length} tools across all categories
@@ -885,25 +888,23 @@ export default function App() {
                           preloadToolWorkspace();
                         }}
                         onTouchStart={preloadToolWorkspace}
-                        className={`w-full text-left p-3 sm:p-3.5 transition flex items-start justify-between gap-3 group cursor-pointer ${
+                        className={`w-full text-left px-3.5 py-2.5 transition flex flex-col gap-1 group cursor-pointer ${
                           isHighlighted ? 'bg-blue-500/15 border-l-3 border-[#2E9BFF]' : 'hover:bg-[var(--bg-surface-hover)]'
                         }`}
                       >
-                        <div className="flex-1 min-w-0 pr-1">
-                          <span className={`text-xs sm:text-sm font-bold block whitespace-normal break-words leading-snug mb-1 ${
+                        <div className="w-full flex items-center justify-between gap-3">
+                          <span className={`text-xs sm:text-sm font-bold truncate ${
                             isHighlighted ? 'text-[#2E9BFF]' : 'text-[var(--text-primary)] group-hover:text-[#2E9BFF]'
                           }`}>
                             {tool.name}
                           </span>
-                          <span className="text-[11px] text-[var(--text-muted)] block whitespace-normal line-clamp-2 leading-relaxed">
-                            {tool.shortDesc}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-1.5 shrink-0 self-start mt-0.5">
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-[#2E9BFF] border border-blue-500/20 whitespace-nowrap">
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-[#2E9BFF] border border-blue-500/20 whitespace-nowrap shrink-0">
                             {tool.categoryName}
                           </span>
                         </div>
+                        <p className="text-[11px] text-[var(--text-muted)] truncate w-full m-0">
+                          {tool.shortDesc}
+                        </p>
                       </button>
                     );
                   })
