@@ -54,5 +54,7 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
-# Canonical Sitemaps
+# Canonical Sitemaps & AI Agent Maps (ARD Specification)
 Sitemap: https://www.encryptdecrypt.org/sitemap.xml
+Agentmap: https://www.encryptdecrypt.org/.well-known/ai-catalog.json
+Agentmap: https://www.encryptdecrypt.org/ai-catalog.json
