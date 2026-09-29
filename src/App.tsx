@@ -5,7 +5,7 @@ import {
   Terminal, ShieldCheck, Database, Zap, RefreshCw, X,
   ChevronRight, ArrowLeft, Binary, CheckCircle, FileText,
   Sliders, Wifi, Code, Sparkles, Menu, BookOpen, Info, Mail,
-  Globe, Clock, Palette, Eye, Gauge, Image, Calculator, Star, HelpCircle, Command, RotateCcw
+  Globe, Clock, Palette, Eye, Gauge, ImageIcon, Calculator, Star, HelpCircle, Command, RotateCcw
 } from 'lucide-react';
 import { ToolItem, CategoryInfo } from './types';
 import { INITIAL_TOP_TOOLS } from './data/initialTools';
@@ -49,7 +49,7 @@ export const CATEGORY_HUBS_CONFIG = [
   { slug: 'network-dns', name: 'Network & DNS', icon: Wifi, count: 7, desc: 'DNS Lookup, IPv4/IPv6, CIDR, Subnet, User-Agent, Headers' },
   { slug: 'security-defensive', name: 'Security — Defensive', icon: ShieldCheck, count: 9, desc: 'Password Strength, Hash, Checksum, JWT, CSP, SRI' },
   { slug: 'developer-generators', name: 'Developer Generators', icon: Key, count: 7, desc: 'UUID, ULID, NanoID, Lorem Ipsum, Mock JSON, Regex' },
-  { slug: 'image-web-optimization', name: 'Image & Web Optimization', icon: Image, count: 6, desc: 'Image Dimensions, Aspect Ratio, WebP, SVG Optimizer' },
+  { slug: 'image-web-optimization', name: 'Image & Web Optimization', icon: ImageIcon, count: 6, desc: 'Image Dimensions, Aspect Ratio, WebP, SVG Optimizer' },
   { slug: 'encoding-decoding', name: 'Encoding & Decoding', icon: Binary, count: 23, desc: 'Base64, Hex, URL, Morse, Base32, Base58, Binary' },
   { slug: 'encryption-ciphers', name: 'Encryption & Ciphers', icon: Lock, count: 24, desc: 'AES-GCM, Caesar, Vigenère, ROT13/47, ChaCha20' },
   { slug: 'hashing-security', name: 'Hashing & Security', icon: Hash, count: 20, desc: 'SHA-256/512, MD5, HMAC, CRC32, Keccak' },
@@ -65,11 +65,85 @@ export const CATEGORY_HUBS_CONFIG = [
   { slug: 'converters-utilities', name: 'Converters & Utilities', icon: Cpu, count: 6, desc: 'Chmod Calc, Data Units, Number Words, UTC Time' },
 ];
 
+function getInitialRouteState(): {
+  selectedTool: ToolItem | null;
+  currentView: AppView;
+  activeCategory: string;
+} {
+  if (typeof window === 'undefined') {
+    return { selectedTool: null, currentView: 'catalog', activeCategory: 'all' };
+  }
+
+  const hash = window.location.hash.replace(/^#/, '');
+  const pathname = window.location.pathname.replace(/\/+$/, '');
+
+  // 1. Hash routes
+  if (hash.startsWith('tool=')) {
+    const slug = hash.replace('tool=', '');
+    const match = INITIAL_TOP_TOOLS.find(t => t.slug === slug || t.id === slug);
+    if (match) {
+      return { selectedTool: match, currentView: 'catalog', activeCategory: 'all' };
+    }
+  }
+  if (['about', 'contact', 'guides', 'privacy', 'terms', 'disclaimer', 'admin', 'all-tools'].includes(hash)) {
+    return { selectedTool: null, currentView: hash as AppView, activeCategory: 'all' };
+  }
+  if (hash.startsWith('category=')) {
+    const cat = hash.replace('category=', '');
+    return { selectedTool: null, currentView: 'category', activeCategory: cat };
+  }
+
+  // 2. Clean Pathname routes
+  if (pathname.startsWith('/tools/')) {
+    const parts = pathname.replace('/tools/', '').split('/').filter(Boolean);
+    if (parts.length === 1) {
+      const slug = parts[0];
+      const match = INITIAL_TOP_TOOLS.find(t => t.slug === slug || t.id === slug);
+      if (match) {
+        return { selectedTool: match, currentView: 'catalog', activeCategory: 'all' };
+      }
+      const isCat = CATEGORY_HUBS_CONFIG.some(c => c.slug === slug);
+      if (isCat) {
+        return { selectedTool: null, currentView: 'category', activeCategory: slug };
+      }
+    } else if (parts.length >= 2) {
+      const toolSlug = parts[1];
+      const match = INITIAL_TOP_TOOLS.find(t => t.slug === toolSlug || t.id === toolSlug);
+      if (match) {
+        return { selectedTool: match, currentView: 'catalog', activeCategory: 'all' };
+      }
+    }
+  }
+
+  if (pathname === '/all-tools' || pathname === '/tools') return { selectedTool: null, currentView: 'all-tools', activeCategory: 'all' };
+  if (pathname === '/about') return { selectedTool: null, currentView: 'about', activeCategory: 'all' };
+  if (pathname === '/contact') return { selectedTool: null, currentView: 'contact', activeCategory: 'all' };
+  if (pathname === '/guides') return { selectedTool: null, currentView: 'guides', activeCategory: 'all' };
+  if (pathname === '/privacy') return { selectedTool: null, currentView: 'privacy', activeCategory: 'all' };
+  if (pathname === '/terms') return { selectedTool: null, currentView: 'terms', activeCategory: 'all' };
+  if (pathname === '/disclaimer') return { selectedTool: null, currentView: 'disclaimer', activeCategory: 'all' };
+  if (pathname === '/admin') return { selectedTool: null, currentView: 'admin', activeCategory: 'all' };
+
+  return { selectedTool: null, currentView: 'catalog', activeCategory: 'all' };
+}
+
 export default function App() {
-  const [tools, setTools] = useState<ToolItem[]>(INITIAL_TOP_TOOLS);
-  const [selectedTool, setSelectedTool] = useState<ToolItem | null>(null);
-  const [currentView, setCurrentView] = useState<AppView>('catalog');
-  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [initialRoute] = useState(getInitialRouteState);
+  const [tools, setTools] = useState<ToolItem[]>(() => {
+    try {
+      const cached = sessionStorage.getItem('ed_tools_catalog_cache');
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length > 50) {
+          return applyAdminOverrides(parsed);
+        }
+      }
+    } catch {}
+    return INITIAL_TOP_TOOLS;
+  });
+  const [selectedTool, setSelectedTool] = useState<ToolItem | null>(initialRoute.selectedTool);
+  const [currentView, setCurrentView] = useState<AppView>(initialRoute.currentView);
+  const [activeCategory, setActiveCategory] = useState<string>(initialRoute.activeCategory);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [searchFocused, setSearchFocused] = useState<boolean>(false);
   const [searchHighlightIndex, setSearchHighlightIndex] = useState<number>(-1);
@@ -225,26 +299,16 @@ export default function App() {
   };
 
   useEffect(() => {
-    // 1. Instant check for initial top tools route
-    resolveLocationRoute(INITIAL_TOP_TOOLS);
+    // 1. Initial route sync with current tools
+    resolveLocationRoute(tools);
 
-    // 2. High-performance background loading with sessionStorage cache
+    // 2. High-performance immediate catalog loading
     const loadFullCatalog = () => {
-      try {
-        const cached = sessionStorage.getItem('ed_tools_catalog_cache');
-        if (cached) {
-          const parsed = JSON.parse(cached);
-          if (Array.isArray(parsed) && parsed.length > 50) {
-            const enhanced = applyAdminOverrides(parsed);
-            setTools(enhanced);
-            resolveLocationRoute(enhanced);
-            return;
-          }
-        }
-      } catch {}
-
       fetch('/assets/data/tools.json')
-        .then(res => res.json())
+        .then(res => {
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return res.json();
+        })
         .then((data: ToolItem[]) => {
           try {
             sessionStorage.setItem('ed_tools_catalog_cache', JSON.stringify(data));
@@ -258,11 +322,7 @@ export default function App() {
         });
     };
 
-    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-      (window as any).requestIdleCallback(loadFullCatalog, { timeout: 3500 });
-    } else {
-      setTimeout(loadFullCatalog, 2000);
-    }
+    loadFullCatalog();
   }, []);
 
   // 2. Browser History Listener
