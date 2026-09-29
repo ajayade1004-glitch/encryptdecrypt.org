@@ -284,51 +284,43 @@ export default function App() {
       const rawPath = isSingular ? pathname.replace('/tool/', '') : pathname.replace('/tools/', '');
       const parts = rawPath.split('/').filter(Boolean);
 
-      if (parts.length === 1) {
-        const slug = parts[0];
-        const match = toolsList.find(t => t.slug === slug || t.id === slug);
+      if (parts.length >= 1) {
+        const targetSlug = parts[parts.length - 1].toLowerCase().trim().replace(/^\/+|\/+$/g, '');
+        
+        // 1. Check direct tool match
+        const match = toolsList.find(t => 
+          t.slug.toLowerCase() === targetSlug || 
+          t.id.toLowerCase() === targetSlug ||
+          t.slug.toLowerCase().replace(/-/g, '') === targetSlug.replace(/-/g, '')
+        );
+
         if (match) {
           setSelectedTool(match);
           setCurrentView('catalog');
-          if (isSingular) {
+          if (isSingular || pathname.includes('//')) {
             window.history.replaceState({}, '', `/tools/${match.slug}`);
           }
           return;
         }
-        const isCat = CATEGORY_HUBS_CONFIG.some(c => c.slug === slug) || toolsList.some(t => t.category === slug);
+
+        // 2. Check category match
+        const isCat = CATEGORY_HUBS_CONFIG.some(c => c.slug.toLowerCase() === targetSlug) || 
+                      toolsList.some(t => t.category.toLowerCase() === targetSlug);
         if (isCat) {
-          setActiveCategory(slug);
+          setActiveCategory(targetSlug);
           setSelectedTool(null);
           setCurrentView('category');
           return;
         }
+
+        // 3. Resilient fallback: Synthesize tool state so users never see a 404 dead end
+        setSelectedTool(synthesizeToolFromSlug(targetSlug));
+        setCurrentView('catalog');
         if (!isCatalogLoaded) {
-          setSelectedTool(synthesizeToolFromSlug(slug));
-          setCurrentView('catalog');
           reloadToolsCatalog();
-          return;
         }
-      } else if (parts.length >= 2) {
-        const toolSlug = parts[1];
-        const match = toolsList.find(t => t.slug === toolSlug || t.id === toolSlug);
-        if (match) {
-          setSelectedTool(match);
-          setCurrentView('catalog');
-          if (isSingular) {
-            window.history.replaceState({}, '', `/tools/${match.slug}`);
-          }
-          return;
-        }
-        if (!isCatalogLoaded) {
-          setSelectedTool(synthesizeToolFromSlug(toolSlug));
-          setCurrentView('catalog');
-          reloadToolsCatalog();
-          return;
-        }
+        return;
       }
-      setSelectedTool(null);
-      setCurrentView('notfound');
-      return;
     }
 
     if (pathname.startsWith('/category/')) {

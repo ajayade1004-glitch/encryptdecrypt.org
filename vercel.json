@@ -1,26 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "cleanUrls": true,
-  "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/tool/:slug*",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/tools/:path*",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/category/:slug*",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/guides/:slug*",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/((?!assets/|favicon|robots\\.txt|sitemap\\.xml|llms.*|\\.well-known/).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ],
