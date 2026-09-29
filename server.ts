@@ -689,6 +689,23 @@ app.get('/api/public/config', (req: Request, res: Response) => {
   });
 });
 
+// AI Catalog & ARD Protocol Manifest Endpoints (RFC 8141 & ARD Spec)
+const serveAiCatalog = (req: Request, res: Response) => {
+  const filePath = path.join(__dirname, 'public', '.well-known', 'ai-catalog.json');
+  if (fs.existsSync(filePath)) {
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Cache-Control', 'public, max-age=3600');
+    return res.sendFile(filePath);
+  }
+  return res.status(404).json({ error: 'Manifest not found' });
+};
+
+app.get('/.well-known/ai-catalog.json', serveAiCatalog);
+app.get('/ai-catalog.json', serveAiCatalog);
+app.get('/.well-known/ard.json', serveAiCatalog);
+app.get('/ard.json', serveAiCatalog);
+
 // ==========================================
 // VITE DEV SERVER / PRODUCTION STATIC ASSETS
 // ==========================================
@@ -703,7 +720,7 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(__dirname, 'dist');
-    app.use(express.static(distPath));
+    app.use(express.static(distPath, { dotfiles: 'allow' }));
     app.get('*', (req: Request, res: Response) => {
       res.sendFile(path.join(distPath, 'index.html'));
     });

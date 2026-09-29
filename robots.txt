@@ -1,6 +1,62 @@
+# robots.txt for EncryptDecrypt.org
+# Optimized for Universal Search & AI Citation Engines (ChatGPT, Perplexity, Google Gemini, Claude, Copilot, Apple Intelligence)
+
 User-agent: *
 Allow: /
-Disallow: /search?
-Disallow: /*?*
+Disallow: /admin
 
-Sitemap: https://encryptdecrypt.org/sitemap.xml
+# OpenAI / ChatGPT Web Search & Indexing Bots
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Google Gemini & Google Search AI Overviews
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity AI Citation Bot
+User-agent: PerplexityBot
+Allow: /
+
+# Anthropic Claude Indexer
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Microsoft Copilot & Bing Search
+User-agent: Bingbot
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Other Major AI Knowledge Crawlers
+User-agent: CCBot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Canonical Sitemaps & AI Agent Maps (ARD Specification)
+Sitemap: https://www.encryptdecrypt.org/sitemap.xml
+Agentmap: https://www.encryptdecrypt.org/.well-known/ai-catalog.json
+Agentmap: https://www.encryptdecrypt.org/ai-catalog.json
+Agentmap: https://www.encryptdecrypt.org/.well-known/ard.json
+Agentmap: https://www.encryptdecrypt.org/ard.json

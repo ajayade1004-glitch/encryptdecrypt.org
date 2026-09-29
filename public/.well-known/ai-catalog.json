@@ -1,98 +1,190 @@
 {
-  "$schema": "https://ai-catalog.io/schemas/v1.0/ai-catalog.schema.json",
   "specVersion": "1.0",
   "host": {
-    "identifier": "did:web:www.encryptdecrypt.org",
     "displayName": "EncryptDecrypt.org",
-    "url": "https://www.encryptdecrypt.org/",
-    "description": "Authoritative 100% private, client-side zero-knowledge cryptographic tools and developer utilities suite."
+    "identifier": "did:web:www.encryptdecrypt.org",
+    "documentationUrl": "https://www.encryptdecrypt.org/llms.txt",
+    "logoUrl": "https://www.encryptdecrypt.org/favicon.png"
   },
   "entries": [
     {
       "identifier": "urn:air:encryptdecrypt.org:suite:all-tools",
-      "type": "application/ai-skill+md",
       "displayName": "EncryptDecrypt 1,380+ Zero-Knowledge Web Crypto Tools Suite",
-      "description": "Comprehensive client-side suite for AES-256-GCM/CBC encryption, RSA, SHA-256, SHA-512, MD5, HMAC, JWT debugging, Base64/Hex/URL encoding, UUID v4/v7, and developer utilities running 100% in local browser RAM.",
+      "type": "application/ai-skill+md",
       "url": "https://www.encryptdecrypt.org/llms.txt",
+      "description": "Comprehensive client-side suite for AES-256-GCM/CBC encryption, RSA, SHA-256, SHA-512, MD5, HMAC, JWT debugging, Base64/Hex/URL encoding, UUID v4/v7, and developer utilities running 100% in local browser RAM.",
+      "tags": [
+        "cryptography",
+        "encryption",
+        "developer-tools",
+        "security",
+        "privacy"
+      ],
+      "capabilities": [
+        "AesEncryption",
+        "Sha256Hashing",
+        "Base64Encoding",
+        "JwtVerification",
+        "UuidGeneration"
+      ],
       "representativeQueries": [
         "encrypt string with AES-256-GCM in browser",
         "compute SHA-256 cryptographic hash offline",
         "encode decode base64 RFC 4648",
         "verify JWT token header payload signature",
         "generate cryptographically secure UUID v4 or v7"
-      ]
+      ],
+      "version": "1.0.0",
+      "updatedAt": "2026-09-29T00:00:00Z"
     },
     {
       "identifier": "urn:air:encryptdecrypt.org:tool:aes-encryption",
-      "type": "application/ai-skill+md",
       "displayName": "AES-256-GCM & CBC Authenticated Symmetric Encryption",
-      "description": "NIST SP 800-38D and FIPS 197 compliant AES symmetric encryption tool using browser Web Cryptography API.",
+      "type": "application/ai-skill+md",
       "url": "https://www.encryptdecrypt.org/tools/encryption-ciphers/aes-encrypt-decrypt/",
+      "description": "NIST SP 800-38D and FIPS 197 compliant AES symmetric encryption tool using browser Web Cryptography API.",
+      "tags": [
+        "aes",
+        "symmetric-encryption",
+        "aes-256-gcm",
+        "fips-197"
+      ],
+      "capabilities": [
+        "AesGcmEncrypt",
+        "AesGcmDecrypt",
+        "KeyDerivation"
+      ],
       "representativeQueries": [
         "encrypt sensitive payload with AES-256",
         "decrypt AES GCM ciphertext in browser",
         "client-side symmetric encryption tool"
-      ]
+      ],
+      "version": "1.0.0",
+      "updatedAt": "2026-09-29T00:00:00Z"
     },
     {
       "identifier": "urn:air:encryptdecrypt.org:tool:sha256-hash",
-      "type": "application/ai-skill+md",
       "displayName": "SHA-256 & SHA-512 Cryptographic Hash Generator",
-      "description": "FIPS PUB 180-4 and RFC 6234 collision-resistant cryptographic hash generator running locally in hardware-accelerated memory.",
+      "type": "application/ai-skill+md",
       "url": "https://www.encryptdecrypt.org/tools/hashing-security/sha256-hash-generator/",
+      "description": "FIPS PUB 180-4 and RFC 6234 collision-resistant cryptographic hash generator running locally in hardware-accelerated memory.",
+      "tags": [
+        "sha256",
+        "sha512",
+        "hashing",
+        "checksum"
+      ],
+      "capabilities": [
+        "Sha256Digest",
+        "Sha512Digest",
+        "HmacSha256"
+      ],
       "representativeQueries": [
         "generate SHA-256 checksum for text or file",
         "compute SHA-512 digest",
         "calculate HMAC-SHA256 signature with secret key"
-      ]
+      ],
+      "version": "1.0.0",
+      "updatedAt": "2026-09-29T00:00:00Z"
     },
     {
       "identifier": "urn:air:encryptdecrypt.org:tool:base64-encode-decode",
-      "type": "application/ai-skill+md",
       "displayName": "Base64 & Hex Binary-to-Text Data Transcoder",
-      "description": "IETF RFC 4648 standard Base64, Hex/Base16, Base32, and URL-safe data encoding and decoding.",
+      "type": "application/ai-skill+md",
       "url": "https://www.encryptdecrypt.org/tools/encoding-decoding/base64-encode-decode/",
+      "description": "IETF RFC 4648 standard Base64, Hex/Base16, Base32, and URL-safe data encoding and decoding.",
+      "tags": [
+        "base64",
+        "hex",
+        "encoding",
+        "decoding",
+        "rfc-4648"
+      ],
+      "capabilities": [
+        "Base64Encode",
+        "Base64Decode",
+        "HexEncode"
+      ],
       "representativeQueries": [
         "convert text to base64 string",
         "decode base64 to plaintext",
         "convert hex bytes to utf-8 text"
-      ]
+      ],
+      "version": "1.0.0",
+      "updatedAt": "2026-09-29T00:00:00Z"
     },
     {
       "identifier": "urn:air:encryptdecrypt.org:tool:jwt-token-debugger",
-      "type": "application/ai-skill+md",
       "displayName": "JWT Token Claims Inspector & Signature Verifier",
-      "description": "RFC 7519 JSON Web Token decoder with JOSE header, claims payload inspection, and HMAC-SHA256 secret verification.",
+      "type": "application/ai-skill+md",
       "url": "https://www.encryptdecrypt.org/tools/tokens-keys/jwt-token-generator/",
+      "description": "RFC 7519 JSON Web Token decoder with JOSE header, claims payload inspection, and HMAC-SHA256 secret verification.",
+      "tags": [
+        "jwt",
+        "jose",
+        "token-debugger",
+        "signature-verifier"
+      ],
+      "capabilities": [
+        "JwtDecodeHeader",
+        "JwtDecodePayload",
+        "JwtVerifyHs256"
+      ],
       "representativeQueries": [
         "inspect JWT token payload claims",
         "verify JWT signature with HS256 secret",
         "validate JWT expiration timestamp"
-      ]
+      ],
+      "version": "1.0.0",
+      "updatedAt": "2026-09-29T00:00:00Z"
     },
     {
       "identifier": "urn:air:encryptdecrypt.org:tool:uuid-generator",
-      "type": "application/ai-skill+md",
       "displayName": "UUID v4 & v7 Cryptographic Unique Identifier Generator",
-      "description": "RFC 9562 random UUID v4 and time-ordered UUID v7 generator powered by CSPRNG crypto.getRandomValues().",
+      "type": "application/ai-skill+md",
       "url": "https://www.encryptdecrypt.org/tools/generators-tokens/uuid-v4-v7-generator/",
+      "description": "RFC 9562 random UUID v4 and time-ordered UUID v7 generator powered by CSPRNG crypto.getRandomValues().",
+      "tags": [
+        "uuid",
+        "guid",
+        "rfc-9562",
+        "uuid-v4",
+        "uuid-v7"
+      ],
+      "capabilities": [
+        "UuidV4Generate",
+        "UuidV7Generate"
+      ],
       "representativeQueries": [
         "generate UUID v4 random identifier",
         "generate time-ordered UUID v7",
         "bulk generate unique GUIDs"
-      ]
+      ],
+      "version": "1.0.0",
+      "updatedAt": "2026-09-29T00:00:00Z"
     },
     {
       "identifier": "urn:air:encryptdecrypt.org:database:tools-index",
-      "type": "application/json",
       "displayName": "Machine-Readable 1,380+ Developer Utilities Database",
-      "description": "Complete JSON database indexing all 1,380+ tools across 26 security hubs with metadata, categories, algorithms, and documentation.",
+      "type": "application/json",
       "url": "https://www.encryptdecrypt.org/assets/data/tools.json",
+      "description": "Complete JSON database indexing all 1,380+ tools across 26 security hubs with metadata, categories, algorithms, and documentation.",
+      "tags": [
+        "tools-database",
+        "crypto-index",
+        "developer-utilities"
+      ],
+      "capabilities": [
+        "ToolsDatabaseSearch",
+        "MetadataExtraction"
+      ],
       "representativeQueries": [
         "developer tools database",
         "web crypto algorithms index",
         "privacy utilities API catalog"
-      ]
+      ],
+      "version": "1.0.0",
+      "updatedAt": "2026-09-29T00:00:00Z"
     }
   ]
 }
