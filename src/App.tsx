@@ -16,20 +16,21 @@ import { AdUnit } from './components/AdUnit';
 import { applyAdminOverrides, recordToolExecution, recordSearchQuery, recordPageView } from './utils/adminStorage';
 
 import { ToolWorkspaceSkeleton } from './components/ToolWorkspaceSkeleton';
-import { preloadToolWorkspace, loadToolWorkspaceComponent } from './utils/toolPreloader';
+import { preloadToolWorkspace, loadToolWorkspaceComponent, lazyWithRetry } from './utils/toolPreloader';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
-// --- REACT LAZY IMPORTS WITH BACKGROUND PRELOADER (Instant Tool Opens + 100% Core Web Vitals) ---
+// --- REACT LAZY IMPORTS WITH AUTO-RETRY PRELOADER (Zero Blank Screens) ---
 const ToolWorkspace = lazy(loadToolWorkspaceComponent);
-const AllToolsPage = lazy(() => import('./components/pages/AllToolsPage').then(module => ({ default: module.AllToolsPage })));
-const CategoryPage = lazy(() => import('./components/pages/CategoryPage').then(module => ({ default: module.CategoryPage })));
-const AboutPage = lazy(() => import('./components/pages/AboutPage').then(module => ({ default: module.AboutPage })));
-const ContactPage = lazy(() => import('./components/pages/ContactPage').then(module => ({ default: module.ContactPage })));
-const TechGuidesPage = lazy(() => import('./components/pages/TechGuidesPage').then(module => ({ default: module.TechGuidesPage })));
-const PrivacyPage = lazy(() => import('./components/pages/PrivacyPage').then(module => ({ default: module.PrivacyPage })));
-const TermsPage = lazy(() => import('./components/pages/TermsPage').then(module => ({ default: module.TermsPage })));
-const DisclaimerPage = lazy(() => import('./components/pages/DisclaimerPage').then(module => ({ default: module.DisclaimerPage })));
-const NotFoundPage = lazy(() => import('./components/pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
-const AdminPanel = lazy(() => import('./components/admin/AdminPanel').then(module => ({ default: module.AdminPanel })));
+const AllToolsPage = lazyWithRetry(() => import('./components/pages/AllToolsPage').then(m => ({ default: m.AllToolsPage })));
+const CategoryPage = lazyWithRetry(() => import('./components/pages/CategoryPage').then(m => ({ default: m.CategoryPage })));
+const AboutPage = lazyWithRetry(() => import('./components/pages/AboutPage').then(m => ({ default: m.AboutPage })));
+const ContactPage = lazyWithRetry(() => import('./components/pages/ContactPage').then(m => ({ default: m.ContactPage })));
+const TechGuidesPage = lazyWithRetry(() => import('./components/pages/TechGuidesPage').then(m => ({ default: m.TechGuidesPage })));
+const PrivacyPage = lazyWithRetry(() => import('./components/pages/PrivacyPage').then(m => ({ default: m.PrivacyPage })));
+const TermsPage = lazyWithRetry(() => import('./components/pages/TermsPage').then(m => ({ default: m.TermsPage })));
+const DisclaimerPage = lazyWithRetry(() => import('./components/pages/DisclaimerPage').then(m => ({ default: m.DisclaimerPage })));
+const NotFoundPage = lazyWithRetry(() => import('./components/pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
+const AdminPanel = lazyWithRetry(() => import('./components/admin/AdminPanel').then(m => ({ default: m.AdminPanel })));
 // ------------------------------------------------------------------
 
 export type AppView = 'catalog' | 'category' | 'about' | 'contact' | 'guides' | 'privacy' | 'terms' | 'disclaimer' | 'admin' | 'notfound' | 'all-tools';
@@ -922,16 +923,17 @@ export default function App() {
 
       {/* Main Container */}
       <main className="container flex-1 py-6" id="main-content">
-        <Suspense fallback={
-          selectedTool ? (
-            <ToolWorkspaceSkeleton tool={selectedTool} onBack={handleBackToCatalog} />
-          ) : (
-            <div className="flex flex-col items-center justify-center min-h-[50vh] text-[var(--text-muted)] gap-3">
-              <RefreshCw size={24} className="animate-spin text-[#2E9BFF]" />
-              <span className="text-sm font-semibold">Loading...</span>
-            </div>
-          )
-        }>
+        <ErrorBoundary>
+          <Suspense fallback={
+            selectedTool ? (
+              <ToolWorkspaceSkeleton tool={selectedTool} onBack={handleBackToCatalog} />
+            ) : (
+              <div className="flex flex-col items-center justify-center min-h-[50vh] text-[var(--text-muted)] gap-3">
+                <RefreshCw size={24} className="animate-spin text-[#2E9BFF]" />
+                <span className="text-sm font-semibold">Loading...</span>
+              </div>
+            )
+          }>
           {selectedTool ? (
             /* Separate Dedicated Tool View */
             <ToolWorkspace 
@@ -1730,6 +1732,7 @@ export default function App() {
             </div>
           )}
         </Suspense>
+        </ErrorBoundary>
       </main>
 
       {/* Semantic Footer */}

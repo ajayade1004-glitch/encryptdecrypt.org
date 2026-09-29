@@ -69,7 +69,7 @@ import * as measurementConstructionExtrasEngines from '../crypto/measurementCons
 import * as foodAcademicLogisticsEngines from '../crypto/foodAcademicLogisticsEngines';
 import * as wellnessGlobalExtrasEngines from '../crypto/wellnessGlobalExtrasEngines';
 
-interface ToolWorkspaceProps {
+export interface ToolWorkspaceProps {
   tool: ToolItem;
   allTools: ToolItem[];
   onBack: () => void;
