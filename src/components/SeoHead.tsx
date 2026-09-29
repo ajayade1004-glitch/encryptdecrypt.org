@@ -10,15 +10,22 @@ export interface SeoHeadProps {
   noIndex?: boolean;
 }
 
+const SITE_DOMAIN = 'https://www.encryptdecrypt.org';
+
 export const SeoHead: React.FC<SeoHeadProps> = ({
   title,
   description,
-  canonicalUrl = 'https://www.encryptdecrypt.org/',
+  canonicalUrl = SITE_DOMAIN,
   keywords = [],
   ogType = 'website',
   schemas = [],
   noIndex = false,
 }) => {
+  // Normalize canonical URL
+  const normalizedCanonical = canonicalUrl.startsWith('http')
+    ? canonicalUrl
+    : `${SITE_DOMAIN}${canonicalUrl.startsWith('/') ? '' : '/'}${canonicalUrl}`;
+
   useEffect(() => {
     // 1. Update Document Title
     document.title = title;
@@ -39,7 +46,7 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
       let element = document.querySelector(`link[rel="${rel}"]`) as HTMLLinkElement | null;
       if (!element) {
         element = document.createElement('link');
-        element.setAttribute('rel', rel);
+        element.setAttribute(rel, rel);
         document.head.appendChild(element);
       }
       element.setAttribute('href', href);
@@ -51,25 +58,27 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
       setMetaTag('name', 'keywords', keywords.join(', '));
     }
 
-    // 3. Robots directive
+    // 3. Robots directive for Googlebot and all search engines
     if (noIndex) {
       setMetaTag('name', 'robots', 'noindex, nofollow');
+      setMetaTag('name', 'googlebot', 'noindex, nofollow');
     } else {
       setMetaTag('name', 'robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
+      setMetaTag('name', 'googlebot', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
     }
 
     // 4. Canonical URL
-    setLinkTag('canonical', canonicalUrl);
+    setLinkTag('canonical', normalizedCanonical);
 
     // 5. OpenGraph Tags
     setMetaTag('property', 'og:title', title);
     setMetaTag('property', 'og:description', description);
-    setMetaTag('property', 'og:url', canonicalUrl);
+    setMetaTag('property', 'og:url', normalizedCanonical);
     setMetaTag('property', 'og:type', ogType);
     setMetaTag('property', 'og:site_name', 'EncryptDecrypt.org');
 
     // 6. Twitter Card Tags
-    setMetaTag('name', 'twitter:card', 'summary');
+    setMetaTag('name', 'twitter:card', 'summary_large_image');
     setMetaTag('name', 'twitter:title', title);
     setMetaTag('name', 'twitter:description', description);
 
@@ -93,7 +102,7 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
         scriptToRemove.remove();
       }
     };
-  }, [title, description, canonicalUrl, keywords, ogType, schemas, noIndex]);
+  }, [title, description, normalizedCanonical, keywords, ogType, schemas, noIndex]);
 
   return null;
 };

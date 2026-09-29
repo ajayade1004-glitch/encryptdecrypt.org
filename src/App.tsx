@@ -65,6 +65,30 @@ export const CATEGORY_HUBS_CONFIG = [
   { slug: 'converters-utilities', name: 'Converters & Utilities', icon: Cpu, count: 6, desc: 'Chmod Calc, Data Units, Number Words, UTC Time' },
 ];
 
+function synthesizeToolFromSlug(slug: string): ToolItem {
+  const formattedTitle = slug
+    .split('-')
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+
+  return {
+    id: slug,
+    name: formattedTitle,
+    slug: slug,
+    category: 'utilities',
+    categoryName: 'Developer Tools',
+    shortDesc: `${formattedTitle} - 100% private, client-side browser cryptographic utility.`,
+    metaTitle: `${formattedTitle} - Free Online Tool | EncryptDecrypt.org`,
+    metaDescription: `Use free ${formattedTitle} online. 100% client-side privacy, zero server storage, instant execution in browser RAM.`,
+    primaryKeyword: formattedTitle.toLowerCase(),
+    secondaryKeywords: [slug, 'cryptography', 'security', 'developer tool'],
+    inputType: 'textarea',
+    hasFileSupport: true,
+    related: ['sha-256-hash-generator', 'base64-encode-decode', 'aes-encryption-decryption'],
+    popular: false
+  };
+}
+
 function getInitialRouteState(): {
   selectedTool: ToolItem | null;
   currentView: AppView;
@@ -80,10 +104,8 @@ function getInitialRouteState(): {
   // 1. Hash routes
   if (hash.startsWith('tool=')) {
     const slug = hash.replace('tool=', '');
-    const match = INITIAL_TOP_TOOLS.find(t => t.slug === slug || t.id === slug);
-    if (match) {
-      return { selectedTool: match, currentView: 'catalog', activeCategory: 'all' };
-    }
+    const match = INITIAL_TOP_TOOLS.find(t => t.slug === slug || t.id === slug) || synthesizeToolFromSlug(slug);
+    return { selectedTool: match, currentView: 'catalog', activeCategory: 'all' };
   }
   if (['about', 'contact', 'guides', 'privacy', 'terms', 'disclaimer', 'admin', 'all-tools'].includes(hash)) {
     return { selectedTool: null, currentView: hash as AppView, activeCategory: 'all' };
@@ -93,26 +115,28 @@ function getInitialRouteState(): {
     return { selectedTool: null, currentView: 'category', activeCategory: cat };
   }
 
-  // 2. Clean Pathname routes
-  if (pathname.startsWith('/tools/')) {
-    const parts = pathname.replace('/tools/', '').split('/').filter(Boolean);
+  // 2. Clean Pathname routes (/tools/:slug, /tool/:slug, /category/:slug)
+  if (pathname.startsWith('/tools/') || pathname.startsWith('/tool/')) {
+    const rawPath = pathname.startsWith('/tools/') ? pathname.replace('/tools/', '') : pathname.replace('/tool/', '');
+    const parts = rawPath.split('/').filter(Boolean);
     if (parts.length === 1) {
       const slug = parts[0];
-      const match = INITIAL_TOP_TOOLS.find(t => t.slug === slug || t.id === slug);
-      if (match) {
-        return { selectedTool: match, currentView: 'catalog', activeCategory: 'all' };
-      }
       const isCat = CATEGORY_HUBS_CONFIG.some(c => c.slug === slug);
       if (isCat) {
         return { selectedTool: null, currentView: 'category', activeCategory: slug };
       }
+      const match = INITIAL_TOP_TOOLS.find(t => t.slug === slug || t.id === slug) || synthesizeToolFromSlug(slug);
+      return { selectedTool: match, currentView: 'catalog', activeCategory: 'all' };
     } else if (parts.length >= 2) {
       const toolSlug = parts[1];
-      const match = INITIAL_TOP_TOOLS.find(t => t.slug === toolSlug || t.id === toolSlug);
-      if (match) {
-        return { selectedTool: match, currentView: 'catalog', activeCategory: 'all' };
-      }
+      const match = INITIAL_TOP_TOOLS.find(t => t.slug === toolSlug || t.id === toolSlug) || synthesizeToolFromSlug(toolSlug);
+      return { selectedTool: match, currentView: 'catalog', activeCategory: 'all' };
     }
+  }
+
+  if (pathname.startsWith('/category/')) {
+    const catSlug = pathname.replace('/category/', '').split('/')[0];
+    return { selectedTool: null, currentView: 'category', activeCategory: catSlug };
   }
 
   if (pathname === '/all-tools' || pathname === '/tools') return { selectedTool: null, currentView: 'all-tools', activeCategory: 'all' };
@@ -123,6 +147,17 @@ function getInitialRouteState(): {
   if (pathname === '/terms') return { selectedTool: null, currentView: 'terms', activeCategory: 'all' };
   if (pathname === '/disclaimer') return { selectedTool: null, currentView: 'disclaimer', activeCategory: 'all' };
   if (pathname === '/admin') return { selectedTool: null, currentView: 'admin', activeCategory: 'all' };
+
+  // Direct single slug check (e.g. /sha256-hash-generator)
+  const cleanSinglePath = pathname.replace(/^\//, '');
+  if (cleanSinglePath && !cleanSinglePath.includes('/')) {
+    const isCat = CATEGORY_HUBS_CONFIG.some(c => c.slug === cleanSinglePath);
+    if (isCat) {
+      return { selectedTool: null, currentView: 'category', activeCategory: cleanSinglePath };
+    }
+    const match = INITIAL_TOP_TOOLS.find(t => t.slug === cleanSinglePath || t.id === cleanSinglePath) || synthesizeToolFromSlug(cleanSinglePath);
+    return { selectedTool: match, currentView: 'catalog', activeCategory: 'all' };
+  }
 
   return { selectedTool: null, currentView: 'catalog', activeCategory: 'all' };
 }
@@ -204,10 +239,12 @@ export default function App() {
       });
   };
 
-  // Route resolver supporting both hash and canonical path routes
+  // Route resolver supporting /tools/:slug, /tool/:slug, /category/:slug, canonical path routes, and old URLs
   const resolveLocationRoute = (toolsList: ToolItem[]) => {
     const hash = window.location.hash.replace(/^#/, '');
     const pathname = window.location.pathname.replace(/\/+$/, '');
+
+    const isCatalogLoaded = toolsList.length > 50;
 
     // 1. Hash-based route
     if (hash.startsWith('tool=')) {
@@ -216,6 +253,12 @@ export default function App() {
       if (match) {
         setSelectedTool(match);
         setCurrentView('catalog');
+        return;
+      }
+      if (!isCatalogLoaded) {
+        setSelectedTool(synthesizeToolFromSlug(slug));
+        setCurrentView('catalog');
+        reloadToolsCatalog();
         return;
       }
       setSelectedTool(null);
@@ -235,15 +278,21 @@ export default function App() {
       return;
     }
 
-    // 2. Clean pathname-based route (sitemap / organic search direct landing)
-    if (pathname.startsWith('/tools/')) {
-      const parts = pathname.replace('/tools/', '').split('/').filter(Boolean);
+    // 2. Clean pathname-based route (/tools/:slug or /tool/:slug)
+    if (pathname.startsWith('/tools/') || pathname.startsWith('/tool/')) {
+      const isSingular = pathname.startsWith('/tool/');
+      const rawPath = isSingular ? pathname.replace('/tool/', '') : pathname.replace('/tools/', '');
+      const parts = rawPath.split('/').filter(Boolean);
+
       if (parts.length === 1) {
         const slug = parts[0];
         const match = toolsList.find(t => t.slug === slug || t.id === slug);
         if (match) {
           setSelectedTool(match);
           setCurrentView('catalog');
+          if (isSingular) {
+            window.history.replaceState({}, '', `/tools/${match.slug}`);
+          }
           return;
         }
         const isCat = CATEGORY_HUBS_CONFIG.some(c => c.slug === slug) || toolsList.some(t => t.category === slug);
@@ -253,17 +302,40 @@ export default function App() {
           setCurrentView('category');
           return;
         }
+        if (!isCatalogLoaded) {
+          setSelectedTool(synthesizeToolFromSlug(slug));
+          setCurrentView('catalog');
+          reloadToolsCatalog();
+          return;
+        }
       } else if (parts.length >= 2) {
         const toolSlug = parts[1];
         const match = toolsList.find(t => t.slug === toolSlug || t.id === toolSlug);
         if (match) {
           setSelectedTool(match);
           setCurrentView('catalog');
+          if (isSingular) {
+            window.history.replaceState({}, '', `/tools/${match.slug}`);
+          }
+          return;
+        }
+        if (!isCatalogLoaded) {
+          setSelectedTool(synthesizeToolFromSlug(toolSlug));
+          setCurrentView('catalog');
+          reloadToolsCatalog();
           return;
         }
       }
       setSelectedTool(null);
       setCurrentView('notfound');
+      return;
+    }
+
+    if (pathname.startsWith('/category/')) {
+      const catSlug = pathname.replace('/category/', '').split('/')[0];
+      setActiveCategory(catSlug);
+      setSelectedTool(null);
+      setCurrentView('category');
       return;
     }
 
@@ -276,15 +348,27 @@ export default function App() {
     if (pathname === '/disclaimer') { setSelectedTool(null); setCurrentView('disclaimer'); return; }
     if (pathname === '/admin') { setSelectedTool(null); setCurrentView('admin'); return; }
 
-    // ✅ FIX FOR OLD WORDPRESS URLs (e.g. /hmac-generator, /css-formatter, ALL 330+ TOOLS)
-    const cleanPath = pathname.replace(/^\//, ''); // Removes starting slash
+    // Direct single slug route (e.g. /sha256-hash-generator)
+    const cleanPath = pathname.replace(/^\//, '');
     if (cleanPath && !cleanPath.includes('/')) {
       const match = toolsList.find(t => t.slug === cleanPath || t.id === cleanPath);
       if (match) {
         setSelectedTool(match);
         setCurrentView('catalog');
-        // Auto-redirect URL to the new format so Google learns the new URL
         window.history.replaceState({}, '', `/tools/${match.slug}`);
+        return;
+      }
+      const isCat = CATEGORY_HUBS_CONFIG.some(c => c.slug === cleanPath);
+      if (isCat) {
+        setActiveCategory(cleanPath);
+        setSelectedTool(null);
+        setCurrentView('category');
+        return;
+      }
+      if (!isCatalogLoaded) {
+        setSelectedTool(synthesizeToolFromSlug(cleanPath));
+        setCurrentView('catalog');
+        reloadToolsCatalog();
         return;
       }
     }
@@ -725,7 +809,7 @@ export default function App() {
           </button>
 
           {/* Header Search Box */}
-          <div className="relative flex-1 max-w-xs sm:max-w-md mx-1 sm:mx-4" ref={searchDropdownRef}>
+          <div className="relative flex-1 max-w-xs sm:max-w-md md:max-w-lg mx-1 sm:mx-4" ref={searchDropdownRef}>
             <div className="flex items-center gap-1.5 w-full">
               <div 
                 className="hidden xs:flex shrink-0 items-center justify-center w-8 h-8 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[#2E9BFF] shadow-xs"
@@ -749,7 +833,7 @@ export default function App() {
                     setSearchHighlightIndex(-1);
                     preloadToolWorkspace();
                   }}
-                  placeholder="Search tools..."
+                  placeholder="Search 1,380+ tools (e.g. aes, sha256, jwt, uuid)..."
                   className="w-full h-9 bg-[var(--bg-input)] border border-[var(--border-subtle)] rounded-lg px-3 pr-9 text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[#2E9BFF] focus:ring-1 focus:ring-[#2E9BFF] transition leading-normal"
                   id="global-search-input"
                 />
@@ -775,9 +859,9 @@ export default function App() {
               </div>
             </div>
 
-            {/* Instant Live Search Results Dropdown */}
+            {/* Instant Live Search Results Dropdown - Full Width & Full Tool Names */}
             {searchFocused && searchQuery.trim().length > 0 && (
-              <div className="absolute left-0 right-0 top-full mt-1.5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl shadow-2xl overflow-hidden z-50 max-h-96 overflow-y-auto divide-y divide-[var(--border-subtle)]">
+              <div className="absolute left-0 right-0 sm:left-auto sm:right-0 sm:w-[500px] md:w-[600px] max-w-[95vw] top-full mt-1.5 bg-[var(--bg-surface)] border border-blue-500/30 rounded-xl shadow-2xl overflow-hidden z-50 max-h-[420px] overflow-y-auto divide-y divide-[var(--border-subtle)]">
                 <div className="p-2.5 text-[11px] font-mono text-[var(--text-muted)] bg-[var(--bg-surface-hover)] flex items-center justify-between">
                   <span className="font-semibold text-[var(--text-secondary)]">
                     Found {filteredTools.length} tools across all categories
@@ -786,7 +870,7 @@ export default function App() {
                 </div>
 
                 {searchQuickMatches.length === 0 ? (
-                  <div className="p-4 text-center text-xs text-[var(--text-muted)]">
+                  <div className="p-5 text-center text-xs text-[var(--text-muted)]">
                     <p className="font-semibold text-[var(--text-secondary)] mb-1">
                       No tools found matching &ldquo;{searchQuery}&rdquo;
                     </p>
@@ -809,21 +893,21 @@ export default function App() {
                           preloadToolWorkspace();
                         }}
                         onTouchStart={preloadToolWorkspace}
-                        className={`w-full text-left p-3 transition flex items-center justify-between group cursor-pointer ${
-                          isHighlighted ? 'bg-blue-500/15 border-l-2 border-[#2E9BFF]' : 'hover:bg-[var(--bg-surface-hover)]'
+                        className={`w-full text-left p-3 sm:p-3.5 transition flex items-start justify-between gap-3 group cursor-pointer ${
+                          isHighlighted ? 'bg-blue-500/15 border-l-3 border-[#2E9BFF]' : 'hover:bg-[var(--bg-surface-hover)]'
                         }`}
                       >
-                        <div className="pr-2 overflow-hidden">
-                          <span className={`text-xs font-bold block truncate ${
+                        <div className="flex-1 min-w-0 pr-1">
+                          <span className={`text-xs sm:text-sm font-bold block whitespace-normal break-words leading-snug mb-1 ${
                             isHighlighted ? 'text-[#2E9BFF]' : 'text-[var(--text-primary)] group-hover:text-[#2E9BFF]'
                           }`}>
                             {tool.name}
                           </span>
-                          <span className="text-[11px] text-[var(--text-muted)] line-clamp-1">
+                          <span className="text-[11px] text-[var(--text-muted)] block whitespace-normal line-clamp-2 leading-relaxed">
                             {tool.shortDesc}
                           </span>
                         </div>
-                        <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                        <div className="flex items-center gap-1.5 shrink-0 self-start mt-0.5">
                           <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-[#2E9BFF] border border-blue-500/20 whitespace-nowrap">
                             {tool.categoryName}
                           </span>
@@ -834,7 +918,7 @@ export default function App() {
                 )}
 
                 {filteredTools.length > searchQuickMatches.length && (
-                  <div className="p-2 bg-[var(--bg-surface-hover)] text-center">
+                  <div className="p-2.5 bg-[var(--bg-surface-hover)] text-center border-t border-[var(--border-subtle)]">
                     <button
                       onClick={() => {
                         setSearchFocused(false);
