@@ -5,6 +5,7 @@ import {
   Lock, Key, Code, Globe, Database, FileText
 } from 'lucide-react';
 import { ToolItem } from '../../types';
+import { preloadToolWorkspace } from '../../utils/toolPreloader';
 
 interface AllToolsPageProps {
   tools: ToolItem[];
@@ -258,6 +259,8 @@ export const AllToolsPage: React.FC<AllToolsPageProps> = ({
                   <div
                     key={tool.id}
                     onClick={() => onSelectTool(tool)}
+                    onMouseEnter={preloadToolWorkspace}
+                    onTouchStart={preloadToolWorkspace}
                     className="p-3.5 rounded-xl bg-[var(--bg-input)] hover:bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:border-[#2E9BFF] transition cursor-pointer group flex flex-col justify-between"
                   >
                     <div>

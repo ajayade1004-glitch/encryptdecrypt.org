@@ -15,8 +15,11 @@ import { SeoHead } from './components/SeoHead';
 import { AdUnit } from './components/AdUnit';
 import { applyAdminOverrides, recordToolExecution, recordSearchQuery, recordPageView } from './utils/adminStorage';
 
-// --- REACT LAZY IMPORTS FOR OPTIMIZED PAGESPEED (100% Core Web Vitals) ---
-const ToolWorkspace = lazy(() => import('./components/ToolWorkspace').then(module => ({ default: module.ToolWorkspace })));
+import { ToolWorkspaceSkeleton } from './components/ToolWorkspaceSkeleton';
+import { preloadToolWorkspace, loadToolWorkspaceComponent } from './utils/toolPreloader';
+
+// --- REACT LAZY IMPORTS WITH BACKGROUND PRELOADER (Instant Tool Opens + 100% Core Web Vitals) ---
+const ToolWorkspace = lazy(loadToolWorkspaceComponent);
 const AllToolsPage = lazy(() => import('./components/pages/AllToolsPage').then(module => ({ default: module.AllToolsPage })));
 const CategoryPage = lazy(() => import('./components/pages/CategoryPage').then(module => ({ default: module.CategoryPage })));
 const AboutPage = lazy(() => import('./components/pages/AboutPage').then(module => ({ default: module.AboutPage })));
@@ -383,6 +386,7 @@ export default function App() {
 
   // Navigate to a specific separate tool using clean URLs
   const handleSelectTool = (tool: ToolItem) => {
+    preloadToolWorkspace();
     setSelectedTool(tool);
     setCurrentView('catalog');
     setMobileMenuOpen(false);
@@ -447,6 +451,7 @@ export default function App() {
 
   // Select tool by slug (e.g. from guides or footer)
   const handleSelectToolBySlug = (slug: string) => {
+    preloadToolWorkspace();
     const t = tools.find(item => item.slug === slug || item.id === slug);
     if (t) {
       handleSelectTool(t);
@@ -648,12 +653,16 @@ export default function App() {
                   ref={headerSearchInputRef}
                   type="text"
                   value={searchQuery}
-                  onFocus={() => setSearchFocused(true)}
+                  onFocus={() => {
+                    setSearchFocused(true);
+                    preloadToolWorkspace();
+                  }}
                   onKeyDown={handleSearchKeyDown}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
                     setSearchFocused(true);
                     setSearchHighlightIndex(-1);
+                    preloadToolWorkspace();
                   }}
                   placeholder="Search tools..."
                   className="w-full h-9 bg-[var(--bg-input)] border border-[var(--border-subtle)] rounded-lg px-3 pr-9 text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[#2E9BFF] focus:ring-1 focus:ring-[#2E9BFF] transition leading-normal"
@@ -710,7 +719,11 @@ export default function App() {
                           setSearchFocused(false);
                           setSearchHighlightIndex(-1);
                         }}
-                        onMouseEnter={() => setSearchHighlightIndex(idx)}
+                        onMouseEnter={() => {
+                          setSearchHighlightIndex(idx);
+                          preloadToolWorkspace();
+                        }}
+                        onTouchStart={preloadToolWorkspace}
                         className={`w-full text-left p-3 transition flex items-center justify-between group cursor-pointer ${
                           isHighlighted ? 'bg-blue-500/15 border-l-2 border-[#2E9BFF]' : 'hover:bg-[var(--bg-surface-hover)]'
                         }`}
@@ -910,10 +923,14 @@ export default function App() {
       {/* Main Container */}
       <main className="container flex-1 py-6" id="main-content">
         <Suspense fallback={
-          <div className="flex flex-col items-center justify-center min-h-[50vh] text-[var(--text-muted)] gap-3">
-            <RefreshCw size={24} className="animate-spin text-[#2E9BFF]" />
-            <span className="text-sm font-semibold">Loading Workspace...</span>
-          </div>
+          selectedTool ? (
+            <ToolWorkspaceSkeleton tool={selectedTool} onBack={handleBackToCatalog} />
+          ) : (
+            <div className="flex flex-col items-center justify-center min-h-[50vh] text-[var(--text-muted)] gap-3">
+              <RefreshCw size={24} className="animate-spin text-[#2E9BFF]" />
+              <span className="text-sm font-semibold">Loading...</span>
+            </div>
+          )
         }>
           {selectedTool ? (
             /* Separate Dedicated Tool View */
@@ -1418,6 +1435,8 @@ export default function App() {
                         <div 
                           key={tool.id} 
                           onClick={() => handleSelectTool(tool)}
+                          onMouseEnter={preloadToolWorkspace}
+                          onTouchStart={preloadToolWorkspace}
                           className="card-glass flex flex-col justify-between hover:border-blue-400/80 transition-colors duration-150 cursor-pointer group shadow-sm bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4"
                         >
                           <div>
@@ -1786,11 +1805,11 @@ export default function App() {
           <div>
             <h4 className="font-bold text-slate-100 uppercase tracking-wider mb-3">Popular Encoders</h4>
             <ul className="space-y-1">
-              <li><a href="/tools/encoding-decoding/base64-encode-decode/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base64-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Base64 Encode/Decode</a></li>
-              <li><a href="/tools/url-web/url-encode-decode/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('url-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">URL Encode/Decode</a></li>
-              <li><a href="/tools/encoding-decoding/base16-hex-encode-decode/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base16-hex-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Hex to Text</a></li>
-              <li><a href="/tools/encoding-decoding/base58-encode-decode/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base58-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Base58 Bitcoin</a></li>
-              <li><a href="/tools/qr-barcodes/qr-code-generator/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('qr-code-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">QR Code Generator</a></li>
+              <li><a href="/tools/encoding-decoding/base64-encode-decode/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base64-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Base64 Encode/Decode</a></li>
+              <li><a href="/tools/url-web/url-encode-decode/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('url-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">URL Encode/Decode</a></li>
+              <li><a href="/tools/encoding-decoding/base16-hex-encode-decode/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base16-hex-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Hex to Text</a></li>
+              <li><a href="/tools/encoding-decoding/base58-encode-decode/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base58-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Base58 Bitcoin</a></li>
+              <li><a href="/tools/qr-barcodes/qr-code-generator/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('qr-code-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">QR Code Generator</a></li>
             </ul>
           </div>
 
@@ -1798,11 +1817,11 @@ export default function App() {
           <div>
             <h4 className="font-bold text-slate-100 uppercase tracking-wider mb-3">Security & Ciphers</h4>
             <ul className="space-y-1">
-              <li><a href="/tools/encryption-ciphers/aes-encrypt-decrypt/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('aes-encrypt-decrypt'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">AES-256-GCM Encrypt</a></li>
-              <li><a href="/tools/hashing-security/sha256-hash-generator/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('sha256-hash-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">SHA-256 Hash</a></li>
-              <li><a href="/tools/hashing-security/md5-hash-generator/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('md5-hash-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">MD5 Hash</a></li>
-              <li><a href="/tools/tokens-keys/jwt-token-generator/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('jwt-token-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">JWT Debugger</a></li>
-              <li><a href="/tools/security-privacy/secure-password-generator/" onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('secure-password-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Password Generator</a></li>
+              <li><a href="/tools/encryption-ciphers/aes-encrypt-decrypt/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('aes-encrypt-decrypt'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">AES-256-GCM Encrypt</a></li>
+              <li><a href="/tools/hashing-security/sha256-hash-generator/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('sha256-hash-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">SHA-256 Hash</a></li>
+              <li><a href="/tools/hashing-security/md5-hash-generator/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('md5-hash-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">MD5 Hash</a></li>
+              <li><a href="/tools/tokens-keys/jwt-token-generator/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('jwt-token-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">JWT Debugger</a></li>
+              <li><a href="/tools/security-privacy/secure-password-generator/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('secure-password-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Password Generator</a></li>
             </ul>
           </div>
         </div>

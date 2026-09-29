@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { ToolItem } from '../../types';
 import { SeoHead } from '../SeoHead';
+import { preloadToolWorkspace } from '../../utils/toolPreloader';
 
 interface CategoryPageProps {
   categorySlug: string;
@@ -212,6 +213,8 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
                 <div
                   key={tool.id}
                   onClick={() => onSelectTool(tool)}
+                  onMouseEnter={preloadToolWorkspace}
+                  onTouchStart={preloadToolWorkspace}
                   className="card-glass flex flex-col justify-between hover:-translate-y-1 hover:border-[#2E9BFF]/60 transition duration-200 cursor-pointer group shadow-sm bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4 relative"
                 >
                   <div>
