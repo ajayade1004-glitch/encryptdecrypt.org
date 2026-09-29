@@ -185,15 +185,15 @@ export const AllToolsPage: React.FC<AllToolsPageProps> = ({
           <span className="text-[11px] text-[var(--text-muted)] font-mono">Click to jump directly to category</span>
         </div>
 
-        <div className="flex flex-wrap gap-1.5 max-h-48 overflow-y-auto pr-1">
+        <div className="flex flex-wrap gap-2 max-h-56 overflow-y-auto pr-1">
           {categoriesList.map(cat => (
             <a
               key={cat.slug}
               href={`#cat-${cat.slug}`}
-              className="px-2.5 py-1 rounded-lg bg-[var(--bg-input)] hover:bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:border-[#2E9BFF] text-[11px] text-[var(--text-secondary)] hover:text-[#2E9BFF] transition flex items-center gap-1.5 font-mono"
+              className="min-h-[44px] px-3.5 py-2.5 rounded-lg bg-[var(--bg-input)] hover:bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:border-blue-400 text-xs text-slate-200 hover:text-sky-300 transition flex items-center gap-2 font-mono"
             >
               <span>{cat.name}</span>
-              <span className="text-[9.5px] px-1.5 py-0.2 rounded bg-blue-500/10 text-[#2E9BFF] font-bold">
+              <span className="text-[10px] px-2 py-0.5 rounded bg-blue-950 text-sky-300 border border-blue-800 font-bold">
                 {cat.tools.length}
               </span>
             </a>
@@ -213,7 +213,7 @@ export const AllToolsPage: React.FC<AllToolsPageProps> = ({
                 setSearchQuery('');
                 setSelectedCategoryFilter('all');
               }}
-              className="px-4 py-2 rounded-lg bg-[#2E9BFF] text-white text-xs font-semibold cursor-pointer"
+              className="px-5 py-3 min-h-[48px] rounded-lg bg-[#1d4ed8] text-white text-xs font-semibold cursor-pointer"
             >
               Reset Filters
             </button>
@@ -234,11 +234,11 @@ export const AllToolsPage: React.FC<AllToolsPageProps> = ({
                   <div>
                     <h2 className="text-base sm:text-lg font-bold text-[var(--text-primary)] m-0 flex items-center gap-2">
                       {cat.name}
-                      <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded-full bg-blue-500/10 text-[#2E9BFF] border border-blue-500/20">
+                      <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded-full bg-blue-500/10 text-sky-400 border border-blue-500/20">
                         {cat.tools.length} Tools
                       </span>
                     </h2>
-                    <span className="text-xs text-[var(--text-muted)] font-mono">
+                    <span className="text-xs text-slate-300 font-mono">
                       Category ID: {cat.slug} · 100% Client-Side Private
                     </span>
                   </div>
@@ -246,7 +246,7 @@ export const AllToolsPage: React.FC<AllToolsPageProps> = ({
 
                 <a
                   href={`#cat-${cat.slug}`}
-                  className="text-xs text-[var(--text-muted)] hover:text-[#2E9BFF] font-mono flex items-center gap-1"
+                  className="min-h-[44px] px-3 py-2 text-xs text-slate-300 hover:text-sky-300 font-mono flex items-center gap-1 rounded-lg hover:bg-white/5"
                 >
                   <Hash size={13} /> Anchor Link
                 </a>
@@ -262,11 +262,11 @@ export const AllToolsPage: React.FC<AllToolsPageProps> = ({
                   >
                     <div>
                       <div className="flex items-center justify-between gap-1 mb-1.5">
-                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-blue-500/10 text-[#2E9BFF]">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-950 text-sky-300 border border-blue-800">
                           {tool.inputType || 'Client-Side'}
                         </span>
                         {tool.popular && (
-                          <span className="text-[9.5px] font-bold px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-400">
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800">
                             ★ Popular
                           </span>
                         )}
