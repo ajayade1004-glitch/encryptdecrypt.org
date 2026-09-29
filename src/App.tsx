@@ -74,6 +74,7 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [toastMsg, setToastMsg] = useState<string | null>(null);
   const [categorySearchQuery, setCategorySearchQuery] = useState<string>('');
+  const [showAllCategories, setShowAllCategories] = useState<boolean>(false);
 
   // Pro Feature States: Favorites, Recently Used, Keyboard Shortcuts
   const [starredToolIds, setStarredToolIds] = useState<string[]>(() => {
@@ -254,9 +255,9 @@ export default function App() {
     };
 
     if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-      (window as any).requestIdleCallback(loadFullCatalog, { timeout: 1000 });
+      (window as any).requestIdleCallback(loadFullCatalog, { timeout: 3500 });
     } else {
-      setTimeout(loadFullCatalog, 30);
+      setTimeout(loadFullCatalog, 2000);
     }
   }, []);
 
@@ -502,6 +503,14 @@ export default function App() {
     );
   }, [tools, categoryCounts, categorySearchQuery]);
 
+  // PageSpeed Optimized: Limit rendered categories on initial paint to prevent excessive DOM size
+  const displayedCategoryHubs = useMemo(() => {
+    if (categorySearchQuery.trim() || showAllCategories) {
+      return allCategoryHubs;
+    }
+    return allCategoryHubs.slice(0, 21);
+  }, [allCategoryHubs, categorySearchQuery, showAllCategories]);
+
   // Recently used tool objects
   const recentToolsObjects = useMemo(() => {
     if (!recentToolIds.length || !tools.length) return [];
@@ -598,7 +607,7 @@ export default function App() {
     <div className="site-wrapper min-h-screen flex flex-col theme-canvas selection:bg-blue-500 selection:text-white">
       {/* Toast Notification */}
       {toastMsg && (
-        <div className="toast fixed bottom-6 right-6 z-50 bg-[#2E9BFF] text-white px-4 py-2.5 rounded-lg shadow-xl font-medium text-xs flex items-center gap-2 animate-fade-in border border-white/20">
+        <div className="toast fixed bottom-6 right-6 z-50 bg-[#1d4ed8] text-white px-4 py-2.5 rounded-lg shadow-xl font-medium text-xs flex items-center gap-2 border border-white/20">
           <Check size={16} />
           <span>{toastMsg}</span>
         </div>
@@ -1089,7 +1098,7 @@ export default function App() {
                         <button
                           key={tab}
                           onClick={() => setHeroTab(tab)}
-                          className={`px-3 py-1 rounded font-semibold capitalize transition ${heroTab === tab ? 'bg-[#2E9BFF] text-white' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}
+                          className={`px-3 py-1 rounded font-semibold capitalize transition-colors duration-150 ${heroTab === tab ? 'bg-[#2563eb] text-white shadow-xs' : 'text-slate-300 hover:text-white'}`}
                         >
                           {tab === 'hash' ? 'SHA-256' : tab === 'password' ? 'Password Gen' : tab.toUpperCase()}
                         </button>
@@ -1183,8 +1192,8 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-2.5 mb-6">
-                  {allCategoryHubs.map(hub => {
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-2.5 mb-4">
+                  {displayedCategoryHubs.map(hub => {
                     const Icon = hub.icon || Code;
                     const isActive = activeCategory === hub.slug;
                     const count = categoryCounts[hub.slug] || hub.count || 0;
@@ -1193,28 +1202,28 @@ export default function App() {
                       <button
                         key={hub.slug}
                         onClick={() => handleSelectCategory(hub.slug)}
-                        className={`p-2.5 rounded-xl text-center transition flex flex-col items-center justify-between border cursor-pointer group shadow-sm ${
+                        className={`p-2.5 rounded-xl text-center transition-colors duration-150 flex flex-col items-center justify-between border cursor-pointer group shadow-sm ${
                           isActive
-                            ? 'bg-blue-600/15 border-[#2E9BFF] shadow-md ring-1 ring-[#2E9BFF]'
-                            : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] hover:border-[var(--accent)] hover:bg-[var(--bg-surface-hover)]'
+                            ? 'bg-blue-600/15 border-blue-500 shadow-md ring-1 ring-blue-500'
+                            : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] hover:border-blue-400 hover:bg-[var(--bg-surface-hover)]'
                         }`}
                       >
                         <div className="w-full flex flex-col items-center">
                           <div className="flex items-center justify-center gap-1.5 mb-1.5 w-full">
-                            <div className={`p-1.5 rounded-lg ${isActive ? 'bg-[#2E9BFF] text-white' : 'bg-blue-500/10 text-[#2E9BFF] group-hover:bg-blue-500/20'}`}>
+                            <div className={`p-1.5 rounded-lg ${isActive ? 'bg-[#2563eb] text-white' : 'bg-blue-500/15 text-sky-400 group-hover:bg-blue-500/25'}`}>
                               <Icon size={15} />
                             </div>
-                            <span className={`text-[9.5px] font-mono px-1.5 py-0.5 rounded ${
-                              isActive ? 'bg-[#2E9BFF] text-white font-bold' : 'bg-[var(--bg-surface-hover)] text-[var(--text-muted)] border border-[var(--border-subtle)]'
+                            <span className={`text-[9.5px] font-mono px-1.5 py-0.5 rounded font-semibold ${
+                              isActive ? 'bg-[#2563eb] text-white' : 'bg-slate-800 text-slate-200 border border-slate-700/60'
                             }`}>
                               {count}
                             </span>
                           </div>
-                          <h3 className={`text-[10.5px] font-bold leading-tight text-center line-clamp-2 w-full ${isActive ? 'text-[#2E9BFF]' : 'text-[var(--text-primary)] group-hover:text-[#2E9BFF]'}`}>
+                          <h3 className={`text-[10.5px] font-bold leading-tight text-center line-clamp-2 w-full ${isActive ? 'text-sky-400' : 'text-slate-100 group-hover:text-sky-400'}`}>
                             {hub.name}
                           </h3>
                         </div>
-                        <span className="text-[9.5px] text-[var(--text-muted)] text-center line-clamp-1 mt-1 font-mono w-full">
+                        <span className="text-[9.5px] text-slate-400 text-center line-clamp-1 mt-1 font-mono w-full">
                           {hub.desc ? hub.desc.split(',')[0] : 'Tools'}
                         </span>
                       </button>
@@ -1222,10 +1231,22 @@ export default function App() {
                   })}
                 </div>
 
+                {!showAllCategories && !categorySearchQuery.trim() && allCategoryHubs.length > 21 && (
+                  <div className="flex justify-center mb-5">
+                    <button
+                      onClick={() => setShowAllCategories(true)}
+                      className="text-xs px-4 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] hover:bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-sky-400 hover:border-blue-400/40 transition-colors duration-150 cursor-pointer flex items-center gap-1.5 font-medium"
+                    >
+                      <span>Show All {allCategoryHubs.length} Categories</span>
+                      <ChevronRight size={13} className="rotate-90" />
+                    </button>
+                  </div>
+                )}
+
                 <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[var(--border-subtle)]">
                   <button
                     onClick={() => handleNavigateView('all-tools')}
-                    className="px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer border bg-[#2E9BFF] text-white border-[#2E9BFF] shadow-sm flex items-center gap-1.5"
+                    className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-150 cursor-pointer border bg-[#2563eb] hover:bg-[#1d4ed8] text-white border-blue-500 shadow-sm flex items-center gap-1.5"
                   >
                     <Layers size={13} />
                     <span>View All Tools ({tools.length || '1,380+'})</span>
@@ -1233,7 +1254,7 @@ export default function App() {
 
                   <button
                     onClick={() => handleSelectCategory('favorites')}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer border flex items-center gap-1.5 ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-150 cursor-pointer border flex items-center gap-1.5 ${
                       activeCategory === 'favorites'
                         ? 'bg-amber-500 text-black font-bold border-amber-400 shadow-sm'
                         : 'bg-[var(--bg-surface)] text-amber-400 border-amber-500/30 hover:border-amber-400'
@@ -1243,18 +1264,18 @@ export default function App() {
                     <span>Favorites ({starredToolIds.length})</span>
                   </button>
 
-                  {allCategoryHubs.map(hub => (
+                  {CATEGORY_HUBS_CONFIG.slice(0, 8).map(hub => (
                     <button
                       key={hub.slug}
                       onClick={() => handleSelectCategory(hub.slug)}
-                      className={`px-3 py-1.5 rounded-lg text-xs whitespace-nowrap transition cursor-pointer border flex items-center gap-1.5 ${
+                      className={`px-3 py-1.5 rounded-lg text-xs whitespace-nowrap transition-colors duration-150 cursor-pointer border flex items-center gap-1.5 ${
                         activeCategory === hub.slug
-                          ? 'bg-[#2E9BFF] text-white border-[#2E9BFF] font-semibold shadow-sm'
-                          : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-[var(--accent)] hover:text-[var(--text-primary)]'
+                          ? 'bg-[#2563eb] text-white border-blue-500 font-semibold shadow-sm'
+                          : 'bg-[var(--bg-surface)] text-slate-300 border-[var(--border-subtle)] hover:border-blue-400 hover:text-white'
                       }`}
                     >
                       <span>{hub.name}</span>
-                      <span className="text-[10px] opacity-75 font-mono">({categoryCounts[hub.slug] || hub.count})</span>
+                      <span className="text-[10px] opacity-80 font-mono text-slate-300">({categoryCounts[hub.slug] || hub.count})</span>
                     </button>
                   ))}
                 </div>
@@ -1386,32 +1407,32 @@ export default function App() {
                         <div 
                           key={tool.id} 
                           onClick={() => handleSelectTool(tool)}
-                          className="card-glass flex flex-col justify-between hover:-translate-y-1 hover:border-[#2E9BFF]/60 transition duration-200 cursor-pointer group shadow-sm bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4"
+                          className="card-glass flex flex-col justify-between hover:border-blue-400/80 transition-colors duration-150 cursor-pointer group shadow-sm bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4"
                         >
                           <div>
                             <div className="flex items-center justify-between mb-2">
-                              <span className="text-[11px] font-semibold px-2 py-0.5 rounded bg-blue-500/10 text-[#2E9BFF] border border-blue-500/20 truncate max-w-[170px]">
+                              <span className="text-[11px] font-semibold px-2 py-0.5 rounded bg-blue-500/15 text-sky-300 border border-blue-500/30 truncate max-w-[170px]">
                                 {tool.categoryName}
                               </span>
                               {tool.popular && (
-                                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20">
+                                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">
                                   Popular
                                 </span>
                               )}
                             </div>
-                            <h3 className="text-sm font-bold text-[var(--text-primary)] group-hover:text-[#2E9BFF] transition mb-1.5 leading-snug">
+                            <h3 className="text-sm font-bold text-slate-100 group-hover:text-sky-400 transition-colors duration-150 mb-1.5 leading-snug">
                               {tool.name}
                             </h3>
-                            <p className="text-xs text-[var(--text-muted)] line-clamp-2 leading-relaxed mb-3">
+                            <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed mb-3">
                               {tool.shortDesc}
                             </p>
                           </div>
 
                           <div className="pt-2 border-t border-[var(--border-subtle)] flex items-center justify-between">
-                            <span className="text-[11px] text-[var(--text-muted)] font-mono">
+                            <span className="text-[11px] text-slate-400 font-mono">
                               {tool.inputType}
                             </span>
-                            <span className="text-xs font-semibold text-[#2E9BFF] group-hover:translate-x-1 transition inline-flex items-center gap-1">
+                            <span className="text-xs font-semibold text-sky-400 group-hover:text-sky-300 transition-colors duration-150 inline-flex items-center gap-1">
                               Open Tool →
                             </span>
                           </div>
