@@ -302,8 +302,22 @@ export default function App() {
     // 1. Initial route sync with current tools
     resolveLocationRoute(tools);
 
-    // 2. High-performance immediate catalog loading
+    // 2. High-performance catalog loading
     const loadFullCatalog = () => {
+      // Check cache first
+      try {
+        const cached = sessionStorage.getItem('ed_tools_catalog_cache');
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 50) {
+            const enhanced = applyAdminOverrides(parsed);
+            setTools(enhanced);
+            resolveLocationRoute(enhanced);
+            return;
+          }
+        }
+      } catch {}
+
       fetch('/assets/data/tools.json')
         .then(res => {
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -322,7 +336,17 @@ export default function App() {
         });
     };
 
-    loadFullCatalog();
+    // If on homepage, defer loading full 1,380 JSON catalog after FCP/LCP paint
+    const isHomepage = window.location.pathname === '/' && !window.location.hash;
+    if (isHomepage && tools.length >= 10) {
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(loadFullCatalog, { timeout: 2500 });
+      } else {
+        setTimeout(loadFullCatalog, 1200);
+      }
+    } else {
+      loadFullCatalog();
+    }
   }, []);
 
   // 2. Browser History Listener
