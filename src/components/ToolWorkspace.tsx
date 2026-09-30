@@ -14,6 +14,8 @@ import { getToolSeoData, buildToolSchemas } from '../utils/toolSeoSystem';
 import { SeoHead } from './SeoHead';
 import { AdUnit } from './AdUnit';
 import { ToolShareBar } from './ToolShareBar';
+import { ImageStudio } from './ImageStudio';
+import { getContextualSampleInput, executeUniversalTool } from '../utils/universalToolDispatcher';
 import * as engines from '../crypto/toolEngines';
 import * as allEngines from '../crypto/allEngines';
 import * as newEngines from '../crypto/newEngines';
@@ -113,6 +115,20 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
   const [cardCheck, setCardCheck] = useState<{ valid: boolean; cardType: string } | null>(null);
   const [qrDataUrl, setQrDataUrl] = useState<string>('');
   const [qrSvg, setQrSvg] = useState<string>('');
+
+  const isImageTool = useMemo(() => {
+    const s = (tool.slug || '').toLowerCase();
+    const c = (tool.category || '').toLowerCase();
+    return c.includes('image') || 
+           s.includes('image') || 
+           s.includes('webp') || 
+           s.includes('favicon') || 
+           s === 'svg-to-png' || 
+           s === 'svg-optimizer' ||
+           s === 'base64-to-image' ||
+           s === 'image-to-base64' ||
+           s === 'base64-image-converter';
+  }, [tool.slug, tool.category]);
 
   // PDF Utilities State
   const [pdfBytes, setPdfBytes] = useState<Uint8Array | null>(null);
@@ -2446,7 +2462,7 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
     } else if (cat === 'hashing-security') {
       setInputText('Zero-knowledge client-side cryptography');
     } else {
-      setInputText('EncryptDecrypt client-side secure payload for ' + tool.name);
+      setInputText(getContextualSampleInput(tool));
     }
   };
 
@@ -6113,7 +6129,15 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
           }
         }
         else {
-          result = engines.base64Encode(inputText);
+          result = await executeUniversalTool(tool, inputText, {
+            pwdLength,
+            pwdOptions,
+            uuidVersion,
+            uuidCount,
+            hexDelimiter,
+            caseStyle,
+            chmodPerms
+          });
         }
 
         if (!cancelled) {
@@ -7435,7 +7459,7 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
           ref={fileInputRef} 
           onChange={handleFileUpload} 
           className="hidden" 
-          accept=".txt,.json,.csv,.xml,.yaml,.yml,.md,.sql,.pem,.key,.crt,.csr,.log"
+          accept="*/*,image/*,.png,.jpg,.jpeg,.webp,.svg,.bmp,.gif,.ico,.txt,.json,.csv,.xml,.yaml,.yml,.md,.sql,.pem,.key,.crt,.csr,.log,.pdf"
         />
 
         {/* Error banner if any */}
@@ -7444,6 +7468,17 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
             <AlertCircle size={15} className="text-rose-500 shrink-0" />
             <span>{errorMsg}</span>
           </div>
+        )}
+
+        {/* Dedicated Interactive Visual Studio for Image Conversion & Optimization */}
+        {isImageTool && (
+          <ImageStudio
+            toolSlug={tool.slug}
+            toolName={tool.name}
+            onPayloadGenerated={(uri, info) => {
+              setOutputText(info + '\n\n[Live Conversion Preview Generated Above]');
+            }}
+          />
         )}
 
         {/* Side-by-Side (Split) or Stacked Dual Textareas */}

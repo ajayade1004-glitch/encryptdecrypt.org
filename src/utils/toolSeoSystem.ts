@@ -1075,7 +1075,8 @@ export function getToolSeoData(tool: ToolItem): ToolSeoData {
     ]
   };
 
-  const canonicalUrl = `https://www.encryptdecrypt.org/tools/${tool.category}/${tool.slug}/`;
+  // Standard canonical URL format strictly matching sitemap.xml (/tools/:slug)
+  const canonicalUrl = `https://www.encryptdecrypt.org/tools/${tool.slug}`;
 
   const howToUse = [
     {
@@ -1117,19 +1118,36 @@ export function getToolSeoData(tool: ToolItem): ToolSeoData {
 
   const breadcrumbList = [
     { name: 'Home', url: 'https://www.encryptdecrypt.org/' },
-    { name: tool.categoryName, url: `https://www.encryptdecrypt.org/tools/${tool.category}/` },
+    { name: tool.categoryName || 'Tools', url: `https://www.encryptdecrypt.org/category/${tool.category}` },
     { name: tool.name, url: canonicalUrl }
   ];
 
+  // High Search Volume, Low KD Keywords for Rank #1 Target
+  const programmaticKeywords = [
+    tool.primaryKeyword || `${(tool.name || '').toLowerCase()} online`,
+    `free online ${tool.name.toLowerCase()}`,
+    `${tool.name.toLowerCase()} in browser`,
+    `${tool.name.toLowerCase()} without upload`,
+    `${tool.name.toLowerCase()} private`,
+    `best ${tool.name.toLowerCase()} tool`,
+    `${tool.slug}`,
+    `${(tool.categoryName || '').toLowerCase()} web tool`,
+    ...(tool.secondaryKeywords || []),
+    ...(tool.lsiKeywords || []),
+    'client-side tool',
+    'zero server logs',
+    'encryptdecrypt.org'
+  ];
+
   // Ensure Title adheres strictly to <= 60 characters for SEO / Semrush
-  let title = tool.metaTitle || `${tool.name} - Free Online Tool | EncryptDecrypt.org`;
+  let title = tool.metaTitle || `${tool.name} – Free Online Tool | EncryptDecrypt.org`;
   if (title.length > 60) {
     const compact = `${tool.name} | EncryptDecrypt.org`;
     title = compact.length <= 60 ? compact : (tool.name.length <= 57 ? tool.name : tool.name.slice(0, 57) + '...');
   }
 
   // Ensure Meta Description adheres strictly to <= 160 characters for SEO / Semrush
-  let metaDescription = tool.metaDescription || `${tool.shortDesc} 100% private client-side tool. Zero server uploads. Fast & free.`;
+  let metaDescription = tool.metaDescription || `Use free ${tool.name} online. 100% private client-side RAM execution. Zero server uploads, instant results.`;
   if (metaDescription.length > 160) {
     const trimmed = metaDescription.slice(0, 157);
     const lastSpace = trimmed.lastIndexOf(' ');
@@ -1144,15 +1162,7 @@ export function getToolSeoData(tool: ToolItem): ToolSeoData {
     title,
     metaDescription,
     canonicalUrl,
-    keywords: [
-      tool.primaryKeyword || `${(tool.name || '').toLowerCase()} online`,
-      ...(tool.secondaryKeywords || []),
-      ...(tool.lsiKeywords || []),
-      'client-side tool',
-      'web crypto api',
-      'zero server logs',
-      'encryptdecrypt.org'
-    ],
+    keywords: [...new Set(programmaticKeywords)],
     geoAnswer: buildGeoAnswer(tool),
     howToUse,
     howItWorks: {
