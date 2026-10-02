@@ -701,10 +701,23 @@ const serveAiCatalog = (req: Request, res: Response) => {
   return res.status(404).json({ error: 'Manifest not found' });
 };
 
+const serveMcp = (req: Request, res: Response) => {
+  const filePath = path.join(__dirname, 'public', '.well-known', 'mcp.json');
+  if (fs.existsSync(filePath)) {
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Cache-Control', 'public, max-age=3600');
+    return res.sendFile(filePath);
+  }
+  return res.status(404).json({ error: 'MCP manifest not found' });
+};
+
 app.get('/.well-known/ai-catalog.json', serveAiCatalog);
 app.get('/ai-catalog.json', serveAiCatalog);
 app.get('/.well-known/ard.json', serveAiCatalog);
 app.get('/ard.json', serveAiCatalog);
+app.get('/.well-known/mcp.json', serveMcp);
+app.get('/mcp.json', serveMcp);
 
 // ==========================================
 // VITE DEV SERVER / PRODUCTION STATIC ASSETS

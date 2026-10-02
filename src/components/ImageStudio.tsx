@@ -175,7 +175,8 @@ export const ImageStudio: React.FC<ImageStudioProps> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={loadSampleImage}
-            className="btn btn-secondary text-xs py-1 px-2.5 flex items-center gap-1.5"
+            aria-label="Load sample canvas graphic"
+            className="btn btn-secondary text-xs py-1 px-2.5 flex items-center gap-1.5 cursor-pointer"
             title="Load sample canvas graphic"
           >
             <Sparkles size={13} className="text-sky-400" />
@@ -184,7 +185,8 @@ export const ImageStudio: React.FC<ImageStudioProps> = ({
 
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="btn btn-primary text-xs py-1 px-3 flex items-center gap-1.5 shadow-xs"
+            aria-label="Upload custom image file"
+            className="btn btn-primary text-xs py-1 px-3 flex items-center gap-1.5 shadow-xs cursor-pointer"
           >
             <Upload size={13} />
             <span>Upload Image</span>
@@ -192,6 +194,7 @@ export const ImageStudio: React.FC<ImageStudioProps> = ({
           <input
             type="file"
             ref={fileInputRef}
+            aria-label="Choose image file to convert"
             onChange={handleFileChange}
             accept="image/*,.png,.jpg,.jpeg,.webp,.svg,.bmp,.gif,.ico"
             className="hidden"
@@ -210,6 +213,7 @@ export const ImageStudio: React.FC<ImageStudioProps> = ({
             {(['webp', 'png', 'jpeg'] as const).map((fmt) => (
               <button
                 key={fmt}
+                aria-label={`Convert to ${fmt === 'jpeg' ? 'JPG' : fmt.toUpperCase()}`}
                 onClick={() => {
                   setTargetFormat(fmt);
                   if (sourceImage) runConversion(sourceImage, fmt, quality / 100);
@@ -229,7 +233,7 @@ export const ImageStudio: React.FC<ImageStudioProps> = ({
         {/* Compression Quality Slider */}
         <div className="flex flex-col gap-1">
           <div className="flex items-center justify-between">
-            <label className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">
+            <label htmlFor="image-quality-slider" className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">
               Compression Quality
             </label>
             <span className="font-mono font-bold text-sky-400 text-xs">
@@ -237,7 +241,9 @@ export const ImageStudio: React.FC<ImageStudioProps> = ({
             </span>
           </div>
           <input
+            id="image-quality-slider"
             type="range"
+            aria-label="Compression quality slider"
             min={10}
             max={100}
             step={5}
@@ -358,6 +364,7 @@ export const ImageStudio: React.FC<ImageStudioProps> = ({
               <button
                 onClick={handleCopyBase64}
                 disabled={!result}
+                aria-label="Copy converted image Base64 data URL"
                 className="btn btn-secondary text-xs py-1 px-2.5 flex items-center gap-1.5 cursor-pointer"
                 title="Copy Base64 DataURI"
               >
@@ -368,6 +375,7 @@ export const ImageStudio: React.FC<ImageStudioProps> = ({
               <button
                 onClick={handleDownload}
                 disabled={!result}
+                aria-label={`Download converted ${targetFormat.toUpperCase()} file`}
                 className="btn btn-primary text-xs py-1 px-3.5 flex items-center gap-1.5 shadow-md cursor-pointer font-bold"
               >
                 <Download size={13} />
@@ -393,6 +401,7 @@ export const ImageStudio: React.FC<ImageStudioProps> = ({
                 <a
                   href={item.dataUrl}
                   download={`favicon-${item.size}x${item.size}.png`}
+                  aria-label={`Download ${item.size} by ${item.size} PNG favicon`}
                   className="text-[10px] font-bold text-sky-400 hover:underline flex items-center gap-1"
                 >
                   <Download size={10} /> Save PNG

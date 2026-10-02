@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "EncryptDecrypt Developer Tools",
+  "name_for_model": "encryptdecrypt_tools",
+  "description_for_human": "1,380+ free client-side cryptographic and developer tools running 100% in browser RAM with zero server transmission.",
+  "description_for_model": "Access 1,380+ zero-knowledge cryptographic, hashing, encoding, decoding, token, security, and developer utilities with 100% client-side privacy.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://www.encryptdecrypt.org/.well-known/openapi.yaml"
+  },
+  "logo_url": "https://www.encryptdecrypt.org/favicon.png",
+  "contact_email": "ajayade1004@gmail.com",
+  "legal_info_url": "https://www.encryptdecrypt.org/terms"
+}

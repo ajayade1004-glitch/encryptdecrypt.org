@@ -1,0 +1,29 @@
+openapi: 3.1.0
+info:
+  title: EncryptDecrypt.org Universal Web Cryptography & Developer API
+  description: 1,380+ client-side cryptographic, conversion, and developer utilities with 100% in-browser RAM privacy.
+  version: 2.6.0
+servers:
+  - url: https://www.encryptdecrypt.org
+paths:
+  /tools/{slug}:
+    get:
+      summary: Get tool execution workspace
+      operationId: getTool
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The canonical tool slug (e.g., base64-encode-decode, sha-256-hash-generator, image-to-webp)
+      responses:
+        '200':
+          description: Successful tool page rendering
+  /api/catalog:
+    get:
+      summary: Retrieve all tools catalog
+      operationId: getCatalog
+      responses:
+        '200':
+          description: List of 1,380+ developer tools

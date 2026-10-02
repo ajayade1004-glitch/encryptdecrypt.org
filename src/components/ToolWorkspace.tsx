@@ -87,7 +87,9 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
   // Common Workspace State
   const [mode, setMode] = useState<'encode' | 'decode' | 'encrypt' | 'decrypt' | 'format' | 'minify' | 'validate'>('encode');
   const [layoutMode, setLayoutMode] = useState<'split' | 'stacked'>('split');
-  const [inputText, setInputText] = useState<string>('');
+  const [inputText, setInputText] = useState<string>(() => {
+    return getContextualSampleInput(tool);
+  });
   const [outputText, setOutputText] = useState<string>('');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -257,7 +259,7 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
     setCopied(false);
     loadSampleData();
     recordPageView(tool.name);
-  }, [tool.id]);
+  }, [tool.id, tool.slug]);
 
   // Helper to trigger browser PDF download
   const downloadPdfBytes = (bytes: Uint8Array, fileName: string) => {
@@ -7512,6 +7514,7 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
                   </div>
                   <button
                     onClick={() => fileInputRef.current?.click()}
+                    aria-label="Upload file into input"
                     className="btn btn-secondary text-[11px] py-0.5 px-2 flex items-center gap-1 text-[var(--text-secondary)]"
                     title="Upload file to populate input"
                   >
@@ -7522,6 +7525,7 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
 
               <textarea
                 value={inputText}
+                aria-label={`Input payload for ${tool.name}`}
                 onChange={e => handleInputChange(e.target.value)}
                 placeholder={`Paste or type payload for ${tool.name}, or drop file here...`}
                 className="form-textarea w-full font-mono text-xs text-[var(--text-primary)] bg-[var(--bg-input)] border border-[var(--border-subtle)] focus:border-[#2E9BFF] rounded-lg p-2.5 outline-none resize-y h-44 sm:h-48 md:h-52"
@@ -7534,6 +7538,7 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
               <div className="flex items-center gap-2 text-[11px] text-[var(--text-muted)]">
                 <button
                   onClick={() => setInputText('')}
+                  aria-label="Clear input text"
                   className="hover:text-[var(--text-primary)] cursor-pointer"
                 >
                   Clear
@@ -7547,6 +7552,7 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
               {['encoding-decoding', 'encryption-ciphers'].includes(tool.category) && outputText && (
                 <button
                   onClick={handleSwap}
+                  aria-label="Swap Input and Output text"
                   className="text-xs font-semibold text-[#2E9BFF] hover:underline flex items-center gap-1 cursor-pointer"
                   title="Swap Input and Output text"
                 >
@@ -7566,7 +7572,7 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70"></span>
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70"></span>
                   </div>
-                  <label className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1 uppercase tracking-wider">
+                  <label htmlFor="tool-output-field" className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1 uppercase tracking-wider">
                     <CheckCircle size={13} className="text-emerald-500" />
                     <span>Output Result</span>
                   </label>
@@ -7578,6 +7584,7 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
                 <div className="flex items-center gap-1.5">
                   <button
                     onClick={handleCopy}
+                    aria-label="Copy output result"
                     disabled={!outputText}
                     className="btn btn-primary text-xs py-0.5 px-2.5 flex items-center gap-1 shadow-xs"
                     title="Copy output to clipboard"
@@ -7587,6 +7594,7 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
                   </button>
                   <button
                     onClick={handleDownload}
+                    aria-label="Save output result as file"
                     disabled={!outputText}
                     className="btn btn-secondary text-xs py-0.5 px-2 flex items-center gap-1 text-[var(--text-secondary)]"
                     title="Download output as file"
@@ -7599,6 +7607,7 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
               <textarea
                 value={outputText}
                 readOnly
+                aria-label="Computation output result"
                 placeholder="Computation will appear here automatically..."
                 className="form-textarea w-full font-mono text-xs text-[#0284C7] dark:text-[#38BDF8] bg-[var(--bg-input-read)] border border-[var(--border-subtle)] font-medium rounded-lg p-2.5 outline-none resize-y h-44 sm:h-48 md:h-52"
                 id="tool-output-field"
@@ -7621,7 +7630,9 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
               <div className="p-2.5 bg-white rounded-xl shadow-md border border-slate-200 shrink-0">
                 <img 
                   src={qrDataUrl} 
-                  alt="Generated QR Code" 
+                  alt="High-resolution QR Code generated in browser RAM" 
+                  width={144}
+                  height={144}
                   className="w-36 h-36 block rounded"
                 />
               </div>
@@ -7638,12 +7649,14 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
                 <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 pt-0.5">
                   <button
                     onClick={handleDownloadQrPng}
+                    aria-label="Download QR code as PNG image"
                     className="btn btn-primary text-xs py-1 px-3 flex items-center gap-1.5 shadow-xs"
                   >
                     <Download size={12} /> Download PNG (320px)
                   </button>
                   <button
                     onClick={handleDownloadQrSvg}
+                    aria-label="Download QR code as vector SVG"
                     className="btn btn-secondary text-xs py-1 px-3 flex items-center gap-1.5 text-[var(--text-secondary)]"
                   >
                     <Code size={12} /> Vector SVG
@@ -7653,18 +7666,21 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
                   <span className="text-[var(--text-muted)] mr-1">Presets:</span>
                   <button 
                     onClick={() => setInputText('https://encryptdecrypt.org')} 
+                    aria-label="Load Website URL preset into QR code"
                     className="px-2 py-0.5 rounded bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] cursor-pointer"
                   >
                     Website URL
                   </button>
                   <button 
                     onClick={() => setInputText('WIFI:S:MyHomeNetwork;T:WPA;P:SuperSecretPass123;;')} 
+                    aria-label="Load WiFi Login preset into QR code"
                     className="px-2 py-0.5 rounded bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] cursor-pointer"
                   >
                     WiFi Login
                   </button>
                   <button 
                     onClick={() => setInputText('mailto:security@encryptdecrypt.org?subject=Inquiry')} 
+                    aria-label="Load Email Card preset into QR code"
                     className="px-2 py-0.5 rounded bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] cursor-pointer"
                   >
                     Email Card

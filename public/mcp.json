@@ -1,0 +1,12 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schema.json",
+  "name": "encryptdecrypt-tools",
+  "version": "1.0.0",
+  "description": "Comprehensive client-side suite for 1,380+ zero-knowledge cryptographic operations, AES-256-GCM encryption, RSA, SHA-256/512 hashing, JWT debugging, Base64/Hex/URL encoding, UUID v4/v7, and developer utilities running 100% in browser RAM.",
+  "homepage": "https://www.encryptdecrypt.org/",
+  "capabilities": {
+    "tools": true,
+    "prompts": true,
+    "resources": true
+  }
+}

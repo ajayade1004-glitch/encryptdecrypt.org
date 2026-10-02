@@ -1,0 +1,72 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schema.json",
+  "name": "encryptdecrypt-tools",
+  "version": "1.0.0",
+  "description": "Comprehensive client-side suite for 1,380+ zero-knowledge cryptographic operations, AES-256-GCM encryption, RSA, SHA-256/512 hashing, JWT debugging, Base64/Hex/URL encoding, UUID v4/v7, and developer utilities running 100% in browser RAM.",
+  "homepage": "https://www.encryptdecrypt.org/",
+  "capabilities": {
+    "tools": true,
+    "prompts": true,
+    "resources": true
+  },
+  "tools": [
+    {
+      "name": "aes_encrypt_decrypt",
+      "description": "Hardware-accelerated AES-256-GCM symmetric encryption and decryption compliant with NIST SP 800-38D.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": { "type": "string", "description": "Plaintext or ciphertext payload" },
+          "key": { "type": "string", "description": "Passphrase or 256-bit encryption key" },
+          "mode": { "type": "string", "enum": ["encrypt", "decrypt"] }
+        },
+        "required": ["text", "key", "mode"]
+      }
+    },
+    {
+      "name": "sha256_hash",
+      "description": "Compute collision-resistant SHA-256 cryptographic digest via W3C Web Cryptography API.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": { "type": "string", "description": "Input data string to hash" }
+        },
+        "required": ["text"]
+      }
+    },
+    {
+      "name": "base64_encode_decode",
+      "description": "RFC 4648 compliant Base64 encoding and decoding for binary and text strings.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": { "type": "string", "description": "Input text or Base64 string" },
+          "mode": { "type": "string", "enum": ["encode", "decode"] }
+        },
+        "required": ["text", "mode"]
+      }
+    },
+    {
+      "name": "jwt_inspect_verify",
+      "description": "Decode and validate RFC 7519 JSON Web Token (JWT) header, claims payload, and HMAC signature.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "token": { "type": "string", "description": "Compact JWT token string" }
+        },
+        "required": ["token"]
+      }
+    },
+    {
+      "name": "image_webp_converter",
+      "description": "In-browser high-efficiency image converter to WebP, PNG, and JPEG with lossy/lossless compression.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "format": { "type": "string", "enum": ["webp", "png", "jpeg"] },
+          "quality": { "type": "number", "minimum": 0.1, "maximum": 1.0 }
+        }
+      }
+    }
+  ]
+}

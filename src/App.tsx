@@ -9,11 +9,44 @@ import {
 } from 'lucide-react';
 import { ToolItem, CategoryInfo } from './types';
 import { INITIAL_TOP_TOOLS } from './data/initialTools';
-import * as engines from './crypto/toolEngines';
 import { searchTools } from './utils/searchTools';
 import { SeoHead } from './components/SeoHead';
 import { AdUnit } from './components/AdUnit';
 import { applyAdminOverrides, recordToolExecution, recordSearchQuery, recordPageView } from './utils/adminStorage';
+
+// Lightweight native Web API implementations for homepage hero runner (zero bundle bloat)
+function heroBase64(str: string): string {
+  try {
+    return btoa(unescape(encodeURIComponent(str)));
+  } catch {
+    return btoa(str);
+  }
+}
+
+function heroUrl(str: string): string {
+  return encodeURIComponent(str);
+}
+
+async function heroSha256(str: string): Promise<string> {
+  if (typeof crypto !== 'undefined' && crypto.subtle) {
+    const data = new TextEncoder().encode(str);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(hashBuffer))
+      .map(b => b.toString(16).padStart(2, '0'))
+      .join('');
+  }
+  return 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
+}
+
+function heroPassword(length = 24): string {
+  const chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789!@#$%&*';
+  const array = new Uint8Array(length);
+  if (typeof crypto !== 'undefined' && crypto.getRandomValues) {
+    crypto.getRandomValues(array);
+    return Array.from(array).map(x => chars[x % chars.length]).join('');
+  }
+  return Array.from({ length }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+}
 
 import { ToolWorkspaceSkeleton } from './components/ToolWorkspaceSkeleton';
 import { preloadToolWorkspace, loadToolWorkspaceComponent, lazyWithRetry } from './utils/toolPreloader';
@@ -220,12 +253,12 @@ export default function App() {
   const [heroOutput, setHeroOutput] = useState('');
   const [heroCopied, setHeroCopied] = useState(false);
 
-  // 1. Fetch tools.json on startup & reload
+  // 1. Fetch tools on startup & reload (uses fast compact 490KB index)
   const reloadToolsCatalog = () => {
     try {
       sessionStorage.removeItem('ed_tools_catalog_cache');
     } catch {}
-    fetch('/assets/data/tools.json')
+    fetch('/assets/data/tools-compact.json')
       .then(res => res.json())
       .then((data: ToolItem[]) => {
         try {
@@ -394,7 +427,7 @@ export default function App() {
         }
       } catch {}
 
-      fetch('/assets/data/tools.json')
+      fetch('/assets/data/tools-compact.json')
         .then(res => {
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           return res.json();
@@ -529,14 +562,14 @@ export default function App() {
           return;
         }
         if (heroTab === 'base64') {
-          setHeroOutput(engines.base64Encode(heroInput));
+          setHeroOutput(heroBase64(heroInput));
         } else if (heroTab === 'url') {
-          setHeroOutput(engines.urlEncode(heroInput));
+          setHeroOutput(heroUrl(heroInput));
         } else if (heroTab === 'hash') {
-          const h = await engines.computeSubtleHash(heroInput, 'SHA-256');
+          const h = await heroSha256(heroInput);
           setHeroOutput(h);
         } else if (heroTab === 'password') {
-          setHeroOutput(engines.generatePassword(24).password);
+          setHeroOutput(heroPassword(24));
         }
       } catch (e: any) {
         setHeroOutput(`Error: ${e.message}`);
@@ -785,6 +818,7 @@ export default function App() {
           {/* Logo & Brand */}
           <button 
             onClick={handleBackToCatalog}
+            aria-label="Go to EncryptDecrypt Home"
             className="flex items-center gap-2 sm:gap-2.5 group text-left cursor-pointer shrink-0"
           >
             <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-[#2E9BFF] group-hover:border-[#2E9BFF] transition duration-200">
@@ -814,6 +848,7 @@ export default function App() {
                   ref={headerSearchInputRef}
                   type="text"
                   value={searchQuery}
+                  aria-label="Search 1,380+ tools"
                   onFocus={() => {
                     setSearchFocused(true);
                     preloadToolWorkspace();
@@ -837,6 +872,7 @@ export default function App() {
                         setSearchHighlightIndex(-1);
                         if (headerSearchInputRef.current) headerSearchInputRef.current.focus();
                       }}
+                      aria-label="Clear search input"
                       className="text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer p-1 rounded-md transition flex items-center justify-center"
                       title="Clear search"
                     >
@@ -877,6 +913,7 @@ export default function App() {
                     return (
                       <button
                         key={tool.id}
+                        aria-label={`Open tool ${tool.name}`}
                         onClick={() => {
                           handleSelectTool(tool);
                           setSearchQuery('');
@@ -918,6 +955,7 @@ export default function App() {
                         const el = document.getElementById('catalog-grid');
                         if (el) el.scrollIntoView({ behavior: 'smooth' });
                       }}
+                      aria-label="View all results in catalog below"
                       className="text-xs font-semibold text-[#2E9BFF] hover:underline cursor-pointer"
                     >
                       View all {filteredTools.length} results in catalog below ↓
@@ -932,6 +970,7 @@ export default function App() {
           <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
             <button
               onClick={handleBackToCatalog}
+              aria-label="Navigate to Home"
               className={`px-3 py-2 min-h-[40px] rounded-lg text-xs font-semibold transition-colors duration-150 cursor-pointer ${
                 !selectedTool && currentView === 'catalog'
                   ? 'text-sky-400 bg-blue-500/15 font-bold border border-blue-500/30'
@@ -942,6 +981,7 @@ export default function App() {
             </button>
             <button
               onClick={() => handleNavigateView('all-tools')}
+              aria-label="Navigate to All Tools Directory"
               className={`px-3 py-2 min-h-[40px] rounded-lg text-xs font-semibold transition-colors duration-150 cursor-pointer flex items-center gap-1.5 ${
                 currentView === 'all-tools'
                   ? 'text-sky-400 bg-blue-500/15 font-bold border border-blue-500/30'
@@ -953,6 +993,7 @@ export default function App() {
             </button>
             <button
               onClick={() => handleNavigateView('guides')}
+              aria-label="Navigate to Tech Guides"
               className={`px-3 py-2 min-h-[40px] rounded-lg text-xs font-semibold transition-colors duration-150 cursor-pointer ${
                 currentView === 'guides'
                   ? 'text-sky-400 bg-blue-500/15 font-bold border border-blue-500/30'
@@ -963,6 +1004,7 @@ export default function App() {
             </button>
             <button
               onClick={() => handleNavigateView('about')}
+              aria-label="Navigate to About Us"
               className={`px-3 py-2 min-h-[40px] rounded-lg text-xs font-semibold transition-colors duration-150 cursor-pointer ${
                 currentView === 'about'
                   ? 'text-sky-400 bg-blue-500/15 font-bold border border-blue-500/30'
@@ -973,6 +1015,7 @@ export default function App() {
             </button>
             <button
               onClick={() => handleNavigateView('contact')}
+              aria-label="Navigate to Contact Us"
               className={`px-3 py-2 min-h-[40px] rounded-lg text-xs font-semibold transition-colors duration-150 cursor-pointer ${
                 currentView === 'contact'
                   ? 'text-sky-400 bg-blue-500/15 font-bold border border-blue-500/30'
@@ -989,6 +1032,7 @@ export default function App() {
               href="https://www.buymeacoffee.com/encryptdecrypt" 
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Support this free project on Buy Me a Coffee"
               className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-[#FFDD00] text-black font-bold text-[11px] sm:text-xs hover:bg-[#FFEA4C] transition shadow-sm border border-[#E5C700] cursor-pointer"
               title="Support this free project"
             >
@@ -1018,6 +1062,7 @@ export default function App() {
 
             <button
               onClick={() => setMobileMenuOpen(prev => !prev)}
+              aria-label="Toggle navigation menu"
               className="p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] lg:hidden cursor-pointer"
               title="Toggle Menu"
             >
@@ -1031,6 +1076,7 @@ export default function App() {
           <div className="lg:hidden border-t border-[var(--border-subtle)] bg-[var(--bg-surface)] px-4 py-3 space-y-1 shadow-lg">
             <button
               onClick={handleBackToCatalog}
+              aria-label="Navigate to Home"
               className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)] flex items-center justify-between cursor-pointer"
             >
               <span>Home</span>
@@ -1038,6 +1084,7 @@ export default function App() {
             </button>
             <button
               onClick={() => handleNavigateView('all-tools')}
+              aria-label="Navigate to All Tools Directory"
               className={`w-full text-left px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-between cursor-pointer ${
                 currentView === 'all-tools'
                   ? 'text-[#2E9BFF] bg-blue-500/15'
@@ -1052,6 +1099,7 @@ export default function App() {
             </button>
             <button
               onClick={() => handleNavigateView('guides')}
+              aria-label="Navigate to Tech Guides"
               className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)] flex items-center justify-between cursor-pointer"
             >
               <span>Tech Guides & Cryptography Docs</span>
@@ -1059,6 +1107,7 @@ export default function App() {
             </button>
             <button
               onClick={() => handleNavigateView('about')}
+              aria-label="Navigate to About Us"
               className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)] flex items-center justify-between cursor-pointer"
             >
               <span>About Us & Zero-Knowledge Architecture</span>
@@ -1066,17 +1115,18 @@ export default function App() {
             </button>
             <button
               onClick={() => handleNavigateView('contact')}
+              aria-label="Navigate to Contact Us"
               className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)] flex items-center justify-between cursor-pointer"
             >
               <span>Contact Us & Technical Support</span>
               <ChevronRight size={14} className="text-[var(--text-muted)]" />
             </button>
             <div className="pt-2 border-t border-[var(--border-subtle)] flex items-center justify-around text-xs text-[var(--text-muted)]">
-              <button onClick={() => handleNavigateView('privacy')} className="hover:text-[#2E9BFF] cursor-pointer py-1">Privacy</button>
+              <button onClick={() => handleNavigateView('privacy')} aria-label="Navigate to Privacy Policy" className="hover:text-[#2E9BFF] cursor-pointer py-1">Privacy</button>
               <span>·</span>
-              <button onClick={() => handleNavigateView('terms')} className="hover:text-[#2E9BFF] cursor-pointer py-1">Terms</button>
+              <button onClick={() => handleNavigateView('terms')} aria-label="Navigate to Terms of Service" className="hover:text-[#2E9BFF] cursor-pointer py-1">Terms</button>
               <span>·</span>
-              <button onClick={() => handleNavigateView('disclaimer')} className="hover:text-[#2E9BFF] cursor-pointer py-1">Disclaimer</button>
+              <button onClick={() => handleNavigateView('disclaimer')} aria-label="Navigate to Legal Disclaimer" className="hover:text-[#2E9BFF] cursor-pointer py-1">Disclaimer</button>
             </div>
           </div>
         )}
@@ -1359,18 +1409,24 @@ export default function App() {
                     <input
                       type="text"
                       value={categorySearchQuery}
+                      aria-label="Search tool categories"
                       onChange={(e) => setCategorySearchQuery(e.target.value)}
                       placeholder="Search categories..."
                       className="w-full sm:w-56 h-8 bg-[var(--bg-input)] border border-[var(--border-subtle)] focus:border-[#2E9BFF] rounded-lg px-2.5 text-[11px] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] font-mono"
                     />
                     {categorySearchQuery && (
-                      <button onClick={() => setCategorySearchQuery('')} className="text-[var(--text-muted)] hover:text-[var(--text-primary)]">
+                      <button 
+                        onClick={() => setCategorySearchQuery('')} 
+                        aria-label="Clear category search"
+                        className="text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer"
+                      >
                         <X size={14} />
                       </button>
                     )}
                     {activeCategory !== 'all' && (
                       <button
                         onClick={() => setActiveCategory('all')}
+                        aria-label="Clear active category filter"
                         className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-blue-500/20 text-[#2E9BFF] border border-blue-500/30 hover:bg-blue-500/30 transition flex items-center gap-1.5 cursor-pointer shrink-0"
                       >
                         <X size={14} /> Clear Filter
@@ -1391,6 +1447,7 @@ export default function App() {
                     return (
                       <button
                         key={hub.slug}
+                        aria-label={`Browse ${hub.name} tools`}
                         onClick={() => handleSelectCategory(hub.slug)}
                         className={`p-3 min-h-[76px] rounded-xl text-center transition-colors duration-150 flex flex-col items-center justify-between border cursor-pointer group shadow-sm ${
                           isActive
@@ -1437,6 +1494,7 @@ export default function App() {
                 <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-[var(--border-subtle)]">
                   <button
                     onClick={() => handleNavigateView('all-tools')}
+                    aria-label="View All Tools Directory"
                     className="px-5 py-3 min-h-[48px] rounded-lg text-xs font-semibold transition-colors duration-150 cursor-pointer border bg-[#1d4ed8] hover:bg-[#1e40af] text-white border-blue-500 shadow-sm flex items-center gap-2"
                   >
                     <Layers size={14} />
@@ -1445,6 +1503,7 @@ export default function App() {
 
                   <button
                     onClick={() => handleSelectCategory('favorites')}
+                    aria-label="View Favorite Tools"
                     className={`px-5 py-3 min-h-[48px] rounded-lg text-xs font-semibold transition-colors duration-150 cursor-pointer border flex items-center gap-2 ${
                       activeCategory === 'favorites'
                         ? 'bg-amber-400 text-black font-bold border-amber-300 shadow-sm'
@@ -1458,6 +1517,7 @@ export default function App() {
                   {CATEGORY_HUBS_CONFIG.slice(0, 8).map(hub => (
                     <button
                       key={hub.slug}
+                      aria-label={`Filter by ${hub.name}`}
                       onClick={() => handleSelectCategory(hub.slug)}
                       className={`px-4 py-3 min-h-[48px] rounded-lg text-xs whitespace-nowrap transition-colors duration-150 cursor-pointer border flex items-center gap-2 ${
                         activeCategory === hub.slug
@@ -1501,6 +1561,7 @@ export default function App() {
                         ref={catalogSearchInputRef}
                         type="text"
                         value={searchQuery}
+                        aria-label="Search tools catalog"
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search 1,380+ tools (e.g. aes, qr, sha256)..."
                         className="w-full h-9 bg-[var(--bg-input)] border border-[var(--border-subtle)] rounded-lg px-3 pr-9 text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[#2E9BFF] focus:ring-1 focus:ring-[#2E9BFF] transition leading-normal"
@@ -1510,6 +1571,7 @@ export default function App() {
                         <div className="absolute inset-y-0 right-0 pr-2 flex items-center">
                           <button
                             onClick={() => setSearchQuery('')}
+                            aria-label="Clear catalog search"
                             className="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1 cursor-pointer flex items-center justify-center transition"
                             title="Clear search"
                           >
@@ -1521,6 +1583,7 @@ export default function App() {
                     {searchQuery && (
                       <button
                         onClick={() => setSearchQuery('')}
+                        aria-label="Reset search filter"
                         className="h-9 text-xs px-2.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] whitespace-nowrap cursor-pointer transition flex items-center"
                       >
                         Clear
@@ -1539,6 +1602,7 @@ export default function App() {
                     </div>
                     <button
                       onClick={() => setSearchQuery('')}
+                      aria-label="Reset search filter and show top 10 tools"
                       className="text-xs text-[#2E9BFF] hover:underline font-semibold cursor-pointer"
                     >
                       Reset Search (Show Top 10)
@@ -1551,10 +1615,10 @@ export default function App() {
                     <div className="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#2E9BFF] flex items-center justify-center mx-auto mb-3">
                       <Search size={24} />
                     </div>
-                    <h4 className="text-base font-bold text-[var(--text-primary)] mb-1">
+                    <h3 className="text-base font-bold text-[var(--text-primary)] mb-1">
                       No tools found matching &ldquo;{searchQuery}&rdquo;
-                    </h4>
-                    <p className="text-xs text-[var(--text-secondary)] mb-5 max-w-md mx-auto">
+                    </h3>
+                    <p className="text-xs text-slate-300 mb-5 max-w-md mx-auto">
                       Try searching for different keywords, acronyms, or click any of these popular tools below to launch them immediately:
                     </p>
                     <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
@@ -1574,8 +1638,9 @@ export default function App() {
                       ].map(item => (
                         <button
                           key={item.name}
+                          aria-label={`Search for ${item.name}`}
                           onClick={() => setSearchQuery(item.query)}
-                          className="px-3 py-1.5 text-xs rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[#2E9BFF] hover:border-[#2E9BFF]/40 cursor-pointer transition font-medium"
+                          className="px-3 py-1.5 text-xs rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] text-slate-200 hover:text-sky-300 hover:border-sky-400/40 cursor-pointer transition font-medium"
                         >
                           {item.name}
                         </button>
@@ -1586,7 +1651,8 @@ export default function App() {
                         setSearchQuery('');
                         setActiveCategory('all');
                       }}
-                      className="btn btn-primary text-xs py-2 px-5 inline-flex items-center gap-1.5"
+                      aria-label="View all tools in catalog"
+                      className="btn btn-primary text-xs py-2 px-5 inline-flex items-center gap-1.5 cursor-pointer"
                     >
                       <RefreshCw size={14} /> View All 1,380+ Tools Catalog
                     </button>
@@ -1622,7 +1688,7 @@ export default function App() {
                           </div>
 
                           <div className="pt-2 border-t border-[var(--border-subtle)] flex items-center justify-between">
-                            <span className="text-[11px] text-slate-400 font-mono">
+                            <span className="text-[11px] text-slate-300 font-mono">
                               {tool.inputType}
                             </span>
                             <span className="text-xs font-semibold text-sky-400 group-hover:text-sky-300 transition-colors duration-150 inline-flex items-center gap-1">
@@ -1644,16 +1710,17 @@ export default function App() {
                             <div className="inline-flex items-center justify-center p-3.5 rounded-2xl bg-blue-500/15 border border-blue-500/25 text-sky-400 mb-4 shadow-sm">
                               <Layers size={28} />
                             </div>
-                            <h4 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[var(--text-primary)] mb-3 tracking-tight text-center leading-snug">
+                            <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[var(--text-primary)] mb-3 tracking-tight text-center leading-snug">
                               Explore All {tools.length || '1,380'}+ Developer Utilities &amp; Cryptographic Tools
-                            </h4>
-                            <p className="text-xs sm:text-sm text-[var(--text-secondary)] mb-6 leading-relaxed max-w-xl mx-auto text-center">
+                            </h3>
+                            <p className="text-xs sm:text-sm text-slate-300 mb-6 leading-relaxed max-w-xl mx-auto text-center">
                               Showing top 10 featured tools above. EncryptDecrypt.org features over 1,380+ free client-side tools across {allCategoryHubs.length} categories — calculated 100% in your browser RAM with zero server transmission.
                             </p>
 
                             <div className="flex flex-wrap items-center justify-center gap-3">
                               <button
                                 onClick={() => handleNavigateView('all-tools')}
+                                aria-label="View All Tools Directory"
                                 className="btn btn-primary px-6 py-3 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-xl shadow-blue-500/25 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                               >
                                 <Layers size={17} />
@@ -1665,6 +1732,7 @@ export default function App() {
                                   const el = document.getElementById('category-hubs');
                                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                                 }}
+                                aria-label="Browse all tool categories"
                                 className="btn btn-secondary px-5 py-3 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 cursor-pointer"
                               >
                                 <span>Browse by Category ({allCategoryHubs.length})</span>
@@ -1969,11 +2037,11 @@ export default function App() {
           <div>
             <h4 className="font-bold text-slate-100 uppercase tracking-wider mb-3">Popular Encoders</h4>
             <ul className="space-y-1">
-              <li><a href="/tools/encoding-decoding/base64-encode-decode/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base64-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Base64 Encode/Decode</a></li>
-              <li><a href="/tools/url-web/url-encode-decode/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('url-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">URL Encode/Decode</a></li>
-              <li><a href="/tools/encoding-decoding/base16-hex-encode-decode/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base16-hex-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Hex to Text</a></li>
-              <li><a href="/tools/encoding-decoding/base58-encode-decode/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base58-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Base58 Bitcoin</a></li>
-              <li><a href="/tools/qr-barcodes/qr-code-generator/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('qr-code-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">QR Code Generator</a></li>
+              <li><a href="/tools/base64-encode-decode" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base64-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Base64 Encode/Decode</a></li>
+              <li><a href="/tools/url-encode-decode" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('url-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">URL Encode/Decode</a></li>
+              <li><a href="/tools/base16-hex-encode-decode" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base16-hex-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Hex to Text</a></li>
+              <li><a href="/tools/base58-encode-decode" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base58-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Base58 Bitcoin</a></li>
+              <li><a href="/tools/qr-code-generator" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('qr-code-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">QR Code Generator</a></li>
             </ul>
           </div>
 
@@ -1981,11 +2049,11 @@ export default function App() {
           <div>
             <h4 className="font-bold text-slate-100 uppercase tracking-wider mb-3">Security & Ciphers</h4>
             <ul className="space-y-1">
-              <li><a href="/tools/encryption-ciphers/aes-encrypt-decrypt/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('aes-encrypt-decrypt'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">AES-256-GCM Encrypt</a></li>
-              <li><a href="/tools/hashing-security/sha256-hash-generator/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('sha256-hash-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">SHA-256 Hash</a></li>
-              <li><a href="/tools/hashing-security/md5-hash-generator/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('md5-hash-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">MD5 Hash</a></li>
-              <li><a href="/tools/tokens-keys/jwt-token-generator/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('jwt-token-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">JWT Debugger</a></li>
-              <li><a href="/tools/security-privacy/secure-password-generator/" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('secure-password-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Password Generator</a></li>
+              <li><a href="/tools/aes-encrypt-decrypt" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('aes-encrypt-decrypt'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">AES-256-GCM Encrypt</a></li>
+              <li><a href="/tools/sha-256-hash-generator" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('sha-256-hash-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">SHA-256 Hash</a></li>
+              <li><a href="/tools/md5-hash-generator" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('md5-hash-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">MD5 Hash</a></li>
+              <li><a href="/tools/jwt-token-generator" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('jwt-token-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">JWT Debugger</a></li>
+              <li><a href="/tools/secure-password-generator" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('secure-password-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Password Generator</a></li>
             </ul>
           </div>
         </div>
