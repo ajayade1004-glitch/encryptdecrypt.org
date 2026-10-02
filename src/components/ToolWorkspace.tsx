@@ -15,6 +15,8 @@ import { SeoHead } from './SeoHead';
 import { AdUnit } from './AdUnit';
 import { ToolShareBar } from './ToolShareBar';
 import { ImageStudio } from './ImageStudio';
+import { BusinessDaysStudio } from './BusinessDaysStudio';
+import { parseBusinessDaysTextQuery } from '../utils/businessDaysCalculatorEngine';
 import { getContextualSampleInput, executeUniversalTool } from '../utils/universalToolDispatcher';
 import * as engines from '../crypto/toolEngines';
 import * as allEngines from '../crypto/allEngines';
@@ -130,6 +132,27 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
            s === 'base64-to-image' ||
            s === 'image-to-base64' ||
            s === 'base64-image-converter';
+  }, [tool.slug, tool.category]);
+
+  const isBusinessDaysTool = useMemo(() => {
+    const s = (tool.slug || '').toLowerCase();
+    const c = (tool.category || '').toLowerCase();
+    return s === 'business-days-calculator' ||
+           s === 'business-days-due-date-calculator' ||
+           s === 'workday-date-calculator' ||
+           s === 'weekday-counter' ||
+           s === 'date-difference' ||
+           s === 'time-duration-calculator' ||
+           s === 'week-number-calculator' ||
+           s === 'recurring-date-calculator' ||
+           s === 'date-add-subtract-calculator' ||
+           s.includes('business-day') ||
+           s.includes('working-day') ||
+           s.includes('workday') ||
+           s.includes('work-day') ||
+           s.includes('days-between') ||
+           s.includes('count-day') ||
+           ((c === 'date-time' || c === 'time-productivity-tools') && (s.includes('day') || s.includes('week') || s.includes('work')));
   }, [tool.slug, tool.category]);
 
   // PDF Utilities State
@@ -2541,6 +2564,9 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
             list.push(uuidVersion === 'v7' ? engines.generateUUIDv7() : engines.generateUUIDv4());
           }
           result = list.join('\n');
+        }
+        else if (isBusinessDaysTool) {
+          result = parseBusinessDaysTextQuery(inputText);
         }
         // Check new/recommended engines first
         const recResult = await newEngines.runRecommendedTool(slug, inputText, mode);
@@ -7479,6 +7505,17 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
             toolName={tool.name}
             onPayloadGenerated={(uri, info) => {
               setOutputText(info + '\n\n[Live Conversion Preview Generated Above]');
+            }}
+          />
+        )}
+
+        {/* Dedicated Interactive Visual Studio for Working Days & Business Days Calculator */}
+        {isBusinessDaysTool && (
+          <BusinessDaysStudio
+            toolSlug={tool.slug}
+            toolName={tool.name}
+            onPayloadGenerated={(summary) => {
+              setOutputText(summary);
             }}
           />
         )}

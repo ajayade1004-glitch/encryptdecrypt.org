@@ -18,6 +18,8 @@
  * 100% Client-Side. Zero server calls. Zero logging.
  */
 
+import { parseBusinessDaysTextQuery } from '../utils/businessDaysCalculatorEngine';
+
 // ----------------------------------------------------
 // 1. JSON & DEVELOPER TOOLS
 // ----------------------------------------------------
@@ -1189,18 +1191,7 @@ export function runWeekNumberCalculator(input: string): string {
 }
 
 export function runBusinessDaysCalculator(input: string): string {
-  const d1 = new Date();
-  const d2 = new Date(Date.now() + 86400000 * 14);
-
-  let cur = new Date(d1);
-  let businessDays = 0;
-  while (cur <= d2) {
-    const day = cur.getDay();
-    if (day !== 0 && day !== 6) businessDays++;
-    cur.setDate(cur.getDate() + 1);
-  }
-
-  return `Business Working Days (Mon-Fri): ${businessDays} days (excluding weekends)`;
+  return parseBusinessDaysTextQuery(input);
 }
 
 // ----------------------------------------------------

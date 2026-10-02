@@ -5,6 +5,7 @@
  */
 
 import { ToolItem } from '../types';
+import { parseBusinessDaysTextQuery } from './businessDaysCalculatorEngine';
 import * as toolEngines from '../crypto/toolEngines';
 import * as allEngines from '../crypto/allEngines';
 import * as newEngines from '../crypto/newEngines';
@@ -222,7 +223,18 @@ Our tools process **100% of data** inside client browser memory.
     return 'Hello, Web Crypto & Privacy! EncryptDecrypt-2026';
   }
 
-  // 10. Default General Text
+  // 10. Date, Time & Working Days
+  if (cat.includes('date') || cat.includes('time') || slug.includes('day') || slug.includes('date') || slug.includes('calendar')) {
+    if (slug.includes('business-day') || slug.includes('workday') || slug.includes('due-date')) {
+      return '2026-10-01 to 2026-10-31';
+    }
+    if (slug.includes('unix') || slug.includes('timestamp')) return '1773788400';
+    if (slug.includes('duration')) return '2 hours 45 mins + 1 hour 30 mins';
+    if (slug.includes('week')) return '2026-10-01';
+    return '2026-10-01 to 2026-12-31';
+  }
+
+  // 11. Default General Text
   return 'The quick brown fox jumps over the lazy dog. 1234567890! #PrivacyMatters';
 }
 
@@ -495,7 +507,25 @@ Action: Preview vector canvas and download crisp PNG via the Image Studio panel 
     }
 
     // ----------------------------------------------------
-    // H. CHECK THE EXTENSIVE SUB-ENGINE LIBRARIES
+    // H. DATE, CALENDAR & BUSINESS DAYS ENGINE
+    // ----------------------------------------------------
+    if (
+      slug === 'business-days-calculator' ||
+      slug === 'business-days-due-date-calculator' ||
+      slug === 'workday-date-calculator' ||
+      slug === 'weekday-counter' ||
+      slug === 'date-difference' ||
+      slug.includes('business-day') ||
+      slug.includes('working-day') ||
+      slug.includes('workday') ||
+      slug.includes('work-day') ||
+      slug.includes('days-between')
+    ) {
+      return parseBusinessDaysTextQuery(text);
+    }
+
+    // ----------------------------------------------------
+    // I. CHECK THE EXTENSIVE SUB-ENGINE LIBRARIES
     // ----------------------------------------------------
     const recResult = await newEngines.runRecommendedTool(slug, text);
     if (recResult !== null) return recResult;

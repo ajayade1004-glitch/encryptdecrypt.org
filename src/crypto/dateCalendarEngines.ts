@@ -4,6 +4,8 @@
  * calendar generators, timezone planners, and ISO week date analyzers.
  */
 
+import { parseBusinessDaysTextQuery } from '../utils/businessDaysCalculatorEngine';
+
 /** 1. Date to Unix Timestamp Batch Converter */
 export function convertDateToUnixBatch(input: string): string {
   const lines = (input || `2026-01-01 00:00:00 UTC
@@ -177,44 +179,7 @@ ISO-8601 Day No : ${dayIndex === 0 ? 7 : dayIndex} (Monday=1, Sunday=7)`;
 
 /** 7. Weekday Counter */
 export function countWeekdays(input: string): string {
-  const parts = (input || '2026-01-01 to 2026-12-31').split(/to|\.\.|-/i);
-  let start = new Date('2026-01-01');
-  let end = new Date('2026-12-31');
-
-  if (parts.length >= 2) {
-    const d1 = new Date(parts[0].trim());
-    const d2 = new Date(parts[1].trim());
-    if (!isNaN(d1.getTime()) && !isNaN(d2.getTime())) {
-      start = d1 < d2 ? d1 : d2;
-      end = d1 < d2 ? d2 : d1;
-    }
-  }
-
-  let weekdays = 0;
-  let weekendDays = 0;
-  let curr = new Date(start.getTime());
-
-  while (curr <= end) {
-    const day = curr.getDay();
-    if (day === 0 || day === 6) {
-      weekendDays++;
-    } else {
-      weekdays++;
-    }
-    curr.setDate(curr.getDate() + 1);
-  }
-
-  const totalDays = weekdays + weekendDays;
-
-  return `=== WEEKDAY & BUSINESS DAY COUNTER ===
-Start Date         : ${start.toDateString()}
-End Date           : ${end.toDateString()}
-Total Elapsed Days : ${totalDays} Days
-
-Business Weekdays  : ${weekdays} Days (${((weekdays / totalDays) * 100).toFixed(1)}%)
-Weekend Days       : ${weekendDays} Days (${((weekendDays / totalDays) * 100).toFixed(1)}%)
-Work Hours (8h/day): ${weekdays * 8} Hours
-Work Weeks (approx): ${(weekdays / 5).toFixed(2)} Weeks`;
+  return parseBusinessDaysTextQuery(input || '2026-01-01 to 2026-12-31');
 }
 
 /** 8. Date Range Generator */
@@ -314,25 +279,7 @@ Federal / International Holidays (Sample):
 
 /** 12. Workday Date Calculator */
 export function calculateWorkdayDate(input: string): string {
-  const start = new Date('2026-10-01');
-  const addWorkdays = 20;
-
-  let count = 0;
-  const curr = new Date(start.getTime());
-
-  while (count < addWorkdays) {
-    curr.setDate(curr.getDate() + 1);
-    const d = curr.getDay();
-    if (d !== 0 && d !== 6) {
-      count++;
-    }
-  }
-
-  return `=== WORKDAY & BUSINESS TARGET DATE CALCULATOR ===
-Starting Date      : ${start.toDateString()}
-Business Days Added: +${addWorkdays} workdays (excluding Sat/Sun)
-Target Delivery Date: ${curr.toDateString()}
-Total Calendar Days : ${Math.round((curr.getTime() - start.getTime()) / (1000 * 60 * 60 * 24))} elapsed calendar days`;
+  return parseBusinessDaysTextQuery(input || '2026-10-01 + 20 workdays');
 }
 
 /** 13. Date Add/Subtract Calculator */
