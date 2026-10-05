@@ -482,12 +482,29 @@ export default function App() {
     document.documentElement.setAttribute('data-theme', initial);
   }, []);
 
-  // 4. Real Client-Side Analytics Tracking
+  // 4. Real Client-Side Analytics Tracking & GA4 SPA Events
   useEffect(() => {
     if (currentView !== 'admin') {
       recordPageView(currentView);
+
+      // Transmit SPA route changes to Google Analytics 4
+      if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
+        const pagePath = selectedTool 
+          ? `/tools/${selectedTool.slug}` 
+          : (currentView === 'catalog' ? '/' : `/${currentView}`);
+        
+        const pageTitle = selectedTool 
+          ? (selectedTool.metaTitle || `${selectedTool.name} - Free Online Tool | EncryptDecrypt.org`)
+          : document.title;
+
+        (window as any).gtag('event', 'page_view', {
+          page_title: pageTitle,
+          page_location: window.location.href,
+          page_path: pagePath
+        });
+      }
     }
-  }, [currentView]);
+  }, [currentView, selectedTool]);
 
   useEffect(() => {
     const q = searchQuery.trim();

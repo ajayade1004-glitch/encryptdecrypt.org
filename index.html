@@ -436,29 +436,15 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" />
     </noscript>
 
-    <!-- ⚡ High-Speed Zero-TBT Analytics (Triggered strictly on real human interaction) -->
+    <!-- Google tag (gtag.js) - Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWS2PGE4ZZ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
-      function initAnalytics() {
-        if (window.__ga_loaded) return;
-        window.__ga_loaded = true;
-        var s = document.createElement('script');
-        s.async = true;
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-RWS2PGE4ZZ';
-        document.head.appendChild(s);
-        gtag('config', 'G-RWS2PGE4ZZ');
-      }
-
-      // Defer strictly until genuine human interaction (zero TBT in Lighthouse audits)
-      var isAuditBot = /Lighthouse|PageSpeed|HeadlessChrome|bot|crawler|spider/i.test(navigator.userAgent);
-      if (!isAuditBot) {
-        ['pointerdown', 'keydown', 'touchstart'].forEach(function(e) {
-          window.addEventListener(e, initAnalytics, { once: true, passive: true });
-        });
-      }
+      gtag('config', 'G-RWS2PGE4ZZ', {
+        send_page_view: true
+      });
     </script>
   </head>
   <body>

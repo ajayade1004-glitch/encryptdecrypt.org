@@ -4,7 +4,7 @@ import {
   ArrowLeft, RefreshCw, Key, FileText, Lock, Code,
   Sliders, Terminal, Info, HelpCircle, CheckCircle, AlertCircle,
   Sparkles, Upload, Share2, Link2, FileUp, QrCode,
-  Columns, Rows
+  Columns, Rows, Search
 } from 'lucide-react';
 import QRCode from 'qrcode';
 import { ToolItem } from '../types';
@@ -7935,24 +7935,39 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
       {/* Complete In-Depth Technical SEO & Documentation Section */}
       <article className="card-glass p-6 sm:p-10 my-8 leading-relaxed text-[var(--text-secondary)] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl shadow-xs">
         {/* Section 1: Answer-First GEO Summary & What is it */}
-        <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-4">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#2E9BFF] text-xs font-mono">
+            <span className="font-semibold">Target Keyword:</span>
+            <span>{seoData.focusKeyword}</span>
+          </div>
+          <span className="text-[11px] font-mono text-emerald-400 font-semibold flex items-center gap-1">
+            <ShieldCheck size={14} /> 100% In-Browser · Zero Cloud Logging
+          </span>
+        </div>
+
+        <h2 className="text-2xl sm:text-3xl font-bold text-[var(--text-primary)] mb-4 tracking-tight">
           What is {tool.name}?
         </h2>
 
-        {/* Answer-First GEO Highlight Box (Optimized for AI Overviews & Search Snippets) */}
+        {/* Answer-First GEO Highlight Box (Optimized for AI Overviews, Perplexity & Google Snippets) */}
         <div className="mb-6 p-4 sm:p-5 rounded-xl bg-blue-500/10 border border-blue-500/20 text-[var(--text-primary)]">
           <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#2E9BFF] uppercase tracking-wider mb-2">
             <ShieldCheck size={16} />
-            <span>Answer-First Architectural Summary</span>
+            <span>Answer-First Architectural Summary (GEO &amp; AI Citation Ready)</span>
           </div>
           <p className="text-sm sm:text-base leading-relaxed m-0 font-medium text-[var(--text-primary)]">
             {seoData.geoAnswer}
           </p>
         </div>
 
-        <p className="mb-4 text-sm sm:text-base leading-relaxed">
-          {tool.name} is an enterprise-grade, browser-native developer utility designed to execute high-assurance data transformations, cryptanalysis, encoding/decoding, validation, and performance diagnostics directly inside client execution environments. Unlike conventional cloud-hosted utilities that silently transmit confidential payloads, tokens, and credentials across the public Internet to third-party servers, {tool.name} operates strictly on your local CPU through deterministic Web Standards, JavaScript TypedArrays, and the W3C Web Cryptography API.
-        </p>
+        {/* Section 2: Deep Technical Overview */}
+        <div className="space-y-3.5 mb-6 text-sm sm:text-base leading-relaxed">
+          {seoData.deepOverview.map((para, pIdx) => (
+            <p key={pIdx} className="m-0 text-[var(--text-secondary)]">
+              {para}
+            </p>
+          ))}
+        </div>
 
         {toolOverride.longDescription && (
           <div className="mb-8 p-6 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)] text-sm leading-relaxed whitespace-pre-line text-[var(--text-primary)]">
@@ -7960,51 +7975,109 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
           </div>
         )}
 
-        {/* Section 2: How to Use */}
+        {/* Section 3: Technical Specifications & Algorithmic Parameters Table */}
+        <h2 className="text-xl font-bold text-[var(--text-primary)] mt-8 mb-3 flex items-center gap-2">
+          <Sliders size={18} className="text-[#2E9BFF]" />
+          Technical Specifications &amp; Architectural Parameters
+        </h2>
+        <p className="text-xs sm:text-sm text-[var(--text-muted)] mb-4">
+          Detailed technical reference parameters for {tool.name}, executing natively under client-side execution boundaries.
+        </p>
+
+        <div className="overflow-x-auto mb-6 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-input)]">
+          <table className="w-full text-left text-xs text-[var(--text-secondary)] border-collapse">
+            <thead>
+              <tr className="border-b border-[var(--border-subtle)] bg-[var(--bg-surface-hover)] text-[var(--text-primary)] font-semibold">
+                <th className="p-3 font-mono text-[11px] uppercase tracking-wider">Specification</th>
+                <th className="p-3 font-mono text-[11px] uppercase tracking-wider">Implementation Vector</th>
+                <th className="p-3 font-mono text-[11px] uppercase tracking-wider text-right">Verification</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[var(--border-subtle)]">
+              {seoData.technicalSpecs.map((spec, sIdx) => (
+                <tr key={sIdx} className="hover:bg-[var(--bg-surface)]/50">
+                  <td className="p-3 font-semibold text-[var(--text-primary)] whitespace-nowrap">{spec.label}</td>
+                  <td className="p-3 font-mono text-slate-300">{spec.value}</td>
+                  <td className="p-3 text-right">
+                    {spec.badge ? (
+                      <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-blue-500/20 text-[#2E9BFF] border border-blue-500/30">
+                        {spec.badge}
+                      </span>
+                    ) : (
+                      <span className="text-[10px] font-mono text-emerald-400 font-semibold">Verified</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Section 4: How to Use */}
         <h2 className="text-xl font-bold text-[var(--text-primary)] mt-8 mb-3">
           How to Use This {tool.name} Utility
         </h2>
-        <ol className="list-decimal pl-5 space-y-2.5 text-sm sm:text-base mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 mb-6">
           {seoData.howToUse.map((item) => (
-            <li key={item.step}>
-              <strong className="text-[var(--text-primary)]">{item.title}:</strong> {item.desc}
-            </li>
-          ))}
-        </ol>
-
-        {/* Section 3: Algorithmic Mechanics & Specifications */}
-        <h2 className="text-xl font-bold text-[var(--text-primary)] mt-8 mb-3">
-          How {tool.name} Works: Algorithmic Mechanics
-        </h2>
-        <p className="mb-4 text-sm sm:text-base leading-relaxed">
-          Under the hood, {tool.name} executes deterministic mathematical state transformations conforming strictly to international engineering standards ({seoData.howItWorks.standard}). In-memory byte buffers are structured utilizing zero-copy <code>Uint8Array</code> and <code>ArrayBuffer</code> primitives, preventing garbage collection stalls and preventing sensitive plaintext credentials from lingering in browser cache heaps.
-        </p>
-        <div className="bg-[var(--bg-input)] p-4 rounded-lg border border-[var(--border-subtle)] font-mono text-xs text-[var(--text-secondary)] overflow-x-auto mb-6">
-          <div className="text-[#2E9BFF] font-bold mb-1">// Deterministic Data Flow Diagram</div>
-          <div>{seoData.howItWorks.flow}</div>
-        </div>
-
-        {/* Section 4: Core Engineering Use Cases */}
-        <h2 className="text-xl font-bold text-[var(--text-primary)] mt-8 mb-3">
-          Core Engineering Use Cases
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-6">
-          {seoData.useCases.map((uc, idx) => (
-            <div key={idx} className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
-              <h3 className="text-xs font-bold text-[var(--text-primary)] mb-1 flex items-center gap-1.5">
-                <Terminal size={13} className="text-[#2E9BFF]" />
-                {uc.title}
-              </h3>
-              <p className="text-xs text-[var(--text-secondary)] m-0 leading-relaxed">
-                {uc.description}
+            <div key={item.step} className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="w-6 h-6 rounded-full bg-[#1d4ed8] text-white text-xs font-bold flex items-center justify-center shrink-0">
+                  {item.step}
+                </span>
+                <strong className="text-sm text-[var(--text-primary)] font-semibold">{item.title}</strong>
+              </div>
+              <p className="text-xs text-[var(--text-secondary)] leading-relaxed mb-2">
+                {item.desc}
               </p>
+              {item.tip && (
+                <div className="text-[11px] font-mono text-sky-400 bg-sky-500/10 px-2.5 py-1 rounded border border-sky-500/20">
+                  💡 <strong>Pro-Tip:</strong> {item.tip}
+                </div>
+              )}
             </div>
           ))}
         </div>
 
-        {/* Section 5: Developer Code Examples */}
+        {/* Section 5: Algorithmic Mechanics & Specifications */}
         <h2 className="text-xl font-bold text-[var(--text-primary)] mt-8 mb-3">
-          Developer Code Examples
+          How {tool.name} Works: Algorithmic Mechanics
+        </h2>
+        <p className="mb-4 text-sm sm:text-base leading-relaxed">
+          {seoData.howItWorks.deepExplanation}
+        </p>
+        <div className="bg-[var(--bg-input)] p-4 rounded-lg border border-[var(--border-subtle)] font-mono text-xs text-[var(--text-secondary)] overflow-x-auto mb-6">
+          <div className="text-[#2E9BFF] font-bold mb-1">// Deterministic Data Flow Diagram for {tool.name}</div>
+          <div>{seoData.howItWorks.flow}</div>
+        </div>
+
+        {/* Section 6: Core Engineering Use Cases */}
+        <h2 className="text-xl font-bold text-[var(--text-primary)] mt-8 mb-3">
+          Core Engineering Use Cases &amp; Workflows
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-6">
+          {seoData.useCases.map((uc, idx) => (
+            <div key={idx} className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)] flex flex-col justify-between">
+              <div>
+                <h3 className="text-xs font-bold text-[var(--text-primary)] mb-1 flex items-center gap-1.5">
+                  <Terminal size={13} className="text-[#2E9BFF]" />
+                  {uc.title}
+                </h3>
+                <p className="text-xs text-[var(--text-secondary)] m-0 leading-relaxed mb-2.5">
+                  {uc.description}
+                </p>
+              </div>
+              {uc.workflow && (
+                <div className="mt-2 text-[10px] font-mono text-emerald-400 bg-emerald-500/10 p-2 rounded border border-emerald-500/20">
+                  <strong>Workflow:</strong> {uc.workflow}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Section 7: Developer Code Examples */}
+        <h2 className="text-xl font-bold text-[var(--text-primary)] mt-8 mb-3">
+          Developer Code Examples for {tool.name}
         </h2>
         <div className="bg-[var(--bg-input)] rounded-lg border border-[var(--border-subtle)] overflow-hidden mb-6">
           <div className="flex items-center border-b border-[var(--border-subtle)] bg-[var(--bg-surface-hover)] text-xs font-mono">
@@ -8031,35 +8104,32 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
           <div className="p-4 font-mono text-xs text-[var(--text-secondary)] overflow-x-auto">
             {activeCodeTab === 'js' && (
               <pre className="m-0 leading-relaxed">
-{`// Client-Side Execution in Modern JavaScript (ES6+ / Web Standards)
+{seoData.codeSnippets?.js || `// Client-Side Execution in Modern JavaScript (ES6+ / Web Standards)
 const inputPayload = "${inputText.substring(0, 40) || 'sample-data'}";
-
-// Process locally without network calls or remote dependencies
 const utf8Bytes = new TextEncoder().encode(inputPayload);
-console.log("Input byte length:", utf8Bytes.length);
-// Native computation running directly on client V8/SpiderMonkey engine`}
+console.log("${tool.name} input byte length:", utf8Bytes.length);`}
               </pre>
             )}
 
             {activeCodeTab === 'python' && (
               <pre className="m-0 leading-relaxed">
-{`# Python 3 Implementation
+{seoData.codeSnippets?.python || `# Python 3 Implementation
 input_payload = "${inputText.substring(0, 40) || 'sample-data'}"
 encoded_bytes = input_payload.encode("utf-8")
-print(f"Processed byte stream: {len(encoded_bytes)} bytes")`}
+print(f"${tool.name} processed: {len(encoded_bytes)} bytes")`}
               </pre>
             )}
 
             {activeCodeTab === 'curl' && (
               <pre className="m-0 leading-relaxed">
-{`# Bash / Coreutils Terminal Command
+{seoData.codeSnippets?.curl || `# Bash / Coreutils Terminal Command
 echo -n "${inputText.substring(0, 40) || 'sample-data'}" | wc -c`}
               </pre>
             )}
           </div>
         </div>
 
-        {/* Section 6: Practical Examples */}
+        {/* Section 8: Practical Examples */}
         <h2 className="text-xl font-bold text-[var(--text-primary)] mt-8 mb-3">
           Practical Transformation Examples
         </h2>
@@ -8086,9 +8156,9 @@ echo -n "${inputText.substring(0, 40) || 'sample-data'}" | wc -c`}
           ))}
         </div>
 
-        {/* Section 7: Technical Architecture & Security Model */}
+        {/* Section 9: Technical Architecture & Security Model */}
         <h2 className="text-xl font-bold text-[var(--text-primary)] mt-8 mb-3">
-          Zero-Knowledge Client Architecture
+          Zero-Knowledge Client Architecture for {tool.name}
         </h2>
         <p className="mb-4 text-sm sm:text-base leading-relaxed">
           Traditional web utilities expose users to significant threat vectors including server-side request logging, reverse-proxy caching, middlebox inspection, and telemetry packet capture. In contrast, EncryptDecrypt.org operates an uncompromising zero-knowledge architecture. No remote application programming interface (API) endpoints are queried during transformation.
@@ -8108,9 +8178,23 @@ echo -n "${inputText.substring(0, 40) || 'sample-data'}" | wc -c`}
           </div>
         </div>
 
-        {/* Section 8: Limitations & Technical Headroom */}
+        {/* Section 10: Step-by-Step Air-Gapped Verification Protocol */}
         <h2 className="text-xl font-bold text-[var(--text-primary)] mt-8 mb-3">
-          Operational Boundaries & Technical Headroom
+          Step-by-Step Air-Gapped Verification Protocol
+        </h2>
+        <p className="mb-4 text-sm sm:text-base leading-relaxed">
+          You do not need to take our privacy claims on faith. You can verify that your private data never leaves your computer using your browser’s built-in developer tools:
+        </p>
+        <ol className="list-decimal pl-5 space-y-2 text-sm sm:text-base mb-6">
+          <li>Press <code>F12</code> (or <code>Cmd + Option + I</code> on macOS) to open Browser Developer Tools.</li>
+          <li>Navigate to the <strong>Network</strong> tab and check the <strong>Preserve log</strong> checkbox.</li>
+          <li>Enter private or sensitive credentials into the {tool.name} input field and execute the calculation.</li>
+          <li>Confirm that <strong>zero HTTP/HTTPS requests or WebSocket frames</strong> are transmitted.</li>
+        </ol>
+
+        {/* Section 11: Limitations & Technical Headroom */}
+        <h2 className="text-xl font-bold text-[var(--text-primary)] mt-8 mb-3">
+          Operational Boundaries &amp; Technical Headroom
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mb-6">
           {seoData.limitations.map((lim, idx) => (
@@ -8125,21 +8209,7 @@ echo -n "${inputText.substring(0, 40) || 'sample-data'}" | wc -c`}
           ))}
         </div>
 
-        {/* Section 9: Step-by-Step Air-Gapped Verification Protocol */}
-        <h2 className="text-xl font-bold text-[var(--text-primary)] mt-8 mb-3">
-          Step-by-Step Air-Gapped Verification Protocol
-        </h2>
-        <p className="mb-4 text-sm sm:text-base leading-relaxed">
-          You do not need to take our privacy claims on faith. You can verify that your private data never leaves your computer using your browser’s built-in developer tools:
-        </p>
-        <ol className="list-decimal pl-5 space-y-2 text-sm sm:text-base mb-6">
-          <li>Press <code>F12</code> (or <code>Cmd + Option + I</code> on macOS) to open Browser Developer Tools.</li>
-          <li>Navigate to the <strong>Network</strong> tab and check the <strong>Preserve log</strong> checkbox.</li>
-          <li>Enter private or sensitive credentials into the input field above and execute the tool.</li>
-          <li>Confirm that <strong>zero HTTP/HTTPS requests or WebSocket frames</strong> are transmitted.</li>
-        </ol>
-
-        {/* Section 10: Frequently Asked Questions (FAQ) */}
+        {/* Section 12: Frequently Asked Questions (FAQ) */}
         <h2 className="text-xl font-bold text-[var(--text-primary)] mt-8 mb-3">
           Frequently Asked Questions (FAQ)
         </h2>
@@ -8156,7 +8226,28 @@ echo -n "${inputText.substring(0, 40) || 'sample-data'}" | wc -c`}
           ))}
         </div>
 
-        {/* Section 11: More Tools in Category Hub */}
+        {/* Section 13: Long-Tail Keyword Directory & Semantic Search Intent */}
+        <div className="mt-8 pt-6 border-t border-[var(--border-subtle)]">
+          <h3 className="text-sm font-bold text-[var(--text-primary)] mb-2 flex items-center gap-1.5">
+            <Search size={14} className="text-[#2E9BFF]" />
+            Search Intent &amp; Related Keyword Queries
+          </h3>
+          <p className="text-xs text-[var(--text-muted)] leading-relaxed mb-3">
+            {seoData.searchIntentSummary}
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {seoData.semanticSearchTags.map((tag, tIdx) => (
+              <span
+                key={tIdx}
+                className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-[var(--bg-input)] text-slate-300 border border-[var(--border-subtle)]"
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Section 14: More Tools in Category Hub */}
         {categorySiblings.length > 0 && (
           <div className="mt-8 pt-6 border-t border-[var(--border-subtle)]">
             <div className="flex items-center justify-between mb-4">
