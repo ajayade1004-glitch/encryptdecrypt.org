@@ -56,6 +56,7 @@ Allow: /
 
 # Canonical Sitemaps & AI Agent Maps (ARD Specification)
 Sitemap: https://www.encryptdecrypt.org/sitemap.xml
+Sitemap: https://www.encryptdecrypt.org/rss.xml
 Agentmap: https://www.encryptdecrypt.org/.well-known/ai-catalog.json
 Agentmap: https://www.encryptdecrypt.org/ai-catalog.json
 Agentmap: https://www.encryptdecrypt.org/.well-known/ard.json

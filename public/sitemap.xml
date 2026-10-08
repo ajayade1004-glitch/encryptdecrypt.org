@@ -3,6 +3,12 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <url>
+    <loc>https://www.encryptdecrypt.org/tools/java-regular-expression-tester</loc>
+    <lastmod>2026-10-08T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
     <loc>https://www.encryptdecrypt.org/</loc>
     <lastmod>2026-09-30</lastmod>
     <changefreq>daily</changefreq>

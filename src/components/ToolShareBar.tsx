@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Share2, Link2, Check, ExternalLink } from 'lucide-react';
+import { Share2, Link2, Check, ExternalLink, Code } from 'lucide-react';
 import { ToolItem } from '../types';
+import { BacklinkModal } from './BacklinkModal';
 
 interface ToolShareBarProps {
   tool: ToolItem;
@@ -10,6 +11,7 @@ interface ToolShareBarProps {
 export const ToolShareBar: React.FC<ToolShareBarProps> = ({ tool, className = '' }) => {
   const [copied, setCopied] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [showBacklinkModal, setShowBacklinkModal] = useState(false);
 
   // Construct absolute canonical share URL
   const baseUrl = 'https://www.encryptdecrypt.org';
@@ -183,8 +185,26 @@ export const ToolShareBar: React.FC<ToolShareBarProps> = ({ tool, className = ''
               {copied ? 'Copied!' : 'Copy Link'}
             </span>
           </button>
+
+          {/* Embed & Backlink Badge Generator */}
+          <button
+            onClick={() => setShowBacklinkModal(true)}
+            aria-label="Embed & Backlink Badge Generator"
+            title="Get Embed Code & DoFollow Backlink Badges"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 active:scale-95 transition shadow-xs cursor-pointer"
+          >
+            <Code size={13} />
+            <span className="text-[11px] font-semibold">Embed &amp; Backlink</span>
+          </button>
         </div>
       </div>
+
+      {/* Backlink & Embed Modal */}
+      <BacklinkModal
+        tool={tool}
+        isOpen={showBacklinkModal}
+        onClose={() => setShowBacklinkModal(false)}
+      />
     </div>
   );
 };

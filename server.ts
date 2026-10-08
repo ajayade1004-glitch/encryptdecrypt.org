@@ -719,6 +719,22 @@ app.get('/ard.json', serveAiCatalog);
 app.get('/.well-known/mcp.json', serveMcp);
 app.get('/mcp.json', serveMcp);
 
+// RSS 2.0 Syndication Feed Endpoint (RFC 822 / RSS 2.0 Spec)
+const serveRssFeed = (req: Request, res: Response) => {
+  const filePath = path.join(__dirname, 'public', 'rss.xml');
+  if (fs.existsSync(filePath)) {
+    res.setHeader('Content-Type', 'application/rss+xml; charset=utf-8');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400');
+    return res.sendFile(filePath);
+  }
+  return res.status(404).json({ error: 'RSS feed not found' });
+};
+
+app.get('/rss.xml', serveRssFeed);
+app.get('/feed.xml', serveRssFeed);
+app.get('/rss', serveRssFeed);
+
 // ==========================================
 // VITE DEV SERVER / PRODUCTION STATIC ASSETS
 // ==========================================

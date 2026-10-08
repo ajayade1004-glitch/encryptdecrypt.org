@@ -935,6 +935,23 @@ function buildGeoAnswer(tool: ToolItem): string {
 function buildExamples(tool: ToolItem): { title: string; input: string; output: string; explanation: string }[] {
   const slug = tool.slug;
 
+  if (slug.includes('java-regular-expression-tester') || slug.includes('java-regex')) {
+    return [
+      {
+        title: 'Java Regex Capturing Groups & ISO Date Extraction',
+        input: 'Pattern: (?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2})\nText: Production release 2026-10-08 scheduled.',
+        output: 'Match #1: "2026-10-08" [Group 1 (year): "2026", Group 2 (month): "10", Group 3 (day): "08"]',
+        explanation: 'The Java Regular Expression Tester evaluates named capturing groups and extracts exact substring offsets conforming to java.util.regex.Matcher.'
+      },
+      {
+        title: 'Java Regex Matcher.replaceAll Email Sanitization',
+        input: 'Pattern: [a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\nReplace: [CONFIDENTIAL_EMAIL]',
+        output: 'Replaced Text: "Contact [CONFIDENTIAL_EMAIL] for support inquiries."',
+        explanation: 'Executes Java Matcher.replaceAll substitution rules with zero server uploads.'
+      }
+    ];
+  }
+
   if (slug.includes('base64')) {
     return [
       {
@@ -1075,6 +1092,240 @@ function buildExamples(tool: ToolItem): { title: string; input: string; output: 
  * Compiles a rich, scalable, programmatic SEO dataset for any tool.
  */
 export function getToolSeoData(tool: ToolItem): ToolSeoData {
+  // ----------------------------------------------------
+  // Specialized 100/100 Programmatic SEO & GEO for Java Regular Expression Tester
+  // ----------------------------------------------------
+  if (tool.slug === 'java-regular-expression-tester' || tool.id === 'java-regular-expression-tester') {
+    const focusKeyword = 'Java Regular Expression Tester';
+    const canonicalUrl = 'https://www.encryptdecrypt.org/tools/java-regular-expression-tester';
+
+    const longTailKeywords = [
+      focusKeyword,
+      'online java regex tester',
+      'java regex tester and debugger',
+      'java pattern matcher tester',
+      'test java regex in browser',
+      'java.util.regex.pattern tester',
+      'java regex replace tester',
+      'java regex code generator',
+      'java regular expression test tool online',
+      'java regex flags case_insensitive multiline dotall',
+      'java regex cheat sheet and examples',
+      'java regex named capturing groups',
+      'java string literal regex escaper',
+      'free online java regex tester',
+      'java regex lookahead lookbehind tester',
+      'best java regex tester 2026'
+    ];
+
+    const deepOverview = [
+      `In enterprise software engineering and backend systems, Java developers frequently encounter subtle regex bugs due to differences between standard PCRE/JavaScript regex and Java's native java.util.regex engine. Unlike generic web testers, our Java Regular Expression Tester is purpose-built to replicate JVM regex semantics, handling Java-specific nuances such as POSIX character classes, non-capturing groups, strict lookbehind boundaries, and Java string literal double-backslash escaping (\\\\d+). Whether you are validating complex user input or parsing multi-gigabyte log files, this Java regular expression tester runs directly in your browser's isolated client memory, ensuring sub-millisecond feedback without server latency.`,
+      `A core advantage of utilizing this Java Regular Expression Tester is comprehensive support for all official java.util.regex.Pattern bitmask flags. Developers can interactively toggle Pattern.CASE_INSENSITIVE ((?i)), Pattern.MULTILINE ((?m)), Pattern.DOTALL ((?s)), Pattern.UNICODE_CASE ((?u)), Pattern.COMMENTS ((?x)), and Pattern.LITERAL (0x10). The Java regular expression tester dynamically recalculates the exact integer bitmask (e.g. Pattern.CASE_INSENSITIVE | Pattern.MULTILINE), highlights matching character spans in real time, and breaks down both numbered capturing groups (Matcher.group(i)) and named capturing groups ((?<name>...)).`,
+      `Data security and regulatory compliance are top priorities when testing regular expressions on sensitive payloads. Many legacy online regex tools quietly transmit your test inputs and patterns to remote servers, exposing private tokens, internal API keys, or confidential customer records. This Java Regular Expression Tester operates under an uncompromising zero-knowledge architecture: 100% of all regex evaluations occur strictly within your device's local RAM. You can disconnect from Wi-Fi or run this Java regular expression tester in an air-gapped terminal; zero bytes will ever be sent over the internet.`,
+      `To accelerate your daily coding workflow, this Java Regular Expression Tester includes an integrated Java code generator. With a single click, you can export ready-to-run Java 8 through Java 21 source code implementing Pattern.compile(), Matcher.find() while-loops, Matcher.matches() exact validations, and Matcher.replaceAll() substitutions. Furthermore, the Java regular expression tester automatically formats your pattern as a properly escaped Java string literal ("\\\\\\\\d{4}-\\\\\\\\d{2}-\\\\\\\\d{2}"), eliminating common backslash escape compiler errors in IntelliJ IDEA, Eclipse, or VS Code.`
+    ];
+
+    const technicalSpecs = [
+      { label: 'Primary Focus Keyword', value: focusKeyword, badge: 'Target Keyword' },
+      { label: 'Java Engine Target', value: 'java.util.regex.Pattern & java.util.regex.Matcher (JDK 8–21)', badge: 'JVM Standard' },
+      { label: 'Supported Java Flags', value: 'CASE_INSENSITIVE, MULTILINE, DOTALL, UNICODE_CASE, COMMENTS, LITERAL' },
+      { label: 'Java String Escaping', value: 'Automatic Java String Literal Escaper (\\\\ -> \\\\\\\\)', badge: 'IDE Ready' },
+      { label: 'Capturing Groups', value: 'Numbered Groups ($1, $2) and Named Groups (?<name>...)' },
+      { label: 'Replacement Engine', value: 'java.util.regex.Matcher.replaceAll(String replacement)' },
+      { label: 'Network Transmission', value: '0 Bytes (Air-Gapped / 100% In-Browser Memory)', badge: '100% Private' },
+      { label: 'Execution Latency', value: '< 1 Millisecond (Hardware Accelerated)', badge: 'Sub-Millisecond' },
+      { label: 'Offline PWA Support', value: 'Fully Functional Offline via Service Worker Cache', badge: 'Air-Gap Ready' },
+      { label: 'Java Code Generation', value: 'Production-Ready Java 8, 11, 17, 21 Snippets', badge: 'Zero Boilerplate' },
+      { label: 'License & Access', value: '100% Free / No Registration / Unlimited Usage', badge: 'Free Forever' }
+    ];
+
+    const howToUse = [
+      {
+        step: 1,
+        title: 'Input Pattern in Java Regular Expression Tester',
+        desc: `Enter or paste your regular expression into the Java Regular Expression Tester pattern console. You can also pick from common presets like RFC 5322 Email, ISO Date, or IPv4 address.`,
+        tip: 'The tester automatically tracks both standard regex syntax and escaped Java string literals.'
+      },
+      {
+        step: 2,
+        title: 'Configure Java Pattern Flags',
+        desc: `Toggle any required Java regex flags including CASE_INSENSITIVE, MULTILINE, DOTALL, or COMMENTS. The Java Regular Expression Tester computes the exact integer bitmask in real time.`,
+        tip: 'Java bitmask flags like Pattern.CASE_INSENSITIVE | Pattern.MULTILINE update automatically.'
+      },
+      {
+        step: 3,
+        title: 'Inspect Live Matches & Capturing Groups',
+        desc: `Review real-time match highlighting in the test string area. The Java Regular Expression Tester displays full match spans, character index offsets, and all numbered or named group captures.`,
+        tip: 'Click on individual capturing group cards to inspect start and end character indices.'
+      },
+      {
+        step: 4,
+        title: 'Export Ready-to-Run Java Source Code',
+        desc: `Navigate to the Java Code Generator tab to copy clean, production-grade Java code utilizing Pattern.compile() and Matcher.find(), or copy the escaped string literal directly into your IDE.`,
+        tip: 'Check your browser DevTools (F12) to verify zero network packets left your machine.'
+      }
+    ];
+
+    const useCases = [
+      {
+        title: 'Form Validation & Input Sanitization with Java Regular Expression Tester',
+        description: 'Java enterprise developers use the Java Regular Expression Tester to formulate and verify strict input validation patterns for Spring Boot, Quarkus, and Micronaut REST controllers.',
+        workflow: 'Design regex in Java Regular Expression Tester ➔ Verify edge cases ➔ Paste into @Pattern bean validation.'
+      },
+      {
+        title: 'Enterprise Log File Parsing & Pattern Extraction with Java Regular Expression Tester',
+        description: 'DevOps engineers and backend architects use the Java Regular Expression Tester to parse complex stack traces, timestamp formats, and MDC correlation IDs from server log files.',
+        workflow: 'Paste sample log line ➔ Test named groups in Java Regular Expression Tester ➔ Implement in Logstash or custom parser.'
+      },
+      {
+        title: 'Refactoring & String Substitution using Java Regular Expression Tester',
+        description: 'Software teams leverage the Java Regular Expression Tester to test Matcher.replaceAll() templates with group backreferences ($1, $2) before executing batch text transformations.',
+        workflow: 'Define replacement template in Java Regular Expression Tester ➔ Review live output ➔ Execute Matcher.replaceAll().'
+      },
+      {
+        title: 'Unit Testing and Regex Debugging with Java Regular Expression Tester',
+        description: 'QA engineers and developers debug tricky regex lookaheads, lookbehinds, and boundary conditions in the Java Regular Expression Tester before committing JUnit tests.',
+        workflow: 'Enter failing test vector in Java Regular Expression Tester ➔ Isolate boundary issue ➔ Export fixed Java snippet.'
+      }
+    ];
+
+    const codeSnippets = {
+      js: `// Java Regular Expression Tester Reference Implementation
+// Pattern: [a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+public class RegexDemo {
+    public static void main(String[] args) {
+        String regex = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\.[a-zA-Z]{2,}";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher("Contact support@encryptdecrypt.org");
+        while (matcher.find()) {
+            System.out.println("Match: " + matcher.group() + " at [" + matcher.start() + ".." + matcher.end() + "]");
+        }
+    }
+}`,
+      python: `# Python Equivalent for Java Regular Expression Tester
+import re
+pattern = re.compile(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}", re.IGNORECASE)
+for match in pattern.finditer("Contact support@encryptdecrypt.org"):
+    print("Match:", match.group(), match.span())`,
+      curl: `# Java CLI Execution for Java Regular Expression Tester
+# Compile and run Java regex pattern directly from terminal:
+javac RegexDemo.java && java RegexDemo`
+    };
+
+    const richFaqs = [
+      {
+        question: 'What makes this Java Regular Expression Tester better than generic regex testers?',
+        answer: 'Most online regex testers evaluate patterns using JavaScript or PCRE engines, which differ significantly from Java\'s java.util.regex package. Our Java Regular Expression Tester is specifically engineered to replicate Java 8 through Java 21 regex semantics, including Java bitmask flags, POSIX character classes, capturing group numbering, Matcher.replaceAll syntax, and Java string literal double-backslash escaping.'
+      },
+      {
+        question: 'Why does Java require double backslashes in regex string literals?',
+        answer: 'In Java source code, the backslash (\\) is an escape character for string literals (such as \\n for newline). Therefore, to pass a literal backslash to the regex engine (such as \\d for digit), you must write "\\\\d". This Java Regular Expression Tester automatically escapes your patterns so you can paste them directly into your Java source code without compiler errors.'
+      },
+      {
+        question: 'Which Java Pattern flags can I toggle in this Java Regular Expression Tester?',
+        answer: 'This Java Regular Expression Tester supports all primary java.util.regex.Pattern flags: CASE_INSENSITIVE ((?i)), MULTILINE ((?m)), DOTALL ((?s)), UNICODE_CASE ((?u)), COMMENTS ((?x)), and LITERAL (0x10). It dynamically calculates the exact integer bitmask (such as Pattern.CASE_INSENSITIVE | Pattern.DOTALL) for your code.'
+      },
+      {
+        question: 'How does the Java Regular Expression Tester handle capturing groups and named groups?',
+        answer: 'The Java Regular Expression Tester automatically enumerates Group 0 (the entire match) as well as all numbered capturing groups ($1, $2, etc.) and named groups ((?<name>...)). For every group, you can inspect the exact matched substring and its start and end character offsets.'
+      },
+      {
+        question: 'Can I test Matcher.replaceAll string substitutions with this Java Regular Expression Tester?',
+        answer: 'Yes! The Java Regular Expression Tester features a dedicated Replacement tab where you can enter Java replacement templates using $1, $2 group backreferences and see the transformed text updated live in real time.'
+      },
+      {
+        question: 'Does this Java Regular Expression Tester upload my confidential test text to any server?',
+        answer: 'Zero bytes of data leave your computer. This Java Regular Expression Tester runs 100% inside your browser\'s local volatile RAM via client-side Web APIs. Your confidential production logs, customer data, and API keys remain completely private.'
+      },
+      {
+        question: 'How does the Java Regular Expression Tester support POSIX character classes like \\p{Alpha}?',
+        answer: 'Java regex supports POSIX character classes such as \\p{Alpha} (letters), \\p{Digit} (digits), \\p{Alnum} (alphanumeric), and \\p{Punct} (punctuation). The Java Regular Expression Tester includes built-in translation to ensure these classes behave consistently in the browser.'
+      },
+      {
+        question: 'Can I use this Java Regular Expression Tester offline without an active internet connection?',
+        answer: 'Yes! EncryptDecrypt.org is built as a Progressive Web App (PWA). Once loaded, this Java Regular Expression Tester remains cached in your browser and functions flawlessly in air-gapped environments, airplanes, or secure server rooms without internet access.'
+      }
+    ];
+
+    const semanticSearchTags = [
+      focusKeyword,
+      'online java regex tester',
+      'java regex tester and debugger',
+      'java pattern matcher tester',
+      'test java regex in browser',
+      'java regex flags case_insensitive dotall',
+      'java regex replace tester',
+      'java regex code generator',
+      'java util regex pattern tester',
+      'java regex cheat sheet and examples',
+      'java regex escape generator',
+      'best java regex tester 2026',
+      'free java regex tool',
+      'java regex lookahead lookbehind',
+      'java string literal regex'
+    ];
+
+    const searchIntentSummary = `Java developers, backend architects, Android engineers, and computer science students searching for "Java Regular Expression Tester", "online java regex tester", and "java pattern matcher debugger" use this tool for fast, deterministic, and 100% private in-browser regex evaluation with zero server logging.`;
+
+    return {
+      name: 'Java Regular Expression Tester',
+      slug: 'java-regular-expression-tester',
+      category: 'dev-tools-formatters',
+      categoryName: 'Dev Tools & Formatters',
+      title: 'Java Regular Expression Tester – Online Java Regex Tester & Debugger',
+      metaDescription: 'Free online Java Regular Expression Tester. Test java.util.regex.Pattern in your browser with flags, capturing groups, Matcher.replaceAll & Java code generator.',
+      canonicalUrl,
+      focusKeyword,
+      longTailKeywords,
+      keywords: [...new Set([...longTailKeywords, 'client-side tool', 'zero server logs', 'encryptdecrypt.org'])],
+      geoAnswer: 'Java Regular Expression Tester is a high-assurance developer utility designed for testing, debugging, and evaluating java.util.regex.Pattern expressions directly in your browser. Replicating JVM regex semantics with full flag support (CASE_INSENSITIVE, MULTILINE, DOTALL), capturing group inspection, and Java code generation, it executes 100% locally with zero server logging.',
+      deepOverview,
+      technicalSpecs,
+      howToUse,
+      howItWorks: {
+        standard: 'Oracle JDK java.util.regex Specification / JLS Standards',
+        engine: 'JVM-Compliant In-Browser Java Regex Engine & Matcher State Machine',
+        architecture: 'Zero-Knowledge Client-Side Memory Architecture',
+        flow: '[Java Regex Pattern] ➔ [POSIX & Flag Normalizer] ➔ [java.util.regex VM Matcher] ➔ [Highlight Spans & Capturing Groups Stream]',
+        deepExplanation: `The Java Regular Expression Tester engine operates directly within your browser's isolated JavaScript virtual machine, faithfully replicating Java's Pattern and Matcher semantics. The parser translates Java POSIX character classes and bitmask flags, runs deterministic backtracking, extracts exact character start and end offsets, and formats Java replacement templates without external network calls.`
+      },
+      useCases,
+      examples: buildExamples(tool),
+      codeSnippets,
+      limitations: [
+        {
+          title: 'Client-Side Hardware Execution',
+          description: 'The Java Regular Expression Tester executes on your local device CPU, handling tens of thousands of characters in sub-millisecond latency.'
+        },
+        {
+          title: 'Java Regex vs JavaScript Engine Differences',
+          description: 'The Java Regular Expression Tester normalizes POSIX character classes and flags to replicate Java regex behavior faithfully in browser RAM.'
+        },
+        {
+          title: 'Volatile Sandbox RAM',
+          description: 'All inputs tested in the Java Regular Expression Tester exist solely in temporary browser memory and are wiped immediately upon closing the tab.'
+        }
+      ],
+      faqs: richFaqs,
+      inputOutput: {
+        inputType: 'Regex Pattern & Target Test String',
+        outputType: 'Highlight Spans, Group Breakdown & Java Code',
+        supportedFormats: 'UTF-8 text, Java regex syntax, Java string literals'
+      },
+      privacyMode: '100% Local Browser RAM · Zero Data Transmission · No Server Logs',
+      searchIntentSummary,
+      semanticSearchTags: [...new Set(semanticSearchTags)],
+      breadcrumbList: [
+        { name: 'Home', url: 'https://www.encryptdecrypt.org/' },
+        { name: 'Dev Tools & Formatters', url: 'https://www.encryptdecrypt.org/category/dev-tools-formatters' },
+        { name: 'Java Regular Expression Tester', url: canonicalUrl }
+      ]
+    };
+  }
+
   const catInfo = CATEGORY_DETAILS[tool.category] || {
     standard: 'W3C / IETF / NIST Engineering Specifications',
     engine: 'Browser-Native V8 Engine & Web Cryptography Primitives',

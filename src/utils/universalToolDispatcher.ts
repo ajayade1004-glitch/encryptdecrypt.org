@@ -6,6 +6,7 @@
 
 import { ToolItem } from '../types';
 import { parseBusinessDaysTextQuery } from './businessDaysCalculatorEngine';
+import { runJavaRegexTester } from './javaRegexEngine';
 import * as toolEngines from '../crypto/toolEngines';
 import * as allEngines from '../crypto/allEngines';
 import * as newEngines from '../crypto/newEngines';
@@ -55,6 +56,11 @@ import * as megaToolsEngines from '../crypto/megaToolsEngines';
 export function getContextualSampleInput(tool: ToolItem): string {
   const slug = tool.slug.toLowerCase();
   const cat = (tool.category || '').toLowerCase();
+
+  // Java Regular Expression Tester
+  if (slug === 'java-regular-expression-tester' || slug.includes('java-regex')) {
+    return 'Pattern: [a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\nFlags: CASE_INSENSITIVE\nText: Contact support@encryptdecrypt.org or dev.team@company.co.uk for inquiries.\nInvalid email: test@.com or user@domain';
+  }
 
   // 1. CSS & Web Styling
   if (cat.includes('css') || slug.includes('css') || slug.includes('style') || slug.includes('tailwind')) {
@@ -254,6 +260,10 @@ export async function executeUniversalTool(
     // ----------------------------------------------------
     // A. PRIORITY SPECIFIC TOOLS & ADVANCED CRYPTO
     // ----------------------------------------------------
+    if (slug === 'java-regular-expression-tester' || slug.includes('java-regex')) {
+      return runJavaRegexTester(text);
+    }
+
     if (slug === 'jwt-validator' || slug === 'jwt-debugger' || slug === 'jwt-token-generator' || slug === 'jwt-inspector') {
       const jwtRes = toolEngines.decodeJWT(text || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFsZXggSm9obnNvbiIsImlhdCI6MTUxNjIzOTAyMn0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c');
       return JSON.stringify({

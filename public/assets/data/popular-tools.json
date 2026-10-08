@@ -1,1 +1,882 @@
-[{"id":"base64-encode-decode","name":"Base64 Encode/Decode","slug":"base64-encode-decode","category":"encoding-decoding","categoryName":"Encoding & Decoding","shortDesc":"Encode or decode strings and binary files to Base64 format instantly.","metaTitle":"Base64 Encode/Decode Online - 100% Free & Private","metaDescription":"Encode or decode strings and binary files to Base64 format instantly. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"base64 encode/decode online","secondaryKeywords":["base64 encode/decode tool","free base64 encode/decode","client-side base64 encode/decode","browser base64 encode/decode"],"lsiKeywords":["encoding & decoding utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"textarea","hasFileSupport":true,"icon":"M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z","related":["url-encode-decode","html-encode-decode","base32-encode-decode","base16-hex-encode-decode","base58-encode-decode","base85-ascii85-encode"],"popular":true},{"id":"url-encode-decode","name":"URL Encode/Decode","slug":"url-encode-decode","category":"encoding-decoding","categoryName":"Encoding & Decoding","shortDesc":"Percent-encode or decode URL query strings and URI components safely.","metaTitle":"URL Encode/Decode Online - 100% Free & Private","metaDescription":"Percent-encode or decode URL query strings and URI components safely. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"url encode/decode online","secondaryKeywords":["url encode/decode tool","free url encode/decode","client-side url encode/decode","browser url encode/decode"],"lsiKeywords":["encoding & decoding utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"textarea","hasFileSupport":false,"icon":"M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z","related":["base64-encode-decode","html-encode-decode","base32-encode-decode","base16-hex-encode-decode","base58-encode-decode","base85-ascii85-encode"],"popular":true},{"id":"html-encode-decode","name":"HTML Entities Encode/Decode","slug":"html-encode-decode","category":"encoding-decoding","categoryName":"Encoding & Decoding","shortDesc":"Convert special characters to HTML entities and back to prevent XSS.","metaTitle":"HTML Entities Encode/Decode Online - 100% Free & Private","metaDescription":"Convert special characters to HTML entities and back to prevent XSS. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"html entities encode/decode online","secondaryKeywords":["html entities encode/decode tool","free html entities encode/decode","client-side html entities encode/decode","browser html entities encode/decode"],"lsiKeywords":["encoding & decoding utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"textarea","hasFileSupport":false,"icon":"M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z","related":["base64-encode-decode","url-encode-decode","base32-encode-decode","base16-hex-encode-decode","base58-encode-decode","base85-ascii85-encode"],"popular":true},{"id":"base16-hex-encode-decode","name":"Base16 Hex Encode/Decode","slug":"base16-hex-encode-decode","category":"encoding-decoding","categoryName":"Encoding & Decoding","shortDesc":"Convert ASCII/UTF-8 text into hexadecimal byte values and reverse.","metaTitle":"Base16 Hex Encode/Decode Online - 100% Free & Private","metaDescription":"Convert ASCII/UTF-8 text into hexadecimal byte values and reverse. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"base16 hex encode/decode online","secondaryKeywords":["base16 hex encode/decode tool","free base16 hex encode/decode","client-side base16 hex encode/decode","browser base16 hex encode/decode"],"lsiKeywords":["encoding & decoding utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"textarea","hasFileSupport":true,"icon":"M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base32-encode-decode","base58-encode-decode","base85-ascii85-encode"],"popular":true},{"id":"base58-encode-decode","name":"Base58 Encode/Decode","slug":"base58-encode-decode","category":"encoding-decoding","categoryName":"Encoding & Decoding","shortDesc":"Bitcoin and IPFS standard Base58 string encoder and decoder tool.","metaTitle":"Base58 Encode/Decode Online - 100% Free & Private","metaDescription":"Bitcoin and IPFS standard Base58 string encoder and decoder tool. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"base58 encode/decode online","secondaryKeywords":["base58 encode/decode tool","free base58 encode/decode","client-side base58 encode/decode","browser base58 encode/decode"],"lsiKeywords":["encoding & decoding utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"textarea","hasFileSupport":true,"icon":"M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base32-encode-decode","base16-hex-encode-decode","base85-ascii85-encode"],"popular":true},{"id":"url-safe-base64","name":"URL-Safe Base64 Encode/Decode","slug":"url-safe-base64","category":"encoding-decoding","categoryName":"Encoding & Decoding","shortDesc":"Base64 encoding replacing + and / with - and _ without padding.","metaTitle":"URL-Safe Base64 Encode/Decode Online - 100% Free & Private","metaDescription":"Base64 encoding replacing + and / with - and _ without padding. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"url-safe base64 encode/decode online","secondaryKeywords":["url-safe base64 encode/decode tool","free url-safe base64 encode/decode","client-side url-safe base64 encode/decode","browser url-safe base64 encode/decode"],"lsiKeywords":["encoding & decoding utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"textarea","hasFileSupport":true,"icon":"M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base32-encode-decode","base16-hex-encode-decode","base58-encode-decode"],"popular":true},{"id":"binary-translator","name":"Binary to Text Translator","slug":"binary-translator","category":"encoding-decoding","categoryName":"Encoding & Decoding","shortDesc":"Convert 8-bit binary 0s and 1s to human-readable text and ASCII.","metaTitle":"Binary to Text Translator Online - 100% Free & Private","metaDescription":"Convert 8-bit binary 0s and 1s to human-readable text and ASCII. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"binary to text translator online","secondaryKeywords":["binary to text translator tool","free binary to text translator","client-side binary to text translator","browser binary to text translator"],"lsiKeywords":["encoding & decoding utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"textarea","hasFileSupport":false,"icon":"M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base32-encode-decode","base16-hex-encode-decode","base58-encode-decode"],"popular":true},{"id":"base64-to-image","name":"Base64 to Image Data URI","slug":"base64-to-image","category":"encoding-decoding","categoryName":"Encoding & Decoding","shortDesc":"Convert raw Base64 data strings into visual images and preview inline.","metaTitle":"Base64 to Image Data URI Online - 100% Free & Private","metaDescription":"Convert raw Base64 data strings into visual images and preview inline. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"base64 to image data uri online","secondaryKeywords":["base64 to image data uri tool","free base64 to image data uri","client-side base64 to image data uri","browser base64 to image data uri"],"lsiKeywords":["encoding & decoding utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"textarea","hasFileSupport":true,"icon":"M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base32-encode-decode","base16-hex-encode-decode","base58-encode-decode"],"popular":true},{"id":"image-to-base64","name":"Image to Base64 Converter","slug":"image-to-base64","category":"encoding-decoding","categoryName":"Encoding & Decoding","shortDesc":"Generate data:image/png;base64 URI strings from any uploaded file.","metaTitle":"Image to Base64 Converter Online - 100% Free & Private","metaDescription":"Generate data:image/png;base64 URI strings from any uploaded file. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"image to base64 converter online","secondaryKeywords":["image to base64 converter tool","free image to base64 converter","client-side image to base64 converter","browser image to base64 converter"],"lsiKeywords":["encoding & decoding utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"file","hasFileSupport":true,"icon":"M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base32-encode-decode","base16-hex-encode-decode","base58-encode-decode"],"popular":true},{"id":"aes-encrypt-decrypt","name":"AES 256 Encrypt & Decrypt","slug":"aes-encrypt-decrypt","category":"encryption-ciphers","categoryName":"Encryption & Ciphers","shortDesc":"Military-grade AES-GCM and AES-CBC symmetric encryption in browser.","metaTitle":"AES 256 Encrypt & Decrypt Online - 100% Free & Private","metaDescription":"Military-grade AES-GCM and AES-CBC symmetric encryption in browser. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"aes 256 encrypt & decrypt online","secondaryKeywords":["aes 256 encrypt & decrypt tool","free aes 256 encrypt & decrypt","client-side aes 256 encrypt & decrypt","browser aes 256 encrypt & decrypt"],"lsiKeywords":["encryption & ciphers utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"dual","hasFileSupport":true,"icon":"M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base16-hex-encode-decode","base58-encode-decode","url-safe-base64"],"popular":true},{"id":"rsa-encrypt-decrypt","name":"RSA Keypair & Encryption","slug":"rsa-encrypt-decrypt","category":"encryption-ciphers","categoryName":"Encryption & Ciphers","shortDesc":"Generate 2048/4096-bit RSA keys and encrypt messages with public key.","metaTitle":"RSA Keypair & Encryption Online - 100% Free & Private","metaDescription":"Generate 2048/4096-bit RSA keys and encrypt messages with public key. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"rsa keypair & encryption online","secondaryKeywords":["rsa keypair & encryption tool","free rsa keypair & encryption","client-side rsa keypair & encryption","browser rsa keypair & encryption"],"lsiKeywords":["encryption & ciphers utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"dual","hasFileSupport":true,"icon":"M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base16-hex-encode-decode","base58-encode-decode","url-safe-base64"],"popular":true},{"id":"caesar-cipher-decoder","name":"Caesar Cipher Decoder","slug":"caesar-cipher-decoder","category":"encryption-ciphers","categoryName":"Encryption & Ciphers","shortDesc":"Classic Roman shift cipher solver with automatic shift brute-force.","metaTitle":"Caesar Cipher Decoder Online - 100% Free & Private","metaDescription":"Classic Roman shift cipher solver with automatic shift brute-force. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"caesar cipher decoder online","secondaryKeywords":["caesar cipher decoder tool","free caesar cipher decoder","client-side caesar cipher decoder","browser caesar cipher decoder"],"lsiKeywords":["encryption & ciphers utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"textarea","hasFileSupport":false,"icon":"M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base16-hex-encode-decode","base58-encode-decode","url-safe-base64"],"popular":true},{"id":"vigenere-cipher-solver","name":"Vigenère Cipher Solver","slug":"vigenere-cipher-solver","category":"encryption-ciphers","categoryName":"Encryption & Ciphers","shortDesc":"Polyalphabetic substitution cipher encryption and cryptanalysis tool.","metaTitle":"Vigenère Cipher Solver Online - 100% Free & Private","metaDescription":"Polyalphabetic substitution cipher encryption and cryptanalysis tool. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"vigenère cipher solver online","secondaryKeywords":["vigenère cipher solver tool","free vigenère cipher solver","client-side vigenère cipher solver","browser vigenère cipher solver"],"lsiKeywords":["encryption & ciphers utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"dual","hasFileSupport":false,"icon":"M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base16-hex-encode-decode","base58-encode-decode","url-safe-base64"],"popular":true},{"id":"rot13-cipher","name":"ROT13 Cipher","slug":"rot13-cipher","category":"encryption-ciphers","categoryName":"Encryption & Ciphers","shortDesc":"Standard 13-character Caesar alphabet rotation cipher for spoilers.","metaTitle":"ROT13 Cipher Online - 100% Free & Private","metaDescription":"Standard 13-character Caesar alphabet rotation cipher for spoilers. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"rot13 cipher online","secondaryKeywords":["rot13 cipher tool","free rot13 cipher","client-side rot13 cipher","browser rot13 cipher"],"lsiKeywords":["encryption & ciphers utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"textarea","hasFileSupport":false,"icon":"M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base16-hex-encode-decode","base58-encode-decode","url-safe-base64"],"popular":true},{"id":"xor-cipher","name":"XOR Stream Cipher","slug":"xor-cipher","category":"encryption-ciphers","categoryName":"Encryption & Ciphers","shortDesc":"Bitwise XOR binary key encryption and stream masking utility.","metaTitle":"XOR Stream Cipher Online - 100% Free & Private","metaDescription":"Bitwise XOR binary key encryption and stream masking utility. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"xor stream cipher online","secondaryKeywords":["xor stream cipher tool","free xor stream cipher","client-side xor stream cipher","browser xor stream cipher"],"lsiKeywords":["encryption & ciphers utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"dual","hasFileSupport":false,"icon":"M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base16-hex-encode-decode","base58-encode-decode","url-safe-base64"],"popular":true},{"id":"enigma-machine-simulator","name":"Enigma Machine Simulator","slug":"enigma-machine-simulator","category":"encryption-ciphers","categoryName":"Encryption & Ciphers","shortDesc":"WWII Wehrmacht M3/M4 Enigma cryptographic rotor machine emulator.","metaTitle":"Enigma Machine Simulator Online - 100% Free & Private","metaDescription":"WWII Wehrmacht M3/M4 Enigma cryptographic rotor machine emulator. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"enigma machine simulator online","secondaryKeywords":["enigma machine simulator tool","free enigma machine simulator","client-side enigma machine simulator","browser enigma machine simulator"],"lsiKeywords":["encryption & ciphers utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"dual","hasFileSupport":false,"icon":"M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base16-hex-encode-decode","base58-encode-decode","url-safe-base64"],"popular":true},{"id":"sha256-hash-generator","name":"SHA-256 Hash Generator","slug":"sha256-hash-generator","category":"hashing-security","categoryName":"Hashing & Security","shortDesc":"Cryptographic 256-bit hash generator using native Web Crypto API.","metaTitle":"SHA-256 Hash Generator Online - 100% Free & Private","metaDescription":"Cryptographic 256-bit hash generator using native Web Crypto API. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"sha-256 hash generator online","secondaryKeywords":["sha-256 hash generator tool","free sha-256 hash generator","client-side sha-256 hash generator","browser sha-256 hash generator"],"lsiKeywords":["hashing & security utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"textarea","hasFileSupport":true,"icon":"M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base16-hex-encode-decode","base58-encode-decode","url-safe-base64"],"popular":true},{"id":"sha512-hash-generator","name":"SHA-512 Hash Generator","slug":"sha512-hash-generator","category":"hashing-security","categoryName":"Hashing & Security","shortDesc":"Generate 512-bit SHA-2 secure cryptographic hashes for files and text.","metaTitle":"SHA-512 Hash Generator Online - 100% Free & Private","metaDescription":"Generate 512-bit SHA-2 secure cryptographic hashes for files and text. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"sha-512 hash generator online","secondaryKeywords":["sha-512 hash generator tool","free sha-512 hash generator","client-side sha-512 hash generator","browser sha-512 hash generator"],"lsiKeywords":["hashing & security utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"textarea","hasFileSupport":true,"icon":"M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base16-hex-encode-decode","base58-encode-decode","url-safe-base64"],"popular":true},{"id":"md5-hash-generator","name":"MD5 Hash Generator","slug":"md5-hash-generator","category":"hashing-security","categoryName":"Hashing & Security","shortDesc":"Calculate 128-bit MD5 checksum digests for verification.","metaTitle":"MD5 Hash Generator Online - 100% Free & Private","metaDescription":"Calculate 128-bit MD5 checksum digests for verification. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"md5 hash generator online","secondaryKeywords":["md5 hash generator tool","free md5 hash generator","client-side md5 hash generator","browser md5 hash generator"],"lsiKeywords":["hashing & security utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"textarea","hasFileSupport":true,"icon":"M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base16-hex-encode-decode","base58-encode-decode","url-safe-base64"],"popular":true},{"id":"sha3-keccak-generator","name":"SHA-3 (Keccak) Hasher","slug":"sha3-keccak-generator","category":"hashing-security","categoryName":"Hashing & Security","shortDesc":"FIPS 202 SHA-3 and Ethereum Keccak-256 cryptographic sponge hash.","metaTitle":"SHA-3 (Keccak) Hasher Online - 100% Free & Private","metaDescription":"FIPS 202 SHA-3 and Ethereum Keccak-256 cryptographic sponge hash. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"sha-3 (keccak) hasher online","secondaryKeywords":["sha-3 (keccak) hasher tool","free sha-3 (keccak) hasher","client-side sha-3 (keccak) hasher","browser sha-3 (keccak) hasher"],"lsiKeywords":["hashing & security utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"textarea","hasFileSupport":true,"icon":"M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base16-hex-encode-decode","base58-encode-decode","url-safe-base64"],"popular":true},{"id":"hmac-generator","name":"HMAC Generator (SHA-256/512)","slug":"hmac-generator","category":"hashing-security","categoryName":"Hashing & Security","shortDesc":"Hash-based Message Authentication Code keyed digest generator.","metaTitle":"HMAC Generator (SHA-256/512) Online - 100% Free & Private","metaDescription":"Hash-based Message Authentication Code keyed digest generator. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"hmac generator (sha-256/512) online","secondaryKeywords":["hmac generator (sha-256/512) tool","free hmac generator (sha-256/512)","client-side hmac generator (sha-256/512)","browser hmac generator (sha-256/512)"],"lsiKeywords":["hashing & security utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"dual","hasFileSupport":true,"icon":"M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base16-hex-encode-decode","base58-encode-decode","url-safe-base64"],"popular":true},{"id":"crc32-checksum","name":"CRC32 Checksum Calculator","slug":"crc32-checksum","category":"hashing-security","categoryName":"Hashing & Security","shortDesc":"Cyclic Redundancy Check 32-bit polynomial error detection.","metaTitle":"CRC32 Checksum Calculator Online - 100% Free & Private","metaDescription":"Cyclic Redundancy Check 32-bit polynomial error detection. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"crc32 checksum calculator online","secondaryKeywords":["crc32 checksum calculator tool","free crc32 checksum calculator","client-side crc32 checksum calculator","browser crc32 checksum calculator"],"lsiKeywords":["hashing & security utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"textarea","hasFileSupport":true,"icon":"M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base16-hex-encode-decode","base58-encode-decode","url-safe-base64"],"popular":true},{"id":"argon2-hasher","name":"Argon2 Password Hash Simulator","slug":"argon2-hasher","category":"hashing-security","categoryName":"Hashing & Security","shortDesc":"Password Hashing Competition winner Argon2i/Argon2d/Argon2id.","metaTitle":"Argon2 Password Hash Simulator Online - 100% Free & Private","metaDescription":"Password Hashing Competition winner Argon2i/Argon2d/Argon2id. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"argon2 password hash simulator online","secondaryKeywords":["argon2 password hash simulator tool","free argon2 password hash simulator","client-side argon2 password hash simulator","browser argon2 password hash simulator"],"lsiKeywords":["hashing & security utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"dual","hasFileSupport":false,"icon":"M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base16-hex-encode-decode","base58-encode-decode","url-safe-base64"],"popular":true},{"id":"bcrypt-generator","name":"bcrypt Hash Generator & Check","slug":"bcrypt-generator","category":"hashing-security","categoryName":"Hashing & Security","shortDesc":"Blowfish-derived adaptive salted password hashing algorithm.","metaTitle":"bcrypt Hash Generator & Check Online - 100% Free & Private","metaDescription":"Blowfish-derived adaptive salted password hashing algorithm. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.","primaryKeyword":"bcrypt hash generator & check online","secondaryKeywords":["bcrypt hash generator & check tool","free bcrypt hash generator & check","client-side bcrypt hash generator & check","browser bcrypt hash generator & check"],"lsiKeywords":["hashing & security utility","web crypto api","developer tools online","privacy first encryption"],"inputType":"dual","hasFileSupport":false,"icon":"M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z","related":["base64-encode-decode","url-encode-decode","html-encode-decode","base16-hex-encode-decode","base58-encode-decode","url-safe-base64"],"popular":true}]
+[
+  {
+    "id": "java-regular-expression-tester",
+    "name": "Java Regular Expression Tester",
+    "slug": "java-regular-expression-tester",
+    "category": "dev-tools-formatters",
+    "categoryName": "Dev Tools & Formatters",
+    "shortDesc": "Test, debug and evaluate Java regular expressions (java.util.regex.Pattern) with full flag support, match highlighting, group extraction and ready-to-run Java code generation.",
+    "metaTitle": "Java Regular Expression Tester – Online Java Regex Tester & Debugger",
+    "metaDescription": "Free online Java Regular Expression Tester. Test java.util.regex.Pattern in your browser with CASE_INSENSITIVE, MULTILINE, DOTALL flags, match groups, replacements & code generator.",
+    "primaryKeyword": "java regular expression tester",
+    "secondaryKeywords": [
+      "online java regex tester",
+      "java regex tester and debugger",
+      "java pattern matcher tester",
+      "test java regex in browser",
+      "java.util.regex.pattern tester",
+      "java regex replace tester",
+      "java regex code generator",
+      "java regular expression test tool online"
+    ],
+    "lsiKeywords": [
+      "java regex flags case_insensitive dotall",
+      "java regex cheat sheet and examples",
+      "java regex named capturing groups",
+      "java string literal regex escaper",
+      "java regex lookaround lookahead lookbehind",
+      "best java regex tester 2026"
+    ],
+    "inputType": "textarea",
+    "hasFileSupport": true,
+    "icon": "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4",
+    "related": [
+      "regex-tester",
+      "find-replace-regex",
+      "regex-char-escaper",
+      "regex-generator",
+      "regex-error-explainer"
+    ],
+    "popular": true
+  },
+  {
+    "id": "base64-encode-decode",
+    "name": "Base64 Encode/Decode",
+    "slug": "base64-encode-decode",
+    "category": "encoding-decoding",
+    "categoryName": "Encoding & Decoding",
+    "shortDesc": "Encode or decode strings and binary files to Base64 format instantly.",
+    "metaTitle": "Base64 Encode/Decode Online - 100% Free & Private",
+    "metaDescription": "Encode or decode strings and binary files to Base64 format instantly. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "base64 encode/decode online",
+    "secondaryKeywords": [
+      "base64 encode/decode tool",
+      "free base64 encode/decode",
+      "client-side base64 encode/decode",
+      "browser base64 encode/decode"
+    ],
+    "lsiKeywords": [
+      "encoding & decoding utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "textarea",
+    "hasFileSupport": true,
+    "icon": "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    "related": [
+      "url-encode-decode",
+      "html-encode-decode",
+      "base32-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode",
+      "base85-ascii85-encode"
+    ],
+    "popular": true
+  },
+  {
+    "id": "url-encode-decode",
+    "name": "URL Encode/Decode",
+    "slug": "url-encode-decode",
+    "category": "encoding-decoding",
+    "categoryName": "Encoding & Decoding",
+    "shortDesc": "Percent-encode or decode URL query strings and URI components safely.",
+    "metaTitle": "URL Encode/Decode Online - 100% Free & Private",
+    "metaDescription": "Percent-encode or decode URL query strings and URI components safely. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "url encode/decode online",
+    "secondaryKeywords": [
+      "url encode/decode tool",
+      "free url encode/decode",
+      "client-side url encode/decode",
+      "browser url encode/decode"
+    ],
+    "lsiKeywords": [
+      "encoding & decoding utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "textarea",
+    "hasFileSupport": false,
+    "icon": "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
+    "related": [
+      "base64-encode-decode",
+      "html-encode-decode",
+      "base32-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode",
+      "base85-ascii85-encode"
+    ],
+    "popular": true
+  },
+  {
+    "id": "html-encode-decode",
+    "name": "HTML Entities Encode/Decode",
+    "slug": "html-encode-decode",
+    "category": "encoding-decoding",
+    "categoryName": "Encoding & Decoding",
+    "shortDesc": "Convert special characters to HTML entities and back to prevent XSS.",
+    "metaTitle": "HTML Entities Encode/Decode Online - 100% Free & Private",
+    "metaDescription": "Convert special characters to HTML entities and back to prevent XSS. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "html entities encode/decode online",
+    "secondaryKeywords": [
+      "html entities encode/decode tool",
+      "free html entities encode/decode",
+      "client-side html entities encode/decode",
+      "browser html entities encode/decode"
+    ],
+    "lsiKeywords": [
+      "encoding & decoding utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "textarea",
+    "hasFileSupport": false,
+    "icon": "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "base32-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode",
+      "base85-ascii85-encode"
+    ],
+    "popular": true
+  },
+  {
+    "id": "base16-hex-encode-decode",
+    "name": "Base16 Hex Encode/Decode",
+    "slug": "base16-hex-encode-decode",
+    "category": "encoding-decoding",
+    "categoryName": "Encoding & Decoding",
+    "shortDesc": "Convert ASCII/UTF-8 text into hexadecimal byte values and reverse.",
+    "metaTitle": "Base16 Hex Encode/Decode Online - 100% Free & Private",
+    "metaDescription": "Convert ASCII/UTF-8 text into hexadecimal byte values and reverse. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "base16 hex encode/decode online",
+    "secondaryKeywords": [
+      "base16 hex encode/decode tool",
+      "free base16 hex encode/decode",
+      "client-side base16 hex encode/decode",
+      "browser base16 hex encode/decode"
+    ],
+    "lsiKeywords": [
+      "encoding & decoding utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "textarea",
+    "hasFileSupport": true,
+    "icon": "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base32-encode-decode",
+      "base58-encode-decode",
+      "base85-ascii85-encode"
+    ],
+    "popular": true
+  },
+  {
+    "id": "base58-encode-decode",
+    "name": "Base58 Encode/Decode",
+    "slug": "base58-encode-decode",
+    "category": "encoding-decoding",
+    "categoryName": "Encoding & Decoding",
+    "shortDesc": "Bitcoin and IPFS standard Base58 string encoder and decoder tool.",
+    "metaTitle": "Base58 Encode/Decode Online - 100% Free & Private",
+    "metaDescription": "Bitcoin and IPFS standard Base58 string encoder and decoder tool. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "base58 encode/decode online",
+    "secondaryKeywords": [
+      "base58 encode/decode tool",
+      "free base58 encode/decode",
+      "client-side base58 encode/decode",
+      "browser base58 encode/decode"
+    ],
+    "lsiKeywords": [
+      "encoding & decoding utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "textarea",
+    "hasFileSupport": true,
+    "icon": "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base32-encode-decode",
+      "base16-hex-encode-decode",
+      "base85-ascii85-encode"
+    ],
+    "popular": true
+  },
+  {
+    "id": "url-safe-base64",
+    "name": "URL-Safe Base64 Encode/Decode",
+    "slug": "url-safe-base64",
+    "category": "encoding-decoding",
+    "categoryName": "Encoding & Decoding",
+    "shortDesc": "Base64 encoding replacing + and / with - and _ without padding.",
+    "metaTitle": "URL-Safe Base64 Encode/Decode Online - 100% Free & Private",
+    "metaDescription": "Base64 encoding replacing + and / with - and _ without padding. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "url-safe base64 encode/decode online",
+    "secondaryKeywords": [
+      "url-safe base64 encode/decode tool",
+      "free url-safe base64 encode/decode",
+      "client-side url-safe base64 encode/decode",
+      "browser url-safe base64 encode/decode"
+    ],
+    "lsiKeywords": [
+      "encoding & decoding utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "textarea",
+    "hasFileSupport": true,
+    "icon": "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base32-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode"
+    ],
+    "popular": true
+  },
+  {
+    "id": "binary-translator",
+    "name": "Binary to Text Translator",
+    "slug": "binary-translator",
+    "category": "encoding-decoding",
+    "categoryName": "Encoding & Decoding",
+    "shortDesc": "Convert 8-bit binary 0s and 1s to human-readable text and ASCII.",
+    "metaTitle": "Binary to Text Translator Online - 100% Free & Private",
+    "metaDescription": "Convert 8-bit binary 0s and 1s to human-readable text and ASCII. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "binary to text translator online",
+    "secondaryKeywords": [
+      "binary to text translator tool",
+      "free binary to text translator",
+      "client-side binary to text translator",
+      "browser binary to text translator"
+    ],
+    "lsiKeywords": [
+      "encoding & decoding utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "textarea",
+    "hasFileSupport": false,
+    "icon": "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base32-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode"
+    ],
+    "popular": true
+  },
+  {
+    "id": "base64-to-image",
+    "name": "Base64 to Image Data URI",
+    "slug": "base64-to-image",
+    "category": "encoding-decoding",
+    "categoryName": "Encoding & Decoding",
+    "shortDesc": "Convert raw Base64 data strings into visual images and preview inline.",
+    "metaTitle": "Base64 to Image Data URI Online - 100% Free & Private",
+    "metaDescription": "Convert raw Base64 data strings into visual images and preview inline. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "base64 to image data uri online",
+    "secondaryKeywords": [
+      "base64 to image data uri tool",
+      "free base64 to image data uri",
+      "client-side base64 to image data uri",
+      "browser base64 to image data uri"
+    ],
+    "lsiKeywords": [
+      "encoding & decoding utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "textarea",
+    "hasFileSupport": true,
+    "icon": "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base32-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode"
+    ],
+    "popular": true
+  },
+  {
+    "id": "image-to-base64",
+    "name": "Image to Base64 Converter",
+    "slug": "image-to-base64",
+    "category": "encoding-decoding",
+    "categoryName": "Encoding & Decoding",
+    "shortDesc": "Generate data:image/png;base64 URI strings from any uploaded file.",
+    "metaTitle": "Image to Base64 Converter Online - 100% Free & Private",
+    "metaDescription": "Generate data:image/png;base64 URI strings from any uploaded file. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "image to base64 converter online",
+    "secondaryKeywords": [
+      "image to base64 converter tool",
+      "free image to base64 converter",
+      "client-side image to base64 converter",
+      "browser image to base64 converter"
+    ],
+    "lsiKeywords": [
+      "encoding & decoding utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "file",
+    "hasFileSupport": true,
+    "icon": "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base32-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode"
+    ],
+    "popular": true
+  },
+  {
+    "id": "aes-encrypt-decrypt",
+    "name": "AES 256 Encrypt & Decrypt",
+    "slug": "aes-encrypt-decrypt",
+    "category": "encryption-ciphers",
+    "categoryName": "Encryption & Ciphers",
+    "shortDesc": "Military-grade AES-GCM and AES-CBC symmetric encryption in browser.",
+    "metaTitle": "AES 256 Encrypt & Decrypt Online - 100% Free & Private",
+    "metaDescription": "Military-grade AES-GCM and AES-CBC symmetric encryption in browser. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "aes 256 encrypt & decrypt online",
+    "secondaryKeywords": [
+      "aes 256 encrypt & decrypt tool",
+      "free aes 256 encrypt & decrypt",
+      "client-side aes 256 encrypt & decrypt",
+      "browser aes 256 encrypt & decrypt"
+    ],
+    "lsiKeywords": [
+      "encryption & ciphers utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "dual",
+    "hasFileSupport": true,
+    "icon": "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode",
+      "url-safe-base64"
+    ],
+    "popular": true
+  },
+  {
+    "id": "rsa-encrypt-decrypt",
+    "name": "RSA Keypair & Encryption",
+    "slug": "rsa-encrypt-decrypt",
+    "category": "encryption-ciphers",
+    "categoryName": "Encryption & Ciphers",
+    "shortDesc": "Generate 2048/4096-bit RSA keys and encrypt messages with public key.",
+    "metaTitle": "RSA Keypair & Encryption Online - 100% Free & Private",
+    "metaDescription": "Generate 2048/4096-bit RSA keys and encrypt messages with public key. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "rsa keypair & encryption online",
+    "secondaryKeywords": [
+      "rsa keypair & encryption tool",
+      "free rsa keypair & encryption",
+      "client-side rsa keypair & encryption",
+      "browser rsa keypair & encryption"
+    ],
+    "lsiKeywords": [
+      "encryption & ciphers utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "dual",
+    "hasFileSupport": true,
+    "icon": "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode",
+      "url-safe-base64"
+    ],
+    "popular": true
+  },
+  {
+    "id": "caesar-cipher-decoder",
+    "name": "Caesar Cipher Decoder",
+    "slug": "caesar-cipher-decoder",
+    "category": "encryption-ciphers",
+    "categoryName": "Encryption & Ciphers",
+    "shortDesc": "Classic Roman shift cipher solver with automatic shift brute-force.",
+    "metaTitle": "Caesar Cipher Decoder Online - 100% Free & Private",
+    "metaDescription": "Classic Roman shift cipher solver with automatic shift brute-force. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "caesar cipher decoder online",
+    "secondaryKeywords": [
+      "caesar cipher decoder tool",
+      "free caesar cipher decoder",
+      "client-side caesar cipher decoder",
+      "browser caesar cipher decoder"
+    ],
+    "lsiKeywords": [
+      "encryption & ciphers utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "textarea",
+    "hasFileSupport": false,
+    "icon": "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode",
+      "url-safe-base64"
+    ],
+    "popular": true
+  },
+  {
+    "id": "vigenere-cipher-solver",
+    "name": "Vigenère Cipher Solver",
+    "slug": "vigenere-cipher-solver",
+    "category": "encryption-ciphers",
+    "categoryName": "Encryption & Ciphers",
+    "shortDesc": "Polyalphabetic substitution cipher encryption and cryptanalysis tool.",
+    "metaTitle": "Vigenère Cipher Solver Online - 100% Free & Private",
+    "metaDescription": "Polyalphabetic substitution cipher encryption and cryptanalysis tool. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "vigenère cipher solver online",
+    "secondaryKeywords": [
+      "vigenère cipher solver tool",
+      "free vigenère cipher solver",
+      "client-side vigenère cipher solver",
+      "browser vigenère cipher solver"
+    ],
+    "lsiKeywords": [
+      "encryption & ciphers utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "dual",
+    "hasFileSupport": false,
+    "icon": "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode",
+      "url-safe-base64"
+    ],
+    "popular": true
+  },
+  {
+    "id": "rot13-cipher",
+    "name": "ROT13 Cipher",
+    "slug": "rot13-cipher",
+    "category": "encryption-ciphers",
+    "categoryName": "Encryption & Ciphers",
+    "shortDesc": "Standard 13-character Caesar alphabet rotation cipher for spoilers.",
+    "metaTitle": "ROT13 Cipher Online - 100% Free & Private",
+    "metaDescription": "Standard 13-character Caesar alphabet rotation cipher for spoilers. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "rot13 cipher online",
+    "secondaryKeywords": [
+      "rot13 cipher tool",
+      "free rot13 cipher",
+      "client-side rot13 cipher",
+      "browser rot13 cipher"
+    ],
+    "lsiKeywords": [
+      "encryption & ciphers utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "textarea",
+    "hasFileSupport": false,
+    "icon": "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode",
+      "url-safe-base64"
+    ],
+    "popular": true
+  },
+  {
+    "id": "xor-cipher",
+    "name": "XOR Stream Cipher",
+    "slug": "xor-cipher",
+    "category": "encryption-ciphers",
+    "categoryName": "Encryption & Ciphers",
+    "shortDesc": "Bitwise XOR binary key encryption and stream masking utility.",
+    "metaTitle": "XOR Stream Cipher Online - 100% Free & Private",
+    "metaDescription": "Bitwise XOR binary key encryption and stream masking utility. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "xor stream cipher online",
+    "secondaryKeywords": [
+      "xor stream cipher tool",
+      "free xor stream cipher",
+      "client-side xor stream cipher",
+      "browser xor stream cipher"
+    ],
+    "lsiKeywords": [
+      "encryption & ciphers utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "dual",
+    "hasFileSupport": false,
+    "icon": "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode",
+      "url-safe-base64"
+    ],
+    "popular": true
+  },
+  {
+    "id": "enigma-machine-simulator",
+    "name": "Enigma Machine Simulator",
+    "slug": "enigma-machine-simulator",
+    "category": "encryption-ciphers",
+    "categoryName": "Encryption & Ciphers",
+    "shortDesc": "WWII Wehrmacht M3/M4 Enigma cryptographic rotor machine emulator.",
+    "metaTitle": "Enigma Machine Simulator Online - 100% Free & Private",
+    "metaDescription": "WWII Wehrmacht M3/M4 Enigma cryptographic rotor machine emulator. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "enigma machine simulator online",
+    "secondaryKeywords": [
+      "enigma machine simulator tool",
+      "free enigma machine simulator",
+      "client-side enigma machine simulator",
+      "browser enigma machine simulator"
+    ],
+    "lsiKeywords": [
+      "encryption & ciphers utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "dual",
+    "hasFileSupport": false,
+    "icon": "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode",
+      "url-safe-base64"
+    ],
+    "popular": true
+  },
+  {
+    "id": "sha256-hash-generator",
+    "name": "SHA-256 Hash Generator",
+    "slug": "sha256-hash-generator",
+    "category": "hashing-security",
+    "categoryName": "Hashing & Security",
+    "shortDesc": "Cryptographic 256-bit hash generator using native Web Crypto API.",
+    "metaTitle": "SHA-256 Hash Generator Online - 100% Free & Private",
+    "metaDescription": "Cryptographic 256-bit hash generator using native Web Crypto API. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "sha-256 hash generator online",
+    "secondaryKeywords": [
+      "sha-256 hash generator tool",
+      "free sha-256 hash generator",
+      "client-side sha-256 hash generator",
+      "browser sha-256 hash generator"
+    ],
+    "lsiKeywords": [
+      "hashing & security utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "textarea",
+    "hasFileSupport": true,
+    "icon": "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode",
+      "url-safe-base64"
+    ],
+    "popular": true
+  },
+  {
+    "id": "sha512-hash-generator",
+    "name": "SHA-512 Hash Generator",
+    "slug": "sha512-hash-generator",
+    "category": "hashing-security",
+    "categoryName": "Hashing & Security",
+    "shortDesc": "Generate 512-bit SHA-2 secure cryptographic hashes for files and text.",
+    "metaTitle": "SHA-512 Hash Generator Online - 100% Free & Private",
+    "metaDescription": "Generate 512-bit SHA-2 secure cryptographic hashes for files and text. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "sha-512 hash generator online",
+    "secondaryKeywords": [
+      "sha-512 hash generator tool",
+      "free sha-512 hash generator",
+      "client-side sha-512 hash generator",
+      "browser sha-512 hash generator"
+    ],
+    "lsiKeywords": [
+      "hashing & security utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "textarea",
+    "hasFileSupport": true,
+    "icon": "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode",
+      "url-safe-base64"
+    ],
+    "popular": true
+  },
+  {
+    "id": "md5-hash-generator",
+    "name": "MD5 Hash Generator",
+    "slug": "md5-hash-generator",
+    "category": "hashing-security",
+    "categoryName": "Hashing & Security",
+    "shortDesc": "Calculate 128-bit MD5 checksum digests for verification.",
+    "metaTitle": "MD5 Hash Generator Online - 100% Free & Private",
+    "metaDescription": "Calculate 128-bit MD5 checksum digests for verification. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "md5 hash generator online",
+    "secondaryKeywords": [
+      "md5 hash generator tool",
+      "free md5 hash generator",
+      "client-side md5 hash generator",
+      "browser md5 hash generator"
+    ],
+    "lsiKeywords": [
+      "hashing & security utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "textarea",
+    "hasFileSupport": true,
+    "icon": "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode",
+      "url-safe-base64"
+    ],
+    "popular": true
+  },
+  {
+    "id": "sha3-keccak-generator",
+    "name": "SHA-3 (Keccak) Hasher",
+    "slug": "sha3-keccak-generator",
+    "category": "hashing-security",
+    "categoryName": "Hashing & Security",
+    "shortDesc": "FIPS 202 SHA-3 and Ethereum Keccak-256 cryptographic sponge hash.",
+    "metaTitle": "SHA-3 (Keccak) Hasher Online - 100% Free & Private",
+    "metaDescription": "FIPS 202 SHA-3 and Ethereum Keccak-256 cryptographic sponge hash. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "sha-3 (keccak) hasher online",
+    "secondaryKeywords": [
+      "sha-3 (keccak) hasher tool",
+      "free sha-3 (keccak) hasher",
+      "client-side sha-3 (keccak) hasher",
+      "browser sha-3 (keccak) hasher"
+    ],
+    "lsiKeywords": [
+      "hashing & security utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "textarea",
+    "hasFileSupport": true,
+    "icon": "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode",
+      "url-safe-base64"
+    ],
+    "popular": true
+  },
+  {
+    "id": "hmac-generator",
+    "name": "HMAC Generator (SHA-256/512)",
+    "slug": "hmac-generator",
+    "category": "hashing-security",
+    "categoryName": "Hashing & Security",
+    "shortDesc": "Hash-based Message Authentication Code keyed digest generator.",
+    "metaTitle": "HMAC Generator (SHA-256/512) Online - 100% Free & Private",
+    "metaDescription": "Hash-based Message Authentication Code keyed digest generator. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "hmac generator (sha-256/512) online",
+    "secondaryKeywords": [
+      "hmac generator (sha-256/512) tool",
+      "free hmac generator (sha-256/512)",
+      "client-side hmac generator (sha-256/512)",
+      "browser hmac generator (sha-256/512)"
+    ],
+    "lsiKeywords": [
+      "hashing & security utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "dual",
+    "hasFileSupport": true,
+    "icon": "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode",
+      "url-safe-base64"
+    ],
+    "popular": true
+  },
+  {
+    "id": "crc32-checksum",
+    "name": "CRC32 Checksum Calculator",
+    "slug": "crc32-checksum",
+    "category": "hashing-security",
+    "categoryName": "Hashing & Security",
+    "shortDesc": "Cyclic Redundancy Check 32-bit polynomial error detection.",
+    "metaTitle": "CRC32 Checksum Calculator Online - 100% Free & Private",
+    "metaDescription": "Cyclic Redundancy Check 32-bit polynomial error detection. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "crc32 checksum calculator online",
+    "secondaryKeywords": [
+      "crc32 checksum calculator tool",
+      "free crc32 checksum calculator",
+      "client-side crc32 checksum calculator",
+      "browser crc32 checksum calculator"
+    ],
+    "lsiKeywords": [
+      "hashing & security utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "textarea",
+    "hasFileSupport": true,
+    "icon": "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode",
+      "url-safe-base64"
+    ],
+    "popular": true
+  },
+  {
+    "id": "argon2-hasher",
+    "name": "Argon2 Password Hash Simulator",
+    "slug": "argon2-hasher",
+    "category": "hashing-security",
+    "categoryName": "Hashing & Security",
+    "shortDesc": "Password Hashing Competition winner Argon2i/Argon2d/Argon2id.",
+    "metaTitle": "Argon2 Password Hash Simulator Online - 100% Free & Private",
+    "metaDescription": "Password Hashing Competition winner Argon2i/Argon2d/Argon2id. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "argon2 password hash simulator online",
+    "secondaryKeywords": [
+      "argon2 password hash simulator tool",
+      "free argon2 password hash simulator",
+      "client-side argon2 password hash simulator",
+      "browser argon2 password hash simulator"
+    ],
+    "lsiKeywords": [
+      "hashing & security utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "dual",
+    "hasFileSupport": false,
+    "icon": "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode",
+      "url-safe-base64"
+    ],
+    "popular": true
+  },
+  {
+    "id": "bcrypt-generator",
+    "name": "bcrypt Hash Generator & Check",
+    "slug": "bcrypt-generator",
+    "category": "hashing-security",
+    "categoryName": "Hashing & Security",
+    "shortDesc": "Blowfish-derived adaptive salted password hashing algorithm.",
+    "metaTitle": "bcrypt Hash Generator & Check Online - 100% Free & Private",
+    "metaDescription": "Blowfish-derived adaptive salted password hashing algorithm. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "primaryKeyword": "bcrypt hash generator & check online",
+    "secondaryKeywords": [
+      "bcrypt hash generator & check tool",
+      "free bcrypt hash generator & check",
+      "client-side bcrypt hash generator & check",
+      "browser bcrypt hash generator & check"
+    ],
+    "lsiKeywords": [
+      "hashing & security utility",
+      "web crypto api",
+      "developer tools online",
+      "privacy first encryption"
+    ],
+    "inputType": "dual",
+    "hasFileSupport": false,
+    "icon": "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
+    "related": [
+      "base64-encode-decode",
+      "url-encode-decode",
+      "html-encode-decode",
+      "base16-hex-encode-decode",
+      "base58-encode-decode",
+      "url-safe-base64"
+    ],
+    "popular": true
+  }
+]

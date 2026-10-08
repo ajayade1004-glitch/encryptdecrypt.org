@@ -4,7 +4,7 @@ import {
   ArrowLeft, RefreshCw, Key, FileText, Lock, Code,
   Sliders, Terminal, Info, HelpCircle, CheckCircle, AlertCircle,
   Sparkles, Upload, Share2, Link2, FileUp, QrCode,
-  Columns, Rows, Search
+  Columns, Rows, Search, Globe, Network, ExternalLink
 } from 'lucide-react';
 import QRCode from 'qrcode';
 import { ToolItem } from '../types';
@@ -16,7 +16,9 @@ import { AdUnit } from './AdUnit';
 import { ToolShareBar } from './ToolShareBar';
 import { ImageStudio } from './ImageStudio';
 import { BusinessDaysStudio } from './BusinessDaysStudio';
+import { JavaRegexStudio } from './JavaRegexStudio';
 import { parseBusinessDaysTextQuery } from '../utils/businessDaysCalculatorEngine';
+import { runJavaRegexTester } from '../utils/javaRegexEngine';
 import { getContextualSampleInput, executeUniversalTool } from '../utils/universalToolDispatcher';
 import * as engines from '../crypto/toolEngines';
 import * as allEngines from '../crypto/allEngines';
@@ -155,6 +157,11 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
            ((c === 'date-time' || c === 'time-productivity-tools') && (s.includes('day') || s.includes('week') || s.includes('work')));
   }, [tool.slug, tool.category]);
 
+  const isJavaRegexTool = useMemo(() => {
+    const s = (tool.slug || '').toLowerCase();
+    return s === 'java-regular-expression-tester' || s === 'java-regex-tester' || s === 'java-regex';
+  }, [tool.slug]);
+
   // PDF Utilities State
   const [pdfBytes, setPdfBytes] = useState<Uint8Array | null>(null);
   const [pdfPageCount, setPdfPageCount] = useState<number>(0);
@@ -243,6 +250,34 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
     if (!allTools) return [];
     return allTools.filter(t => t.category === tool.category && t.id !== tool.id).slice(0, 8);
   }, [allTools, tool.category, tool.id]);
+
+  // Complementary workflow tools across other categories (Internal PageRank & Contextual Backlinks)
+  const complementaryTools = useMemo(() => {
+    if (!allTools) return [];
+    return allTools
+      .filter(t => t.category !== tool.category && t.id !== tool.id)
+      .slice(0, 8);
+  }, [allTools, tool.category, tool.id]);
+
+  const [copiedInPageKey, setCopiedInPageKey] = useState<string | null>(null);
+  const copyInPageSnippet = async (text: string, key: string) => {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      setCopiedInPageKey(key);
+      setTimeout(() => setCopiedInPageKey(null), 2500);
+    } catch (e) {
+      console.error('Failed to copy', e);
+    }
+  };
 
   // Admin Tool Overrides (custom long-form SEO content, FAQs, custom steps)
   const toolOverride: Partial<ToolContentOverride> = useMemo(() => {
@@ -2567,6 +2602,9 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
         }
         else if (isBusinessDaysTool) {
           result = parseBusinessDaysTextQuery(inputText);
+        }
+        else if (isJavaRegexTool) {
+          result = runJavaRegexTester(inputText);
         }
         // Check new/recommended engines first
         const recResult = await newEngines.runRecommendedTool(slug, inputText, mode);
@@ -7520,6 +7558,17 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
           />
         )}
 
+        {/* Dedicated Interactive Visual Studio for Java Regular Expression Tester */}
+        {isJavaRegexTool && (
+          <JavaRegexStudio
+            toolSlug={tool.slug}
+            toolName={tool.name}
+            onPayloadGenerated={(summary) => {
+              setOutputText(summary);
+            }}
+          />
+        )}
+
         {/* Side-by-Side (Split) or Stacked Dual Textareas */}
         <div className={`grid gap-3.5 items-stretch ${layoutMode === 'split' ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
           {/* Input Box with Terminal Styling and Drag-and-Drop */}
@@ -8287,6 +8336,114 @@ echo -n "${inputText.substring(0, 40) || 'sample-data'}" | wc -c`}
             </div>
           </div>
         )}
+
+        {/* Section 15: Complementary Developer Tools & Deep Contextual Links */}
+        {complementaryTools.length > 0 && (
+          <div className="mt-8 pt-6 border-t border-[var(--border-subtle)]">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-base font-bold text-[var(--text-primary)] flex items-center gap-2 m-0">
+                <Network size={16} className="text-[#2E9BFF]" />
+                Frequently Used Together &amp; Related Utilities
+              </h3>
+              <span className="text-xs text-[var(--text-muted)] font-mono">
+                Contextual Topic Cluster
+              </span>
+            </div>
+            <p className="text-xs text-[var(--text-muted)] mb-3 leading-relaxed">
+              Engineers and developers working with {tool.name} frequently pipeline data through these complementary client-side utilities:
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+              {complementaryTools.map(rel => (
+                <button
+                  key={rel.id}
+                  onClick={() => {
+                    if (onSelectTool) onSelectTool(rel);
+                  }}
+                  className="p-3 text-left rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:border-[#2E9BFF]/50 transition flex flex-col justify-between group cursor-pointer"
+                >
+                  <div>
+                    <span className="text-[10px] uppercase font-semibold text-[#2E9BFF] tracking-wider block mb-1">
+                      {rel.categoryName}
+                    </span>
+                    <h4 className="text-xs font-bold text-[var(--text-primary)] group-hover:text-[#2E9BFF] mb-1 line-clamp-1">
+                      {rel.name}
+                    </h4>
+                    <p className="text-[11px] text-[var(--text-muted)] line-clamp-2">
+                      {rel.shortDesc}
+                    </p>
+                  </div>
+                  <span className="text-[10px] text-[#2E9BFF] font-semibold mt-2 flex items-center gap-1">
+                    Launch Utility →
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Section 16: Embed, Cite & Backlink Badges */}
+        <div className="mt-8 pt-6 border-t border-[var(--border-subtle)]">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-base font-bold text-[var(--text-primary)] flex items-center gap-2 m-0">
+              <Code size={16} className="text-[#2E9BFF]" />
+              Embed This Tool &amp; Get DoFollow Backlink Badges
+            </h3>
+            <span className="text-xs text-emerald-400 font-semibold bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">
+              Free &amp; Open Embed
+            </span>
+          </div>
+          <p className="text-xs text-[var(--text-muted)] mb-4 leading-relaxed">
+            Writing a technical blog, documentation, GitHub README, or university assignment? Link to or embed this zero-knowledge {tool.name} directly for your readers:
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Markdown Badge Box */}
+            <div className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
+                  <Terminal size={13} className="text-[#2E9BFF]" />
+                  GitHub / Markdown Badge
+                </span>
+                <button
+                  onClick={() => copyInPageSnippet(
+                    `[![${tool.name}](https://img.shields.io/badge/Tool-${encodeURIComponent(tool.name)}-2563EB?style=flat-square&logo=code)](https://www.encryptdecrypt.org/tools/${tool.category}/${tool.slug}/)`,
+                    'inpage-md'
+                  )}
+                  className="flex items-center gap-1 px-2.5 py-1 rounded bg-[#2E9BFF]/15 text-[#2E9BFF] hover:bg-[#2E9BFF]/25 text-xs font-medium transition cursor-pointer"
+                >
+                  {copiedInPageKey === 'inpage-md' ? <Check size={12} /> : <Copy size={12} />}
+                  <span>{copiedInPageKey === 'inpage-md' ? 'Copied!' : 'Copy Markdown'}</span>
+                </button>
+              </div>
+              <div className="p-2.5 bg-[var(--bg-surface)] rounded font-mono text-[11px] text-[var(--text-secondary)] break-all border border-[var(--border-subtle)]">
+                {`[![${tool.name}](https://img.shields.io/badge/Tool-${encodeURIComponent(tool.name)}-2563EB?style=flat-square&logo=code)](https://www.encryptdecrypt.org/tools/${tool.category}/${tool.slug}/)`}
+              </div>
+            </div>
+
+            {/* DoFollow HTML Link Box */}
+            <div className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5">
+                  <Globe size={13} className="text-[#2E9BFF]" />
+                  DoFollow HTML Link (For Blogs &amp; CMS)
+                </span>
+                <button
+                  onClick={() => copyInPageSnippet(
+                    `<a href="https://www.encryptdecrypt.org/tools/${tool.category}/${tool.slug}/" target="_blank" rel="noopener" title="${tool.name} - Free Online Tool">${tool.name} - Free In-Browser Tool</a>`,
+                    'inpage-html'
+                  )}
+                  className="flex items-center gap-1 px-2.5 py-1 rounded bg-[#2E9BFF]/15 text-[#2E9BFF] hover:bg-[#2E9BFF]/25 text-xs font-medium transition cursor-pointer"
+                >
+                  {copiedInPageKey === 'inpage-html' ? <Check size={12} /> : <Copy size={12} />}
+                  <span>{copiedInPageKey === 'inpage-html' ? 'Copied!' : 'Copy HTML'}</span>
+                </button>
+              </div>
+              <div className="p-2.5 bg-[var(--bg-surface)] rounded font-mono text-[11px] text-[var(--text-secondary)] break-all border border-[var(--border-subtle)]">
+                {`<a href="https://www.encryptdecrypt.org/tools/${tool.category}/${tool.slug}/" target="_blank" rel="noopener" title="${tool.name} - Free Online Tool">${tool.name} - Free In-Browser Tool</a>`}
+              </div>
+            </div>
+          </div>
+        </div>
       </article>
 
       {/* AdSense Placement below article with clear boundary */}

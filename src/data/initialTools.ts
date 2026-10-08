@@ -2,6 +2,46 @@ import { ToolItem } from "../types";
 
 export const INITIAL_TOP_TOOLS: ToolItem[] = [
   {
+    "id": "java-regular-expression-tester",
+    "name": "Java Regular Expression Tester",
+    "slug": "java-regular-expression-tester",
+    "category": "dev-tools-formatters",
+    "categoryName": "Dev Tools & Formatters",
+    "shortDesc": "Test, debug and evaluate Java regular expressions (java.util.regex.Pattern) with full flag support, match highlighting, group extraction and ready-to-run Java code generation.",
+    "metaTitle": "Java Regular Expression Tester – Online Java Regex Tester & Debugger",
+    "metaDescription": "Free online Java Regular Expression Tester. Test java.util.regex.Pattern in your browser with CASE_INSENSITIVE, MULTILINE, DOTALL flags, match groups, replacements & code generator.",
+    "primaryKeyword": "java regular expression tester",
+    "secondaryKeywords": [
+      "online java regex tester",
+      "java regex tester and debugger",
+      "java pattern matcher tester",
+      "test java regex in browser",
+      "java.util.regex.pattern tester",
+      "java regex replace tester",
+      "java regex code generator",
+      "java regular expression test tool online"
+    ],
+    "lsiKeywords": [
+      "java regex flags case_insensitive dotall",
+      "java regex cheat sheet and examples",
+      "java regex named capturing groups",
+      "java string literal regex escaper",
+      "java regex lookaround lookahead lookbehind",
+      "best java regex tester 2026"
+    ],
+    "inputType": "textarea",
+    "hasFileSupport": true,
+    "icon": "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4",
+    "related": [
+      "regex-tester",
+      "find-replace-regex",
+      "regex-char-escaper",
+      "regex-generator",
+      "regex-error-explainer"
+    ],
+    "popular": true
+  },
+  {
     "id": "aes-encrypt-decrypt",
     "name": "AES 256 Encrypt & Decrypt",
     "slug": "aes-encrypt-decrypt",

@@ -2084,6 +2084,11 @@ export default function App() {
             <a href="/disclaimer" onClick={(e) => { e.preventDefault(); handleNavigateView('disclaimer'); }} className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Legal Disclaimer</a>
             <a href="/about" onClick={(e) => { e.preventDefault(); handleNavigateView('about'); }} className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">About Us</a>
             <a href="/contact" onClick={(e) => { e.preventDefault(); handleNavigateView('contact'); }} className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Contact Us</a>
+            <a href="/rss.xml" target="_blank" rel="noopener noreferrer" className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-amber-300 hover:text-amber-200 transition-colors cursor-pointer rounded-lg hover:bg-white/5 font-semibold">
+              <span className="w-2 h-2 rounded-full bg-amber-400 mr-1.5 animate-pulse"></span>
+              RSS Feed
+            </a>
+            <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Sitemap</a>
           </div>
 
           <div className="flex items-center gap-4 font-mono text-[11px] shrink-0 text-slate-300">
