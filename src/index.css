@@ -80,6 +80,61 @@
   }
 }
 
+/* Button Component Standards */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 6px 14px;
+  border-radius: 0.375rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.btn-primary {
+  background-color: #2563EB;
+  color: #FFFFFF;
+  border-color: #2563EB;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: #1D4ED8;
+  border-color: #1D4ED8;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: var(--bg-surface-hover, #131A2B);
+  color: var(--text-primary, #F8FAFC);
+  border: 1px solid var(--border-subtle, rgba(0, 255, 157, 0.15));
+}
+
+.btn-secondary:hover {
+  border-color: #2E9BFF;
+  color: #2E9BFF;
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--text-secondary, #CBD5E1);
+  border: 1px solid transparent;
+}
+
+.btn-ghost:hover {
+  color: #2E9BFF;
+  background-color: rgba(46, 155, 255, 0.08);
+}
+
 /* Glassmorphic Luxury Card */
 .cyber-card, .clean-card {
   background: linear-gradient(180deg, rgba(14, 18, 27, 0.95) 0%, rgba(10, 13, 21, 0.95) 100%);

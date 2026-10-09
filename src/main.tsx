@@ -3,7 +3,6 @@ import {createRoot} from 'react-dom/client';
 import App from './App.tsx';
 import {ErrorBoundary} from './components/ErrorBoundary.tsx';
 import {registerWebMcpTools} from './utils/webMcpIntegration.ts';
-import '../public/assets/css/main.css';
 import './index.css';
 
 // Handle dynamic module chunk loading failures (network hiccups / deployment updates)

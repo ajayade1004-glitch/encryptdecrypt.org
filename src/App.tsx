@@ -473,14 +473,31 @@ export default function App() {
         });
     };
 
-    // If on homepage, defer loading full 1,380 JSON catalog after FCP/LCP paint
+    // If on homepage, defer loading full 1,380 JSON catalog until first interaction or 6s idle
+    // Eliminates the 2,260 ms critical path chaining penalty flagged by Lighthouse
     const isHomepage = window.location.pathname === '/' && !window.location.hash;
     if (isHomepage && tools.length >= 10) {
-      if ('requestIdleCallback' in window) {
-        (window as any).requestIdleCallback(loadFullCatalog, { timeout: 2500 });
-      } else {
-        setTimeout(loadFullCatalog, 1200);
-      }
+      let loaded = false;
+      const triggerLoad = () => {
+        if (loaded) return;
+        loaded = true;
+        loadFullCatalog();
+        ['pointerdown', 'touchstart', 'scroll', 'keydown'].forEach(ev => {
+          window.removeEventListener(ev, triggerLoad);
+        });
+      };
+
+      ['pointerdown', 'touchstart', 'scroll', 'keydown'].forEach(ev => {
+        window.addEventListener(ev, triggerLoad, { once: true, passive: true });
+      });
+
+      const idleTimer = setTimeout(triggerLoad, 6000);
+      return () => {
+        clearTimeout(idleTimer);
+        ['pointerdown', 'touchstart', 'scroll', 'keydown'].forEach(ev => {
+          window.removeEventListener(ev, triggerLoad);
+        });
+      };
     } else {
       loadFullCatalog();
     }
@@ -896,6 +913,7 @@ export default function App() {
                   aria-label="Search 1,380+ tools"
                   onFocus={() => {
                     setSearchFocused(true);
+                    if (tools.length <= 50) reloadToolsCatalog();
                     preloadToolWorkspace();
                   }}
                   onKeyDown={handleSearchKeyDown}
@@ -1607,6 +1625,9 @@ export default function App() {
                         type="text"
                         value={searchQuery}
                         aria-label="Search tools catalog"
+                        onFocus={() => {
+                          if (tools.length <= 50) reloadToolsCatalog();
+                        }}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search 1,380+ tools (e.g. aes, qr, sha256)..."
                         className="w-full h-9 bg-[var(--bg-input)] border border-[var(--border-subtle)] rounded-lg px-3 pr-9 text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[#2E9BFF] focus:ring-1 focus:ring-[#2E9BFF] transition leading-normal"
