@@ -214,7 +214,7 @@ export function generateHtmlTable(input: string): string {
         <td>101</td>
         <td>AES-256-GCM</td>
         <td>256-bit</td>
-        <td>NIST FIPS 197 / Military Grade</td>
+        <td>NIST FIPS 197 / High Security</td>
         <td><span class="badge badge-success">Active</span></td>
       </tr>
       <tr>

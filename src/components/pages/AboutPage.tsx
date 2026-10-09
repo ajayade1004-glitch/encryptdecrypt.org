@@ -132,7 +132,43 @@ export const AboutPage: React.FC<AboutPageProps> = ({
         </ul>
 
         <h2 className="text-xl font-bold text-[var(--text-primary)] pt-4 border-t border-[var(--border-subtle)]">
-          Editorial Independence & Quality Standards
+          Engineering Team &amp; Author Credentials
+        </h2>
+        <div className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)] space-y-3">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-blue-500/20 text-[#2E9BFF] flex items-center justify-center font-bold text-sm shrink-0">
+              AA
+            </div>
+            <div>
+              <div className="font-bold text-[var(--text-primary)]">Ajjay Ade</div>
+              <div className="text-xs text-[var(--text-muted)]">Lead Software &amp; Cryptographic Engineer · Open-Source Maintainer</div>
+            </div>
+          </div>
+          <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+            Maintained alongside dedicated open-source security contributors. All algorithmic test harnesses are systematically validated against official NIST Computer Security Division (CSD) test vectors, Known Answer Tests (KAT), and IETF RFC test suites.
+          </p>
+        </div>
+
+        <h2 className="text-xl font-bold text-[var(--text-primary)] pt-4 border-t border-[var(--border-subtle)]">
+          Cryptographic Execution: Web Crypto API vs Local Algorithms
+        </h2>
+        <p>
+          We maintain rigorous technical precision regarding how algorithms execute:
+        </p>
+        <ul className="list-disc pl-5 space-y-2 text-xs sm:text-sm">
+          <li>
+            <strong>Hardware-Accelerated Web Crypto API:</strong> Primitives natively supported by the W3C Web Cryptography API (including AES-GCM, AES-CBC, SHA-256, SHA-384, SHA-512, HMAC, PBKDF2, RSA-OAEP, and ECDSA) run directly via <code>window.crypto.subtle</code> leveraging CPU hardware acceleration (AES-NI).
+          </li>
+          <li>
+            <strong>Audited Client-Side Memory Implementations:</strong> Algorithms not part of the browser's native Web Crypto standard (such as MD5, SHA-3, BLAKE2, bcrypt, Argon2, Blowfish, RC4, and ChaCha20) execute via audited, deterministic client-side JavaScript / WebAssembly running entirely in volatile browser memory.
+          </li>
+          <li>
+            <strong>Server-Assisted Diagnostic Network Tools:</strong> Diagnostic utilities requiring external internet queries (specifically DNS Lookup, WHOIS, HTTP Header &amp; Redirect Inspector, Ping, and Googlebot Simulator) query remote endpoints on-demand without storing or logging search parameters.
+          </li>
+        </ul>
+
+        <h2 className="text-xl font-bold text-[var(--text-primary)] pt-4 border-t border-[var(--border-subtle)]">
+          Editorial Independence &amp; Quality Standards
         </h2>
         <p>
           EncryptDecrypt.org is an independent technical resource funded through privacy-conscious digital advertising. We never accept sponsored ranking manipulation or compromise on our strict zero-logging pledge. Our educational guides and tutorials are authored by experienced security practitioners to provide actionable, technically rigorous information to the developer community.

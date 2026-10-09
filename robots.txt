@@ -4,60 +4,86 @@
 User-agent: *
 Allow: /
 Disallow: /admin
+Disallow: /api/admin
 
 # OpenAI / ChatGPT Web Search & Indexing Bots
 User-agent: GPTBot
 Allow: /
+Disallow: /admin
+Disallow: /api/admin
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /admin
+Disallow: /api/admin
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /admin
+Disallow: /api/admin
 
 # Google Gemini & Google Search AI Overviews
 User-agent: Googlebot
 Allow: /
+Disallow: /admin
+Disallow: /api/admin
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /admin
+Disallow: /api/admin
 
 # Perplexity AI Citation Bot
 User-agent: PerplexityBot
 Allow: /
+Disallow: /admin
+Disallow: /api/admin
 
 # Anthropic Claude Indexer
 User-agent: ClaudeBot
 Allow: /
+Disallow: /admin
+Disallow: /api/admin
 
 User-agent: anthropic-ai
 Allow: /
+Disallow: /admin
+Disallow: /api/admin
 
 # Microsoft Copilot & Bing Search
 User-agent: Bingbot
 Allow: /
+Disallow: /admin
+Disallow: /api/admin
 
 # Apple Intelligence
 User-agent: Applebot
 Allow: /
+Disallow: /admin
+Disallow: /api/admin
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /admin
+Disallow: /api/admin
 
 # Other Major AI Knowledge Crawlers
 User-agent: CCBot
 Allow: /
+Disallow: /admin
+Disallow: /api/admin
 
 User-agent: Diffbot
 Allow: /
+Disallow: /admin
+Disallow: /api/admin
 
 User-agent: cohere-ai
 Allow: /
+Disallow: /admin
+Disallow: /api/admin
 
 # Canonical Sitemaps & AI Agent Maps (ARD Specification)
 Sitemap: https://www.encryptdecrypt.org/sitemap.xml
 Sitemap: https://www.encryptdecrypt.org/rss.xml
 Agentmap: https://www.encryptdecrypt.org/.well-known/ai-catalog.json
-Agentmap: https://www.encryptdecrypt.org/ai-catalog.json
-Agentmap: https://www.encryptdecrypt.org/.well-known/ard.json
-Agentmap: https://www.encryptdecrypt.org/ard.json

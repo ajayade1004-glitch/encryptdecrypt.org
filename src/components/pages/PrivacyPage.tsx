@@ -70,8 +70,42 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({
           <ul className="list-disc pl-5 space-y-1 text-xs sm:text-sm">
             <li>We do not record, transmit, or inspect your plaintexts, ciphertexts, passwords, hashes, or symmetric/asymmetric keys.</li>
             <li>We do not log user data into server databases, cloud caches, or backend logging files.</li>
-            <li>Disconnecting your workstation from the internet does not interrupt tool functionality, mathematically confirming zero data exfiltration.</li>
+            <li>For client-side cryptographic and data tools, disconnecting your workstation from the internet does not interrupt tool functionality, confirming zero data exfiltration.</li>
           </ul>
+        </section>
+
+        <section className="space-y-3 pt-4 border-t border-[var(--border-subtle)]">
+          <h2 className="text-xl font-bold text-[var(--text-primary)] flex items-center gap-2">
+            <Shield size={18} className="text-emerald-400" />
+            2.1. Network Request Disclosure: Client-Side vs Server-Assisted Tools
+          </h2>
+          <p>
+            To provide complete transparency regarding network traffic:
+          </p>
+          <div className="space-y-3 text-xs sm:text-sm">
+            <div className="p-3.5 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+              <strong className="text-emerald-400 block mb-1">1. Client-Side Tools (1,300+ Tools) — Zero Network Transmission</strong>
+              <p className="text-slate-300">
+                All Cryptographic Ciphers (AES-GCM, AES-CBC, ChaCha20, RSA), Hashing Functions (SHA-256, SHA-512, MD5, SHA-3, BLAKE2, HMAC), Data Encoders (Base64, Hex, URL, Base58), Identifiers (UUID, NanoID), Formatters, and Converters run strictly within the client browser's local sandbox memory. Zero bytes are ever transmitted to any remote server.
+              </p>
+            </div>
+            <div className="p-3.5 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+              <strong className="text-sky-400 block mb-1">2. Server-Assisted Diagnostic Tools — Explicit On-Demand Queries</strong>
+              <p className="text-slate-300 mb-2">
+                A small, dedicated set of network diagnostic utilities inherently require external connectivity to perform their function when deliberately requested by the user:
+              </p>
+              <ul className="list-disc pl-5 space-y-1 text-slate-300 text-xs">
+                <li><strong>DNS Lookup:</strong> Resolves DNS records (A, AAAA, MX, TXT, CNAME, NS) for the user-specified hostname via standard public DNS resolvers.</li>
+                <li><strong>WHOIS Domain Checker:</strong> Queries public registrar WHOIS databases for the requested domain name.</li>
+                <li><strong>HTTP Header &amp; Redirect Inspector:</strong> Fetches HTTP response headers and status codes from the target URL provided by the user.</li>
+                <li><strong>Ping / Host Diagnostic:</strong> Measures round-trip reachability to the user-specified server.</li>
+                <li><strong>Googlebot Simulator:</strong> Inspects public web page headers using Googlebot User-Agent simulation.</li>
+              </ul>
+              <p className="text-[11px] text-slate-400 mt-2">
+                Privacy Guarantee for Server-Assisted Tools: The server acts solely as a stateless transparent proxy. Queries are processed on-demand in memory, never stored in databases, never linked to user identities, and immediately discarded upon response completion.
+              </p>
+            </div>
+          </div>
         </section>
 
         <section className="space-y-3 pt-4 border-t border-[var(--border-subtle)]">

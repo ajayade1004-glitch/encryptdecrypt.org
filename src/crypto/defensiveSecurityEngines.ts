@@ -348,7 +348,7 @@ Security Flag Verification:
 • Secure Flag   : ${hasSecure ? '✓ ENABLED (Transmitted solely over encrypted HTTPS)' : '✗ MISSING (High Risk: Transmitted over plaintext HTTP)'}
 • SameSite Mode : ${sameSite} (${sameSite === 'Strict' || sameSite === 'Lax' ? '✓ Protected against CSRF attacks' : '⚠ Vulnerable to Cross-Site Request Forgery'})
 
-Compliance: ${hasHttpOnly && hasSecure && (sameSite === 'Strict' || sameSite === 'Lax') ? '✓ GOLD STANDARD SECURITY (OWASP Top 10 Compliant)' : '⚠ HARDENING REQUIRED'}`;
+Compliance: ${hasHttpOnly && hasSecure && (sameSite === 'Strict' || sameSite === 'Lax') ? '✓ HIGH SECURITY (OWASP Top 10 Compliant)' : '⚠ HARDENING REQUIRED'}`;
 }
 
 /** 16. Secure Cookie Configuration Builder */
@@ -429,7 +429,7 @@ export function compareEncryptionAlgorithms(input: string): string {
 
 Algorithm          Type        Key Length     Security Status
 -----------------  ----------  -------------  --------------------------------------
-AES-256-GCM        Symmetric   256 bits       ★ Gold Standard (Authenticated AEAD)
+AES-256-GCM        Symmetric   256 bits       ★ NIST SP 800-38D Recommended (AEAD)
 ChaCha20-Poly1305  Symmetric   256 bits       ★ High Speed on Mobile / ARM CPUs
 RSA-4096           Asymmetric  4096 bits      ✓ Strong (High memory / CPU cost)
 Ed25519 (ECDSA)    Asymmetric  256 bits       ★ Best Modern Key Exchange / Signatures

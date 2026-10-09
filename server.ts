@@ -739,19 +739,65 @@ app.get('/rss', serveRssFeed);
 // VITE DEV SERVER / PRODUCTION STATIC ASSETS
 // ==========================================
 
+import { renderSsrRoute, initializeSsrData } from './src/server/ssrRenderer.ts';
+
 async function startServer() {
+  initializeSsrData(__dirname);
+
   if (!isProd) {
     const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: { middlewareMode: true },
-      appType: 'spa'
+      appType: 'custom'
     });
     app.use(vite.middlewares);
+
+    // Dynamic SSR / Prerenderer for Development
+    app.get('*', async (req: Request, res: Response, next: NextFunction) => {
+      // Skip API and internal Vite asset requests
+      if (req.path.startsWith('/api/') || req.path.startsWith('/@') || (req.path.includes('.') && !req.path.endsWith('.html'))) {
+        return next();
+      }
+
+      try {
+        const rawTemplate = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf-8');
+        const transformedTemplate = await vite.transformIndexHtml(req.originalUrl, rawTemplate);
+
+        const ssr = renderSsrRoute(req.path, transformedTemplate);
+
+        if (ssr.status === 301 && ssr.redirect) {
+          return res.redirect(301, ssr.redirect);
+        }
+
+        res.status(ssr.status).set({ 'Content-Type': 'text/html; charset=utf-8' }).send(ssr.html);
+      } catch (e) {
+        vite.ssrFixStacktrace(e as Error);
+        next(e);
+      }
+    });
   } else {
     const distPath = path.join(__dirname, 'dist');
-    app.use(express.static(distPath, { dotfiles: 'allow' }));
-    app.get('*', (req: Request, res: Response) => {
-      res.sendFile(path.join(distPath, 'index.html'));
+    app.use(express.static(distPath, { dotfiles: 'allow', index: false }));
+
+    // Dynamic SSR / Prerenderer for Production
+    app.get('*', (req: Request, res: Response, next: NextFunction) => {
+      if (req.path.startsWith('/api/') || (req.path.includes('.') && !req.path.endsWith('.html'))) {
+        return next();
+      }
+
+      const distHtmlPath = path.join(distPath, 'index.html');
+      if (!fs.existsSync(distHtmlPath)) {
+        return res.status(500).send('Production build not found. Run npm run build.');
+      }
+
+      const rawTemplate = fs.readFileSync(distHtmlPath, 'utf-8');
+      const ssr = renderSsrRoute(req.path, rawTemplate);
+
+      if (ssr.status === 301 && ssr.redirect) {
+        return res.redirect(301, ssr.redirect);
+      }
+
+      res.status(ssr.status).set({ 'Content-Type': 'text/html; charset=utf-8' }).send(ssr.html);
     });
   }
 
@@ -760,6 +806,7 @@ async function startServer() {
     console.log(`🚀 EncryptDecrypt.org Server running at http://0.0.0.0:${PORT}`);
     console.log(`🔒 Sole Authorized Administrator: ${db.auth.email}`);
     console.log(`🛡️ Rate-limiting & PBKDF2 Password Security Active`);
+    console.log(`🌐 Server-Side Rendering & Dynamic Prerendering Active`);
     console.log(`======================================================\n`);
   });
 }

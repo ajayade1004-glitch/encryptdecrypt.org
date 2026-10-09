@@ -24,14 +24,14 @@ const categorySlugs = [
   'api-web-development',
   'seo-webmaster',
   'website-performance',
-  'accessibility',
+  'accessibility-tools',
   'text-writing-utilities',
   'file-data-tools',
-  'date-time',
+  'date-calendar-time-tools',
   'math-science',
   'color-design',
-  'network-dns',
-  'security-defensive',
+  'network-dns-tools',
+  'defensive-security-tools',
   'developer-generators',
   'image-web-optimization',
   'encoding-decoding',
@@ -76,14 +76,10 @@ const allUrlsMap = new Map();
 const allUrls = Array.from(allUrlsMap.values());
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${allUrls.map(u => `  <url>
     <loc>${u.loc}</loc>
     <lastmod>${u.lastmod}</lastmod>
-    <changefreq>${u.changefreq}</changefreq>
-    <priority>${u.priority}</priority>
   </url>`).join('\n')}
 </urlset>
 `;

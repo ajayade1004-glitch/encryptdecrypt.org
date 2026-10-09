@@ -233,7 +233,7 @@ Compliant Table Pattern:
     <tr>
       <th scope="row">AES-256-GCM</th>
       <td>256 bits</td>
-      <td>Gold Standard</td>
+      <td>NIST Approved</td>
     </tr>
   </tbody>
 </table>

@@ -30,6 +30,14 @@ if (typeof window !== 'undefined') {
   } catch {
     // Non-blocking
   }
+  // Service Worker Registration for Offline Tool Execution (PWA)
+  if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch((err) => {
+        console.warn('SW registration skipped:', err);
+      });
+    });
+  }
 }
 
 createRoot(document.getElementById('root')!).render(

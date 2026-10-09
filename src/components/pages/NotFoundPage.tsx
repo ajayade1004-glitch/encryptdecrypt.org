@@ -26,12 +26,12 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({
 
   const popularShortcuts = [
     { name: 'Base64 Encode/Decode', slug: 'base64-encode-decode', category: 'Encoding' },
-    { name: 'AES-256 Encryption', slug: 'aes-encryption-decryption', category: 'Ciphers' },
+    { name: 'AES-256 Encryption', slug: 'aes-encrypt-decrypt', category: 'Ciphers' },
     { name: 'SHA-256 Hash Generator', slug: 'sha-256-hash-generator', category: 'Hashing' },
     { name: 'UUID/GUID Generator', slug: 'uuid-guid-generator', category: 'Generators' },
     { name: 'Password Generator', slug: 'secure-password-generator', category: 'Security' },
     { name: 'URL Encode/Decode', slug: 'url-encode-decode', category: 'Encoding' },
-    { name: 'JWT Debugger', slug: 'jwt-token-debugger-generator', category: 'Security' },
+    { name: 'JWT Debugger', slug: 'jwt-token-generator', category: 'Security' },
     { name: 'QR Code Generator', slug: 'qr-code-generator', category: 'Utilities' },
   ];
 
@@ -39,8 +39,8 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({
     <div className="container py-12 max-w-4xl mx-auto">
       <SeoHead
         title="404 - Page Not Found | EncryptDecrypt.org"
-        description="The requested tool or page could not be found. Explore 330+ free, client-side cryptography, encoding, and developer tools at EncryptDecrypt.org."
-        canonicalUrl="https://encryptdecrypt.org/404"
+        description="The requested tool or page could not be found. Explore 1,360+ free, client-side cryptography, encoding, and developer tools at EncryptDecrypt.org."
+        canonicalUrl="https://www.encryptdecrypt.org/404"
         noIndex={true}
       />
 

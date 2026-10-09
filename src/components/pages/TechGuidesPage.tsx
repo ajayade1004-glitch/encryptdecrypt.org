@@ -125,7 +125,7 @@ const ciphertextWithTag = await crypto.subtle.encrypt(
     summary: 'A definitive breakdown of collision resistance, pre-image resistance, Merkle-Damgård vulnerabilities (length extension), and the Sponge construction of Keccak / SHA-3.',
     relatedToolSlug: 'sha-256-hash-generator',
     content: {
-      intro: 'A cryptographic hash function transforms an arbitrary-length binary stream into a fixed-size digest. The bedrock of digital signatures, blockchain ledgers, and password storage, hash functions must satisfy three golden properties: pre-image resistance, second pre-image resistance, and collision resistance.',
+      intro: 'A cryptographic hash function transforms an arbitrary-length binary stream into a fixed-size digest. The bedrock of digital signatures, blockchain ledgers, and integrity verification, hash functions must satisfy three golden properties: pre-image resistance, second pre-image resistance, and collision resistance. (Note: For credential and password storage, fast hash functions like SHA-256 are unsuitable due to GPU dictionary attacks; modern standards like NIST SP 800-63B mandate slow, memory-hard algorithms like Argon2id, bcrypt, or PBKDF2).',
       sections: [
         {
           heading: '1. The Collapse of MD5 and SHA-1',

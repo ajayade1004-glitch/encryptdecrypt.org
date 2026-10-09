@@ -59,6 +59,13 @@ export const TermsPage: React.FC<TermsPageProps> = ({
         </section>
 
         <section className="space-y-3 pt-4 border-t border-[var(--border-subtle)]">
+          <h2 className="text-xl font-bold text-[var(--text-primary)]">2.1. Network Request Notice (Server-Assisted Tools)</h2>
+          <p>
+            While all cryptographic tools execute in local browser memory without network activity, a specific set of network &amp; webmaster diagnostic tools (including DNS Lookup, WHOIS, HTTP Header/Redirect Inspector, Ping, and Googlebot Simulator) make on-demand, stateless outbound queries to public endpoints solely to fulfill your diagnostic request. No user-supplied parameters are stored or tracked.
+          </p>
+        </section>
+
+        <section className="space-y-3 pt-4 border-t border-[var(--border-subtle)]">
           <h2 className="text-xl font-bold text-[var(--text-primary)]">3. Acceptable Use Policy</h2>
           <p>
             You agree to use our services exclusively for lawful purposes. You shall not:

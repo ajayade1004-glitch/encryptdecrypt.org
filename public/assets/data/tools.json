@@ -850,9 +850,9 @@
     "slug": "aes-encrypt-decrypt",
     "category": "encryption-ciphers",
     "categoryName": "Encryption & Ciphers",
-    "shortDesc": "Military-grade AES-GCM and AES-CBC symmetric encryption in browser.",
+    "shortDesc": "high-security AES-GCM and AES-CBC symmetric encryption in browser.",
     "metaTitle": "AES 256 Encrypt & Decrypt Online - 100% Free & Private",
-    "metaDescription": "Military-grade AES-GCM and AES-CBC symmetric encryption in browser. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
+    "metaDescription": "high-security AES-GCM and AES-CBC symmetric encryption in browser. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
     "primaryKeyword": "aes 256 encrypt & decrypt online",
     "secondaryKeywords": [
       "aes 256 encrypt & decrypt tool",
@@ -4168,41 +4168,6 @@
       "url-safe-base64"
     ],
     "popular": false
-  },
-  {
-    "id": "jwt-validator",
-    "name": "JWT Token Signature Validator",
-    "slug": "jwt-validator",
-    "category": "validators-checkers",
-    "categoryName": "Validators & Checkers",
-    "shortDesc": "Check expiration, claims, and verify HMAC/RSA signatures of JWTs.",
-    "metaTitle": "JWT Token Signature Validator Online - 100% Free & Private",
-    "metaDescription": "Check expiration, claims, and verify HMAC/RSA signatures of JWTs. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
-    "primaryKeyword": "jwt token signature validator online",
-    "secondaryKeywords": [
-      "jwt token signature validator tool",
-      "free jwt token signature validator",
-      "client-side jwt token signature validator",
-      "browser jwt token signature validator"
-    ],
-    "lsiKeywords": [
-      "validators & checkers utility",
-      "web crypto api",
-      "developer tools online",
-      "privacy first encryption"
-    ],
-    "inputType": "textarea",
-    "hasFileSupport": false,
-    "icon": "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
-    "related": [
-      "base64-encode-decode",
-      "url-encode-decode",
-      "html-encode-decode",
-      "base16-hex-encode-decode",
-      "base58-encode-decode",
-      "url-safe-base64"
-    ],
-    "popular": true
   },
   {
     "id": "ssl-cert-decoder",
@@ -7748,8 +7713,8 @@
     "id": "chmod-permissions-calculator",
     "name": "Unix Chmod Calculator",
     "slug": "chmod-permissions-calculator",
-    "category": "converters-utilities",
-    "categoryName": "Converters & Utilities",
+    "category": "dev-tools-formatters",
+    "categoryName": "Dev Tools & Formatters",
     "shortDesc": "Calculate octal (755, 644) and symbolic (rwxr-xr-x) Linux permissions.",
     "metaTitle": "Unix Chmod Calculator Online - 100% Free & Private",
     "metaDescription": "Calculate octal (755, 644) and symbolic (rwxr-xr-x) Linux permissions. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
@@ -7783,8 +7748,8 @@
     "id": "data-storage-units-converter",
     "name": "Data Storage Units Converter",
     "slug": "data-storage-units-converter",
-    "category": "converters-utilities",
-    "categoryName": "Converters & Utilities",
+    "category": "dev-tools-formatters",
+    "categoryName": "Dev Tools & Formatters",
     "shortDesc": "Convert bytes, KB, MB, GB, TB between binary (1024) and decimal (1000).",
     "metaTitle": "Data Storage Units Converter Online - 100% Free & Private",
     "metaDescription": "Convert bytes, KB, MB, GB, TB between binary (1024) and decimal (1000). 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
@@ -7818,8 +7783,8 @@
     "id": "number-to-words-converter",
     "name": "Number to Words Converter",
     "slug": "number-to-words-converter",
-    "category": "converters-utilities",
-    "categoryName": "Converters & Utilities",
+    "category": "dev-tools-formatters",
+    "categoryName": "Dev Tools & Formatters",
     "shortDesc": "Convert numerals to English words for checks, invoices, and contracts.",
     "metaTitle": "Number to Words Converter Online - 100% Free & Private",
     "metaDescription": "Convert numerals to English words for checks, invoices, and contracts. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
@@ -7853,8 +7818,8 @@
     "id": "utc-timezone-difference",
     "name": "UTC Offset & Timezone Tool",
     "slug": "utc-timezone-difference",
-    "category": "converters-utilities",
-    "categoryName": "Converters & Utilities",
+    "category": "dev-tools-formatters",
+    "categoryName": "Dev Tools & Formatters",
     "shortDesc": "Compare time offsets and calculate UTC conversions across zones.",
     "metaTitle": "UTC Offset & Timezone Tool Online - 100% Free & Private",
     "metaDescription": "Compare time offsets and calculate UTC conversions across zones. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
@@ -7888,8 +7853,8 @@
     "id": "ascii-table-reference",
     "name": "ASCII Code Table Reference",
     "slug": "ascii-table-reference",
-    "category": "converters-utilities",
-    "categoryName": "Converters & Utilities",
+    "category": "dev-tools-formatters",
+    "categoryName": "Dev Tools & Formatters",
     "shortDesc": "Complete 7-bit ASCII reference chart with hex, octal, and HTML codes.",
     "metaTitle": "ASCII Code Table Reference Online - 100% Free & Private",
     "metaDescription": "Complete 7-bit ASCII reference chart with hex, octal, and HTML codes. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
@@ -7923,8 +7888,8 @@
     "id": "qr-code-generator",
     "name": "QR Code Generator (Client-Side)",
     "slug": "qr-code-generator",
-    "category": "converters-utilities",
-    "categoryName": "Converters & Utilities",
+    "category": "dev-tools-formatters",
+    "categoryName": "Dev Tools & Formatters",
     "shortDesc": "Generate custom QR codes instantly with error correction and SVG download.",
     "metaTitle": "QR Code Generator (Client-Side) Online - 100% Free & Private",
     "metaDescription": "Generate custom QR codes instantly with error correction and SVG download. 100% client-side Web Crypto tool. Zero server uploads. Fast, private and free.",
@@ -8337,33 +8302,6 @@
       "api response formatter tool",
       "free api response formatter",
       "client-side api response formatter"
-    ],
-    "lsiKeywords": [
-      "api & web development online",
-      "developer tools",
-      "privacy first encryption",
-      "web crypto utility"
-    ],
-    "inputType": "textarea",
-    "hasFileSupport": true,
-    "icon": "M13 10V3L4 14h7v7l9-11h-7z",
-    "related": [],
-    "popular": true
-  },
-  {
-    "id": "jwt-inspector",
-    "name": "JWT Inspector",
-    "slug": "jwt-inspector",
-    "category": "api-web-development",
-    "categoryName": "API & Web Development",
-    "shortDesc": "Inspect JSON Web Tokens (JWT), decode claims, and verify expiry dates.",
-    "metaTitle": "JWT Inspector - 100% Free & Private Online Tool",
-    "metaDescription": "Inspect JSON Web Tokens (JWT), decode claims, and verify expiry dates. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
-    "primaryKeyword": "jwt inspector online",
-    "secondaryKeywords": [
-      "jwt inspector online tool",
-      "free jwt inspector",
-      "client-side jwt inspector"
     ],
     "lsiKeywords": [
       "api & web development online",
@@ -8796,33 +8734,6 @@
     "popular": true
   },
   {
-    "id": "webp-converter",
-    "name": "WebP Converter",
-    "slug": "webp-converter",
-    "category": "website-performance",
-    "categoryName": "Website Performance",
-    "shortDesc": "Convert PNG and JPEG images to high-efficiency WebP format in browser.",
-    "metaTitle": "WebP Converter - 100% Free & Private Online Tool",
-    "metaDescription": "Convert PNG and JPEG images to high-efficiency WebP format in browser. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
-    "primaryKeyword": "webp converter online",
-    "secondaryKeywords": [
-      "webp converter online tool",
-      "free webp converter",
-      "client-side webp converter"
-    ],
-    "lsiKeywords": [
-      "website performance online",
-      "developer tools",
-      "privacy first encryption",
-      "web crypto utility"
-    ],
-    "inputType": "textarea",
-    "hasFileSupport": true,
-    "icon": "M13 10V3L4 14h7v7l9-11h-7z",
-    "related": [],
-    "popular": true
-  },
-  {
     "id": "cache-header-checker",
     "name": "Cache Header Checker",
     "slug": "cache-header-checker",
@@ -8850,38 +8761,11 @@
     "popular": true
   },
   {
-    "id": "wcag-contrast-checker",
-    "name": "WCAG Contrast Checker",
-    "slug": "wcag-contrast-checker",
-    "category": "accessibility",
-    "categoryName": "Accessibility",
-    "shortDesc": "Check color contrast ratio against WCAG 2.1 AA and AAA standards.",
-    "metaTitle": "WCAG Contrast Checker - 100% Free & Private Online Tool",
-    "metaDescription": "Check color contrast ratio against WCAG 2.1 AA and AAA standards. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
-    "primaryKeyword": "wcag contrast checker",
-    "secondaryKeywords": [
-      "wcag contrast checker tool",
-      "free wcag contrast checker",
-      "client-side wcag contrast checker"
-    ],
-    "lsiKeywords": [
-      "accessibility online",
-      "developer tools",
-      "privacy first encryption",
-      "web crypto utility"
-    ],
-    "inputType": "textarea",
-    "hasFileSupport": true,
-    "icon": "M13 10V3L4 14h7v7l9-11h-7z",
-    "related": [],
-    "popular": true
-  },
-  {
     "id": "alt-text-checker",
     "name": "Alt Text Checker",
     "slug": "alt-text-checker",
-    "category": "accessibility",
-    "categoryName": "Accessibility",
+    "category": "accessibility-tools",
+    "categoryName": "Accessibility & WCAG Tools",
     "shortDesc": "Audit image alt text for screen reader clarity and length optimization.",
     "metaTitle": "Alt Text Checker - 100% Free & Private Online Tool",
     "metaDescription": "Audit image alt text for screen reader clarity and length optimization. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -8907,8 +8791,8 @@
     "id": "heading-checker",
     "name": "Heading Checker",
     "slug": "heading-checker",
-    "category": "accessibility",
-    "categoryName": "Accessibility",
+    "category": "accessibility-tools",
+    "categoryName": "Accessibility & WCAG Tools",
     "shortDesc": "Validate HTML heading structure (H1-H6) for logical accessibility order.",
     "metaTitle": "Heading Checker - 100% Free & Private Online Tool",
     "metaDescription": "Validate HTML heading structure (H1-H6) for logical accessibility order. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -8934,8 +8818,8 @@
     "id": "aria-validator",
     "name": "ARIA Validator",
     "slug": "aria-validator",
-    "category": "accessibility",
-    "categoryName": "Accessibility",
+    "category": "accessibility-tools",
+    "categoryName": "Accessibility & WCAG Tools",
     "shortDesc": "Validate WAI-ARIA role and state attributes for accessibility compliance.",
     "metaTitle": "ARIA Validator - 100% Free & Private Online Tool",
     "metaDescription": "Validate WAI-ARIA role and state attributes for accessibility compliance. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -8961,8 +8845,8 @@
     "id": "link-text-checker",
     "name": "Link Text Checker",
     "slug": "link-text-checker",
-    "category": "accessibility",
-    "categoryName": "Accessibility",
+    "category": "accessibility-tools",
+    "categoryName": "Accessibility & WCAG Tools",
     "shortDesc": "Detect non-descriptive anchor text like click here or read more.",
     "metaTitle": "Link Text Checker - 100% Free & Private Online Tool",
     "metaDescription": "Detect non-descriptive anchor text like click here or read more. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -8988,8 +8872,8 @@
     "id": "color-blindness-simulator",
     "name": "Color Blindness Simulator",
     "slug": "color-blindness-simulator",
-    "category": "accessibility",
-    "categoryName": "Accessibility",
+    "category": "accessibility-tools",
+    "categoryName": "Accessibility & WCAG Tools",
     "shortDesc": "Simulate Protanopia, Deuteranopia, and Tritanopia color vision.",
     "metaTitle": "Color Blindness Simulator - 100% Free & Private Online Tool",
     "metaDescription": "Simulate Protanopia, Deuteranopia, and Tritanopia color vision. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -9204,8 +9088,8 @@
     "id": "csv-viewer",
     "name": "CSV Viewer",
     "slug": "csv-viewer",
-    "category": "file-data-tools",
-    "categoryName": "File & Data Tools",
+    "category": "file-data-converters",
+    "categoryName": "File & Data Converters",
     "shortDesc": "View, format, and inspect CSV records in a clean tabular ASCII layout.",
     "metaTitle": "CSV Viewer - 100% Free & Private Online Tool",
     "metaDescription": "View, format, and inspect CSV records in a clean tabular ASCII layout. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -9231,8 +9115,8 @@
     "id": "csv-cleaner",
     "name": "CSV Cleaner",
     "slug": "csv-cleaner",
-    "category": "file-data-tools",
-    "categoryName": "File & Data Tools",
+    "category": "file-data-converters",
+    "categoryName": "File & Data Converters",
     "shortDesc": "Clean CSV files by trimming cells, removing empty lines, and normalizing quotes.",
     "metaTitle": "CSV Cleaner - 100% Free & Private Online Tool",
     "metaDescription": "Clean CSV files by trimming cells, removing empty lines, and normalizing quotes. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -9258,8 +9142,8 @@
     "id": "tsv-to-csv",
     "name": "TSV to CSV",
     "slug": "tsv-to-csv",
-    "category": "file-data-tools",
-    "categoryName": "File & Data Tools",
+    "category": "file-data-converters",
+    "categoryName": "File & Data Converters",
     "shortDesc": "Convert Tab-Separated Values (TSV) to standard Comma-Separated Values (CSV).",
     "metaTitle": "TSV to CSV - 100% Free & Private Online Tool",
     "metaDescription": "Convert Tab-Separated Values (TSV) to standard Comma-Separated Values (CSV). 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -9285,8 +9169,8 @@
     "id": "json-to-html-table",
     "name": "JSON to HTML Table",
     "slug": "json-to-html-table",
-    "category": "file-data-tools",
-    "categoryName": "File & Data Tools",
+    "category": "file-data-converters",
+    "categoryName": "File & Data Converters",
     "shortDesc": "Convert JSON arrays into clean, semantic HTML <table> markup.",
     "metaTitle": "JSON to HTML Table - 100% Free & Private Online Tool",
     "metaDescription": "Convert JSON arrays into clean, semantic HTML <table> markup. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -9312,8 +9196,8 @@
     "id": "xml-to-csv",
     "name": "XML to CSV",
     "slug": "xml-to-csv",
-    "category": "file-data-tools",
-    "categoryName": "File & Data Tools",
+    "category": "file-data-converters",
+    "categoryName": "File & Data Converters",
     "shortDesc": "Flatten XML hierarchical nodes into tabular CSV rows easily.",
     "metaTitle": "XML to CSV - 100% Free & Private Online Tool",
     "metaDescription": "Flatten XML hierarchical nodes into tabular CSV rows easily. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -9339,8 +9223,8 @@
     "id": "yaml-formatter",
     "name": "YAML Formatter",
     "slug": "yaml-formatter",
-    "category": "file-data-tools",
-    "categoryName": "File & Data Tools",
+    "category": "file-data-converters",
+    "categoryName": "File & Data Converters",
     "shortDesc": "Format and indent YAML configuration files with 2-space standards.",
     "metaTitle": "YAML Formatter - 100% Free & Private Online Tool",
     "metaDescription": "Format and indent YAML configuration files with 2-space standards. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -9366,8 +9250,8 @@
     "id": "log-analyzer",
     "name": "Log Analyzer",
     "slug": "log-analyzer",
-    "category": "file-data-tools",
-    "categoryName": "File & Data Tools",
+    "category": "file-data-converters",
+    "categoryName": "File & Data Converters",
     "shortDesc": "Parse server access logs, extracting IP addresses and HTTP status codes.",
     "metaTitle": "Log Analyzer - 100% Free & Private Online Tool",
     "metaDescription": "Parse server access logs, extracting IP addresses and HTTP status codes. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -9393,8 +9277,8 @@
     "id": "file-size-calculator",
     "name": "File Size Calculator",
     "slug": "file-size-calculator",
-    "category": "file-data-tools",
-    "categoryName": "File & Data Tools",
+    "category": "file-data-converters",
+    "categoryName": "File & Data Converters",
     "shortDesc": "Convert between Bytes, KB, MB, GB, and TB with decimal and binary bases.",
     "metaTitle": "File Size Calculator - 100% Free & Private Online Tool",
     "metaDescription": "Convert between Bytes, KB, MB, GB, and TB with decimal and binary bases. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -9420,8 +9304,8 @@
     "id": "unix-timestamp",
     "name": "Unix Timestamp",
     "slug": "unix-timestamp",
-    "category": "date-time",
-    "categoryName": "Date & Time",
+    "category": "date-calendar-time-tools",
+    "categoryName": "Date, Calendar & Time Tools",
     "shortDesc": "Convert Unix epoch timestamps to human-readable dates and vice versa.",
     "metaTitle": "Unix Timestamp - 100% Free & Private Online Tool",
     "metaDescription": "Convert Unix epoch timestamps to human-readable dates and vice versa. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -9447,8 +9331,8 @@
     "id": "date-difference",
     "name": "Date Difference",
     "slug": "date-difference",
-    "category": "date-time",
-    "categoryName": "Date & Time",
+    "category": "date-calendar-time-tools",
+    "categoryName": "Date, Calendar & Time Tools",
     "shortDesc": "Calculate the exact number of days, weeks, and hours between two dates.",
     "metaTitle": "Date Difference - 100% Free & Private Online Tool",
     "metaDescription": "Calculate the exact number of days, weeks, and hours between two dates. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -9474,8 +9358,8 @@
     "id": "age-calculator",
     "name": "Age Calculator",
     "slug": "age-calculator",
-    "category": "date-time",
-    "categoryName": "Date & Time",
+    "category": "date-calendar-time-tools",
+    "categoryName": "Date, Calendar & Time Tools",
     "shortDesc": "Calculate chronological age in years, months, and total days lived.",
     "metaTitle": "Age Calculator - 100% Free & Private Online Tool",
     "metaDescription": "Calculate chronological age in years, months, and total days lived. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -9501,8 +9385,8 @@
     "id": "time-duration-calculator",
     "name": "Time Duration Calculator",
     "slug": "time-duration-calculator",
-    "category": "date-time",
-    "categoryName": "Date & Time",
+    "category": "date-calendar-time-tools",
+    "categoryName": "Date, Calendar & Time Tools",
     "shortDesc": "Add or subtract hours and minutes to compute cumulative durations.",
     "metaTitle": "Time Duration Calculator - 100% Free & Private Online Tool",
     "metaDescription": "Add or subtract hours and minutes to compute cumulative durations. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -9528,8 +9412,8 @@
     "id": "iso-date-converter",
     "name": "ISO Date Converter",
     "slug": "iso-date-converter",
-    "category": "date-time",
-    "categoryName": "Date & Time",
+    "category": "date-calendar-time-tools",
+    "categoryName": "Date, Calendar & Time Tools",
     "shortDesc": "Convert dates to and from ISO 8601, RFC 2822, and UTC formats.",
     "metaTitle": "ISO Date Converter - 100% Free & Private Online Tool",
     "metaDescription": "Convert dates to and from ISO 8601, RFC 2822, and UTC formats. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -9555,8 +9439,8 @@
     "id": "week-number-calculator",
     "name": "Week Number Calculator",
     "slug": "week-number-calculator",
-    "category": "date-time",
-    "categoryName": "Date & Time",
+    "category": "date-calendar-time-tools",
+    "categoryName": "Date, Calendar & Time Tools",
     "shortDesc": "Find the ISO-8601 calendar week number for any specified date.",
     "metaTitle": "Week Number Calculator - 100% Free & Private Online Tool",
     "metaDescription": "Find the ISO-8601 calendar week number for any specified date. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -9582,8 +9466,8 @@
     "id": "business-days-calculator",
     "name": "Business Days Calculator",
     "slug": "business-days-calculator",
-    "category": "date-time",
-    "categoryName": "Date & Time",
+    "category": "date-calendar-time-tools",
+    "categoryName": "Date, Calendar & Time Tools",
     "shortDesc": "Calculate working business days between dates, excluding weekends.",
     "metaTitle": "Business Days Calculator - 100% Free & Private Online Tool",
     "metaDescription": "Calculate working business days between dates, excluding weekends. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -9957,33 +9841,6 @@
     "popular": true
   },
   {
-    "id": "contrast-checker",
-    "name": "Contrast Checker",
-    "slug": "contrast-checker",
-    "category": "color-design",
-    "categoryName": "Color & Design",
-    "shortDesc": "Verify foreground and background color contrast for visual legibility.",
-    "metaTitle": "Contrast Checker - 100% Free & Private Online Tool",
-    "metaDescription": "Verify foreground and background color contrast for visual legibility. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
-    "primaryKeyword": "color contrast checker",
-    "secondaryKeywords": [
-      "color contrast checker tool",
-      "free contrast checker",
-      "client-side contrast checker"
-    ],
-    "lsiKeywords": [
-      "color & design online",
-      "developer tools",
-      "privacy first encryption",
-      "web crypto utility"
-    ],
-    "inputType": "textarea",
-    "hasFileSupport": true,
-    "icon": "M13 10V3L4 14h7v7l9-11h-7z",
-    "related": [],
-    "popular": true
-  },
-  {
     "id": "css-shadow-generator",
     "name": "CSS Shadow Generator",
     "slug": "css-shadow-generator",
@@ -10041,8 +9898,8 @@
     "id": "dns-record-lookup",
     "name": "DNS Record Lookup",
     "slug": "dns-record-lookup",
-    "category": "network-dns",
-    "categoryName": "Network & DNS",
+    "category": "network-dns-tools",
+    "categoryName": "Network & DNS Tools",
     "shortDesc": "Lookup DNS records (A, AAAA, MX, CNAME, TXT) in BIND zone format.",
     "metaTitle": "DNS Record Lookup - 100% Free & Private Online Tool",
     "metaDescription": "Lookup DNS records (A, AAAA, MX, CNAME, TXT) in BIND zone format. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -10068,8 +9925,8 @@
     "id": "ipv4-calculator",
     "name": "IPv4 Calculator",
     "slug": "ipv4-calculator",
-    "category": "network-dns",
-    "categoryName": "Network & DNS",
+    "category": "network-dns-tools",
+    "categoryName": "Network & DNS Tools",
     "shortDesc": "Calculate IPv4 network, broadcast, wildcard mask, and usable host range.",
     "metaTitle": "IPv4 Calculator - 100% Free & Private Online Tool",
     "metaDescription": "Calculate IPv4 network, broadcast, wildcard mask, and usable host range. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -10095,8 +9952,8 @@
     "id": "ipv6-calculator",
     "name": "IPv6 Calculator",
     "slug": "ipv6-calculator",
-    "category": "network-dns",
-    "categoryName": "Network & DNS",
+    "category": "network-dns-tools",
+    "categoryName": "Network & DNS Tools",
     "shortDesc": "Compress, expand, and audit IPv6 addresses and prefix lengths.",
     "metaTitle": "IPv6 Calculator - 100% Free & Private Online Tool",
     "metaDescription": "Compress, expand, and audit IPv6 addresses and prefix lengths. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -10122,8 +9979,8 @@
     "id": "cidr-calculator",
     "name": "CIDR Calculator",
     "slug": "cidr-calculator",
-    "category": "network-dns",
-    "categoryName": "Network & DNS",
+    "category": "network-dns-tools",
+    "categoryName": "Network & DNS Tools",
     "shortDesc": "Convert CIDR notation to subnet mask and total host count.",
     "metaTitle": "CIDR Calculator - 100% Free & Private Online Tool",
     "metaDescription": "Convert CIDR notation to subnet mask and total host count. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -10149,8 +10006,8 @@
     "id": "subnet-calculator",
     "name": "Subnet Calculator",
     "slug": "subnet-calculator",
-    "category": "network-dns",
-    "categoryName": "Network & DNS",
+    "category": "network-dns-tools",
+    "categoryName": "Network & DNS Tools",
     "shortDesc": "Subnet IP networks and calculate broadcast and gateway boundaries.",
     "metaTitle": "Subnet Calculator - 100% Free & Private Online Tool",
     "metaDescription": "Subnet IP networks and calculate broadcast and gateway boundaries. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -10176,8 +10033,8 @@
     "id": "dns-record-formatter",
     "name": "DNS Record Formatter",
     "slug": "dns-record-formatter",
-    "category": "network-dns",
-    "categoryName": "Network & DNS",
+    "category": "network-dns-tools",
+    "categoryName": "Network & DNS Tools",
     "shortDesc": "Format standard DNS resource records with TTL and origin directives.",
     "metaTitle": "DNS Record Formatter - 100% Free & Private Online Tool",
     "metaDescription": "Format standard DNS resource records with TTL and origin directives. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -10203,8 +10060,8 @@
     "id": "http-header-analyzer",
     "name": "HTTP Header Analyzer",
     "slug": "http-header-analyzer",
-    "category": "network-dns",
-    "categoryName": "Network & DNS",
+    "category": "network-dns-tools",
+    "categoryName": "Network & DNS Tools",
     "shortDesc": "Audit security response headers including HSTS, CSP, and X-Frame-Options.",
     "metaTitle": "HTTP Header Analyzer - 100% Free & Private Online Tool",
     "metaDescription": "Audit security response headers including HSTS, CSP, and X-Frame-Options. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -10227,38 +10084,11 @@
     "popular": true
   },
   {
-    "id": "password-strength-checker",
-    "name": "Password Strength Checker",
-    "slug": "password-strength-checker",
-    "category": "security-defensive",
-    "categoryName": "Security — Defensive",
-    "shortDesc": "Test password entropy and estimated crack time with zero server uploads.",
-    "metaTitle": "Password Strength Checker - 100% Free & Private Online Tool",
-    "metaDescription": "Test password entropy and estimated crack time with zero server uploads. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
-    "primaryKeyword": "password strength checker",
-    "secondaryKeywords": [
-      "password strength checker tool",
-      "free password strength checker",
-      "client-side password strength checker"
-    ],
-    "lsiKeywords": [
-      "security — defensive online",
-      "developer tools",
-      "privacy first encryption",
-      "web crypto utility"
-    ],
-    "inputType": "textarea",
-    "hasFileSupport": true,
-    "icon": "M13 10V3L4 14h7v7l9-11h-7z",
-    "related": [],
-    "popular": true
-  },
-  {
     "id": "hash-generator",
     "name": "Hash Generator",
     "slug": "hash-generator",
-    "category": "security-defensive",
-    "categoryName": "Security — Defensive",
+    "category": "defensive-security-tools",
+    "categoryName": "Defensive Security Tools",
     "shortDesc": "Generate cryptographic SHA-256 digests in real time via Web Crypto API.",
     "metaTitle": "Hash Generator - 100% Free & Private Online Tool",
     "metaDescription": "Generate cryptographic SHA-256 digests in real time via Web Crypto API. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -10284,8 +10114,8 @@
     "id": "file-checksum",
     "name": "File Checksum",
     "slug": "file-checksum",
-    "category": "security-defensive",
-    "categoryName": "Security — Defensive",
+    "category": "defensive-security-tools",
+    "categoryName": "Defensive Security Tools",
     "shortDesc": "Compute SHA-256 and CRC32 file checksums completely client-side.",
     "metaTitle": "File Checksum - 100% Free & Private Online Tool",
     "metaDescription": "Compute SHA-256 and CRC32 file checksums completely client-side. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -10308,38 +10138,11 @@
     "popular": true
   },
   {
-    "id": "jwt-decoder",
-    "name": "JWT Decoder",
-    "slug": "jwt-decoder",
-    "category": "security-defensive",
-    "categoryName": "Security — Defensive",
-    "shortDesc": "Decode Base64URL JWT payload and headers without sending tokens over network.",
-    "metaTitle": "JWT Decoder - 100% Free & Private Online Tool",
-    "metaDescription": "Decode Base64URL JWT payload and headers without sending tokens over network. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
-    "primaryKeyword": "jwt decoder online",
-    "secondaryKeywords": [
-      "jwt decoder online tool",
-      "free jwt decoder",
-      "client-side jwt decoder"
-    ],
-    "lsiKeywords": [
-      "security — defensive online",
-      "developer tools",
-      "privacy first encryption",
-      "web crypto utility"
-    ],
-    "inputType": "textarea",
-    "hasFileSupport": true,
-    "icon": "M13 10V3L4 14h7v7l9-11h-7z",
-    "related": [],
-    "popular": true
-  },
-  {
     "id": "certificate-decoder",
     "name": "Certificate Decoder",
     "slug": "certificate-decoder",
-    "category": "security-defensive",
-    "categoryName": "Security — Defensive",
+    "category": "defensive-security-tools",
+    "categoryName": "Defensive Security Tools",
     "shortDesc": "Decode X.509 PEM SSL/TLS certificates and inspect public key metadata.",
     "metaTitle": "Certificate Decoder - 100% Free & Private Online Tool",
     "metaDescription": "Decode X.509 PEM SSL/TLS certificates and inspect public key metadata. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -10365,8 +10168,8 @@
     "id": "ssl-expiry-calculator",
     "name": "SSL Expiry Calculator",
     "slug": "ssl-expiry-calculator",
-    "category": "security-defensive",
-    "categoryName": "Security — Defensive",
+    "category": "defensive-security-tools",
+    "categoryName": "Defensive Security Tools",
     "shortDesc": "Calculate days remaining before SSL/TLS certificate expiration.",
     "metaTitle": "SSL Expiry Calculator - 100% Free & Private Online Tool",
     "metaDescription": "Calculate days remaining before SSL/TLS certificate expiration. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -10389,65 +10192,11 @@
     "popular": true
   },
   {
-    "id": "csp-generator",
-    "name": "CSP Generator",
-    "slug": "csp-generator",
-    "category": "security-defensive",
-    "categoryName": "Security — Defensive",
-    "shortDesc": "Build robust Content Security Policy headers to mitigate XSS attacks.",
-    "metaTitle": "CSP Generator - 100% Free & Private Online Tool",
-    "metaDescription": "Build robust Content Security Policy headers to mitigate XSS attacks. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
-    "primaryKeyword": "csp generator online",
-    "secondaryKeywords": [
-      "csp generator online tool",
-      "free csp generator",
-      "client-side csp generator"
-    ],
-    "lsiKeywords": [
-      "security — defensive online",
-      "developer tools",
-      "privacy first encryption",
-      "web crypto utility"
-    ],
-    "inputType": "textarea",
-    "hasFileSupport": true,
-    "icon": "M13 10V3L4 14h7v7l9-11h-7z",
-    "related": [],
-    "popular": true
-  },
-  {
-    "id": "sri-generator",
-    "name": "SRI Generator",
-    "slug": "sri-generator",
-    "category": "security-defensive",
-    "categoryName": "Security — Defensive",
-    "shortDesc": "Generate Subresource Integrity (SRI) sha384 hashes for scripts.",
-    "metaTitle": "SRI Generator - 100% Free & Private Online Tool",
-    "metaDescription": "Generate Subresource Integrity (SRI) sha384 hashes for scripts. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
-    "primaryKeyword": "sri hash generator",
-    "secondaryKeywords": [
-      "sri hash generator tool",
-      "free sri generator",
-      "client-side sri generator"
-    ],
-    "lsiKeywords": [
-      "security — defensive online",
-      "developer tools",
-      "privacy first encryption",
-      "web crypto utility"
-    ],
-    "inputType": "textarea",
-    "hasFileSupport": true,
-    "icon": "M13 10V3L4 14h7v7l9-11h-7z",
-    "related": [],
-    "popular": true
-  },
-  {
     "id": "security-header-checker",
     "name": "Security Header Checker",
     "slug": "security-header-checker",
-    "category": "security-defensive",
-    "categoryName": "Security — Defensive",
+    "category": "defensive-security-tools",
+    "categoryName": "Defensive Security Tools",
     "shortDesc": "Evaluate defensive security posture based on modern HTTP response headers.",
     "metaTitle": "Security Header Checker - 100% Free & Private Online Tool",
     "metaDescription": "Evaluate defensive security posture based on modern HTTP response headers. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
@@ -10459,33 +10208,6 @@
     ],
     "lsiKeywords": [
       "security — defensive online",
-      "developer tools",
-      "privacy first encryption",
-      "web crypto utility"
-    ],
-    "inputType": "textarea",
-    "hasFileSupport": true,
-    "icon": "M13 10V3L4 14h7v7l9-11h-7z",
-    "related": [],
-    "popular": true
-  },
-  {
-    "id": "uuid-generator",
-    "name": "UUID Generator",
-    "slug": "uuid-generator",
-    "category": "developer-generators",
-    "categoryName": "Developer Generators",
-    "shortDesc": "Generate cryptographically random UUID v4 and v7 identifiers.",
-    "metaTitle": "UUID Generator - 100% Free & Private Online Tool",
-    "metaDescription": "Generate cryptographically random UUID v4 and v7 identifiers. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
-    "primaryKeyword": "uuid generator online",
-    "secondaryKeywords": [
-      "uuid generator online tool",
-      "free uuid generator",
-      "client-side uuid generator"
-    ],
-    "lsiKeywords": [
-      "developer generators online",
       "developer tools",
       "privacy first encryption",
       "web crypto utility"
@@ -10672,33 +10394,6 @@
       "image dimension calculator tool",
       "free image dimension calculator",
       "client-side image dimension calculator"
-    ],
-    "lsiKeywords": [
-      "image/web optimization online",
-      "developer tools",
-      "privacy first encryption",
-      "web crypto utility"
-    ],
-    "inputType": "textarea",
-    "hasFileSupport": true,
-    "icon": "M13 10V3L4 14h7v7l9-11h-7z",
-    "related": [],
-    "popular": true
-  },
-  {
-    "id": "image-to-webp-converter",
-    "name": "Image to WebP Converter",
-    "slug": "image-to-webp-converter",
-    "category": "image-web-optimization",
-    "categoryName": "Image/Web Optimization",
-    "shortDesc": "Convert image files to WebP format client-side using browser canvas.",
-    "metaTitle": "Image to WebP Converter - 100% Free & Private Online Tool",
-    "metaDescription": "Convert image files to WebP format client-side using browser canvas. 100% client-side tool on EncryptDecrypt.org. Zero server uploads. Fast, private and free.",
-    "primaryKeyword": "image to webp converter",
-    "secondaryKeywords": [
-      "image to webp converter tool",
-      "free image to webp converter",
-      "client-side image to webp converter"
     ],
     "lsiKeywords": [
       "image/web optimization online",
@@ -25231,37 +24926,6 @@
     "popular": false
   },
   {
-    "id": "password-entropy-calculator",
-    "name": "Password Entropy Calculator",
-    "slug": "password-entropy-calculator",
-    "category": "defensive-security-tools",
-    "categoryName": "Defensive Security Tools",
-    "shortDesc": "Calculate mathematical password entropy in bits and estimate GPU cluster crack times.",
-    "metaTitle": "Password Entropy Calculator - Free Online Tool",
-    "metaDescription": "Calculate mathematical password entropy in bits and estimate GPU cluster crack times. Fast, 100% client-side, zero server logging.",
-    "primaryKeyword": "password entropy calculator",
-    "secondaryKeywords": [
-      "password entropy calculator online",
-      "free password entropy calculator",
-      "defensive security tools tool"
-    ],
-    "lsiKeywords": [
-      "developer tools",
-      "client-side",
-      "privacy focused",
-      "instant calculation"
-    ],
-    "inputType": "text",
-    "hasFileSupport": false,
-    "related": [
-      "password-policy-checker",
-      "passphrase-strength-analyzer",
-      "security-header-policy-builder",
-      "content-security-policy-explainer"
-    ],
-    "popular": false
-  },
-  {
     "id": "password-policy-checker",
     "name": "Password Policy Checker",
     "slug": "password-policy-checker",
@@ -25351,37 +25015,6 @@
       "password-policy-checker",
       "passphrase-strength-analyzer",
       "content-security-policy-explainer"
-    ],
-    "popular": false
-  },
-  {
-    "id": "content-security-policy-explainer",
-    "name": "Content Security Policy Explainer",
-    "slug": "content-security-policy-explainer",
-    "category": "defensive-security-tools",
-    "categoryName": "Defensive Security Tools",
-    "shortDesc": "Breakdown and explain CSP directives and Cross-Site Scripting (XSS) protections.",
-    "metaTitle": "Content Security Policy Explainer - Free Online Tool",
-    "metaDescription": "Breakdown and explain CSP directives and Cross-Site Scripting (XSS) protections. Fast, 100% client-side, zero server logging.",
-    "primaryKeyword": "content security policy explainer",
-    "secondaryKeywords": [
-      "content security policy explainer online",
-      "free content security policy explainer",
-      "defensive security tools tool"
-    ],
-    "lsiKeywords": [
-      "developer tools",
-      "client-side",
-      "privacy focused",
-      "instant calculation"
-    ],
-    "inputType": "text",
-    "hasFileSupport": false,
-    "related": [
-      "password-entropy-calculator",
-      "password-policy-checker",
-      "passphrase-strength-analyzer",
-      "security-header-policy-builder"
     ],
     "popular": false
   },
@@ -25615,37 +25248,6 @@
     "secondaryKeywords": [
       "hmac verification tester online",
       "free hmac verification tester",
-      "defensive security tools tool"
-    ],
-    "lsiKeywords": [
-      "developer tools",
-      "client-side",
-      "privacy focused",
-      "instant calculation"
-    ],
-    "inputType": "text",
-    "hasFileSupport": false,
-    "related": [
-      "password-entropy-calculator",
-      "password-policy-checker",
-      "passphrase-strength-analyzer",
-      "security-header-policy-builder"
-    ],
-    "popular": false
-  },
-  {
-    "id": "jwt-claim-inspector",
-    "name": "JWT Claim Inspector",
-    "slug": "jwt-claim-inspector",
-    "category": "defensive-security-tools",
-    "categoryName": "Defensive Security Tools",
-    "shortDesc": "Decode JSON Web Token headers, payload claims, and check expiration lifetimes.",
-    "metaTitle": "JWT Claim Inspector - Free Online Tool",
-    "metaDescription": "Decode JSON Web Token headers, payload claims, and check expiration lifetimes. Fast, 100% client-side, zero server logging.",
-    "primaryKeyword": "jwt claim inspector",
-    "secondaryKeywords": [
-      "jwt claim inspector online",
-      "free jwt claim inspector",
       "defensive security tools tool"
     ],
     "lsiKeywords": [
@@ -31533,8 +31135,8 @@
   {
     "name": "QR Code Batch Generator",
     "slug": "qr-code-batch-generator",
-    "category": "qr-barcode-label-tools",
-    "categoryName": "QR, Barcode & Product Label Tools",
+    "category": "qr-barcode-tools",
+    "categoryName": "QR & Barcode Tools",
     "desc": "Generate multi-item manifests for batch QR code generation with custom error correction levels.",
     "keywords": [
       "qr code batch generator",
@@ -31551,8 +31153,8 @@
   {
     "name": "QR Code Text Length Analyzer",
     "slug": "qr-code-text-length-analyzer",
-    "category": "qr-barcode-label-tools",
-    "categoryName": "QR, Barcode & Product Label Tools",
+    "category": "qr-barcode-tools",
+    "categoryName": "QR & Barcode Tools",
     "desc": "Inspect text byte payload and recommend optimal QR code versions and error correction levels.",
     "keywords": [
       "qr code text length analyzer",
@@ -31569,8 +31171,8 @@
   {
     "name": "QR Code Print Sheet Maker",
     "slug": "qr-code-print-sheet-maker",
-    "category": "qr-barcode-label-tools",
-    "categoryName": "QR, Barcode & Product Label Tools",
+    "category": "qr-barcode-tools",
+    "categoryName": "QR & Barcode Tools",
     "desc": "Plan Avery 3x10 multi-up print sheets for QR stickers and product labels.",
     "keywords": [
       "qr code print sheet maker",
@@ -31587,8 +31189,8 @@
   {
     "name": "QR Code SVG Exporter",
     "slug": "qr-code-svg-exporter",
-    "category": "qr-barcode-label-tools",
-    "categoryName": "QR, Barcode & Product Label Tools",
+    "category": "qr-barcode-tools",
+    "categoryName": "QR & Barcode Tools",
     "desc": "Generate scalable vector SVG markup for crisp, infinitely scalable QR code printing.",
     "keywords": [
       "qr code svg exporter",
@@ -31605,8 +31207,8 @@
   {
     "name": "QR Code Error Correction Explainer",
     "slug": "qr-code-error-correction-explainer",
-    "category": "qr-barcode-label-tools",
-    "categoryName": "QR, Barcode & Product Label Tools",
+    "category": "qr-barcode-tools",
+    "categoryName": "QR & Barcode Tools",
     "desc": "Compare Reed-Solomon Error Correction levels (L 7%, M 15%, Q 25%, H 30%) for print resilience.",
     "keywords": [
       "qr code error correction explainer",
@@ -31623,8 +31225,8 @@
   {
     "name": "Product Label Size Calculator",
     "slug": "product-label-size-calculator",
-    "category": "qr-barcode-label-tools",
-    "categoryName": "QR, Barcode & Product Label Tools",
+    "category": "qr-barcode-tools",
+    "categoryName": "QR & Barcode Tools",
     "desc": "Calculate wrap-around and front panel dimensions for cylindrical bottles, jars, and cartons.",
     "keywords": [
       "product label size calculator",
@@ -31641,8 +31243,8 @@
   {
     "name": "Barcode Label Sheet Planner",
     "slug": "barcode-label-sheet-planner",
-    "category": "qr-barcode-label-tools",
-    "categoryName": "QR, Barcode & Product Label Tools",
+    "category": "qr-barcode-tools",
+    "categoryName": "QR & Barcode Tools",
     "desc": "Plan Avery 5163 2x4 shipping and inventory barcode label sheets at 300 DPI.",
     "keywords": [
       "barcode label sheet planner",
@@ -31659,8 +31261,8 @@
   {
     "name": "Barcode Check Digit Validator",
     "slug": "barcode-check-digit-validator",
-    "category": "qr-barcode-label-tools",
-    "categoryName": "QR, Barcode & Product Label Tools",
+    "category": "qr-barcode-tools",
+    "categoryName": "QR & Barcode Tools",
     "desc": "Validate modulo-10 check digits on standard 12-digit UPC-A and 13-digit EAN-13 barcodes.",
     "keywords": [
       "barcode check digit validator",
@@ -31677,8 +31279,8 @@
   {
     "name": "UPC to EAN Format Reference",
     "slug": "upc-to-ean-format-reference",
-    "category": "qr-barcode-label-tools",
-    "categoryName": "QR, Barcode & Product Label Tools",
+    "category": "qr-barcode-tools",
+    "categoryName": "QR & Barcode Tools",
     "desc": "Understand UPC-A to EAN-13 country code zero-prefix compatibility for point-of-sale systems.",
     "keywords": [
       "upc to ean format reference",
@@ -31695,8 +31297,8 @@
   {
     "name": "GS1 Barcode Data Formatter",
     "slug": "gs1-barcode-data-formatter",
-    "category": "qr-barcode-label-tools",
-    "categoryName": "QR, Barcode & Product Label Tools",
+    "category": "qr-barcode-tools",
+    "categoryName": "QR & Barcode Tools",
     "desc": "Parse and format GS1-128 Application Identifiers (GTIN, Expiration, Lot/Batch numbers).",
     "keywords": [
       "gs1 barcode data formatter",
@@ -31713,8 +31315,8 @@
   {
     "name": "Product SKU Label Generator",
     "slug": "product-sku-label-generator",
-    "category": "qr-barcode-label-tools",
-    "categoryName": "QR, Barcode & Product Label Tools",
+    "category": "qr-barcode-tools",
+    "categoryName": "QR & Barcode Tools",
     "desc": "Generate printable ASCII and barcode product SKU labels with metadata.",
     "keywords": [
       "product sku label generator",
@@ -31731,8 +31333,8 @@
   {
     "name": "QR Code Border Calculator",
     "slug": "qr-code-border-calculator",
-    "category": "qr-barcode-label-tools",
-    "categoryName": "QR, Barcode & Product Label Tools",
+    "category": "qr-barcode-tools",
+    "categoryName": "QR & Barcode Tools",
     "desc": "Calculate the mandatory 4-module ISO/IEC 18004 quiet zone border for reliable scanning.",
     "keywords": [
       "qr code border calculator",
@@ -31749,8 +31351,8 @@
   {
     "name": "QR Code Margin Calculator",
     "slug": "qr-code-margin-calculator",
-    "category": "qr-barcode-label-tools",
-    "categoryName": "QR, Barcode & Product Label Tools",
+    "category": "qr-barcode-tools",
+    "categoryName": "QR & Barcode Tools",
     "desc": "Compute safe canvas padding and inset margins for branded QR code artwork.",
     "keywords": [
       "qr code margin calculator",
@@ -31767,8 +31369,8 @@
   {
     "name": "QR Code Version Selector",
     "slug": "qr-code-version-selector",
-    "category": "qr-barcode-label-tools",
-    "categoryName": "QR, Barcode & Product Label Tools",
+    "category": "qr-barcode-tools",
+    "categoryName": "QR & Barcode Tools",
     "desc": "Determine the exact QR matrix size (Version 1 to 40) required for arbitrary character payload lengths.",
     "keywords": [
       "qr code version selector",
@@ -31785,8 +31387,8 @@
   {
     "name": "Barcode Width Estimator",
     "slug": "barcode-width-estimator",
-    "category": "qr-barcode-label-tools",
-    "categoryName": "QR, Barcode & Product Label Tools",
+    "category": "qr-barcode-tools",
+    "categoryName": "QR & Barcode Tools",
     "desc": "Estimate physical print width in millimeters and inches for Code 128 and EAN barcodes.",
     "keywords": [
       "barcode width estimator",
@@ -34371,7 +33973,7 @@
     "categoryName": "Encryption & Ciphers",
     "shortDesc": "Encrypt and decrypt local files with hardware-accelerated AES-256-GCM entirely in browser memory without server uploads.",
     "metaTitle": "Client-Side File Encryption Tool Online - 100% In-Browser AES-256-GCM",
-    "metaDescription": "Encrypt any local file (PDF, images, documents, archives) with military-grade AES-256-GCM and PBKDF2 key derivation directly in your browser.",
+    "metaDescription": "Encrypt any local file (PDF, images, documents, archives) with high-security AES-256-GCM and PBKDF2 key derivation directly in your browser.",
     "primaryKeyword": "client side file encryption tool online",
     "secondaryKeywords": [
       "in browser file encryptor",

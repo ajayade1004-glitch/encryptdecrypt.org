@@ -73,14 +73,14 @@ export const CATEGORY_HUBS_CONFIG = [
   { slug: 'api-web-development', name: 'API & Web Development', icon: Globe, count: 7, desc: 'HTTP Status, REST Builder, cURL, JWT, MIME Lookup' },
   { slug: 'seo-webmaster', name: 'SEO & Webmaster', icon: Search, count: 23, desc: 'Robots.txt, Sitemap, Meta Title/Desc, Schema, OG Card' },
   { slug: 'website-performance', name: 'Website Performance', icon: Gauge, count: 6, desc: 'Page Load, Image Size, CSS/JS/HTML Minifier, GZIP' },
-  { slug: 'accessibility', name: 'Accessibility & WCAG', icon: Eye, count: 6, desc: 'WCAG Contrast, Alt Text, Heading, ARIA, Color Blindness' },
+  { slug: 'accessibility-tools', name: 'Accessibility & WCAG', icon: Eye, count: 20, desc: 'WCAG Contrast, Alt Text, Heading, ARIA, Color Blindness' },
   { slug: 'text-writing-utilities', name: 'Text & Writing Utilities', icon: FileText, count: 7, desc: 'Sentence, Reading Time, Keyword Counter, Cleaner' },
   { slug: 'file-data-tools', name: 'File & Data Tools', icon: Database, count: 8, desc: 'CSV Viewer/Cleaner, TSV→CSV, JSON Table, XML, YAML' },
-  { slug: 'date-time', name: 'Date & Time', icon: Clock, count: 7, desc: 'Unix Timestamp, Date Diff, Age, Duration, Business Days' },
+  { slug: 'date-calendar-time-tools', name: 'Date & Time', icon: Clock, count: 20, desc: 'Unix Timestamp, Date Diff, Age, Duration, Business Days' },
   { slug: 'math-science', name: 'Math & Science', icon: Calculator, count: 8, desc: 'Scientific Calc, Fractions, Ratios, Averages, Compound Int' },
   { slug: 'color-design', name: 'Color & Design', icon: Palette, count: 8, desc: 'HEX Picker, RGB/HSL, Gradient, Palette, CSS Shadow' },
-  { slug: 'network-dns', name: 'Network & DNS', icon: Wifi, count: 7, desc: 'DNS Lookup, IPv4/IPv6, CIDR, Subnet, User-Agent, Headers' },
-  { slug: 'security-defensive', name: 'Security — Defensive', icon: ShieldCheck, count: 9, desc: 'Password Strength, Hash, Checksum, JWT, CSP, SRI' },
+  { slug: 'network-dns-tools', name: 'Network & DNS', icon: Wifi, count: 20, desc: 'DNS Lookup, IPv4/IPv6, CIDR, Subnet, User-Agent, Headers' },
+  { slug: 'defensive-security-tools', name: 'Security — Defensive', icon: ShieldCheck, count: 20, desc: 'Password Strength, Hash, Checksum, JWT, CSP, SRI' },
   { slug: 'developer-generators', name: 'Developer Generators', icon: Key, count: 7, desc: 'UUID, ULID, NanoID, Lorem Ipsum, Mock JSON, Regex' },
   { slug: 'image-web-optimization', name: 'Image & Web Optimization', icon: ImageIcon, count: 6, desc: 'Image Dimensions, Aspect Ratio, WebP, SVG Optimizer' },
   { slug: 'encoding-decoding', name: 'Encoding & Decoding', icon: Binary, count: 23, desc: 'Base64, Hex, URL, Morse, Base32, Base58, Binary' },
@@ -122,6 +122,23 @@ function synthesizeToolFromSlug(slug: string): ToolItem {
   };
 }
 
+const REDIRECT_SLUGS: Record<string, string> = {
+  'jwt-decoder': 'jwt-token-generator',
+  'jwt-inspector': 'jwt-token-generator',
+  'jwt-claim-inspector': 'jwt-token-generator',
+  'jwt-validator': 'jwt-token-generator',
+  'uuid-generator': 'uuid-guid-generator',
+  'csp-generator': 'csp-builder-analyzer',
+  'content-security-policy-explainer': 'csp-builder-analyzer',
+  'sri-generator': 'sri-hash-generator',
+  'contrast-checker': 'color-contrast-checker',
+  'wcag-contrast-checker': 'color-contrast-checker',
+  'webp-converter': 'image-to-webp',
+  'image-to-webp-converter': 'image-to-webp',
+  'password-strength-checker': 'password-strength-meter',
+  'password-entropy-calculator': 'password-strength-meter',
+};
+
 function getInitialRouteState(): {
   selectedTool: ToolItem | null;
   currentView: AppView;
@@ -136,9 +153,10 @@ function getInitialRouteState(): {
 
   // 1. Hash routes
   if (hash.startsWith('tool=')) {
-    const slug = hash.replace('tool=', '');
-    const match = INITIAL_TOP_TOOLS.find(t => t.slug === slug || t.id === slug) || synthesizeToolFromSlug(slug);
-    return { selectedTool: match, currentView: 'catalog', activeCategory: 'all' };
+    const rawSlug = hash.replace('tool=', '');
+    const slug = REDIRECT_SLUGS[rawSlug] || rawSlug;
+    const match = INITIAL_TOP_TOOLS.find(t => t.slug === slug || t.id === slug);
+    return { selectedTool: match || null, currentView: 'catalog', activeCategory: 'all' };
   }
   if (['about', 'contact', 'guides', 'privacy', 'terms', 'disclaimer', 'admin', 'all-tools'].includes(hash)) {
     return { selectedTool: null, currentView: hash as AppView, activeCategory: 'all' };
@@ -152,18 +170,18 @@ function getInitialRouteState(): {
   if (pathname.startsWith('/tools/') || pathname.startsWith('/tool/')) {
     const rawPath = pathname.startsWith('/tools/') ? pathname.replace('/tools/', '') : pathname.replace('/tool/', '');
     const parts = rawPath.split('/').filter(Boolean);
-    if (parts.length === 1) {
-      const slug = parts[0];
+    if (parts.length >= 1) {
+      const rawSlug = parts[parts.length - 1];
+      const slug = REDIRECT_SLUGS[rawSlug] || rawSlug;
       const isCat = CATEGORY_HUBS_CONFIG.some(c => c.slug === slug);
       if (isCat) {
         return { selectedTool: null, currentView: 'category', activeCategory: slug };
       }
-      const match = INITIAL_TOP_TOOLS.find(t => t.slug === slug || t.id === slug) || synthesizeToolFromSlug(slug);
-      return { selectedTool: match, currentView: 'catalog', activeCategory: 'all' };
-    } else if (parts.length >= 2) {
-      const toolSlug = parts[1];
-      const match = INITIAL_TOP_TOOLS.find(t => t.slug === toolSlug || t.id === toolSlug) || synthesizeToolFromSlug(toolSlug);
-      return { selectedTool: match, currentView: 'catalog', activeCategory: 'all' };
+      const match = INITIAL_TOP_TOOLS.find(t => t.slug === slug || t.id === slug);
+      if (match) {
+        return { selectedTool: match, currentView: 'catalog', activeCategory: 'all' };
+      }
+      return { selectedTool: null, currentView: 'catalog', activeCategory: 'all' };
     }
   }
 
@@ -172,6 +190,7 @@ function getInitialRouteState(): {
     return { selectedTool: null, currentView: 'category', activeCategory: catSlug };
   }
 
+  if (pathname === '' || pathname === '/') return { selectedTool: null, currentView: 'catalog', activeCategory: 'all' };
   if (pathname === '/all-tools' || pathname === '/tools') return { selectedTool: null, currentView: 'all-tools', activeCategory: 'all' };
   if (pathname === '/about') return { selectedTool: null, currentView: 'about', activeCategory: 'all' };
   if (pathname === '/contact') return { selectedTool: null, currentView: 'contact', activeCategory: 'all' };
@@ -184,15 +203,18 @@ function getInitialRouteState(): {
   // Direct single slug check (e.g. /sha256-hash-generator)
   const cleanSinglePath = pathname.replace(/^\//, '');
   if (cleanSinglePath && !cleanSinglePath.includes('/')) {
-    const isCat = CATEGORY_HUBS_CONFIG.some(c => c.slug === cleanSinglePath);
+    const slug = REDIRECT_SLUGS[cleanSinglePath] || cleanSinglePath;
+    const isCat = CATEGORY_HUBS_CONFIG.some(c => c.slug === slug);
     if (isCat) {
-      return { selectedTool: null, currentView: 'category', activeCategory: cleanSinglePath };
+      return { selectedTool: null, currentView: 'category', activeCategory: slug };
     }
-    const match = INITIAL_TOP_TOOLS.find(t => t.slug === cleanSinglePath || t.id === cleanSinglePath) || synthesizeToolFromSlug(cleanSinglePath);
-    return { selectedTool: match, currentView: 'catalog', activeCategory: 'all' };
+    const match = INITIAL_TOP_TOOLS.find(t => t.slug === slug || t.id === slug);
+    if (match) {
+      return { selectedTool: match, currentView: 'catalog', activeCategory: 'all' };
+    }
   }
 
-  return { selectedTool: null, currentView: 'catalog', activeCategory: 'all' };
+  return { selectedTool: null, currentView: 'notfound', activeCategory: 'all' };
 }
 
 export default function App() {
@@ -318,7 +340,8 @@ export default function App() {
       const parts = rawPath.split('/').filter(Boolean);
 
       if (parts.length >= 1) {
-        const targetSlug = parts[parts.length - 1].toLowerCase().trim().replace(/^\/+|\/+$/g, '');
+        const rawSlug = parts[parts.length - 1].toLowerCase().trim().replace(/^\/+|\/+$/g, '');
+        const targetSlug = REDIRECT_SLUGS[rawSlug] || rawSlug;
         
         // 1. Check direct tool match
         const match = toolsList.find(t => 
@@ -330,7 +353,7 @@ export default function App() {
         if (match) {
           setSelectedTool(match);
           setCurrentView('catalog');
-          if (isSingular || pathname.includes('//')) {
+          if (isSingular || rawSlug !== match.slug || pathname.includes('//')) {
             window.history.replaceState({}, '', `/tools/${match.slug}`);
           }
           return;
@@ -346,13 +369,15 @@ export default function App() {
           return;
         }
 
-        // 3. Resilient fallback: Synthesize tool state so users never see a 404 dead end
-        setSelectedTool(synthesizeToolFromSlug(targetSlug));
-        setCurrentView('catalog');
-        if (!isCatalogLoaded) {
+        // 3. If catalog is loaded and tool does not exist -> 404 Not Found
+        if (isCatalogLoaded) {
+          setSelectedTool(null);
+          setCurrentView('notfound');
+          return;
+        } else {
           reloadToolsCatalog();
+          return;
         }
-        return;
       }
     }
 
@@ -376,23 +401,26 @@ export default function App() {
     // Direct single slug route (e.g. /sha256-hash-generator)
     const cleanPath = pathname.replace(/^\//, '');
     if (cleanPath && !cleanPath.includes('/')) {
-      const match = toolsList.find(t => t.slug === cleanPath || t.id === cleanPath);
+      const targetSlug = REDIRECT_SLUGS[cleanPath] || cleanPath;
+      const match = toolsList.find(t => t.slug === targetSlug || t.id === targetSlug);
       if (match) {
         setSelectedTool(match);
         setCurrentView('catalog');
         window.history.replaceState({}, '', `/tools/${match.slug}`);
         return;
       }
-      const isCat = CATEGORY_HUBS_CONFIG.some(c => c.slug === cleanPath);
+      const isCat = CATEGORY_HUBS_CONFIG.some(c => c.slug === targetSlug);
       if (isCat) {
-        setActiveCategory(cleanPath);
+        setActiveCategory(targetSlug);
         setSelectedTool(null);
         setCurrentView('category');
         return;
       }
-      if (!isCatalogLoaded) {
-        setSelectedTool(synthesizeToolFromSlug(cleanPath));
-        setCurrentView('catalog');
+      if (isCatalogLoaded) {
+        setSelectedTool(null);
+        setCurrentView('notfound');
+        return;
+      } else {
         reloadToolsCatalog();
         return;
       }
@@ -1298,11 +1326,11 @@ export default function App() {
                   : "EncryptDecrypt.org - Free Cryptographic & Developer Tools"
                 }
                 description={activeCategory !== 'all'
-                  ? `Explore free client-side ${CATEGORY_HUBS_CONFIG.find(c => c.slug === activeCategory)?.name || activeCategory} developer utilities. 100% private, WebCrypto API powered with zero logs.`
-                  : "1,380+ free client-side cryptographic & developer tools. AES-256, RSA, SHA-256, Base64, JWT, UUID & WebCrypto running 100% in your browser with zero logs."
+                  ? `Explore free client-side ${CATEGORY_HUBS_CONFIG.find(c => c.slug === activeCategory)?.name || activeCategory} developer utilities. Fast, private, and secure in your browser.`
+                  : "1,360+ free client-side cryptographic & developer tools. AES-256, RSA, SHA-256, Base64, JWT, UUID & WebCrypto running in your browser memory."
                 }
                 canonicalUrl={activeCategory !== 'all'
-                  ? `https://www.encryptdecrypt.org/tools/${activeCategory}/`
+                  ? `https://www.encryptdecrypt.org/category/${activeCategory}`
                   : "https://www.encryptdecrypt.org/"
                 }
                 keywords={['cryptography', 'base64', 'aes-256', 'sha-256', 'jwt debugger', 'developer tools', 'web crypto']}
@@ -1312,7 +1340,7 @@ export default function App() {
                     '@type': 'WebSite',
                     'name': 'EncryptDecrypt.org',
                     'url': 'https://www.encryptdecrypt.org/',
-                    'description': 'The #1 best website for cryptographic tools and developer utilities. Free client-side security, encryption, hashing, and encoding tools.',
+                    'description': 'Comprehensive suite of 1,360+ client-side developer utilities, cryptography tools, and encoders.',
                     'potentialAction': {
                       '@type': 'SearchAction',
                       'target': 'https://www.encryptdecrypt.org/?search={search_term_string}',
@@ -1332,10 +1360,10 @@ export default function App() {
                     <span>NIST & RFC Compliant · {tools.length || '1,380'}+ Separate Developer Utilities</span>
                   </div>
                   <h1 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight leading-tight">
-                    Best Website for Cryptographic Tools &amp; Developer Utilities
+                    Free Client-Side Developer, Cryptographic &amp; Security Utilities
                   </h1>
                   <p className="text-[var(--text-secondary)] text-sm sm:text-base mt-2 leading-relaxed">
-                    Every tool runs 100% inside your web browser via the W3C Web Cryptography API. Nothing is ever transmitted to a server. Click on any of the <strong>{tools.length || '1,380'}+ separate tools</strong> below to open its dedicated workspace.
+                    Client-side cryptographic hashing, ciphers, encoders, and developer utilities execute locally inside your browser memory. Server-assisted diagnostic utilities (DNS, Whois, Ping, HTTP Headers) query external endpoints only upon request. Click on any of the <strong>{tools.length || '1,380'}+ separate tools</strong> below to open its dedicated workspace.
                   </p>
                 </div>
 
@@ -1762,12 +1790,12 @@ export default function App() {
                         <div className="mb-10 p-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] flex flex-wrap items-center justify-between gap-3 text-xs text-slate-300">
                           <div className="flex items-center gap-2">
                             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0"></span>
-                            <span>Author: <strong className="text-white">EncryptDecrypt Cryptography Research Team</strong> · Peer-reviewed by Certified Information Systems Security Professionals (CISSP)</span>
+                            <span>Author: <strong className="text-white">Ajjay Ade &amp; Open-Source Contributors</strong> · Verified against official NIST FIPS &amp; IETF RFC test vectors</span>
                           </div>
                           <div className="flex items-center gap-3 font-mono text-[11px] text-slate-400 shrink-0">
                             <span>Published: <time dateTime="2024-01-15">Jan 15, 2024</time></span>
                             <span>·</span>
-                            <span>Updated: <time dateTime="2026-09-29">Sep 29, 2026</time></span>
+                            <span>Updated: <time dateTime="2026-10-08">Oct 8, 2026</time></span>
                           </div>
                         </div>
 
@@ -1777,7 +1805,7 @@ export default function App() {
                             Core Cryptographic Standards &amp; Verified Citations
                           </h2>
                           <p className="text-sm text-slate-300 leading-relaxed mb-4">
-                            EncryptDecrypt.org operates strictly under peer-reviewed international standards defined by the National Institute of Standards and Technology (NIST), the Internet Engineering Task Force (IETF), and the World Wide Web Consortium (W3C). All cryptographic primitives execute natively through the browser&rsquo;s hardware-accelerated Web Cryptography API with zero remote server logging.
+                            EncryptDecrypt.org operates strictly under peer-reviewed international standards defined by the National Institute of Standards and Technology (NIST), the Internet Engineering Task Force (IETF), and the World Wide Web Consortium (W3C). Standard ciphers execute natively through the browser&rsquo;s hardware-accelerated Web Cryptography API.
                           </p>
 
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
@@ -1794,7 +1822,7 @@ export default function App() {
 
                           <div className="p-4 rounded-lg bg-[var(--bg-input)] border border-[var(--border-subtle)] text-xs text-slate-300 mb-5">
                             <blockquote className="italic" cite="https://datatracker.ietf.org/doc/html/rfc4648">
-                              <p className="mb-1">&ldquo;The Base 64, Base 32, and Base 16 Data Encodings represent arbitrary sequences of binary octets in a form that is human-readable and safe for text-only transfer systems like MIME and URL parameters.&rdquo;</p>
+                              <p className="mb-1">&ldquo;The Base 64, Base 32, and Base 16 Data Encodings represent arbitrary sequences of binary octets in a form that is human-readable and safe for text-only transfer systems.&rdquo;</p>
                               <cite className="block not-italic font-semibold text-purple-400">— IETF RFC 4648 (Internet Standards Track Specification)</cite>
                             </blockquote>
                           </div>
@@ -1802,20 +1830,20 @@ export default function App() {
                           {/* Key Verifiable Statistics */}
                           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center pt-2">
                             <div className="p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
-                              <div className="text-xl font-bold text-sky-400 font-mono">1,380+</div>
-                              <div className="text-[11px] text-slate-400 mt-0.5">Zero-Knowledge Tools</div>
+                              <div className="text-xl font-bold text-sky-400 font-mono">1,360+</div>
+                              <div className="text-[11px] text-slate-400 mt-0.5">Client-Side Tools</div>
                             </div>
                             <div className="p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
                               <div className="text-xl font-bold text-emerald-400 font-mono">0 Bytes</div>
-                              <div className="text-[11px] text-slate-400 mt-0.5">Network Transmission</div>
+                              <div className="text-[11px] text-slate-400 mt-0.5">Crypto Network Transmission</div>
                             </div>
                             <div className="p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
                               <div className="text-xl font-bold text-amber-400 font-mono">256 Bits</div>
                               <div className="text-[11px] text-slate-400 mt-0.5">AES Security Strength</div>
                             </div>
                             <div className="p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
-                              <div className="text-xl font-bold text-purple-400 font-mono">&lt; 1 ms</div>
-                              <div className="text-[11px] text-slate-400 mt-0.5">Native RAM Execution</div>
+                              <div className="text-xl font-bold text-purple-400 font-mono">Zero-Server</div>
+                              <div className="text-[11px] text-slate-400 mt-0.5">Local RAM Latency</div>
                             </div>
                           </div>
                         </section>
@@ -1837,7 +1865,7 @@ export default function App() {
                                   <th className="p-3">Standard Specification</th>
                                   <th className="p-3">Key / Digest Length</th>
                                   <th className="p-3">Primary Purpose</th>
-                                  <th className="p-3">NIST Security Status</th>
+                                  <th className="p-3">Cryptographic Status &amp; Application</th>
                                 </tr>
                               </thead>
                               <tbody className="divide-y divide-slate-800">
@@ -1846,56 +1874,56 @@ export default function App() {
                                   <td className="p-3 font-mono text-sky-400">NIST SP 800-38D</td>
                                   <td className="p-3 font-mono">256 bits</td>
                                   <td className="p-3">Authenticated Symmetric Encryption (AEAD)</td>
-                                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">Gold Standard</span></td>
+                                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">NIST SP 800-38D (AEAD)</span></td>
                                 </tr>
                                 <tr className="hover:bg-slate-800/30">
                                   <td className="p-3 font-semibold text-white">AES-256-CBC</td>
                                   <td className="p-3 font-mono text-sky-400">NIST FIPS 197</td>
                                   <td className="p-3 font-mono">256 bits</td>
-                                  <td className="p-3">Legacy Symmetric Encryption (Requires HMAC)</td>
-                                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-semibold">Legacy Safe</span></td>
+                                  <td className="p-3">Legacy Symmetric Encryption (Requires Separate MAC)</td>
+                                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-semibold">NIST FIPS 197 Approved</span></td>
                                 </tr>
                                 <tr className="hover:bg-slate-800/30">
                                   <td className="p-3 font-semibold text-white">SHA-256</td>
                                   <td className="p-3 font-mono text-sky-400">FIPS PUB 180-4 / RFC 6234</td>
                                   <td className="p-3 font-mono">256-bit Digest</td>
                                   <td className="p-3">Cryptographic Checksum, Digital Signatures</td>
-                                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">Approved</span></td>
+                                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">NIST FIPS 180-4 Approved</span></td>
                                 </tr>
                                 <tr className="hover:bg-slate-800/30">
                                   <td className="p-3 font-semibold text-white">SHA-512</td>
                                   <td className="p-3 font-mono text-sky-400">FIPS PUB 180-4 / RFC 6234</td>
                                   <td className="p-3 font-mono">512-bit Digest</td>
                                   <td className="p-3">High-Security Collision-Resistant Hashing</td>
-                                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">Approved</span></td>
+                                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">NIST FIPS 180-4 Approved</span></td>
                                 </tr>
                                 <tr className="hover:bg-slate-800/30">
                                   <td className="p-3 font-semibold text-white">HMAC-SHA256</td>
                                   <td className="p-3 font-mono text-sky-400">IETF RFC 2104</td>
                                   <td className="p-3 font-mono">Variable Secret Key</td>
                                   <td className="p-3">Keyed-Hash Message Authentication (API Signatures)</td>
-                                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">Standard</span></td>
+                                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">IETF RFC 2104 Standard</span></td>
                                 </tr>
                                 <tr className="hover:bg-slate-800/30">
                                   <td className="p-3 font-semibold text-white">ChaCha20-Poly1305</td>
                                   <td className="p-3 font-mono text-sky-400">IETF RFC 8439</td>
                                   <td className="p-3 font-mono">256-bit Key</td>
                                   <td className="p-3">High-Speed AEAD Stream Cipher for Mobile</td>
-                                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">Modern Standard</span></td>
+                                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">IETF RFC 8439 Standard</span></td>
                                 </tr>
                                 <tr className="hover:bg-slate-800/30">
                                   <td className="p-3 font-semibold text-white">Base64 / Hex</td>
                                   <td className="p-3 font-mono text-sky-400">IETF RFC 4648</td>
                                   <td className="p-3 font-mono">Radix-64 / Radix-16</td>
                                   <td className="p-3">Binary-to-Text Encoding (Not Encryption)</td>
-                                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 font-semibold">Universal</span></td>
+                                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 font-semibold">IETF RFC 4648 Standard</span></td>
                                 </tr>
                                 <tr className="hover:bg-slate-800/30">
                                   <td className="p-3 font-semibold text-white">JWT Debugger</td>
                                   <td className="p-3 font-mono text-sky-400">IETF RFC 7519</td>
                                   <td className="p-3 font-mono">HS256 / RS256 / ES256</td>
                                   <td className="p-3">Claims-based Identity Token Inspection</td>
-                                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-purple-500/20 text-purple-400 font-semibold">Auth Protocol</span></td>
+                                  <td className="p-3"><span className="px-2 py-0.5 rounded bg-purple-500/20 text-purple-400 font-semibold">IETF RFC 7519 Standard</span></td>
                                 </tr>
                               </tbody>
                             </table>
@@ -1941,7 +1969,7 @@ export default function App() {
                                 <strong>Direct Answer:</strong> No. SHA-256 and SHA-512 are cryptographic one-way compression functions compliant with FIPS PUB 180-4 and RFC 6234 that cannot be mathematically inverted or reversed into the original plaintext.
                               </p>
                               <p className="text-xs text-slate-400 leading-relaxed">
-                                Cryptographic hashes map variable-length inputs into a deterministic, fixed-size digest (256 bits or 512 bits). They possess pre-image resistance and strong collision resistance, making them ideal for verifying file checksums, password storage (with salting), and data integrity.
+                                Cryptographic hashes map variable-length inputs into a deterministic, fixed-size digest (256 bits or 512 bits). They possess pre-image resistance and strong collision resistance, making them ideal for verifying file checksums, digital signatures, and data integrity verification. Note: SHA-256 alone is not recommended for password storage; modern cryptographic standards (such as NIST SP 800-63B) mandate memory-hard algorithms like Argon2id, bcrypt, or PBKDF2.
                               </p>
                             </article>
 
@@ -1991,14 +2019,14 @@ export default function App() {
               <span>EncryptDecrypt.org</span>
             </div>
             <p className="leading-relaxed mb-3 text-[var(--text-secondary)]">
-              The #1 best website for cryptographic tools and developer utilities. 1,380+ utilities executing 100% inside your web browser via standard Web Cryptography algorithms. Your data never touches a server.
+              Client-side cryptographic tools, data encoders, and developer utilities. Cryptographic tools execute locally in browser memory; server-assisted diagnostic tools query public endpoints upon request.
             </p>
             <div className="flex flex-wrap gap-2 text-[11px] font-mono">
               <span className="px-2 py-1 rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 font-semibold">
-                100% Client-Side RAM
+                Client-Side Memory
               </span>
               <span className="px-2 py-1 rounded bg-blue-500/10 text-[#2E9BFF] border border-blue-500/20">
-                Zero Data Transmission
+                Private &amp; Secure
               </span>
             </div>
           </div>
@@ -2014,7 +2042,7 @@ export default function App() {
               </li>
               <li>
                 <a href="/all-tools" onClick={(e) => { e.preventDefault(); handleNavigateView('all-tools'); }} className="min-h-[48px] py-3 px-2 flex items-center text-sky-400 hover:text-sky-300 transition-colors cursor-pointer font-semibold rounded-lg hover:bg-white/5">
-                  All Tools Directory (1,380+)
+                  All Tools Directory (1,360+)
                 </a>
               </li>
               <li>

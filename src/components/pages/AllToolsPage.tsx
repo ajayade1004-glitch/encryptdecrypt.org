@@ -7,6 +7,18 @@ import {
 import { ToolItem } from '../../types';
 import { preloadToolWorkspace } from '../../utils/toolPreloader';
 
+const LIFESTYLE_CATEGORY_SLUGS = new Set([
+  'parenting-child',
+  'cooking-recipe-math',
+  'agriculture-gardening',
+  'sports-stats',
+  'genealogy-family',
+  'weather-formulas',
+  'food-nutrition',
+  'construction-home',
+  'civic-reference'
+]);
+
 interface AllToolsPageProps {
   tools: ToolItem[];
   onSelectTool: (tool: ToolItem) => void;
@@ -89,6 +101,14 @@ export const AllToolsPage: React.FC<AllToolsPageProps> = ({
     return displayedCategories.reduce((acc, cat) => acc + cat.tools.length, 0);
   }, [displayedCategories]);
 
+  const devCategories = useMemo(() => {
+    return displayedCategories.filter(cat => !LIFESTYLE_CATEGORY_SLUGS.has(cat.slug));
+  }, [displayedCategories]);
+
+  const lifestyleCategories = useMemo(() => {
+    return displayedCategories.filter(cat => LIFESTYLE_CATEGORY_SLUGS.has(cat.slug));
+  }, [displayedCategories]);
+
   return (
     <article className="max-w-6xl mx-auto py-4 px-2 sm:px-4 animate-fade-in" itemScope itemType="https://schema.org/CollectionPage">
       {/* Programmatic Breadcrumb */}
@@ -103,7 +123,7 @@ export const AllToolsPage: React.FC<AllToolsPageProps> = ({
         <div className="flex flex-wrap items-center gap-2 mb-3">
           <span className="px-2.5 py-1 rounded-full bg-[#2E9BFF]/20 text-[#2E9BFF] border border-[#2E9BFF]/30 text-xs font-mono font-bold flex items-center gap-1.5">
             <Shield size={13} />
-            Best Website for Cryptographic Tools & Developer Utilities
+            Verified Cryptographic Tools &amp; Developer Utilities
           </span>
           <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono">
             1,380+ Verified Client-Side Tools
@@ -220,86 +240,160 @@ export const AllToolsPage: React.FC<AllToolsPageProps> = ({
             </button>
           </div>
         ) : (
-          displayedCategories.map(cat => (
-            <section 
-              key={cat.slug} 
-              id={`cat-${cat.slug}`}
-              className="scroll-mt-24 p-5 sm:p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:border-[var(--border-subtle)] transition shadow-xs"
-            >
-              {/* Category Header */}
-              <div className="flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-[var(--border-subtle)]">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-[#2E9BFF]">
-                    <Terminal size={18} />
+          <>
+            {/* 1. Core Cryptographic & Developer Utility Categories */}
+            <div className="space-y-8">
+              {devCategories.map(cat => (
+                <section 
+                  key={cat.slug} 
+                  id={`cat-${cat.slug}`}
+                  className="scroll-mt-24 p-5 sm:p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:border-[var(--border-subtle)] transition shadow-xs"
+                >
+                  {/* Category Header */}
+                  <div className="flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-[var(--border-subtle)]">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-[#2E9BFF]">
+                        <Terminal size={18} />
+                      </div>
+                      <div>
+                        <h2 className="text-base sm:text-lg font-bold text-[var(--text-primary)] m-0 flex items-center gap-2">
+                          {cat.name}
+                          <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded-full bg-blue-500/10 text-sky-400 border border-blue-500/20">
+                            {cat.tools.length} Tools
+                          </span>
+                        </h2>
+                        <span className="text-xs text-slate-300 font-mono">
+                          Category ID: {cat.slug} · 100% Client-Side Private
+                        </span>
+                      </div>
+                    </div>
+
+                    <a
+                      href={`#cat-${cat.slug}`}
+                      className="min-h-[44px] px-3 py-2 text-xs text-slate-300 hover:text-sky-300 font-mono flex items-center gap-1 rounded-lg hover:bg-white/5"
+                    >
+                      <Hash size={13} /> Anchor Link
+                    </a>
                   </div>
-                  <div>
-                    <h2 className="text-base sm:text-lg font-bold text-[var(--text-primary)] m-0 flex items-center gap-2">
-                      {cat.name}
-                      <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded-full bg-blue-500/10 text-sky-400 border border-blue-500/20">
-                        {cat.tools.length} Tools
-                      </span>
-                    </h2>
-                    <span className="text-xs text-slate-300 font-mono">
-                      Category ID: {cat.slug} · 100% Client-Side Private
-                    </span>
+
+                  {/* Tools Grid in this category */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                    {cat.tools.map(tool => (
+                      <div
+                        key={tool.id}
+                        onClick={() => onSelectTool(tool)}
+                        onMouseEnter={preloadToolWorkspace}
+                        onTouchStart={preloadToolWorkspace}
+                        className="p-3.5 rounded-xl bg-[var(--bg-input)] hover:bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:border-[#2E9BFF] transition cursor-pointer group flex flex-col justify-between"
+                      >
+                        <div>
+                          <div className="flex items-center justify-between gap-1 mb-1.5">
+                            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-950 text-sky-300 border border-blue-800">
+                              {tool.inputType || 'Client-Side'}
+                            </span>
+                            {tool.popular && (
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800">
+                                ★ Popular
+                              </span>
+                            )}
+                          </div>
+
+                          <h3 className="text-xs font-bold text-[var(--text-primary)] group-hover:text-[#2E9BFF] transition line-clamp-1 mb-1">
+                            {tool.name}
+                          </h3>
+
+                          <p className="text-[11px] text-[var(--text-muted)] line-clamp-2 leading-relaxed mb-3">
+                            {tool.shortDesc || `Perform client-side ${tool.name} computations in secure browser RAM.`}
+                          </p>
+                        </div>
+
+                        <div className="pt-2 border-t border-[var(--border-subtle)] flex items-center justify-between text-[10px] text-[#2E9BFF] font-semibold group-hover:translate-x-0.5 transition">
+                          <span>Launch Tool</span>
+                          <ArrowRight size={13} />
+                        </div>
+                      </div>
+                    ))}
                   </div>
+                </section>
+              ))}
+            </div>
+
+            {/* 2. Dedicated Lifestyle & Everyday Utilities Section (Separated from Cryptographic Suite) */}
+            {lifestyleCategories.length > 0 && (
+              <div className="mt-14 pt-10 border-t border-slate-700/80">
+                <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-700 mb-8">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-mono mb-2">
+                    <span>Non-Cryptographic Utilities</span>
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">
+                    Lifestyle, Everyday &amp; Specialized Utilities
+                  </h2>
+                  <p className="text-xs sm:text-sm text-slate-300 max-w-3xl leading-relaxed">
+                    General calculation, conversion, reference, and everyday tools (such as gardening, cooking math, and sports statistics) maintained separately from our core cryptography and security engineering hubs.
+                  </p>
                 </div>
 
-                <a
-                  href={`#cat-${cat.slug}`}
-                  className="min-h-[44px] px-3 py-2 text-xs text-slate-300 hover:text-sky-300 font-mono flex items-center gap-1 rounded-lg hover:bg-white/5"
-                >
-                  <Hash size={13} /> Anchor Link
-                </a>
-              </div>
-
-              {/* Tools Grid in this category */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                {cat.tools.map(tool => (
-                  <div
-                    key={tool.id}
-                    onClick={() => onSelectTool(tool)}
-                    onMouseEnter={preloadToolWorkspace}
-                    onTouchStart={preloadToolWorkspace}
-                    className="p-3.5 rounded-xl bg-[var(--bg-input)] hover:bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:border-[#2E9BFF] transition cursor-pointer group flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between gap-1 mb-1.5">
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-950 text-sky-300 border border-blue-800">
-                          {tool.inputType || 'Client-Side'}
-                        </span>
-                        {tool.popular && (
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800">
-                            ★ Popular
-                          </span>
-                        )}
+                <div className="space-y-8">
+                  {lifestyleCategories.map(cat => (
+                    <section 
+                      key={cat.slug} 
+                      id={`cat-${cat.slug}`}
+                      className="scroll-mt-24 p-5 sm:p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:border-[var(--border-subtle)] transition shadow-xs"
+                    >
+                      <div className="flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-[var(--border-subtle)]">
+                        <div>
+                          <h3 className="text-base font-bold text-[var(--text-primary)] m-0 flex items-center gap-2">
+                            {cat.name}
+                            <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+                              {cat.tools.length} Tools
+                            </span>
+                          </h3>
+                        </div>
+                        <a
+                          href={`#cat-${cat.slug}`}
+                          className="min-h-[44px] px-3 py-2 text-xs text-slate-300 hover:text-sky-300 font-mono flex items-center gap-1 rounded-lg hover:bg-white/5"
+                        >
+                          <Hash size={13} /> Anchor Link
+                        </a>
                       </div>
 
-                      <h3 className="text-xs font-bold text-[var(--text-primary)] group-hover:text-[#2E9BFF] transition line-clamp-1 mb-1">
-                        {tool.name}
-                      </h3>
-
-                      <p className="text-[11px] text-[var(--text-muted)] line-clamp-2 leading-relaxed mb-3">
-                        {tool.shortDesc || `Perform client-side ${tool.name} computations in secure browser RAM.`}
-                      </p>
-                    </div>
-
-                    <div className="pt-2 border-t border-[var(--border-subtle)] flex items-center justify-between text-[10px] text-[#2E9BFF] font-semibold group-hover:translate-x-0.5 transition">
-                      <span>Launch Tool</span>
-                      <ArrowRight size={13} />
-                    </div>
-                  </div>
-                ))}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                        {cat.tools.map(tool => (
+                          <div
+                            key={tool.id}
+                            onClick={() => onSelectTool(tool)}
+                            onMouseEnter={preloadToolWorkspace}
+                            onTouchStart={preloadToolWorkspace}
+                            className="p-3.5 rounded-xl bg-[var(--bg-input)] hover:bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:border-[#2E9BFF] transition cursor-pointer group flex flex-col justify-between"
+                          >
+                            <div>
+                              <h4 className="text-xs font-bold text-[var(--text-primary)] group-hover:text-[#2E9BFF] transition line-clamp-1 mb-1">
+                                {tool.name}
+                              </h4>
+                              <p className="text-[11px] text-[var(--text-muted)] line-clamp-2 leading-relaxed mb-3">
+                                {tool.shortDesc}
+                              </p>
+                            </div>
+                            <div className="pt-2 border-t border-[var(--border-subtle)] flex items-center justify-between text-[10px] text-[#2E9BFF] font-semibold">
+                              <span>Open Utility</span>
+                              <ArrowRight size={13} />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </section>
+                  ))}
+                </div>
               </div>
-            </section>
-          ))
+            )}
+          </>
         )}
       </div>
 
       {/* Programmatic SEO & AEO Deep Authority Footer Section */}
       <footer className="mt-16 p-8 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
         <h2 className="text-lg font-bold text-[var(--text-primary)] mb-3">
-          Why EncryptDecrypt.org is the Best Website for Cryptographic Tools &amp; Developer Utilities
+          Why Developers Choose EncryptDecrypt.org for Cryptographic Tools &amp; Utilities
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-[var(--text-secondary)] leading-relaxed">
           <div>
