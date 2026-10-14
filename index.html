@@ -6,6 +6,18 @@
     <title>EncryptDecrypt.org - Free Cryptographic &amp; Developer Tools</title>
     <meta name="description" content="1,360+ free client-side cryptographic &amp; developer tools. AES-256, RSA, SHA-256, Base64, JWT, UUID &amp; WebCrypto running in your browser memory." />
     
+    <!-- Inline script to apply theme immediately before render (White Mode / Dark Mode) -->
+    <script>
+      (function() {
+        try {
+          var stored = localStorage.getItem('ed_theme');
+          var theme = stored === 'light' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+          document.documentElement.classList.add(theme);
+        } catch (e) {}
+      })();
+    </script>
+
     <!-- ✅ High Performance Vector & Retina Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />
@@ -200,32 +212,65 @@
     }
     </script>
 
+    <!-- ⚡ Inline Early Theme Boot Script to Prevent Flash -->
+    <script>
+      (function() {
+        try {
+          var t = localStorage.getItem('ed_theme');
+          var theme = (t === 'light') ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+          if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+          } else {
+            document.documentElement.classList.add('light');
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+
     <!-- ⚡ Inline Critical CSS for Instant 0ms First Contentful Paint (FCP) -->
     <style>
-      :root {
+      :root,
+      [data-theme="dark"],
+      .dark {
         --bg-base: #030712;
+        --bg-main: #030712;
         --bg-surface: #0B0F19;
         --bg-input: #070B14;
         --text-primary: #F8FAFC;
         --text-secondary: #CBD5E1;
         --text-muted: #94A3B8;
-        --border-subtle: rgba(0, 255, 157, 0.15);
+        --border-subtle: rgba(255, 255, 255, 0.08);
+      }
+      [data-theme="light"],
+      .light {
+        --bg-base: #FFFFFF;
+        --bg-main: #FFFFFF;
+        --bg-surface: #FFFFFF;
+        --bg-input: #FFFFFF;
+        --text-primary: #0F172A;
+        --text-secondary: #334155;
+        --text-muted: #64748B;
+        --border-subtle: #E2E8F0;
       }
       *, ::before, ::after {
         box-sizing: border-box;
         border-width: 0;
         border-style: solid;
-        border-color: rgba(0, 255, 157, 0.15);
+        border-color: var(--border-subtle);
       }
       body {
-        background-color: #030712;
-        color: #F8FAFC;
+        background-color: var(--bg-main);
+        color: var(--text-primary);
         margin: 0;
         font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         font-size: 0.8125rem;
         line-height: 1.5;
+        transition: background-color 0.15s ease, color 0.15s ease;
       }
       .container {
         width: 100%;
@@ -236,23 +281,25 @@
         padding-right: 1rem;
       }
       .theme-header {
-        background: rgba(11, 15, 25, 0.94);
+        background: var(--bg-surface);
         backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(0, 255, 157, 0.15);
+        border-bottom: 1px solid var(--border-subtle);
       }
       .card-glass {
-        background: rgba(11, 15, 25, 0.94);
-        border: 1px solid rgba(0, 255, 157, 0.15);
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
         border-radius: 1rem;
+        color: var(--text-primary);
       }
       .theme-subcard {
-        background: #070B14;
-        border: 1px solid rgba(0, 255, 157, 0.15);
+        background: var(--bg-input);
+        border: 1px solid var(--border-subtle);
+        color: var(--text-primary);
       }
       .form-input {
-        background: #070B14;
-        border: 1px solid rgba(0, 255, 157, 0.15);
-        color: #F8FAFC;
+        background: var(--bg-input);
+        border: 1px solid var(--border-subtle);
+        color: var(--text-primary);
         border-radius: 0.5rem;
         padding: 0.625rem;
         resize: none;

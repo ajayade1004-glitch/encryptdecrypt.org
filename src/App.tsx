@@ -519,12 +519,14 @@ export default function App() {
     };
   }, [tools]);
 
-  // 3. Theme management
+  // 3. Theme management (White Mode and Dark Mode only)
   useEffect(() => {
-    const stored = localStorage.getItem('ed_theme') as 'dark' | 'light';
-    const initial = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    const stored = localStorage.getItem('ed_theme') as 'dark' | 'light' | null;
+    const initial = stored === 'light' ? 'light' : 'dark';
     setTheme(initial);
     document.documentElement.setAttribute('data-theme', initial);
+    document.documentElement.classList.toggle('dark', initial === 'dark');
+    document.documentElement.classList.toggle('light', initial === 'light');
   }, []);
 
   // 4. Real Client-Side Analytics Tracking & GA4 SPA Events
@@ -566,6 +568,8 @@ export default function App() {
     setTheme(next);
     localStorage.setItem('ed_theme', next);
     document.documentElement.setAttribute('data-theme', next);
+    document.documentElement.classList.toggle('dark', next === 'dark');
+    document.documentElement.classList.toggle('light', next === 'light');
   };
 
   const triggerToast = (msg: string) => {
@@ -1037,7 +1041,7 @@ export default function App() {
               className={`px-3 py-2 min-h-[40px] rounded-lg text-xs font-semibold transition-colors duration-150 cursor-pointer ${
                 !selectedTool && currentView === 'catalog'
                   ? 'text-sky-400 bg-blue-500/15 font-bold border border-blue-500/30'
-                  : 'text-slate-300 hover:text-white hover:bg-[var(--bg-surface-hover)]'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]'
               }`}
             >
               Home
@@ -1048,7 +1052,7 @@ export default function App() {
               className={`px-3 py-2 min-h-[40px] rounded-lg text-xs font-semibold transition-colors duration-150 cursor-pointer flex items-center gap-1.5 ${
                 currentView === 'all-tools'
                   ? 'text-sky-400 bg-blue-500/15 font-bold border border-blue-500/30'
-                  : 'text-slate-300 hover:text-white hover:bg-[var(--bg-surface-hover)]'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]'
               }`}
             >
               <Terminal size={14} className="text-sky-400" />
@@ -1060,7 +1064,7 @@ export default function App() {
               className={`px-3 py-2 min-h-[40px] rounded-lg text-xs font-semibold transition-colors duration-150 cursor-pointer ${
                 currentView === 'guides'
                   ? 'text-sky-400 bg-blue-500/15 font-bold border border-blue-500/30'
-                  : 'text-slate-300 hover:text-white hover:bg-[var(--bg-surface-hover)]'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]'
               }`}
             >
               Tech Guides
@@ -1071,7 +1075,7 @@ export default function App() {
               className={`px-3 py-2 min-h-[40px] rounded-lg text-xs font-semibold transition-colors duration-150 cursor-pointer ${
                 currentView === 'about'
                   ? 'text-sky-400 bg-blue-500/15 font-bold border border-blue-500/30'
-                  : 'text-slate-300 hover:text-white hover:bg-[var(--bg-surface-hover)]'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]'
               }`}
             >
               About Us
@@ -1082,7 +1086,7 @@ export default function App() {
               className={`px-3 py-2 min-h-[40px] rounded-lg text-xs font-semibold transition-colors duration-150 cursor-pointer ${
                 currentView === 'contact'
                   ? 'text-sky-400 bg-blue-500/15 font-bold border border-blue-500/30'
-                  : 'text-slate-300 hover:text-white hover:bg-[var(--bg-surface-hover)]'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]'
               }`}
             >
               Contact Us
@@ -1093,7 +1097,7 @@ export default function App() {
           <div className="flex items-center gap-2">
             <a
               href="https://www.buymeacoffee.com/encryptdecrypt" 
-              target="_blank"
+              target="_blank" 
               rel="noopener noreferrer"
               aria-label="Support this free project on Buy Me a Coffee"
               className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-[#FFDD00] text-black font-bold text-[11px] sm:text-xs hover:bg-[#FFEA4C] transition shadow-sm border border-[#E5C700] cursor-pointer"
@@ -1105,20 +1109,20 @@ export default function App() {
 
             <button
               onClick={toggleAppTheme}
-              className="p-2.5 min-h-[44px] min-w-[44px] rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-slate-200 hover:text-white hover:border-blue-400 transition-colors duration-150 cursor-pointer flex items-center justify-center gap-1.5 shadow-sm"
-              title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
-              aria-label={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
+              className="p-2.5 min-h-[44px] min-w-[44px] rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-blue-400 transition-colors duration-150 cursor-pointer flex items-center justify-center gap-1.5 shadow-sm"
+              title={`Switch to ${theme === 'dark' ? 'White' : 'Dark'} Mode`}
+              aria-label={`Switch to ${theme === 'dark' ? 'White' : 'Dark'} Mode`}
               id="theme-toggle-btn"
             >
               {theme === 'dark' ? (
                 <>
                   <Sun size={16} className="text-amber-400" />
-                  <span className="text-[11px] font-medium hidden xl:inline text-slate-200">Light</span>
+                  <span className="text-[11px] font-semibold hidden xl:inline text-[var(--text-primary)]">White Mode</span>
                 </>
               ) : (
                 <>
-                  <Moon size={16} className="text-[#0284C7]" />
-                  <span className="text-[11px] font-medium hidden xl:inline text-slate-200">Dark</span>
+                  <Moon size={16} className="text-[#2563EB]" />
+                  <span className="text-[11px] font-semibold hidden xl:inline text-[var(--text-primary)]">Dark Mode</span>
                 </>
               )}
             </button>
@@ -1183,6 +1187,21 @@ export default function App() {
             >
               <span>Contact Us & Technical Support</span>
               <ChevronRight size={14} className="text-[var(--text-muted)]" />
+            </button>
+            <button
+              onClick={() => {
+                toggleAppTheme();
+              }}
+              aria-label={`Switch to ${theme === 'dark' ? 'White' : 'Dark'} Mode`}
+              className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)] flex items-center justify-between cursor-pointer border-t border-[var(--border-subtle)] my-1 pt-2"
+            >
+              <span className="flex items-center gap-2">
+                {theme === 'dark' ? <Sun size={15} className="text-amber-400" /> : <Moon size={15} className="text-[#2563EB]" />}
+                <span>Switch to {theme === 'dark' ? 'White' : 'Dark'} Mode</span>
+              </span>
+              <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-[#2563EB] dark:text-[#60A5FA]">
+                {theme === 'dark' ? 'Dark' : 'White'}
+              </span>
             </button>
             <div className="pt-2 border-t border-[var(--border-subtle)] flex items-center justify-around text-xs text-[var(--text-muted)]">
               <button onClick={() => handleNavigateView('privacy')} aria-label="Navigate to Privacy Policy" className="hover:text-[#2E9BFF] cursor-pointer py-1">Privacy</button>
@@ -1395,7 +1414,7 @@ export default function App() {
                           className={`min-h-[44px] min-w-[72px] px-3.5 py-2 rounded-md font-semibold capitalize transition-colors duration-150 cursor-pointer flex items-center justify-center ${
                             heroTab === tab 
                               ? 'bg-[#1d4ed8] text-white font-bold shadow-xs' 
-                              : 'text-slate-200 hover:text-white hover:bg-white/5'
+                              : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]'
                           }`}
                         >
                           {tab === 'hash' ? 'SHA-256' : tab === 'password' ? 'Password Gen' : tab.toUpperCase()}
@@ -1403,7 +1422,7 @@ export default function App() {
                       ))}
                     </div>
 
-                    <span className="text-xs font-mono text-emerald-400 flex items-center gap-1 font-semibold">
+                    <span className="text-xs font-mono text-emerald-500 flex items-center gap-1 font-semibold">
                       <ShieldCheck size={14} /> Instant Client-Side Preview
                     </span>
                   </div>
@@ -1411,8 +1430,8 @@ export default function App() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <div className="flex items-center justify-between mb-3 text-xs">
-                        <label htmlFor="hero-input-textarea" className="font-semibold text-slate-100">Input String</label>
-                        <span className="text-slate-300 font-mono font-medium">{heroInput.length} chars</span>
+                        <label htmlFor="hero-input-textarea" className="font-semibold text-[var(--text-primary)]">Input String</label>
+                        <span className="text-[var(--text-muted)] font-mono font-medium">{heroInput.length} chars</span>
                       </div>
                       <textarea
                         id="hero-input-textarea"
@@ -1427,7 +1446,7 @@ export default function App() {
 
                     <div>
                       <div className="flex items-center justify-between mb-3 text-xs">
-                        <label htmlFor="hero-output-textarea" className="font-semibold text-slate-100">Live Result</label>
+                        <label htmlFor="hero-output-textarea" className="font-semibold text-[var(--text-primary)]">Live Result</label>
                         <button
                           onClick={() => {
                             navigator.clipboard.writeText(heroOutput);
@@ -1524,16 +1543,16 @@ export default function App() {
                               <Icon size={15} />
                             </div>
                             <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold ${
-                              isActive ? 'bg-[#1d4ed8] text-white' : 'bg-slate-800 text-slate-100 border border-slate-700'
+                              isActive ? 'bg-[#1d4ed8] text-white' : 'bg-[var(--bg-surface-hover)] text-[var(--text-primary)] border border-[var(--border-subtle)]'
                             }`}>
                               {count}
                             </span>
                           </div>
-                          <h3 className={`text-[11px] font-bold leading-tight text-center line-clamp-2 w-full ${isActive ? 'text-sky-400' : 'text-slate-100 group-hover:text-sky-400'}`}>
+                          <h3 className={`text-[11px] font-bold leading-tight text-center line-clamp-2 w-full ${isActive ? 'text-[#2E9BFF]' : 'text-[var(--text-primary)] group-hover:text-[#2E9BFF]'}`}>
                             {hub.name}
                           </h3>
                         </div>
-                        <span className="text-[10px] text-slate-300 text-center line-clamp-1 mt-1 font-mono w-full">
+                        <span className="text-[10px] text-[var(--text-muted)] text-center line-clamp-1 mt-1 font-mono w-full">
                           {hub.desc ? hub.desc.split(',')[0] : 'Tools'}
                         </span>
                       </button>
@@ -1585,11 +1604,11 @@ export default function App() {
                       className={`px-4 py-3 min-h-[48px] rounded-lg text-xs whitespace-nowrap transition-colors duration-150 cursor-pointer border flex items-center gap-2 ${
                         activeCategory === hub.slug
                           ? 'bg-[#1d4ed8] text-white border-blue-500 font-bold shadow-sm'
-                          : 'bg-[var(--bg-surface)] text-slate-200 border-[var(--border-subtle)] hover:border-blue-400 hover:text-white'
+                          : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-blue-400 hover:text-[var(--text-primary)]'
                       }`}
                     >
                       <span>{hub.name}</span>
-                      <span className="text-[10px] font-mono text-slate-300">({categoryCounts[hub.slug] || hub.count})</span>
+                      <span className="text-[10px] font-mono text-[var(--text-muted)]">({categoryCounts[hub.slug] || hub.count})</span>
                     </button>
                   ))}
                 </div>
@@ -1745,16 +1764,16 @@ export default function App() {
                                 </span>
                               )}
                             </div>
-                            <h3 className="text-sm font-bold text-slate-100 group-hover:text-sky-400 transition-colors duration-150 mb-1.5 leading-snug">
+                            <h3 className="text-sm font-bold text-[var(--text-primary)] group-hover:text-[#2E9BFF] transition-colors duration-150 mb-1.5 leading-snug">
                               {tool.name}
                             </h3>
-                            <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed mb-3">
+                            <p className="text-xs text-[var(--text-secondary)] line-clamp-2 leading-relaxed mb-3">
                               {tool.shortDesc}
                             </p>
                           </div>
 
                           <div className="pt-2 border-t border-[var(--border-subtle)] flex items-center justify-between">
-                            <span className="text-[11px] text-slate-300 font-mono">
+                            <span className="text-[11px] text-[var(--text-muted)] font-mono">
                               {tool.inputType}
                             </span>
                             <span className="text-xs font-semibold text-sky-400 group-hover:text-sky-300 transition-colors duration-150 inline-flex items-center gap-1">
@@ -2054,45 +2073,45 @@ export default function App() {
 
           {/* Navigation & Documentation */}
           <div>
-            <h4 className="font-bold text-slate-100 uppercase tracking-wider mb-3">Site & Guides</h4>
+            <h4 className="font-bold text-[var(--text-primary)] uppercase tracking-wider mb-3">Site & Guides</h4>
             <ul className="space-y-1">
               <li>
-                <a href="/" onClick={(e) => { e.preventDefault(); handleBackToCatalog(); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">
+                <a href="/" onClick={(e) => { e.preventDefault(); handleBackToCatalog(); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">
                   Home (All Tools)
                 </a>
               </li>
               <li>
-                <a href="/all-tools" onClick={(e) => { e.preventDefault(); handleNavigateView('all-tools'); }} className="min-h-[48px] py-3 px-2 flex items-center text-sky-400 hover:text-sky-300 transition-colors cursor-pointer font-semibold rounded-lg hover:bg-white/5">
+                <a href="/all-tools" onClick={(e) => { e.preventDefault(); handleNavigateView('all-tools'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[#2E9BFF] hover:underline transition-colors cursor-pointer font-semibold rounded-lg hover:bg-[var(--bg-surface-hover)]">
                   All Tools Directory (1,360+)
                 </a>
               </li>
               <li>
-                <a href="/guides" onClick={(e) => { e.preventDefault(); handleNavigateView('guides'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">
+                <a href="/guides" onClick={(e) => { e.preventDefault(); handleNavigateView('guides'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">
                   Tech Guides
                 </a>
               </li>
               <li>
-                <a href="/about" onClick={(e) => { e.preventDefault(); handleNavigateView('about'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">
+                <a href="/about" onClick={(e) => { e.preventDefault(); handleNavigateView('about'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">
                   About Us
                 </a>
               </li>
               <li>
-                <a href="/contact" onClick={(e) => { e.preventDefault(); handleNavigateView('contact'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">
+                <a href="/contact" onClick={(e) => { e.preventDefault(); handleNavigateView('contact'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">
                   Contact Us
                 </a>
               </li>
               <li>
-                <a href="/privacy" onClick={(e) => { e.preventDefault(); handleNavigateView('privacy'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">
+                <a href="/privacy" onClick={(e) => { e.preventDefault(); handleNavigateView('privacy'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href="/terms" onClick={(e) => { e.preventDefault(); handleNavigateView('terms'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">
+                <a href="/terms" onClick={(e) => { e.preventDefault(); handleNavigateView('terms'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">
                   Terms of Service
                 </a>
               </li>
               <li>
-                <a href="/disclaimer" onClick={(e) => { e.preventDefault(); handleNavigateView('disclaimer'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">
+                <a href="/disclaimer" onClick={(e) => { e.preventDefault(); handleNavigateView('disclaimer'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">
                   Legal Disclaimer
                 </a>
               </li>
@@ -2101,25 +2120,25 @@ export default function App() {
 
           {/* Popular Encoders */}
           <div>
-            <h4 className="font-bold text-slate-100 uppercase tracking-wider mb-3">Popular Encoders</h4>
+            <h4 className="font-bold text-[var(--text-primary)] uppercase tracking-wider mb-3">Popular Encoders</h4>
             <ul className="space-y-1">
-              <li><a href="/tools/base64-encode-decode" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base64-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Base64 Encode/Decode</a></li>
-              <li><a href="/tools/url-encode-decode" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('url-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">URL Encode/Decode</a></li>
-              <li><a href="/tools/base16-hex-encode-decode" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base16-hex-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Hex to Text</a></li>
-              <li><a href="/tools/base58-encode-decode" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base58-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Base58 Bitcoin</a></li>
-              <li><a href="/tools/qr-code-generator" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('qr-code-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">QR Code Generator</a></li>
+              <li><a href="/tools/base64-encode-decode" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base64-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">Base64 Encode/Decode</a></li>
+              <li><a href="/tools/url-encode-decode" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('url-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">URL Encode/Decode</a></li>
+              <li><a href="/tools/base16-hex-encode-decode" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base16-hex-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">Hex to Text</a></li>
+              <li><a href="/tools/base58-encode-decode" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('base58-encode-decode'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">Base58 Bitcoin</a></li>
+              <li><a href="/tools/qr-code-generator" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('qr-code-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">QR Code Generator</a></li>
             </ul>
           </div>
 
           {/* Security & Ciphers */}
           <div>
-            <h4 className="font-bold text-slate-100 uppercase tracking-wider mb-3">Security & Ciphers</h4>
+            <h4 className="font-bold text-[var(--text-primary)] uppercase tracking-wider mb-3">Security & Ciphers</h4>
             <ul className="space-y-1">
-              <li><a href="/tools/aes-encrypt-decrypt" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('aes-encrypt-decrypt'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">AES-256-GCM Encrypt</a></li>
-              <li><a href="/tools/sha-256-hash-generator" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('sha-256-hash-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">SHA-256 Hash</a></li>
-              <li><a href="/tools/md5-hash-generator" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('md5-hash-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">MD5 Hash</a></li>
-              <li><a href="/tools/jwt-token-generator" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('jwt-token-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">JWT Debugger</a></li>
-              <li><a href="/tools/secure-password-generator" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('secure-password-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Password Generator</a></li>
+              <li><a href="/tools/aes-encrypt-decrypt" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('aes-encrypt-decrypt'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">AES-256-GCM Encrypt</a></li>
+              <li><a href="/tools/sha-256-hash-generator" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('sha-256-hash-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">SHA-256 Hash</a></li>
+              <li><a href="/tools/md5-hash-generator" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('md5-hash-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">MD5 Hash</a></li>
+              <li><a href="/tools/jwt-token-generator" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('jwt-token-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">JWT Debugger</a></li>
+              <li><a href="/tools/secure-password-generator" onMouseEnter={preloadToolWorkspace} onTouchStart={preloadToolWorkspace} onClick={(e) => { e.preventDefault(); handleSelectToolBySlug('secure-password-generator'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">Password Generator</a></li>
             </ul>
           </div>
         </div>
@@ -2127,20 +2146,20 @@ export default function App() {
         {/* Legal Bottom Bar */}
         <div className="container border-t border-[var(--border-subtle)] mt-8 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[var(--text-muted)]">
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 font-medium">
-            <span className="text-slate-200 font-semibold px-2 py-3">© 2026 EncryptDecrypt.org</span>
-            <a href="/privacy" onClick={(e) => { e.preventDefault(); handleNavigateView('privacy'); }} className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Privacy Policy</a>
-            <a href="/terms" onClick={(e) => { e.preventDefault(); handleNavigateView('terms'); }} className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Terms of Service</a>
-            <a href="/disclaimer" onClick={(e) => { e.preventDefault(); handleNavigateView('disclaimer'); }} className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Legal Disclaimer</a>
-            <a href="/about" onClick={(e) => { e.preventDefault(); handleNavigateView('about'); }} className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">About Us</a>
-            <a href="/contact" onClick={(e) => { e.preventDefault(); handleNavigateView('contact'); }} className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Contact Us</a>
-            <a href="/rss.xml" target="_blank" rel="noopener noreferrer" className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-amber-300 hover:text-amber-200 transition-colors cursor-pointer rounded-lg hover:bg-white/5 font-semibold">
+            <span className="text-[var(--text-primary)] font-semibold px-2 py-3">© 2026 EncryptDecrypt.org</span>
+            <a href="/privacy" onClick={(e) => { e.preventDefault(); handleNavigateView('privacy'); }} className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">Privacy Policy</a>
+            <a href="/terms" onClick={(e) => { e.preventDefault(); handleNavigateView('terms'); }} className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">Terms of Service</a>
+            <a href="/disclaimer" onClick={(e) => { e.preventDefault(); handleNavigateView('disclaimer'); }} className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">Legal Disclaimer</a>
+            <a href="/about" onClick={(e) => { e.preventDefault(); handleNavigateView('about'); }} className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">About Us</a>
+            <a href="/contact" onClick={(e) => { e.preventDefault(); handleNavigateView('contact'); }} className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">Contact Us</a>
+            <a href="/rss.xml" target="_blank" rel="noopener noreferrer" className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-amber-500 hover:text-amber-600 transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)] font-semibold">
               <span className="w-2 h-2 rounded-full bg-amber-400 mr-1.5 animate-pulse"></span>
               RSS Feed
             </a>
-            <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-slate-200 hover:text-sky-400 transition-colors cursor-pointer rounded-lg hover:bg-white/5">Sitemap</a>
+            <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">Sitemap</a>
           </div>
 
-          <div className="flex items-center gap-4 font-mono text-[11px] shrink-0 text-slate-300">
+          <div className="flex items-center gap-4 font-mono text-[11px] shrink-0 text-[var(--text-muted)]">
             <span>RFC 4648</span>
             <span>NIST FIPS 197</span>
             <span>W3C WebCrypto</span>
