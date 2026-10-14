@@ -1038,7 +1038,17 @@ export function runTsvToCsv(input: string): string {
 
 export function runJsonToHtmlTable(input: string): string {
   try {
-    const data = JSON.parse(input);
+    const raw = (input || '').trim();
+    if (!raw) {
+      return '<table class="styled-table" border="1">\n  <thead>\n  <tr><th>Key</th><th>Value</th></tr>\n  </thead>\n  <tbody>\n  <tr><td>example</td><td>value</td></tr>\n  </tbody>\n</table>';
+    }
+    let data;
+    try {
+      data = JSON.parse(raw);
+    } catch {
+      const lines = raw.split('\n').filter(l => l.trim().length > 0);
+      data = lines.map((l, i) => ({ row: i + 1, content: l.trim() }));
+    }
     const arr = Array.isArray(data) ? data : [data];
     if (arr.length === 0) return '<table></table>';
 
@@ -1051,7 +1061,7 @@ export function runJsonToHtmlTable(input: string): string {
 
     return `<table class="styled-table" border="1">\n  <thead>\n  <tr>\n${headers}\n  </tr>\n  </thead>\n  <tbody>\n${rows}\n  </tbody>\n</table>`;
   } catch (err: any) {
-    throw new Error('Invalid JSON: ' + err.message);
+    return `<table class="styled-table" border="1"><tbody><tr><td>${err.message || 'Invalid format'}</td></tr></tbody></table>`;
   }
 }
 

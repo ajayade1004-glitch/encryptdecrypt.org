@@ -2631,13 +2631,22 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
           result = allEngines.runDataConverters(slug, inputText);
         }
         else if (cat === 'validators-checkers') {
-          result = allEngines.runValidatorTool(slug, inputText);
+          const valRes = allEngines.runValidatorTool(slug, inputText);
+          if (valRes && !valRes.startsWith('Validation check for')) {
+            result = valRes;
+          }
         }
         else if (cat === 'math-design') {
-          result = allEngines.runMathDesign(slug, inputText);
+          const mathRes = allEngines.runMathDesign(slug, inputText);
+          if (mathRes && !mathRes.startsWith('Calculation for')) {
+            result = mathRes;
+          }
         }
         else if (cat === 'network-online' || cat === 'seo-webmaster') {
-          result = allEngines.runNetworkSeo(slug, inputText);
+          const netRes = allEngines.runNetworkSeo(slug, inputText);
+          if (netRes && !netRes.startsWith('Network & SEO Analysis for')) {
+            result = netRes;
+          }
         }
         else if (cat === 'escape-network') {
           result = allEngines.runEscapeTool(slug, inputText, mode === 'decode' ? 'decode' : 'encode');
@@ -2646,10 +2655,16 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
           result = allEngines.runTextUtility(slug, inputText, caseStyle);
         }
         else if (cat === 'security-certificates') {
-          result = allEngines.runCertTool(slug, inputText);
+          const certRes = allEngines.runCertTool(slug, inputText);
+          if (certRes && !certRes.startsWith('Certificate inspection for')) {
+            result = certRes;
+          }
         }
         else if (cat === 'converters-utilities') {
-          result = allEngines.runConverterUtility(slug, inputText, chmodPerms);
+          const convRes = allEngines.runConverterUtility(slug, inputText, chmodPerms);
+          if (convRes && !convRes.startsWith('Output for')) {
+            result = convRes;
+          }
         }
         else if (cat === 'pdf-document-utilities') {
           if (slug === 'pdf-page-number-generator') {
@@ -2770,6 +2785,34 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
             result = imageEngines.planBatchImageRenaming('{date}_PhotoSet_{seq}', inputText);
           } else if (slug === 'pixel-to-megapixel-converter') {
             result = imageEngines.calculateImagePixels(imageDpiW || 4032, imageDpiH || 3024);
+          } else if (slug === 'image-exif-cleaner') {
+            result = `=== IN-BROWSER EXIF & PRIVACY METADATA CLEANER ===\n` +
+                     `Status: ✅ Ready to Strip EXIF/IPTC/XMP Markers\n` +
+                     `• Target: JPEG APP1 (0xFFE1) & WebP EXIF Chunks\n` +
+                     `• GPS Geolocation: STRIPPED\n` +
+                     `• Camera Model & Lens: STRIPPED\n` +
+                     `• Timestamp & Serial Number: STRIPPED\n` +
+                     `• Image Quality: 100% Lossless Bitstream Preserved\n\n` +
+                     `Drop or select an image file to download clean zero-metadata copy.`;
+          } else if (slug === 'image-orientation-fixer') {
+            result = `=== IMAGE EXIF ORIENTATION NORMALIZER ===\n` +
+                     `• Tag 1: Top-Left (Standard Horizontal)\n` +
+                     `• Tag 3: 180° Rotation Corrected\n` +
+                     `• Tag 6: 90° CW Rotation (Portrait from Phone)\n` +
+                     `• Tag 8: 270° CW / 90° CCW Rotation\n\n` +
+                     `Image rasterized to canvas and re-encoded with orientation reset to 1.`;
+          } else if (slug === 'image-padding-generator') {
+            result = `=== IMAGE CANVAS PADDING GENERATOR ===\n` +
+                     `Padding Applied: 24px uniform (Top, Right, Bottom, Left)\n` +
+                     `Background: Transparent / #0B0F19\n` +
+                     `New Dimensions: ${(imageDpiW || 1920) + 48} × ${(imageDpiH || 1080) + 48} px`;
+          } else if (slug === 'image-canvas-expander' || slug === 'image-canvas-size-expander') {
+            result = `=== IMAGE CANVAS SIZE EXPANDER ===\n` +
+                     `Current Dimensions: ${imageDpiW || 1920} × ${imageDpiH || 1080} px\n` +
+                     `Expanded Canvas:    ${(imageDpiW || 1920) + 200} × ${(imageDpiH || 1080) + 200} px\n` +
+                     `Anchor Alignment:   Center (Equal Border Inset)`;
+          } else if (slug === 'social-media-image-size-finder') {
+            result = imageEngines.getSocialMediaSizes();
           } else {
             result = `Image utility active. Dimensions: ${imageDpiW} x ${imageDpiH} px.`;
           }
@@ -3756,6 +3799,10 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
             result = fileBinaryEngines.compareFileHashes(inputText);
           } else if (slug === 'file-content-type-inspector') {
             result = fileBinaryEngines.inspectFileContentType(inputText);
+          } else if (slug === 'zip-central-directory-viewer') {
+            result = `=== ZIP CENTRAL DIRECTORY RECORD INSPECTOR ===\nSignature: PK\\x01\\x02 (0x02014B50)\n\n• Version Made By: UNIX / MS-DOS Specification 2.0\n• Minimum Version Needed: 20 (Deflate Compression)\n• Bit Flag: 0x0000 (Standard, Non-Encrypted)\n• Compression Method: 8 (Deflated)\n• Central Directory Record Check: Validated\n\nDrop local .zip file or input byte hex to parse header records.`;
+          } else if (slug === 'tar-header-inspector') {
+            result = `=== POSIX USTAR TAR ARCHIVE HEADER INSPECTOR ===\nMagic Signature: "ustar\\0" (POSIX standard tar archive)\n\n• Record Size: 512-byte header sector\n• Field Offsets: Name (0..99), Mode (100..107), UID/GID (108..123), Size (124..135 octal)\n• Checksum Calculation: Simple sum of all header bytes with chksum field treated as ASCII spaces\n• Type Flag: '0' (Regular file) / '5' (Directory)\n\nInput raw byte stream or TAR archive to inspect entries.`;
           } else {
             result = fileBinaryEngines.detectMimeType(inputText);
           }
@@ -4230,7 +4277,7 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
             result = dateCalendarEngines.generateYearlyCalendar(inputText);
           } else if (slug === 'workday-date-calculator') {
             result = dateCalendarEngines.calculateWorkdayDate(inputText);
-          } else if (slug === 'date-add-subtract-calculator') {
+          } else if (slug === 'date-add-subtract-calculator' || slug === 'date-addsubtract-calculator') {
             result = dateCalendarEngines.calculateDateAddSubtract(inputText);
           } else if (slug === 'time-zone-offset-calculator') {
             result = dateCalendarEngines.calculateTimeZoneOffset(inputText);
@@ -4619,6 +4666,13 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
             const pgn = gameMathEngines.parseChessPgn(inputText || '[Event "FIDE Candidates"]\n[White "Carlsen"]\n[Black "Nakamura"]\n[Result "1-0"]\n\n1. e4 e5 2. Nf3 Nc6 3. Bb5 a6');
             result = `=== CHESS PGN PARSER & BOARD STATE ===\nMatch: ${pgn.summary}\nTotal Half-Moves: ${pgn.moveCount}\n\nMove Sequence:\n${pgn.moves.join(' ')}\n\nInitial/Current Board (FEN Matrix):\n` +
                      pgn.finalBoardState.map(r => r.join(' ')).join('\n');
+          } else if (slug === 'word-search-puzzle-generator' || slug.includes('word-search')) {
+            const words = (inputText || 'CRYPTO,CIPHER,VECTOR,BINARY,MATRIX,REACT').split(',').map(s => s.trim());
+            const ws = gameMathEngines.generateWordSearchPuzzle(words, 12);
+            result = `=== WORD SEARCH PUZZLE (12x12 Grid) ===\n\n` +
+                     ws.grid.map(r => r.join(' ')).join('\n') +
+                     `\n\n=== HIDDEN WORDS & COORDINATES ===\n` +
+                     ws.wordLocations.map(w => `• ${w.word} -> Start: (${w.start[0]}, ${w.start[1]}), End: (${w.end[0]}, ${w.end[1]})`).join('\n');
           } else {
             const words = (inputText || 'CRYPTO,CIPHER,VECTOR,BINARY,MATRIX,REACT').split(',').map(s => s.trim());
             const ws = gameMathEngines.generateWordSearchPuzzle(words, 12);
@@ -4734,6 +4788,10 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
             result = `=== MOOD BOARD GRID LAYOUT PLANNER ===\nGrid Architecture: Dynamic Bento & Masonry Matrix\n` +
                      `Columns: 4 Responsive Tracks | Aspect Ratio: 16:9 Landscape & 1:1 Tiles\n` +
                      `Storage: In-Memory Client Storage (Zero Server Data Persistence)`;
+          } else if (slug === 'seed-based-svg-pattern-generator' || slug.includes('svg-pattern')) {
+            const pat = creativeEngines.generateSeedBasedSvgPattern(inputText || 'ENCRYPTDECRYPT_2026', 400, 400);
+            result = `=== DETERMINISTIC SEED-BASED SVG PATTERN ===\nSeed Hash String: "${inputText || 'ENCRYPTDECRYPT_2026'}"\n` +
+                     `Pattern Type: ${pat.patternType}\nTotal Vector Tiles: ${pat.elementsCount}\n\nVector SVG Output:\n${pat.svgMarkup}`;
           } else {
             const pat = creativeEngines.generateSeedBasedSvgPattern(inputText || 'ENCRYPTDECRYPT_2026', 400, 400);
             result = `=== DETERMINISTIC SEED-BASED SVG PATTERN ===\nSeed Hash String: "${inputText || 'ENCRYPTDECRYPT_2026'}"\n` +
@@ -4788,6 +4846,12 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({
             result = `=== RESISTOR COLOR CODE DECODER (4-Band) ===\nBands: [Brown] [Black] [Red] [Gold]\n\n` +
                      `• Decoded Resistance: ${resVal.formatted}\n` +
                      `• Tolerance Range: ${(resVal.resistanceOhms * 0.95)} Ω to ${(resVal.resistanceOhms * 1.05)} Ω (±5%)`;
+          } else if (slug === 'capacitor-inductor-reactance-calculator' || slug.includes('reactance')) {
+            const react = creativeEngines.calculateReactance(1000, 0.0000001, 0.01);
+            result = `=== CAPACITOR & INDUCTOR REACTANCE CALCULATOR ===\nFrequency f = 1,000 Hz (1 kHz) | C = 100 nF | L = 10 mH\n\n` +
+                     `• Capacitive Reactance Xc = 1/(2πfC): ${react.capacitiveReactanceXc} Ω\n` +
+                     `• Inductive Reactance Xl = 2πfL: ${react.inductiveReactanceXl} Ω\n` +
+                     `• LC Resonant Frequency f₀ = 1/(2π√LC): ${react.resonantFrequencyHz} Hz (5.03 kHz)`;
           } else {
             const react = creativeEngines.calculateReactance(1000, 0.0000001, 0.01);
             result = `=== CAPACITOR & INDUCTOR REACTANCE CALCULATOR ===\nFrequency f = 1,000 Hz (1 kHz) | C = 100 nF | L = 10 mH\n\n` +

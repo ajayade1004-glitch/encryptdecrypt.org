@@ -49,6 +49,10 @@ import * as measurementConstructionExtrasEngines from '../crypto/measurementCons
 import * as foodAcademicLogisticsEngines from '../crypto/foodAcademicLogisticsEngines';
 import * as wellnessGlobalExtrasEngines from '../crypto/wellnessGlobalExtrasEngines';
 import * as megaToolsEngines from '../crypto/megaToolsEngines';
+import * as astronomyGeoEngines from '../crypto/astronomyGeoEngines';
+import * as imageEngines from '../crypto/imageEngines';
+import * as fileBinaryEngines from '../crypto/fileBinaryEngines';
+import * as qrBarcodeEngines from '../crypto/qrBarcodeEngines';
 
 /**
  * Returns contextual, realistic, non-empty sample input for ANY tool
@@ -294,6 +298,253 @@ export async function executeUniversalTool(
       }).password;
     }
 
+    // Cipher & Hash Detection (Priority Cluster D: cipher detect / encryption identifier)
+    if (slug === 'frequency-analysis-cryptanalysis-tool' || slug.includes('cipher-detect') || slug.includes('cipher-identif')) {
+      return advancedCryptoEngines.detectCipherAndHash(text || 'KHOOR ZRUOG');
+    }
+
+    // 17 Specialized Developer & Utility Engines
+    if (slug === 'http-status-checker') return devUtilityMathExtrasEngines.checkHttpStatus(text || '404');
+    if (slug === 'api-response-formatter') return devUtilityMathExtrasEngines.formatApiResponse(text);
+    if (slug === 'http-method-tester') return devUtilityMathExtrasEngines.testHttpMethod(text || 'POST');
+    if (slug === 'image-metadata-viewer') return devUtilityMathExtrasEngines.viewImageMetadata(text);
+    if (slug === 'toml-formatter-validator') return devUtilityMathExtrasEngines.formatAndValidateToml(text);
+    if (slug === 'css-in-js-to-css-converter') return devUtilityMathExtrasEngines.convertCssInJsToCss(text);
+    if (slug === 'hjson-to-json-converter') return devUtilityMathExtrasEngines.convertHjsonToJson(text);
+    if (slug === 'edn-to-json-converter') return devUtilityMathExtrasEngines.convertEdnToJson(text);
+    if (slug === 'excess-k-notation-converter') return devUtilityMathExtrasEngines.convertExcessKNotation(text || '130');
+    if (slug === 'fixed-point-float-converter') return devUtilityMathExtrasEngines.convertFixedPointFloat(text || '3.75');
+    if (slug === 'grpc-message-formatter') return devUtilityMathExtrasEngines.formatGrpcMessage(text);
+    if (slug === 'websocket-url-builder') return devUtilityMathExtrasEngines.buildWebSocketUrl(text);
+    if (slug === 'saml-request-response-decoder') return devUtilityMathExtrasEngines.decodeSamlRequestResponse(text);
+    if (slug === 'semantic-json-diff') return devUtilityMathExtrasEngines.computeSemanticJsonDiff(text);
+    if (slug === 'code-minifier-ratio-calculator') return devUtilityMathExtrasEngines.calculateCodeMinifierRatio(text);
+    if (slug === 'owasp-top-10-checklist') return devUtilityMathExtrasEngines.getOwaspTop10Checklist(text);
+    if (slug === 'secure-header-recommendation-generator') return devUtilityMathExtrasEngines.generateSecureHeaderRecommendations(text);
+
+    // Additional Developer & System Utilities
+    if (slug === 'etag-generator-weak-strong') {
+      const et = devUtilityMathExtrasEngines.generateEtag(text || 'Hello World', true);
+      return `=== HTTP ETAG GENERATOR ===\nInput: "${et.contentString}"\n\n• ETag Header: ${et.etagHeader}\n• Weak ETag:   ${et.isWeakEtag ? 'YES (W/)' : 'NO'}`;
+    }
+    if (slug === 'two-by-two-matrix-inverse-calculator') {
+      const parts = text.split(',').map(s => parseFloat(s.trim()));
+      const a = !isNaN(parts[0]) ? parts[0] : 4;
+      const b = !isNaN(parts[1]) ? parts[1] : 7;
+      const c = !isNaN(parts[2]) ? parts[2] : 2;
+      const d = !isNaN(parts[3]) ? parts[3] : 6;
+      const res = devUtilityMathExtrasEngines.calculate2x2MatrixInverse(a, b, c, d);
+      const invStr = res.inverseMatrix
+        ? `  [ ${res.inverseMatrix[0][0].toFixed(4)}, ${res.inverseMatrix[0][1].toFixed(4)} ]\n  [ ${res.inverseMatrix[1][0].toFixed(4)}, ${res.inverseMatrix[1][1].toFixed(4)} ]`
+        : '  [ Singular / Non-invertible ]';
+      return `=== 2×2 MATRIX INVERSE & DETERMINANT ===\nMatrix: [[${a}, ${b}], [${c}, ${d}]]\n\n• Determinant: ${res.determinant}\n• Invertible: ${res.isInvertible ? 'YES' : 'NO'}\n• Inverse Matrix:\n${invStr}`;
+    }
+    if (slug === 'semver-range-satisfier-tester') {
+      const parts = text.split(',');
+      const res = devUtilityMathExtrasEngines.testSemverRange(parts[0] || '^1.2.3', parts[1] || '1.4.0');
+      return `=== SEMVER RANGE SATISFIER TESTER ===\nRange: ${res.semverRange} | Version: ${res.targetVersion}\n\n• Result: ${res.isSatisfied ? '✅ SATISFIED (Compatible)' : '❌ NOT SATISFIED'}\n• Details: ${res.explanation}`;
+    }
+    if (slug === 'npm-package-name-validator') {
+      const res = devUtilityMathExtrasEngines.validateNpmPackageName(text || 'my-awesome-tool');
+      return `=== NPM PACKAGE NAME VALIDATOR ===\nPackage Name: "${res.packageName}"\n\n• Syntax Valid: ${res.isValidNpmName ? '✅ VALID NPM NAME' : '❌ INVALID SYNTAX'}\n` + (res.warnings.length > 0 ? res.warnings.map(w => '• Warning: ' + w).join('\n') : '• Clean, lowercase, and URL safe.');
+    }
+    if (slug === 'http-cache-control-directive-builder') {
+      const res = devUtilityMathExtrasEngines.buildCacheControlHeader(3600, true, false, false);
+      return `=== HTTP CACHE-CONTROL DIRECTIVE BUILDER ===\nHeader: ${res.cacheControlHeader}\n\n• Recommended Use Cases: ${res.recommendedUseCases}`;
+    }
+    if (slug === 'collatz-conjecture-visualizer') {
+      const n = parseInt(text.replace(/[^0-9]/g, ''), 10) || 27;
+      const res = cadDesignNumberSysadminEngines.checkCollatzSequence(n);
+      return `=== COLLATZ CONJECTURE 3N + 1 VISUALIZER ===\nStarting Integer: ${res.startNumber}\n\n• Total Steps to 1: ${res.totalSteps}\n• Maximum Peak Reached: ${res.peakMaximumValue}\n• Sequence: ${res.first20SequenceValues.slice(0, 10).join(' ➔ ')}${res.first20SequenceValues.length > 10 ? ' ... ➔ 1' : ''}`;
+    }
+    if (slug === 'beam-bending-stress-calculator-pro') {
+      const parts = text.split(',').map(s => parseFloat(s.trim()));
+      const m = parts[0] || 1200;
+      const y = parts[1] || 25;
+      const i = parts[2] || 150000;
+      const res = cadDesignNumberSysadminEngines.calculateBeamBendingStress(m, y, i);
+      return `=== BEAM BENDING STRESS (σ = My/I) ===\nMoment: ${m} N·m | Distance y: ${y} mm | Inertia I: ${i} mm⁴\n\n• Max Stress: ${res.bendingStressMpa} MPa\n• Margin Rating: ${res.stressCategory}`;
+    }
+    if (slug === 'eight-point-grid-spacing-scale-generator') {
+      const res = cadDesignNumberSysadminEngines.generate8PointGridScale();
+      return `=== 8-POINT GRID DESIGN SYSTEM SCALE ===\nBase Unit: 8px\n\n` + res.scaleTokensPx.map(s => `${s.token.padEnd(10)}: ${s.sizePx}px (${s.sizeRem}rem)`).join('\n');
+    }
+    if (slug === 'narcissistic-armstrong-number-checker') {
+      const num = parseInt(text.replace(/[^0-9]/g, ''), 10) || 153;
+      const res = cadDesignNumberSysadminEngines.checkNarcissisticNumber(num);
+      return `=== NARCISSISTIC (ARMSTRONG) NUMBER CHECKER ===\nCandidate: ${res.number} (${res.digitCount} digits)\n\n• Result: ${res.isNarcissisticArmstrong ? '✅ NARCISSISTIC NUMBER' : '❌ NOT NARCISSISTIC'}\n• Sum of Digit Powers: ${res.digitPowersSum}`;
+    }
+    if (slug === 'raid-storage-capacity-calculator-pro') {
+      const parts = text.split(',');
+      const driveCount = parseInt(parts[0], 10) || 4;
+      const driveSizeTb = parseFloat(parts[1]) || 8;
+      const rawRaid = (parts[2] || 'raid5').trim().toLowerCase().replace(/[^a-z0-9]/g, '');
+      const validRaid: 'raid0' | 'raid1' | 'raid5' | 'raid6' | 'raid10' =
+        (['raid0', 'raid1', 'raid5', 'raid6', 'raid10'] as const).find(r => r === rawRaid) || 'raid5';
+      const res = cadDesignNumberSysadminEngines.calculateRaidCapacity(driveCount, driveSizeTb, validRaid);
+      return `=== RAID STORAGE CAPACITY CALCULATOR ===\nConfig: ${res.raidType} with ${driveCount} Disks (${driveSizeTb} TB each)\n\n• Usable Capacity: ${res.usableCapacityTb} TB\n• Fault Tolerance: ${res.parityFaultTolerance}`;
+    }
+    if (slug === 'video-bitrate-recommendation-calculator') {
+      const resVal: '1080p' | '4k' = text.toLowerCase().includes('4k') ? '4k' : '1080p';
+      const res = cadDesignNumberSysadminEngines.recommendVideoBitrate(resVal, 60);
+      return `=== VIDEO BITRATE & BANDWIDTH ESTIMATOR ===\nResolution: ${resVal} @ 60 FPS\n\n• Recommended Bitrate: ${res.recommendedBitrateMbps} Mbps\n• Recommended Livestream Bandwidth: ${res.recommendedLivestreamBandwidthMbps} Mbps\n• Estimated Storage: ~${res.estimatedStorageGbPerHour.toFixed(2)} GB/hr`;
+    }
+    if (slug === 'saros-eclipse-cycle-estimator') {
+      const yr = parseInt(text.replace(/[^0-9]/g, ''), 10) || 2026;
+      const res = astronomyGeoEngines.estimateSarosEclipseCycle(yr);
+      return `=== SOLAR & LUNAR ECLIPSE CYCLE ESTIMATOR (SAROS) ===\nReference Year: ${yr}\n\n• Saros Period: ${res.cyclePeriodYears} Years (${res.cyclePeriodDays} Days)\n• Active Saros Series: #${res.sarosNumber}\n• Estimated Recurrence: ${res.estimatedNextEclipseDate}`;
+    }
+    if (slug === 'elevation-grade-slope-calculator') {
+      const parts = text.split(',').map(s => parseFloat(s.trim()));
+      const rise = parts[0] || 50;
+      const run = parts[1] || 1000;
+      const res = astronomyGeoEngines.calculateElevationGrade(rise, run);
+      return `=== ELEVATION GRADE & ROAD SLOPE CALCULATOR ===\nVertical Rise: ${rise} m | Horizontal Run: ${run} m\n\n• Slope Grade: ${res.gradePercent.toFixed(1)}% Grade\n• Angle of Inclination: ${res.slopeAngleDegrees.toFixed(1)}°\n• Road Classification: ${res.steepnessRating}`;
+    }
+    if (slug === 'solution-concentration-converter') {
+      const parts = text.split(',');
+      const res = chemistryPhysicsExtendedEngines.convertConcentrations(parseFloat(parts[0]) || 500, parseFloat(parts[1]) || 58.44);
+      return `=== SOLUTION CONCENTRATION CONVERTER ===\nInput PPM: ${res.ppm} PPM\n\n• Weight Percentage: ${res.weightPercent}%\n• Molarity: ${res.molarityM} M`;
+    }
+    if (slug === 'shm-period-calculator') {
+      const parts = text.split(',').map(s => parseFloat(s.trim()));
+      const m = parts[0] || 0.5;
+      const k = parts[1] || 200;
+      const res = chemistryPhysicsExtendedEngines.calculateShmPeriod(m, k);
+      return `=== SIMPLE HARMONIC MOTION (SHM) PERIOD ===\nMass m = ${m} kg | Spring Constant k = ${k} N/m\n\n• Period T: ${res.periodSeconds} seconds\n• Frequency f: ${res.frequencyHz} Hz\n• Angular Frequency ω: ${res.angularFrequencyRadS} rad/s`;
+    }
+    if (slug === 'fantasy-sports-points-calculator') {
+      const parts = text.split(',').map(s => parseFloat(s.trim()));
+      const res = sportsParentingWeatherEngines.calculateFantasySportsPoints({
+        passingYds: parts[0] || 250,
+        passingTds: parts[1] || 2,
+        rushingYds: parts[2] || 45,
+        rushingTds: parts[3] || 1,
+        receptions: parts[4] || 5
+      });
+      return `=== FANTASY SPORTS POINTS CALCULATOR ===\nScoring Format: PPR Standard\n\n• Total Points: ${res.totalFantasyPoints} PTS\n• Passing Points: ${res.breakdown.passingPoints} PTS\n• Rushing Points: ${res.breakdown.rushingPoints} PTS\n• Receiving Points: ${res.breakdown.receivingPoints} PTS`;
+    }
+    if (slug === 'aap-screen-time-calculator') {
+      const age = parseFloat(text) || 4;
+      const res = sportsParentingWeatherEngines.calculateAapScreenTime(age);
+      return `=== AAP SCREEN TIME RECOMMENDATION ===\nChild Age: ${age} Years\n\n• Recommended Daily Limit: ${res.recommendedDailyLimitHours}\n• Guidelines: ${res.guidelineSummary}\n• Key Habits: ${res.healthyHabitTips.join(', ')}`;
+    }
+    if (slug === 'barometric-pressure-altitude-converter') {
+      const parts = text.split(',').map(s => parseFloat(s.trim()));
+      const pressure = parts[0] || 1013.25;
+      const altitude = parts[1] || 500;
+      const res = sportsParentingWeatherEngines.convertBarometricPressureAltitude(pressure, altitude);
+      return `=== BAROMETRIC PRESSURE & ALTITUDE CONVERTER ===\nStation Pressure: ${pressure} hPa | Altitude: ${altitude} m\n\n• Sea Level Adjusted: ${res.seaLevelPressureHpa} hPa\n• Pressure in InHg: ${res.pressureInHg} inHg\n• Pressure in Atmospheres: ${res.pressureAtm} atm`;
+    }
+    if (slug === 'rhyme-finder-dictionary') {
+      const inputWord = text.trim() || 'light';
+      const res = linguisticsAgriTaxEngines.findStaticRhymes(inputWord);
+      return `=== RHYME FINDER & PHONETIC DICTIONARY ===\nTarget Word: "${res.word}"\n\n• Perfect Rhymes: ${res.perfectRhymes.join(', ')}\n• Slant Rhymes: ${res.slantRhymes.join(', ')}`;
+    }
+    if (slug === 'curve-grading-calculator') {
+      const parts = text.split(',').map(s => parseFloat(s.trim())).filter(n => !isNaN(n));
+      const res = linguisticsAgriTaxEngines.calculateCurveGrading(parts.length > 0 ? parts : [65, 72, 80, 88, 95]);
+      return `=== CURVE GRADING CALCULATOR (BELL CURVE) ===\nExam Sample Size: ${res.curvedScores.length} Students\n\n• Raw Mean Score: ${res.originalMean.toFixed(1)} / 100\n• Raw Standard Deviation σ: ${res.originalStdDev.toFixed(2)}\n• Sample Curved Grades:\n` + res.curvedScores.slice(0, 5).map(c => `  - Raw ${c.raw} ➔ Curved ${c.curvedScore} (${c.curvedGrade})`).join('\n');
+    }
+    if (slug === 'irrigation-water-calculator') {
+      const parts = text.split(',').map(s => parseFloat(s.trim()));
+      const res = linguisticsAgriTaxEngines.calculateIrrigationRequirement(parts[0] || 1000, parts[1] || 5, parts[2] || 7);
+      return `=== AGRICULTURAL IRRIGATION WATER CALCULATOR ===\nField Area: ${parts[0] || 1000} m² | Daily ET₀: ${parts[1] || 5} mm/day\n\n• Total Water Needed: ${res.totalWaterLitersNeeded.toLocaleString()} Liters (${res.totalWaterCubicMeters} m³)\n• Irrigation Duration (at 50 L/min): ${res.irrigationHoursAt50Lpm} hours`;
+    }
+    if (slug === 'vat-sales-tax-reverse-calculator') {
+      const parts = text.split(',').map(s => parseFloat(s.trim()));
+      const res = linguisticsAgriTaxEngines.calculateReverseVat(parts[0] || 120, parts[1] || 20);
+      return `=== REVERSE VAT & SALES TAX CALCULATOR ===\nGross Total: $${res.totalGrossAmount.toFixed(2)} | VAT Rate: ${parts[1] || 20}%\n\n• Net Amount Before VAT: $${res.netAmountBeforeVat.toFixed(2)}\n• VAT Amount Included: $${res.vatAmountIncluded.toFixed(2)}`;
+    }
+    if (slug === 'family-tree-chart-builder') {
+      const res = genealogyTypographyCookingCivicEngines.calculateFamilyRelationship(text.trim() || 'father brother');
+      return `=== FAMILY TREE & KINSHIP DEGREE CALCULATOR ===\nRelationship: ${res.relationshipName}\n\n• Kinship Type: ${res.kinshipType}\n• Estimated Shared DNA: ~${res.sharedAncestryPercent}`;
+    }
+    if (slug === 'web-safe-font-stack-generator') {
+      const res = genealogyTypographyCookingCivicEngines.generateTypographicScale(16, 1.25);
+      return `=== WEB TYPOGRAPHY SCALE GENERATOR ===\nScale Ratio: ${res.ratioName}\n\n` + res.scaleStepsPx.map(s => `${s.step.padEnd(6)}: ${s.sizePx}px (${s.sizeRem}rem)`).join('\n');
+    }
+    if (slug === 'dark-mode-preference-detector') {
+      const res = genealogyTypographyCookingCivicEngines.detectDarkModePreference();
+      return `=== SYSTEM DARK MODE & MEDIA QUERY DETECTOR ===\nEngine: window.matchMedia('(prefers-color-scheme: dark)')\n\n• Dark Mode Active: ${res.isDarkModePreferred ? 'YES' : 'NO'}\n• Detected Color Scheme: ${res.colorScheme.toUpperCase()}`;
+    }
+    if (slug === 'recipe-batch-scaling-calculator') {
+      const parts = text.split(',').map(s => parseFloat(s.trim()));
+      const qty = parts[0] || 2.5;
+      const mult = parts[1] || 2.0;
+      const res = genealogyTypographyCookingCivicEngines.scaleRecipeBatch(qty, mult);
+      return `=== RECIPE BATCH SCALING CALCULATOR ===\nOriginal Quantity: ${res.originalQuantity} | Multiplier: ${res.multiplier}x\n\n• Scaled Quantity: ${res.scaledQuantity}`;
+    }
+    if (slug === 'postal-code-format-validator') {
+      const parts = text.split(',');
+      const res = genealogyTypographyCookingCivicEngines.validatePostalCodeFormat(parts[0] || '10001', (parts[1] || 'US').trim());
+      return `=== POSTAL / ZIP CODE FORMAT VALIDATOR ===\nPostal Code: "${res.postalCode}" | Country: ${res.country}\n\n• Format Check: ${res.isValidFormat ? '✅ VALID POSTAL FORMAT' : '❌ INVALID FORMAT'}\n• Expected Pattern: ${res.expectedPattern}`;
+    }
+    if (slug === 'meta-tag-pixel-width-estimator') {
+      const res = seoStatsPmHrEngines.estimateTextSimilarity(text || 'EncryptDecrypt Tool', 'Encrypt Decrypt Platform');
+      return `=== SEO TEXT SIMILARITY & OVERLAP ===\n• Word Similarity: ${res.similarityPercent}%\n• Word Overlap Count: ${res.wordOverlapCount}\n• Unique Words: Input 1 (${res.uniqueWordsText1}), Input 2 (${res.uniqueWordsText2})`;
+    }
+    if (slug === 'ab-test-significance-calculator') {
+      const res = seoStatsPmHrEngines.calculateAbTestSignificance({
+        controlVisitors: 1000,
+        controlConversions: 120,
+        variantVisitors: 1000,
+        variantConversions: 160
+      });
+      return `=== A/B TEST STATISTICAL SIGNIFICANCE ===\nControl Rate: ${res.controlRatePercent}% | Variant Rate: ${res.variantRatePercent}%\n\n• Uplift: +${res.relativeUpliftPercent}%\n• Statistically Significant (95% Confidence): ${res.isStatisticallySignificant95 ? '✅ YES' : '❌ NO'}\n• Confidence Level: ${res.pValConfidencePercent}%`;
+    }
+    if (slug === 'raci-matrix-template-generator') {
+      return `=== RACI MATRIX TEMPLATE ===\nR: Responsible | A: Accountable | C: Consulted | I: Informed\n\n| Deliverable | PM | Dev | QA | Sec |\n| :--- | :-: | :-: | :-: | :-: |\n| Security Architecture | A | R | C | C |\n| Web Crypto Implementation | I | R | C | A |\n| Production Release | A | R | R | C |`;
+    }
+    if (slug === 'offer-letter-total-compensation-calculator') {
+      const parts = text.split(',').map(s => parseFloat(s.trim()));
+      const res = seoStatsPmHrEngines.calculateTotalCompensation(parts[0] || 140000, parts[1] || 15, parts[2] || 40000, parts[3] || 12000);
+      return `=== TOTAL COMPENSATION (TC) CALCULATOR ===\nBase Salary: $${res.baseSalary.toLocaleString()}\nBonus: $${res.bonusAmount.toLocaleString()}\nEquity Grant: $${res.stockValue.toLocaleString()}\nBenefits: $${res.benefitsValue.toLocaleString()}\n\n• Total Annual Compensation: $${res.totalAnnualCompensation.toLocaleString()}`;
+    }
+    if (slug === 'paper-weight-gsm-lb-converter-pro') {
+      const parts = text.split(',');
+      const res = measurementConstructionExtrasEngines.convertPaperWeightGsmLb(parseFloat(parts[0]) || 80, (parts[1] || 'gsm').trim() as any);
+      return `=== PAPER WEIGHT GSM ↔ LB CONVERTER ===\nBase: ${res.gsm} GSM\n\n• Basis Weight (Text):  ${res.lbText} lb Text\n• Basis Weight (Cover): ${res.lbCover} lb Cover`;
+    }
+    if (slug === 'electrical-wire-gauge-awg-load-calculator-pro') {
+      const parts = text.split(',').map(s => parseFloat(s.trim()));
+      const res = measurementConstructionExtrasEngines.calculateAwgWireLoad(parts[0] || 12, parts[2] || 50, 120);
+      return `=== ELECTRICAL WIRE GAUGE (AWG) LOAD CALCULATOR ===\nWire: ${res.awgGauge} AWG Copper | Current: ${parts[1] || 15} A | Length: ${parts[2] || 50} ft\n\n• Voltage Drop (at 10A): ${res.voltageDropPercent10A}%\n• NEC Standard: ${res.voltageDropPercent10A <= 3 ? '✅ COMPLIANT (<3%)' : '⚠️ EXCEEDS 3%'}\n• Max Ampacity: ${res.maxAmpacityAmps} A\n• Max Continuous Power: ${res.maxContinuousPowerWatts} W`;
+    }
+    if (slug === 'coffee-to-water-ratio-calculator-pro') {
+      const parts = text.split(',');
+      const grams = parseFloat(parts[0]) || 20;
+      const res = foodAcademicLogisticsEngines.calculateCoffeeWaterRatio(grams, 'pour_over');
+      return `=== COFFEE-TO-WATER BREW RATIO CALCULATOR ===\nGround Coffee: ${grams} g | Method: ${res.brewMethod}\n\n• Brew Ratio: ${res.ratioString}\n• Water Required: ${res.waterGramsMl} g (ml)`;
+    }
+    if (slug === 'likert-scale-score-aggregator-pro') {
+      const res = foodAcademicLogisticsEngines.aggregateLikertScores([4, 5, 4, 3, 5, 4, 5, 4, 4, 5]);
+      return `=== LIKERT SCALE SCORE AGGREGATOR ===\nTotal Responses: ${res.totalResponses}\n\n• Mean Score: ${res.meanScore} / 5.0\n• Median Score: ${res.medianScore}\n• Positive Sentiment: ${res.positivePercentage}%`;
+    }
+    if (slug === 'safety-stock-reorder-point-calculator-pro') {
+      const parts = text.split(',').map(s => parseFloat(s.trim()));
+      const res = foodAcademicLogisticsEngines.calculateSafetyStock(parts[0] || 100, parts[1] || 80, parts[2] || 14, parts[3] || 10);
+      return `=== SAFETY STOCK & REORDER POINT (ROP) ===\nMax Daily Demand: ${parts[0] || 100} | Avg Daily Demand: ${parts[1] || 80}\n\n• Safety Stock: ${res.safetyStockUnits} Units\n• Reorder Point: ${res.reorderPointUnits} Units`;
+    }
+    if (slug === 'steps-to-distance-stride-calculator-pro') {
+      const parts = text.split(',').map(s => parseFloat(s.trim()));
+      const strideMeters = (parts[1] ? (parts[1] > 5 ? parts[1] / 100 : parts[1]) : 0.76);
+      const res = wellnessGlobalExtrasEngines.calculateStepsToDistance(parts[0] || 10000, strideMeters);
+      return `=== STEPS TO DISTANCE & CALORIE CALCULATOR ===\nSteps: ${res.totalSteps.toLocaleString()} | Stride: ${(strideMeters * 100).toFixed(0)} cm\n\n• Distance: ${res.distanceKilometers} km (${res.distanceMiles} miles)\n• Estimated Energy: ~${res.caloriesBurnedEst} kcal`;
+    }
+    if (slug === 'currency-denomination-breakdown-calculator-pro') {
+      const amt = parseFloat(text.replace(/[^0-9.]/g, '')) || 487;
+      const res = wellnessGlobalExtrasEngines.calculateCurrencyDenominations(amt, '$');
+      return `=== CURRENCY DENOMINATION BREAKDOWN ===\nTotal: $${res.totalAmount.toFixed(2)} USD\n\n` + res.noteBreakdown.filter(b => b.count > 0).map(b => `$${b.noteValue}: ${b.count} bill(s)`).join('\n');
+    }
+    if (slug === 'pe-exe-header-inspector' || slug === 'macho-binary-header-inspector' || slug === 'wasm-section-viewer') {
+      const elf = megaToolsEngines.parseElfHeaderSummary(text);
+      return `=== BINARY HEADER & EXEC FORMAT INSPECTOR ===\nFormat: ${slug.toUpperCase()}\n\n• Magic Bytes Valid: ${elf.magicValid ? 'YES' : 'NO'}\n• Class: ${elf.class}\n• Endianness: ${elf.dataEndianness}\n• Machine Architecture: ${elf.machine}`;
+    }
+    if (slug === 'base64-chunking-tool') {
+      return text.replace(/(.{76})/g, '$1\n');
+    }
+
     // ----------------------------------------------------
     // B. CSS & WEB DEVELOPER TOOLS
     // ----------------------------------------------------
@@ -537,49 +788,42 @@ Action: Preview vector canvas and download crisp PNG via the Image Studio panel 
     // ----------------------------------------------------
     // I. CHECK THE EXTENSIVE SUB-ENGINE LIBRARIES
     // ----------------------------------------------------
-    const recResult = await newEngines.runRecommendedTool(slug, text);
+    const recResult = await newEngines.runRecommendedTool(slug, text, extraState.mode);
     if (recResult !== null) return recResult;
 
-    // Check category engines from allEngines
-    if (cat.includes('encoding')) {
-      const res = allEngines.runEncodingTool(slug, text, 'encode');
-      if (res) return res;
+    // Check primary crypto categories
+    if (cat === 'encryption-ciphers' || cat.includes('cipher')) {
+      return await allEngines.runCipherTool(slug, text, extraState.secretKey || 'secure-aes-256-key', extraState.shiftAmount || 3, extraState.mode === 'decrypt' ? 'decrypt' : 'encrypt');
     }
-    if (cat.includes('dev-tools') || cat.includes('formatter')) {
-      const res = allEngines.runDevTools(slug, text);
-      if (res) return res;
+    if (cat === 'hashing-security' || cat.includes('hash') || cat.includes('checksum')) {
+      return await allEngines.runHashingTool(slug, text, extraState.secretKey || '');
     }
-    if (cat.includes('converter') || cat.includes('file-data')) {
-      const res = allEngines.runDataConverters(slug, text);
-      if (res) return res;
+    if (cat === 'encoding-decoding' || cat.includes('encoding')) {
+      return allEngines.runEncodingTool(slug, text, extraState.mode === 'decrypt' ? 'decode' : 'encode');
     }
-    if (cat.includes('validator') || cat.includes('checker')) {
-      const res = allEngines.runValidatorTool(slug, text);
-      if (res) return res;
+    if (cat === 'generators-tokens' || cat.includes('generator') || cat.includes('identifier')) {
+      return allEngines.runGeneratorTool(slug, { length: extraState.pwdLength || 20, options: extraState.pwdOptions, count: extraState.uuidCount || 5, counter: 1 });
     }
-    if (cat.includes('text') || cat.includes('writing')) {
-      const res = allEngines.runTextUtility(slug, text, 'upper');
-      if (res) return res;
+    if (cat === 'dev-tools-formatters' || cat.includes('dev-tools') || cat.includes('formatter') || cat.includes('minifier')) {
+      return allEngines.runDevTools(slug, text);
     }
-    if (cat.includes('math') || cat.includes('design')) {
-      const res = allEngines.runMathDesign(slug, text);
-      if (res) return res;
+    if (cat === 'file-data-converters' || cat.includes('converter') || cat.includes('file-data') || cat.includes('number-systems')) {
+      return allEngines.runDataConverters(slug, text);
     }
-    if (cat.includes('network') || cat.includes('seo')) {
-      const res = allEngines.runNetworkSeo(slug, text);
-      if (res) return res;
+    if (cat === 'validators-checkers' || cat.includes('validator') || cat.includes('checker')) {
+      return allEngines.runValidatorTool(slug, text);
     }
-    if (cat.includes('escape')) {
-      const res = allEngines.runEscapeTool(slug, text, 'encode');
-      if (res) return res;
+    if (cat === 'math-design' || cat.includes('math') || cat.includes('science')) {
+      return allEngines.runMathDesign(slug, text);
     }
-    if (cat.includes('certificate') || cat.includes('cert')) {
-      const res = allEngines.runCertTool(slug, text);
-      if (res) return res;
+    if (cat === 'escape-network') {
+      return allEngines.runEscapeTool(slug, text, 'encode');
     }
-    if (cat.includes('converters-utilities')) {
-      const res = allEngines.runConverterUtility(slug, text, 755);
-      if (res) return res;
+    if (cat === 'security-certificates') {
+      return allEngines.runCertTool(slug, text);
+    }
+    if (cat === 'converters-utilities') {
+      return allEngines.runConverterUtility(slug, text, 755);
     }
 
     // ----------------------------------------------------
@@ -598,3 +842,4 @@ Action: Preview vector canvas and download crisp PNG via the Image Studio panel 
     return `// Execution Error: ${err.message || 'Could not process input'}`;
   }
 }
+

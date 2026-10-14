@@ -380,3 +380,179 @@ export function compareRsaKeyFingerprints(key1Pem: string, key2Pem: string): {
     isExactMatch: clean1 === clean2
   };
 }
+
+// ==========================================
+// 6. CIPHER DETECTOR & CRYPTOGRAPHIC IDENTIFIER
+// ==========================================
+
+export function detectCipherAndHash(input = ''): string {
+  const text = input.trim();
+  if (!text) {
+    return [
+      `=== CIPHER & CRYPTOGRAPHIC ALGORITHM IDENTIFIER ===`,
+      `Status: Waiting for input ciphertext, hash, or encoded string.`,
+      `Paste any payload to detect algorithm, character set, Shannon entropy, and decryption candidates.`
+    ].join('\n');
+  }
+
+  const length = text.length;
+  const isHex = /^[0-9a-fA-F]+$/.test(text);
+  const isBase64 = /^[A-Za-z0-9+/]+={0,2}$/.test(text) && text.length % 4 === 0 && text.length >= 8;
+  const isBase64Url = /^[A-Za-z0-9_-]+$/.test(text);
+  const isAsciiLettersOnly = /^[a-zA-Z\s.,!?'"-]+$/.test(text);
+
+  // Calculate Shannon Entropy
+  const freqMap: Record<string, number> = {};
+  for (const ch of text) {
+    freqMap[ch] = (freqMap[ch] || 0) + 1;
+  }
+  let entropy = 0;
+  for (const ch in freqMap) {
+    const p = freqMap[ch] / length;
+    entropy -= p * Math.log2(p);
+  }
+
+  // Calculate Index of Coincidence (IC) for alphabetic characters
+  const lettersOnly = text.toUpperCase().replace(/[^A-Z]/g, '');
+  let ic = 0;
+  if (lettersOnly.length > 1) {
+    const lCounts: Record<string, number> = {};
+    for (const c of lettersOnly) lCounts[c] = (lCounts[c] || 0) + 1;
+    let sum = 0;
+    for (const c in lCounts) sum += lCounts[c] * (lCounts[c] - 1);
+    ic = sum / (lettersOnly.length * (lettersOnly.length - 1));
+  }
+
+  const candidates: string[] = [];
+  let nature = 'Unknown / Custom Encoding';
+  let isHashOneWay = false;
+  let recommendedTool = '/tools/aes-encrypt-decrypt';
+
+  // 1. Check for Hashes (Fixed-Length Hex Digests)
+  if (isHex) {
+    if (length === 32) {
+      candidates.push('MD5 (128-bit Message Digest - RFC 1321)', 'NTLM / MD4 Hash');
+      nature = 'One-Way Cryptographic Hash Digest (⚠️ Irreversible, CANNOT be decrypted)';
+      isHashOneWay = true;
+      recommendedTool = '/tools/md5-hash-generator';
+    } else if (length === 40) {
+      candidates.push('SHA-1 (160-bit Secure Hash - FIPS 180-1)', 'RIPEMD-160');
+      nature = 'One-Way Cryptographic Hash Digest (⚠️ Irreversible, CANNOT be decrypted)';
+      isHashOneWay = true;
+      recommendedTool = '/tools/sha1-hash-generator';
+    } else if (length === 56) {
+      candidates.push('SHA-224 (224-bit NIST FIPS 180-4)', 'SHA3-224');
+      nature = 'One-Way Cryptographic Hash Digest (⚠️ Irreversible, CANNOT be decrypted)';
+      isHashOneWay = true;
+      recommendedTool = '/tools/sha224-hash-generator';
+    } else if (length === 64) {
+      candidates.push('SHA-256 (256-bit NIST FIPS 180-4)', 'SHA3-256 (Keccak)', 'BLAKE2s', 'SM3');
+      nature = 'One-Way Cryptographic Hash Digest (⚠️ Irreversible, CANNOT be decrypted)';
+      isHashOneWay = true;
+      recommendedTool = '/tools/sha256-hash-generator';
+    } else if (length === 96) {
+      candidates.push('SHA-384 (384-bit NIST FIPS 180-4)', 'SHA3-384');
+      nature = 'One-Way Cryptographic Hash Digest (⚠️ Irreversible, CANNOT be decrypted)';
+      isHashOneWay = true;
+      recommendedTool = '/tools/sha384-hash-generator';
+    } else if (length === 128) {
+      candidates.push('SHA-512 (512-bit NIST FIPS 180-4)', 'SHA3-512', 'Whirlpool (512-bit)', 'BLAKE2b');
+      nature = 'One-Way Cryptographic Hash Digest (⚠️ Irreversible, CANNOT be decrypted)';
+      isHashOneWay = true;
+      recommendedTool = '/tools/sha512-hash-generator';
+    } else if (length % 2 === 0) {
+      candidates.push('Hexadecimal Byte Stream (Base16 Encoded Binary)', 'Raw AES/DES Ciphertext Bytes');
+      nature = 'Two-Way Reversible Encodings / Ciphertext';
+      recommendedTool = '/tools/base16-hex-encode-decode';
+    }
+  }
+
+  // 2. Check for Structured Tokens & Modern Payloads
+  if (candidates.length === 0) {
+    if (/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(text)) {
+      candidates.push('JSON Web Token (JWT - RFC 7519)', 'JWS (Signed Compact Token)');
+      nature = 'Structured Authentication Token (Header, Payload, Signature)';
+      recommendedTool = '/tools/jwt-token-generator';
+    } else if (text.includes(':') && text.split(':').length === 3 && text.split(':').every(p => /^[0-9a-fA-F]+$/.test(p))) {
+      candidates.push('AES-256-GCM Authenticated Payload (SaltHex : IVHex : CiphertextHex)');
+      nature = 'Two-Way Authenticated Symmetric Encryption (Requires Passphrase)';
+      recommendedTool = '/tools/aes-encrypt-decrypt';
+    } else if (text.startsWith('U2FsdGVkX1')) {
+      candidates.push('OpenSSL AES-256-CBC Encrypted String ("Salted__" magic header)');
+      nature = 'Two-Way Symmetric Encryption (Requires Passphrase)';
+      recommendedTool = '/tools/aes-encrypt-decrypt';
+    }
+  }
+
+  // 3. Check for Classical Ciphers & English Letter Substitution
+  if (candidates.length === 0 && isAsciiLettersOnly && lettersOnly.length >= 6) {
+    // Test all 25 Caesar shifts to detect potential English words
+    const commonWords = ['THE', 'AND', 'FOR', 'THAT', 'THIS', 'WITH', 'FROM', 'HAVE'];
+    let bestShift = -1;
+    let decodedPreview = '';
+
+    for (let s = 1; s <= 25; s++) {
+      let candidate = '';
+      for (const ch of lettersOnly) {
+        candidate += String.fromCharCode(((ch.charCodeAt(0) - 65 + (26 - s)) % 26) + 65);
+      }
+      for (const w of commonWords) {
+        if (candidate.includes(w)) {
+          bestShift = s;
+          decodedPreview = candidate.slice(0, 40);
+          break;
+        }
+      }
+      if (bestShift !== -1) break;
+    }
+
+    if (bestShift !== -1) {
+      candidates.push(`Caesar / Shift Cipher (Detected Shift +${bestShift})`, 'ROT13 (if shift is 13)', 'Monoalphabetic Substitution');
+      nature = `Two-Way Classical Shift Cipher (Decoded: "${decodedPreview}...")`;
+      recommendedTool = '/tools/caesar-cipher-decoder';
+    } else if (ic >= 0.058) {
+      candidates.push('Monoalphabetic Substitution Cipher (High IC ~0.067)', 'Atbash Hebrew Cipher', 'Simple Substitution');
+      nature = 'Two-Way Classical Substitution Cipher (Recoverable via Frequency Analysis)';
+      recommendedTool = '/tools/substitution-cipher';
+    } else if (ic >= 0.035 && ic < 0.055) {
+      candidates.push('Polyalphabetic Vigenère Cipher (Low IC ~0.038 - 0.045)', 'Beaufort Cipher', 'Autokey Cipher');
+      nature = 'Two-Way Polyalphabetic Cipher (Key required for recovery)';
+      recommendedTool = '/tools/vigenere-cipher-solver';
+    }
+  }
+
+  // 4. Fallback to General Encodings
+  if (candidates.length === 0) {
+    if (isBase64) {
+      candidates.push('Base64 Encoded Binary / Text (RFC 4648)');
+      nature = 'Two-Way Reversible Encoding (No key required)';
+      recommendedTool = '/tools/base64-encode-decode';
+    } else if (isBase64Url) {
+      candidates.push('URL-Safe Base64 (RFC 4648 §5)', 'NanoID / URL Slug');
+      nature = 'Two-Way Reversible Encoding';
+      recommendedTool = '/tools/url-safe-base64';
+    } else {
+      candidates.push('Custom Ciphertext / Polyalphabetic Stream / Compressed Binary');
+      nature = 'Two-Way Cipher or Compressed Data Stream';
+      recommendedTool = '/tools/aes-encrypt-decrypt';
+    }
+  }
+
+  return [
+    `=== CIPHER & CRYPTOGRAPHIC IDENTIFIER (Cryptanalysis Report) ===`,
+    `Input Payload Size:    ${length} characters (${new TextEncoder().encode(text).length} bytes)`,
+    `Character Set:         ${isHex ? 'Strict Hexadecimal [0-9a-fA-F]' : isBase64 ? 'Base64 [A-Za-z0-9+/=]' : isAsciiLettersOnly ? 'Standard Letters [A-Za-z]' : 'Mixed Printable UTF-8'}`,
+    `Shannon Entropy:       ${entropy.toFixed(3)} bits/char ${entropy > 7.0 ? '(High Entropy - Typical of Strong Encryption/Hashes)' : entropy > 4.5 ? '(Moderate Entropy - Typical of Compressed/Encoded Data)' : '(Low Entropy - Typical of Plaintext/Simple Ciphers)'}`,
+    `Index of Coincidence:  ${ic > 0 ? ic.toFixed(4) : 'N/A (Non-alphabetic stream)'}`,
+    ``,
+    `[Identified Candidates & Classification]:`,
+    ...candidates.map((c, i) => `  ${i + 1}. ${c}`),
+    ``,
+    `Cryptographic Nature:  ${nature}`,
+    ``,
+    `[Recommended Tool for Decryption / Verification]:`,
+    `• Target Action: ${isHashOneWay ? 'Compute and compare hash fingerprints locally:' : 'Decrypt or decode using dedicated tool:'}`,
+    `• URL: https://www.encryptdecrypt.org${recommendedTool}`
+  ].join('\n');
+}
+

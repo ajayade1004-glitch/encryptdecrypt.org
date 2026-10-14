@@ -1326,6 +1326,701 @@ javac RegexDemo.java && java RegexDemo`
     };
   }
 
+  // ----------------------------------------------------
+  // Priority Cluster A, B, E: AES 256 Encrypt & Decrypt Online
+  // ----------------------------------------------------
+  if (tool.slug === 'aes-encrypt-decrypt' || tool.id === 'aes-encrypt-decrypt') {
+    const focusKeyword = 'encrypt decrypt online';
+    const canonicalUrl = 'https://www.encryptdecrypt.org/tools/aes-encrypt-decrypt';
+
+    const longTailKeywords = [
+      focusKeyword,
+      'encrypt decrypt',
+      'encrypt online',
+      'encrypt tool',
+      'encrypt decrypt text online',
+      'encryption and decryption online',
+      'decrypt online',
+      'decrypt tool online',
+      'online decrypter',
+      'decryption website',
+      'decrypt text online',
+      'online decryptor',
+      'code encryptor',
+      'decrypt code online',
+      'encrypt code online',
+      'javascript encrypt decrypt',
+      'json encrypt',
+      'link encryptor',
+      'aes 256 encrypt decrypt online',
+      'aes gcm online tool',
+      'free encryption tool online'
+    ];
+
+    const deepOverview = [
+      `In modern web development, cloud computing, and confidential communications, encrypting and decrypting sensitive data before transmission or storage is critical. Our online AES-256 encrypt and decrypt tool delivers military-grade symmetric encryption conforming to NIST FIPS 197. Supporting both AES-GCM (Authenticated Encryption with Associated Data) and AES-CBC modes, it allows developers, system administrators, and security professionals to securely seal and unseal plaintext, source code, JSON objects, URLs, and binary payloads directly in their web browser.`,
+      `A defining technical superiority of this online encryption and decryption suite is its strict zero-knowledge architecture. Utilizing the W3C Web Cryptography API (window.crypto.subtle), all cryptographic operations—including PBKDF2 key derivation with 250,000 iterations, random salt generation, initialization vector (IV) synthesis, and Galois/Counter Mode authenticated tagging—execute entirely within your device's local CPU and volatile RAM. Zero bytes of your secret keys, plaintext messages, or ciphertext streams are ever transmitted across the network or logged to external servers.`,
+      `For users searching for an "online decrypter", "decryption website", or "decrypt text online", this tool provides robust ciphertext parsing and automatic format recovery. It accepts ciphertext encoded in standard Base64, URL-safe Base64, or raw Hexadecimal, dynamically isolates the prepended IV and authentication tag, and decrypts the underlying payload in sub-millisecond latency. Comprehensive input validation alerts you immediately if a passphrase is incorrect or if the ciphertext has been tampered with or corrupted during transmission.`,
+      `Software engineers and DevOps teams regularly rely on this interface as a versatile code encryptor, JSON encryptor, and link encryptor. You can paste complex JavaScript, Python, or SQL code snippets, raw JSON configuration objects, or confidential web links to generate sealed, transportable encrypted strings. Additionally, copy-paste code snippets for browser JavaScript (Web Crypto API), Python (cryptography library), and OpenSSL command-line execution are provided below for immediate integration into your production backends.`
+    ];
+
+    const technicalSpecs = [
+      { label: 'Primary Target Intent', value: 'Encrypt Decrypt Online & Decryption Tool', badge: 'Priority Hub' },
+      { label: 'Symmetric Cipher', value: 'AES-256 (Advanced Encryption Standard, 256-bit Key)', badge: 'NIST FIPS 197' },
+      { label: 'Supported Block Modes', value: 'AES-GCM (AEAD Authenticated) & AES-CBC (PKCS#7 Padding)' },
+      { label: 'Key Derivation Function', value: 'PBKDF2 with SHA-256 & 250,000 Iterations', badge: 'OWASP Compliant' },
+      { label: 'Authentication Tag', value: '128-bit Galois Field GCM Tag (Tamper Detection)', badge: 'High Assurance' },
+      { label: 'Ciphertext Formats', value: 'Base64, URL-Safe Base64, Hexadecimal (0x)' },
+      { label: 'Network Transmission', value: '0 Bytes (100% In-Browser Local Execution)', badge: '100% Private' },
+      { label: 'Execution Engine', value: 'W3C Hardware-Accelerated Web Crypto API', badge: '< 1ms Latency' },
+      { label: 'Use Cases Supported', value: 'Text, Source Code, JSON Payloads, Links & Files' }
+    ];
+
+    const howToUse = [
+      {
+        step: 1,
+        title: 'Input Data or Ciphertext',
+        desc: 'Paste the text, code snippet, JSON structure, or ciphertext you want to process into the input workspace. You can also upload text or binary files directly.',
+        tip: 'For decryption, paste standard Base64 or Hex ciphertext produced by AES-256.'
+      },
+      {
+        step: 2,
+        title: 'Select Operation Mode & Algorithm',
+        desc: 'Choose between "Encrypt" or "Decrypt" mode, and select AES-GCM (recommended for built-in tamper detection) or legacy AES-CBC.',
+        tip: 'AES-GCM includes a 128-bit authentication tag to prevent ciphertext tampering.'
+      },
+      {
+        step: 3,
+        title: 'Enter Secret Passphrase or Key',
+        desc: 'Provide your secret encryption passphrase. The tool automatically derives a cryptographically secure 256-bit key using PBKDF2 with a unique salt.',
+        tip: 'Never share your secret passphrase; it is required to decrypt the ciphertext.'
+      },
+      {
+        step: 4,
+        title: 'Instant Execution & Export',
+        desc: 'The output is computed deterministically in sub-millisecond time. Copy the result with one click or download it as an encrypted text/file payload.',
+        tip: 'Check your browser DevTools network tab to verify zero HTTP requests are sent.'
+      }
+    ];
+
+    const useCases = [
+      {
+        title: 'Confidential Credential & Text Sealing Online',
+        description: 'Encrypt sensitive credentials, passwords, API tokens, and private notes locally before storing them in cloud notes, issue trackers, or chat channels.',
+        workflow: 'Paste secret text ➔ Encrypt with strong passphrase ➔ Transmit ciphertext safely.'
+      },
+      {
+        title: 'Source Code & Script Protection (Code Encryptor)',
+        description: 'Developers encrypt proprietary JavaScript, Python, or shell scripts before distributing packages or sharing code snippets across public repositories.',
+        workflow: 'Paste source code ➔ Encrypt with AES-256-GCM ➔ Decrypt on client device at runtime.'
+      },
+      {
+        title: 'JSON Payload & Configuration Encryption (JSON Encrypt)',
+        description: 'Encrypt structured JSON payloads, database configurations, and environment variables with zero risk of server-side data retention.',
+        workflow: 'Paste raw JSON ➔ Validate and encrypt ➔ Save sealed JSON string for backend deployment.'
+      },
+      {
+        title: 'Private Link & URL Token Sealing (Link Encryptor)',
+        description: 'Obfuscate and securely encrypt destination URLs and affiliate or authentication links using URL-safe ciphertext strings.',
+        workflow: 'Enter target URL ➔ Encrypt with shared key ➔ Embed encrypted link token in client applications.'
+      }
+    ];
+
+    const codeSnippets = {
+      js: `// Browser Native JavaScript AES-256-GCM Encryption (Web Crypto API)
+async function encryptAesGcm(plaintext, password) {
+  const enc = new TextEncoder();
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  
+  const keyMaterial = await crypto.subtle.importKey(
+    "raw", enc.encode(password), "PBKDF2", false, ["deriveKey"]
+  );
+  const key = await crypto.subtle.deriveKey(
+    { name: "PBKDF2", salt, iterations: 250000, hash: "SHA-256" },
+    keyMaterial,
+    { name: "AES-GCM", length: 256 },
+    false,
+    ["encrypt"]
+  );
+  
+  const ciphertext = await crypto.subtle.encrypt(
+    { name: "AES-GCM", iv }, key, enc.encode(plaintext)
+  );
+  
+  // Combine salt + iv + ciphertext for transport
+  const combined = new Uint8Array(salt.length + iv.length + ciphertext.byteLength);
+  combined.set(salt, 0);
+  combined.set(iv, salt.length);
+  combined.set(new Uint8Array(ciphertext), salt.length + iv.length);
+  return btoa(String.fromCharCode(...combined));
+}`,
+      python: `# Python 3 AES-256-GCM Reference Implementation (cryptography package)
+import os, base64
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.hazmat.primitives import hashes
+
+def encrypt_aes(plaintext: str, password: str) -> str:
+    salt = os.urandom(16)
+    kdf = PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=salt, iterations=250000)
+    key = kdf.derive(password.encode())
+    iv = os.urandom(12)
+    aesgcm = AESGCM(key)
+    ciphertext = aesgcm.encrypt(iv, plaintext.encode(), None)
+    return base64.b64encode(salt + iv + ciphertext).decode()`,
+      curl: `# OpenSSL Command-Line Equivalent
+# Encrypt:
+openssl enc -aes-256-cbc -pbkdf2 -iter 250000 -salt -in secret.txt -out secret.enc -k "MyPassphrase"
+# Decrypt:
+openssl enc -d -aes-256-cbc -pbkdf2 -iter 250000 -in secret.enc -out decrypted.txt -k "MyPassphrase"`
+    };
+
+    const richFaqs = [
+      {
+        question: 'Can someone decrypt my ciphertext without the secret passphrase?',
+        answer: 'No. AES-256 is mathematically considered unbreakable under current computational capabilities. With 2^256 possible key combinations, a brute-force attack using all supercomputers on Earth would take billions of years. As long as you choose a strong, unguessable passphrase, your data remains completely secure.'
+      },
+      {
+        question: 'What is the difference between AES-GCM and AES-CBC?',
+        answer: 'AES-GCM (Galois/Counter Mode) is an Authenticated Encryption with Associated Data (AEAD) mode that provides both high-speed confidentiality and cryptographic integrity verification via a 128-bit authentication tag. If even a single bit of ciphertext is modified, decryption immediately halts. AES-CBC only provides confidentiality and requires separate HMAC padding verification.'
+      },
+      {
+        question: 'Does this tool ever send my private keys or decrypted text to a server?',
+        answer: 'Never. Unlike legacy cloud converters, EncryptDecrypt.org operates strictly inside your client browser memory using the W3C Web Cryptography API. Zero network requests leave your machine. You can disconnect your internet connection entirely after loading the page and continue encrypting and decrypting offline.'
+      },
+      {
+        question: 'Can I safely encrypt source code, JSON configurations, and web links here?',
+        answer: 'Yes. The input accepts arbitrary UTF-8 characters including multiline source code, JSON objects with nested brackets, and URLs with query parameters. Because the encryption executes 100% locally in browser RAM, confidential code and environment keys are never exposed.'
+      }
+    ];
+
+    return {
+      name: 'AES 256 Encrypt & Decrypt',
+      slug: 'aes-encrypt-decrypt',
+      category: 'encryption-ciphers',
+      categoryName: 'Encryption & Ciphers',
+      title: 'Encrypt Decrypt Online – Free AES-256 Text & File Encryption Tool',
+      metaDescription: 'Encrypt and decrypt text, code, JSON, and files online with military-grade AES-256. 100% private in-browser Web Crypto API. Zero server uploads.',
+      canonicalUrl,
+      focusKeyword,
+      longTailKeywords,
+      keywords: [...new Set([...longTailKeywords, 'client-side tool', 'zero server logs', 'encryptdecrypt.org'])],
+      geoAnswer: 'EncryptDecrypt.org provides an online AES-256 encryption and decryption utility engineered for high-assurance data privacy. Supporting AES-GCM and AES-CBC symmetric cipher modes with PBKDF2 key derivation, it encrypts and decrypts text, code, JSON, and files 100% locally in browser RAM with zero server communication.',
+      deepOverview,
+      technicalSpecs,
+      howToUse,
+      howItWorks: {
+        standard: 'NIST FIPS 197 / RFC 5116 / IEEE 802.1AE Standards',
+        engine: 'Hardware-Accelerated W3C Web Cryptography API (SubtleCrypto)',
+        architecture: 'Zero-Knowledge Client-Side Memory Architecture',
+        flow: '[Plaintext / Ciphertext] ➔ [PBKDF2 250k Key Expansion] ➔ [AES-256-GCM AEAD / CBC Engine] ➔ [Base64 / Hex Transport Output]',
+        deepExplanation: 'The AES engine executes directly on your device CPU via native browser cryptographic primitives. Passphrases undergo PBKDF2 stretching with SHA-256 over 250,000 iterations and a cryptographically random salt to resist dictionary attacks. The resulting 256-bit symmetric key seals the data with a 96-bit random IV and an authenticated Galois tag.'
+      },
+      useCases,
+      examples: [
+        {
+          title: 'AES-256-GCM Text Encryption with Password',
+          input: 'Plaintext: "Confidential Project Blueprint 2026"\nPassphrase: "CorrectHorseBatteryStaple!"',
+          output: 'Ciphertext: "v1:gcm:f4a18b... (Base64 Sealed Payload)"',
+          explanation: 'The tool derives an AES-256 key via PBKDF2 and generates an authenticated ciphertext stream with built-in tamper detection.'
+        },
+        {
+          title: 'Instant Online Decryption of Sealed Ciphertext',
+          input: 'Ciphertext: "v1:gcm:f4a18b... (Base64 Sealed Payload)"\nPassphrase: "CorrectHorseBatteryStaple!"',
+          output: 'Decrypted Output: "Confidential Project Blueprint 2026"',
+          explanation: 'Validates the 128-bit GCM authentication tag and restores the exact original plaintext in sub-millisecond execution.'
+        }
+      ],
+      codeSnippets,
+      limitations: [
+        {
+          title: 'Key Recovery Impossibility',
+          description: 'Because encryption is mathematically irreversible without the exact passphrase, lost keys cannot be recovered by any administrator or tool.'
+        },
+        {
+          title: 'Browser Memory Scope',
+          description: 'All operations execute in volatile browser RAM. Closing the window or tab immediately clears all keys and plaintexts from memory.'
+        }
+      ],
+      faqs: richFaqs,
+      inputOutput: {
+        inputType: 'Plaintext string, source code, JSON, URLs, or binary files',
+        outputType: 'Base64 / Hex AES-256 ciphertext or decrypted plaintext',
+        supportedFormats: 'UTF-8 text, Base64, Hexadecimal, Binary ArrayBuffer'
+      },
+      privacyMode: '100% Local Browser RAM · Zero Data Transmission · No Server Logs',
+      searchIntentSummary: 'Users searching for "encrypt decrypt online", "decrypt online", "online decrypter", "encrypt tool", "code encryptor", and "javascript encrypt decrypt" use this page for fast, military-grade client-side AES-256 encryption and decryption without server logging.',
+      semanticSearchTags: [...new Set(longTailKeywords)],
+      breadcrumbList: [
+        { name: 'Home', url: 'https://www.encryptdecrypt.org/' },
+        { name: 'Encryption & Ciphers', url: 'https://www.encryptdecrypt.org/category/encryption-ciphers' },
+        { name: 'AES 256 Encrypt & Decrypt', url: canonicalUrl }
+      ]
+    };
+  }
+
+  // ----------------------------------------------------
+  // Priority Cluster C: SHA-256 Hash Generator & Checksum Verifier
+  // ----------------------------------------------------
+  if (tool.slug === 'sha256-hash-generator' || tool.id === 'sha256-hash-generator') {
+    const focusKeyword = 'sha256 hash generator online';
+    const canonicalUrl = 'https://www.encryptdecrypt.org/tools/sha256-hash-generator';
+
+    const longTailKeywords = [
+      focusKeyword,
+      'encrypt decrypt sha256',
+      'online unhash',
+      'sha256 checksum verifier',
+      'sha256 hash calculator',
+      'generate sha256 hash in browser',
+      'sha256 file checksum',
+      'verify sha256 checksum online',
+      'free sha256 hash generator',
+      'sha256 online tool',
+      'hmac sha256 generator'
+    ];
+
+    const deepOverview = [
+      `A frequent query in search engines is "encrypt decrypt sha256" or "online unhash". From an information security and cryptographic perspective, it is critical to clarify that SHA-256 is an irreversible, one-way cryptographic hash function conforming to NIST FIPS 180-4, NOT reversible encryption. While symmetric ciphers like AES-256 are engineered to be decrypted with a secret key, cryptographic hash algorithms transform arbitrary input data into a deterministic, fixed-length 256-bit (64 hexadecimal character) digest that mathematically cannot be reversed or decrypted.`,
+      `Our SHA-256 Hash Generator and Checksum Verifier is built for developers, system administrators, and security analysts requiring instant, hardware-accelerated digest calculation. Powered by the W3C Web Cryptography API (window.crypto.subtle.digest), the tool computes cryptographically verified hashes at gigabit-per-second memory speeds directly on your local device CPU. Zero bytes of your text or file data are ever transmitted to external cloud servers.`,
+      `File integrity verification is a cornerstone of supply chain security. When downloading software packages, operating system ISOs, firmware binaries, or database backups, verifying the published SHA-256 checksum guarantees that the file has not suffered bit rot during download or been tampered with by malicious actors. Our in-browser file reader uses the HTML5 FileReader API to process multi-gigabyte files locally in memory without uploading a single byte over your internet connection.`,
+      `In addition to standard digest generation, this tool includes keyed HMAC-SHA-256 signature calculation conforming to RFC 2104. This enables API developers to test webhook signatures, OAuth authentication tokens, and API request signing for platforms such as Stripe, GitHub, Amazon Web Services (AWS), and Shopify in an isolated, private sandbox.`
+    ];
+
+    const technicalSpecs = [
+      { label: 'Cryptographic Standard', value: 'NIST FIPS 180-4 Secure Hash Standard (SHS)', badge: 'NIST Standard' },
+      { label: 'Digest Bit Length', value: '256 Bits (32 Bytes)', badge: '64 Hex Characters' },
+      { label: 'Collision Resistance', value: '128-bit Cryptographic Security (Zero Known Collisions)', badge: 'High Security' },
+      { label: 'Cryptographic Architecture', value: 'Merkle–Damgård Construction with Davies–Meyer Compression' },
+      { label: 'HMAC Capability', value: 'RFC 2104 Keyed-Hash Message Authentication (HMAC-SHA256)', badge: 'Webhook Ready' },
+      { label: 'Client Privacy', value: '100% In-Browser Memory (0 Bytes Transmitted)', badge: '100% Private' },
+      { label: 'Execution Engine', value: 'Native WebCrypto SubtleCrypto.digest("SHA-256")', badge: 'Hardware Accelerated' }
+    ];
+
+    const howToUse = [
+      {
+        step: 1,
+        title: 'Input Text or Upload File',
+        desc: 'Enter any text string into the input console, or drag and drop a software binary, document, or archive file directly into the file dropzone.',
+        tip: 'Large files are processed in chunks via the HTML5 File API without uploading to any server.'
+      },
+      {
+        step: 2,
+        title: 'Optional: Configure HMAC Secret Key',
+        desc: 'If testing API webhook authentication or request signing, enter your secret HMAC key to generate a keyed message authentication code.',
+        tip: 'Standard checksum generation does not require a key.'
+      },
+      {
+        step: 3,
+        title: 'Inspect 256-Bit Fingerprint',
+        desc: 'The deterministic 64-character hexadecimal digest appears instantly in the output console with automatic copy actions.',
+        tip: 'Compare this value against vendor-published checksums to verify file authenticity.'
+      }
+    ];
+
+    const richFaqs = [
+      {
+        question: 'Can a SHA-256 hash be decrypted or "unhashed"?',
+        answer: 'No. SHA-256 is mathematically a one-way function. It takes inputs of arbitrary size and compresses them into a fixed 256-bit fingerprint, discarding the original data structure. Because an infinite number of possible inputs map to a finite 256-bit space, mathematical reverse-engineering is impossible. The only way to find a matching input is via pre-computed rainbow tables or brute-force searching, which is computationally infeasible for high-entropy secrets.'
+      },
+      {
+        question: 'What is the difference between SHA-256 hashing and AES encryption?',
+        answer: 'Hashing is a one-way, irreversible transformation designed for integrity verification, digital signatures, and content indexing. Encryption (such as AES-256) is a two-way reversible process intended for confidentiality, where the original plaintext can be fully recovered using the appropriate secret key.'
+      },
+      {
+        question: 'Does this tool upload my files to calculate checksums?',
+        answer: 'Never. The file reader reads bytes locally in your browser memory into an ArrayBuffer and streams them through the Web Crypto engine. No network packets leave your computer, making it completely safe for proprietary binaries, confidential datasets, and private keys.'
+      },
+      {
+        question: 'Has SHA-256 ever suffered a hash collision?',
+        answer: 'No collision has ever been discovered in SHA-256. With a collision resistance of 128 bits, finding two distinct inputs that produce the identical SHA-256 digest would require approximately 2^128 operations, far exceeding the computing power of all computers currently on Earth.'
+      }
+    ];
+
+    return {
+      name: 'SHA-256 Hash Generator',
+      slug: 'sha256-hash-generator',
+      category: 'hashing-security',
+      categoryName: 'Hashing & Security',
+      title: 'SHA-256 Hash Generator Online – 256-Bit Checksum & Digest Tool',
+      metaDescription: 'Calculate secure SHA-256 cryptographic hashes online. Verify file integrity, compute HMAC digests, and understand one-way hash security. 100% client-side.',
+      canonicalUrl,
+      focusKeyword,
+      longTailKeywords,
+      keywords: [...new Set([...longTailKeywords, 'client-side tool', 'zero server logs', 'encryptdecrypt.org'])],
+      geoAnswer: 'SHA-256 Hash Generator is a client-side cryptographic utility conforming to NIST FIPS 180-4. Engineered for checksum calculation, file integrity verification, and HMAC signatures, it computes 256-bit digests at hardware-accelerated speeds directly in browser RAM with zero server logging.',
+      deepOverview,
+      technicalSpecs,
+      howToUse,
+      howItWorks: {
+        standard: 'NIST FIPS 180-4 / RFC 6234 / RFC 2104',
+        engine: 'Native W3C Web Cryptography API (crypto.subtle.digest)',
+        architecture: 'Zero-Knowledge Client-Side Memory Architecture',
+        flow: '[Input Text / File Stream] ➔ [Padding & 512-bit Block Parser] ➔ [64-Round Compression Function] ➔ [64-Hex Digest Output]',
+        deepExplanation: 'The input message is padded with a single "1" bit, zeroes, and the 64-bit message length. It is processed in 512-bit blocks through 64 rounds of bitwise rotations, choices, and majorities across eight 32-bit state registers initialized to the fractional parts of the square roots of the first eight prime numbers.'
+      },
+      useCases: [
+        {
+          title: 'Software & ISO File Integrity Verification',
+          description: 'Calculate cryptographic checksums for downloaded software installers, Linux ISOs, and firmware images to detect corruption or tampering.',
+          workflow: 'Drop downloaded file into workspace ➔ Generate SHA-256 digest ➔ Verify against developer published hash.'
+        },
+        {
+          title: 'HMAC Webhook Signature Verification',
+          description: 'Verify HMAC-SHA256 signatures for payment webhooks from Stripe, PayPal, Shopify, or GitHub.',
+          workflow: 'Enter webhook payload ➔ Input API secret key ➔ Verify signature matches HTTP header.'
+        },
+        {
+          title: 'Database Record & Content Deduplication',
+          description: 'Generate deterministic fingerprints for caching keys, document snapshots, and content-addressable storage systems.',
+          workflow: 'Hash record payload ➔ Store 64-character hex key ➔ Query cache by hash index.'
+        }
+      ],
+      examples: [
+        {
+          title: 'Standard SHA-256 String Digest',
+          input: 'Input: "EncryptDecrypt-2026"',
+          output: 'Digest: 64e837f... (64 Hex Characters)',
+          explanation: 'Computes a deterministic 256-bit fingerprint using native browser Web Crypto.'
+        }
+      ],
+      codeSnippets: {
+        js: `// Browser Native JavaScript SHA-256 Calculation
+async function computeSha256(message) {
+  const msgBuffer = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}`,
+        python: `# Python 3 Standard Library SHA-256
+import hashlib
+def sha256_hash(data: str) -> str:
+    return hashlib.sha256(data.encode('utf-8')).hexdigest()`,
+        curl: `# Linux / macOS Terminal Verification
+echo -n "MySecretData" | sha256sum`
+      },
+      limitations: [
+        {
+          title: 'Irreversible One-Way Digest',
+          description: 'Cryptographic hashes cannot be mathematically "unhashed" or decrypted. They are fingerprints, not encrypted envelopes.'
+        },
+        {
+          title: 'Password Storage Caution',
+          description: 'Raw SHA-256 is extremely fast and should NOT be used directly for passwords without key stretching (use Argon2 or bcrypt instead).'
+        }
+      ],
+      faqs: richFaqs,
+      inputOutput: {
+        inputType: 'Arbitrary UTF-8 text or binary file',
+        outputType: '64-character lowercase hexadecimal hash digest',
+        supportedFormats: 'UTF-8 strings, File Blob, ArrayBuffer'
+      },
+      privacyMode: '100% Local Browser RAM · Zero Data Transmission · No Server Logs',
+      searchIntentSummary: 'Users searching for "sha256 hash generator online", "encrypt decrypt sha256", "online unhash", and "sha256 checksum verifier" use this page for fast, private, and mathematically verified 256-bit cryptographic digest generation.',
+      semanticSearchTags: [...new Set(longTailKeywords)],
+      breadcrumbList: [
+        { name: 'Home', url: 'https://www.encryptdecrypt.org/' },
+        { name: 'Hashing & Security', url: 'https://www.encryptdecrypt.org/category/hashing-security' },
+        { name: 'SHA-256 Hash Generator', url: canonicalUrl }
+      ]
+    };
+  }
+
+  // ----------------------------------------------------
+  // Priority Cluster C: MD5 Hash Generator & Checksum Calculator
+  // ----------------------------------------------------
+  if (tool.slug === 'md5-hash-generator' || tool.id === 'md5-hash-generator') {
+    const focusKeyword = 'md5 hash generator online';
+    const canonicalUrl = 'https://www.encryptdecrypt.org/tools/md5-hash-generator';
+
+    const longTailKeywords = [
+      focusKeyword,
+      'encrypt decrypt md5',
+      'md5 checksum online',
+      'online unhash md5',
+      'md5 checksum calculator',
+      'generate md5 hash in browser',
+      'md5 file integrity checker',
+      'free md5 hasher online'
+    ];
+
+    const deepOverview = [
+      `Users frequently search for "encrypt decrypt md5" or "online unhash md5". As with other cryptographic digest algorithms, MD5 is an irreversible one-way hash function conforming to RFC 1321, NOT symmetric encryption. While legacy websites sometimes colloquially refer to MD5 lookups as "decryption", mathematically an MD5 digest cannot be decrypted because data is lossily compressed into a 128-bit output.`,
+      `The MD5 (Message Digest Algorithm 5) produces a compact 32-character hexadecimal digest. Although superseded by SHA-256 and SHA-3 for high-security applications due to collision vulnerabilities discovered by cryptanalysts, MD5 remains ubiquitous across legacy systems, database row deduplication, content-addressable storage, Git asset integrity, and fast file transmission checksums.`,
+      `Our in-browser MD5 Hash Generator processes input strings and files locally in browser RAM. Utilizing optimized bitwise operations and unrolled nonlinear functions (F, G, H, I), it computes 128-bit hashes in microseconds without sending data to any external server.`,
+      `For password storage and modern security protocols, we strongly recommend modern salted functions like Argon2id or bcrypt. However, for legacy interoperability, file package verification, and educational cryptanalysis, this tool provides a safe, zero-log, client-side reference implementation.`
+    ];
+
+    const technicalSpecs = [
+      { label: 'Specification', value: 'IETF RFC 1321 Message Digest Algorithm', badge: 'RFC Standard' },
+      { label: 'Output Digest Length', value: '128 Bits (16 Bytes / 32 Hex Characters)' },
+      { label: 'Execution Speed', value: 'High Throughput (> 400 MB/s in Browser RAM)', badge: 'Microsecond Latency' },
+      { label: 'Network Transmission', value: '0 Bytes (100% In-Browser Memory)', badge: '100% Private' },
+      { label: 'Recommended Use', value: 'File Integrity, Checksums, Cache Keys & Deduplication' }
+    ];
+
+    const richFaqs = [
+      {
+        question: 'Can MD5 hashes be decrypted or reversed?',
+        answer: 'No. MD5 is an irreversible one-way digest. It reduces arbitrary input text or files into a fixed 128-bit fingerprint. When third-party websites appear to "decrypt" MD5, they are merely looking up pre-computed rainbow tables for simple dictionary words. If the original input was a high-entropy string or salted passkey, it cannot be reversed.'
+      },
+      {
+        question: 'Is MD5 still safe to use today?',
+        answer: 'MD5 should NOT be used for cryptographic security, digital signatures, or password hashing due to known collision vulnerabilities. However, for non-cryptographic checksums, file transfer verification, and cache key generation, MD5 remains fast, reliable, and widely supported.'
+      },
+      {
+        question: 'Does this tool upload my files to compute MD5 checksums?',
+        answer: 'No. File processing takes place strictly inside your browser through the HTML5 File API. No bytes are sent over the internet.'
+      }
+    ];
+
+    return {
+      name: 'MD5 Hash Generator',
+      slug: 'md5-hash-generator',
+      category: 'hashing-security',
+      categoryName: 'Hashing & Security',
+      title: 'MD5 Hash Generator Online – 128-Bit Checksum Calculator',
+      metaDescription: 'Generate 128-bit MD5 checksums online for file integrity checks and legacy verification. Learn why MD5 cannot be decrypted. Fast, free & 100% private in browser.',
+      canonicalUrl,
+      focusKeyword,
+      longTailKeywords,
+      keywords: [...new Set([...longTailKeywords, 'client-side tool', 'zero server logs', 'encryptdecrypt.org'])],
+      geoAnswer: 'MD5 Hash Generator is a high-speed client-side checksum utility implementing RFC 1321. Designed for file verification, legacy compatibility, and data deduplication, it produces 128-bit digests locally in browser RAM with zero server transmission.',
+      deepOverview,
+      technicalSpecs,
+      howToUse: [
+        {
+          step: 1,
+          title: 'Input Text or Drop File',
+          desc: 'Type or paste your text into the console, or drop any local file into the file upload box.',
+          tip: 'MD5 processes both text strings and binary files.'
+        },
+        {
+          step: 2,
+          title: 'Instant 128-Bit Calculation',
+          desc: 'The tool computes the 32-character hexadecimal digest in browser RAM in microseconds.',
+          tip: 'Copy with one click or verify against your reference checksum.'
+        }
+      ],
+      howItWorks: {
+        standard: 'IETF RFC 1321 Standard Specification',
+        engine: 'Pure In-Memory Optimized MD5 Bitwise State Machine',
+        architecture: 'Zero-Knowledge Client-Side Memory Architecture',
+        flow: '[Input String] ➔ [512-bit Block Padding] ➔ [4 Rounds x 16 Operations] ➔ [32-Hex Output]',
+        deepExplanation: 'The input is padded to a multiple of 512 bits and processed through 64 nonlinear operations divided into 4 rounds utilizing auxiliary functions F(X,Y,Z), G(X,Y,Z), H(X,Y,Z), and I(X,Y,Z) with constant sines.'
+      },
+      useCases: [
+        {
+          title: 'File Checksum & Legacy Release Verification',
+          description: 'Verify downloaded open-source packages and legacy disk images against published MD5 hashes.',
+          workflow: 'Calculate local MD5 hash ➔ Compare with vendor hash string.'
+        },
+        {
+          title: 'Database Row Deduplication & Cache Keys',
+          description: 'Generate compact 32-character keys for cache lookups and duplicate record identification.',
+          workflow: 'Hash record content ➔ Store MD5 index key in Redis or SQL cache.'
+        }
+      ],
+      examples: [
+        {
+          title: 'MD5 String Hash Example',
+          input: 'Hello World',
+          output: 'b10a8db164e0754105b7a99be72e3fe5',
+          explanation: 'Generates the standard 128-bit hex digest in microseconds.'
+        }
+      ],
+      codeSnippets: {
+        js: `// In-Browser MD5 Hash Generation
+// MD5 produces 32 hex characters:
+const hash = md5("Hello World");
+console.log(hash); // b10a8db164e0754105b7a99be72e3fe5`,
+        python: `import hashlib
+print(hashlib.md5(b"Hello World").hexdigest())`,
+        curl: `echo -n "Hello World" | md5sum`
+      },
+      limitations: [
+        {
+          title: 'Collision Resistance Deprecated',
+          description: 'MD5 is vulnerable to collision attacks and must not be used for TLS certificates, signatures, or password storage.'
+        }
+      ],
+      faqs: richFaqs,
+      inputOutput: {
+        inputType: 'Plaintext string or binary file',
+        outputType: '32-character hexadecimal digest',
+        supportedFormats: 'UTF-8 strings, binary files'
+      },
+      privacyMode: '100% Local Browser RAM · Zero Data Transmission · No Server Logs',
+      searchIntentSummary: 'Users searching for "md5 hash generator online", "encrypt decrypt md5", and "md5 checksum online" use this page for fast, private, client-side 128-bit checksum calculation.',
+      semanticSearchTags: [...new Set(longTailKeywords)],
+      breadcrumbList: [
+        { name: 'Home', url: 'https://www.encryptdecrypt.org/' },
+        { name: 'Hashing & Security', url: 'https://www.encryptdecrypt.org/category/hashing-security' },
+        { name: 'MD5 Hash Generator', url: canonicalUrl }
+      ]
+    };
+  }
+
+  // ----------------------------------------------------
+  // Priority Cluster D: Cipher Detect & Frequency Analysis Cryptanalysis
+  // ----------------------------------------------------
+  if (tool.slug === 'frequency-analysis-cryptanalysis-tool' || tool.id === 'frequency-analysis-cryptanalysis-tool') {
+    const focusKeyword = 'cipher detect';
+    const canonicalUrl = 'https://www.encryptdecrypt.org/tools/frequency-analysis-cryptanalysis-tool';
+
+    const longTailKeywords = [
+      focusKeyword,
+      'encryption identifier',
+      'online cryptography tool',
+      'cryptography online',
+      'cryptography decode',
+      'decode ciphertext online',
+      'frequency analysis tool online',
+      'cipher identifier online',
+      'detect cipher online',
+      'index of coincidence calculator',
+      'classical cryptanalysis tool online'
+    ];
+
+    const deepOverview = [
+      `When investigating an unknown piece of ciphertext, encoded token, or scrambled payload, cryptanalysts, CTF participants, and security researchers need to quickly identify the underlying algorithm. Our Cipher Detect & Frequency Analysis Cryptanalysis Tool provides automated cipher identification alongside deep mathematical frequency analysis. By evaluating character entropy, unigram and bigram frequency distributions, base character sets, and the Index of Coincidence (IC), this tool immediately determines whether an unknown payload is Caesar, Vigenère, Substitution, Base64, Hex, a cryptographic hash, or modern AES/DES ciphertext.`,
+      `The Index of Coincidence (IC) is a powerful statistical measure developed by William F. Friedman. For standard English plaintext, the IC is approximately 0.0667. Monoalphabetic substitution ciphers (such as Caesar, ROT13, and Atbash) preserve letter frequency distributions and maintain an IC near 0.067, while polyalphabetic ciphers (such as Vigenère and Beaufort) flatten the distribution toward an IC of 0.0385. Our automated detection engine calculates the exact IC, compares unigram counts against standard natural language frequency tables (ETAOIN SHRDLU), and highlights the most probable cipher candidates.`,
+      `Beyond classical ciphers, the engine inspects token structures to detect modern encodings and cryptographic hashes. It identifies 32-character Hex strings as MD5, 40-character strings as SHA-1, 64-character strings as SHA-256, Base64 padding patterns (==), and JSON Web Token (JWT) three-part signatures.`,
+      `All cryptanalysis and frequency parsing run entirely client-side in browser RAM. You can inspect proprietary data, capture-the-flag challenges, and confidential ciphertext samples without transmitting a single byte to external servers.`
+    ];
+
+    const technicalSpecs = [
+      { label: 'Primary Target Intent', value: 'Cipher Detect, Encryption Identifier & Cryptanalysis', badge: 'Cluster D Target' },
+      { label: 'Statistical Metrics', value: 'Unigram / Bigram Frequencies, Shannon Entropy, Index of Coincidence (IC)' },
+      { label: 'Supported Classical Ciphers', value: 'Caesar, Vigenère, Substitution, Atbash, ROT13, Affine, Rail Fence' },
+      { label: 'Hash & Modern Detection', value: 'MD5, SHA-1, SHA-256, SHA-512, Base64, Base32, Hex, JWT' },
+      { label: 'Network Transmission', value: '0 Bytes (100% In-Browser Memory)', badge: '100% Private' },
+      { label: 'Execution Speed', value: '< 1 Millisecond (Sub-Millisecond Heuristic Evaluation)' }
+    ];
+
+    const richFaqs = [
+      {
+        question: 'How does automated cipher detection work?',
+        answer: 'The detection engine evaluates several mathematical properties: character set composition (alphanumeric, hex, base64), length, Shannon entropy, and the Index of Coincidence (IC). Texts with an IC near ~0.067 indicate monoalphabetic ciphers, while an IC near ~0.038 indicates polyalphabetic ciphers like Vigenère. Exact 32 or 64 character hex strings indicate MD5 or SHA-256 digests.'
+      },
+      {
+        question: 'What is the Index of Coincidence (IC)?',
+        answer: 'The Index of Coincidence measures the probability that two randomly selected letters from a text are identical. In English, certain letters (like E, T, A) appear far more frequently than others, giving English plaintext an IC of ~0.0667. A cipher that scrambles letters without changing their relative frequencies (like Caesar) preserves this high IC, whereas polyalphabetic ciphers flatten it toward ~0.0385.'
+      },
+      {
+        question: 'Can frequency analysis decode modern AES-256 ciphertext?',
+        answer: 'No. Modern block ciphers like AES-256 in GCM or CBC mode pass strict pseudorandomness and avalanche tests, producing ciphertext indistinguishable from pure random noise with maximal Shannon entropy (~8.0 bits/byte). Frequency analysis cannot break AES, but the tool will successfully identify it as modern high-entropy ciphertext.'
+      }
+    ];
+
+    return {
+      name: 'Frequency Analysis & Cipher Identifier',
+      slug: 'frequency-analysis-cryptanalysis-tool',
+      category: 'encryption-ciphers',
+      categoryName: 'Encryption & Ciphers',
+      title: 'Cipher Identifier & Frequency Analysis Tool – Online Cryptanalysis',
+      metaDescription: 'Detect unknown ciphers and hashes online. Analyze letter frequencies, Index of Coincidence (IC), and entropy to identify Caesar, Vigenère, Substitution, Base64 & hashes.',
+      canonicalUrl,
+      focusKeyword,
+      longTailKeywords,
+      keywords: [...new Set([...longTailKeywords, 'client-side tool', 'zero server logs', 'encryptdecrypt.org'])],
+      geoAnswer: 'Cipher Identifier & Frequency Analysis Tool is an in-browser cryptanalysis utility. By calculating unigram/bigram distributions, Shannon entropy, and Friedman Index of Coincidence (IC), it automatically identifies and decodes unknown classical ciphers, encodings, and hash fingerprints with zero server logs.',
+      deepOverview,
+      technicalSpecs,
+      howToUse: [
+        {
+          step: 1,
+          title: 'Paste Unknown Ciphertext or Message',
+          desc: 'Enter or paste your ciphertext, encoded token, or scrambled text into the workspace.',
+          tip: 'Works with classical ciphers, Base64, Hex, and unknown hashes.'
+        },
+        {
+          step: 2,
+          title: 'Automatic Statistical Evaluation',
+          desc: 'The tool calculates the Index of Coincidence, Shannon entropy, character set distribution, and most probable cipher type.',
+          tip: 'Review the candidate rank list to see matched ciphers with confidence ratings.'
+        },
+        {
+          step: 3,
+          title: 'Inspect Letter Frequencies & Decode',
+          desc: 'Review the unigram distribution chart comparing your text against natural English frequencies to solve substitution alphabets.',
+          tip: 'Click on recommended cipher solvers to automatically transfer ciphertext.'
+        }
+      ],
+      howItWorks: {
+        standard: 'Classical Cryptanalysis & Friedman Statistical Tests',
+        engine: 'Client-Side Statistical Lexical & Entropy Analysis Engine',
+        architecture: 'Zero-Knowledge Client-Side Memory Architecture',
+        flow: '[Ciphertext Sample] ➔ [Shannon Entropy & IC Computation] ➔ [Heuristic Classifier] ➔ [Candidate Ciphers & Frequency Breakdown]',
+        deepExplanation: 'The engine parses all unigram and bigram tokens, calculates the probability sum of identical letters for the Index of Coincidence, computes information entropy, and checks format regexes to classify the input.'
+      },
+      useCases: [
+        {
+          title: 'CTF Cryptography Challenge Solving',
+          description: 'Identify mysterious ciphers and encoded strings in cybersecurity Capture The Flag competitions.',
+          workflow: 'Paste challenge ciphertext ➔ Identify cipher type ➔ Solve using dedicated cipher decoder.'
+        },
+        {
+          title: 'Historical & Educational Cryptanalysis',
+          description: 'Demonstrate how frequency analysis and the Index of Coincidence break classical monoalphabetic and polyalphabetic ciphers.',
+          workflow: 'Input Caesar or Vigenère text ➔ Inspect frequency shifts against English standard.'
+        }
+      ],
+      examples: [
+        {
+          title: 'Caesar Cipher Identification',
+          input: 'Ciphertext: "KHOOR ZRUOG"',
+          output: 'Detected: Caesar Cipher (Shift +3) | IC: 0.067 | Plaintext: "HELLO WORLD"',
+          explanation: 'High Index of Coincidence and preservation of monoalphabetic unigrams identifies Caesar shift.'
+        }
+      ],
+      codeSnippets: {
+        js: `// JavaScript Index of Coincidence (IC) Calculator
+function calculateIC(text) {
+  const clean = text.toUpperCase().replace(/[^A-Z]/g, '');
+  const n = clean.length;
+  if (n <= 1) return 0;
+  const counts = {};
+  for (const char of clean) counts[char] = (counts[char] || 0) + 1;
+  let sum = 0;
+  for (const c in counts) sum += counts[c] * (counts[c] - 1);
+  return sum / (n * (n - 1));
+}`,
+        python: `# Python Index of Coincidence (IC)
+from collections import Counter
+def index_of_coincidence(text: str) -> float:
+    clean = [c.upper() for c in text if c.isalpha()]
+    n = len(clean)
+    if n <= 1: return 0.0
+    counts = Counter(clean)
+    return sum(f * (f - 1) for f in counts.values()) / (n * (n - 1))`,
+        curl: `# Client-side zero-server computation. Run with local node:
+node -e 'console.log("Analyzing text locally with zero-knowledge RAM architecture")'`
+      },
+      limitations: [
+        {
+          title: 'Short Text Statistical Variance',
+          description: 'Texts shorter than 30-50 characters have higher statistical noise in Index of Coincidence calculations.'
+        }
+      ],
+      faqs: richFaqs,
+      inputOutput: {
+        inputType: 'Ciphertext, encoded string, or unknown hash',
+        outputType: 'Classification report, IC score, frequency distribution, and candidate decoders',
+        supportedFormats: 'UTF-8 text, Hex, Base64'
+      },
+      privacyMode: '100% Local Browser RAM · Zero Data Transmission · No Server Logs',
+      searchIntentSummary: 'Users searching for "cipher detect", "encryption identifier", "online cryptography tool", "cryptography decode", and "decode ciphertext online" use this page to statistically analyze and detect ciphers without server transit.',
+      semanticSearchTags: [...new Set(longTailKeywords)],
+      breadcrumbList: [
+        { name: 'Home', url: 'https://www.encryptdecrypt.org/' },
+        { name: 'Encryption & Ciphers', url: 'https://www.encryptdecrypt.org/category/encryption-ciphers' },
+        { name: 'Frequency Analysis & Cipher Identifier', url: canonicalUrl }
+      ]
+    };
+  }
+
   const catInfo = CATEGORY_DETAILS[tool.category] || {
     standard: 'W3C / IETF / NIST Engineering Specifications',
     engine: 'Browser-Native V8 Engine & Web Cryptography Primitives',
