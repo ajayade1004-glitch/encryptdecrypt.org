@@ -86,15 +86,15 @@ function getInitialDb(): AdminDatabase {
     },
     pageContents: {},
     adsConfig: {
-      enabled: false,
-      publisherId: 'ca-pub-XXXXXXXXXXXXXXXX',
+      enabled: true,
+      publisherId: 'ca-pub-7730607896444632',
       slots: {
-        header: { slotId: '1234567890', enabled: false },
-        sidebar: { slotId: '2345678901', enabled: false },
-        inContent: { slotId: '3456789012', enabled: false },
-        footer: { slotId: '4567890123', enabled: false }
+        header: { slotId: '1234567890', enabled: true },
+        sidebar: { slotId: '2345678901', enabled: true },
+        inContent: { slotId: '3456789012', enabled: true },
+        footer: { slotId: '4567890123', enabled: true }
       },
-      testMode: true
+      testMode: false
     },
     settings: {
       siteName: 'EncryptDecrypt.org',
