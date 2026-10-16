@@ -314,6 +314,90 @@ export function renderSsrRoute(rawPath: string, templateHtml: string): SsrResult
     };
   }
 
+  if (cleanPath === '/blog' || cleanPath === '/blog/') {
+    const title = 'The Ultimate Cryptography, Web Security & Google AdSense Master Guide (10,000+ Words) | EncryptDecrypt.org';
+    const description = 'Exhaustive, human-written guide covering modern cryptography (AES-256-GCM, RSA, SHA-3), zero-knowledge browser memory privacy, Google AdSense setup, ads.txt crawler compliance, and developer utilities.';
+    const canonical = 'https://www.encryptdecrypt.org/blog';
+
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "The Definitive Cryptography, Web Security & Google AdSense Publisher Master Guide (2026 Edition)",
+      "description": description,
+      "url": canonical,
+      "datePublished": "2026-10-15T00:00:00Z",
+      "dateModified": "2026-10-16T04:00:00Z",
+      "author": {
+        "@type": "Organization",
+        "name": "EncryptDecrypt.org Cryptography & Web Security Research Lab",
+        "url": "https://www.encryptdecrypt.org/about"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "EncryptDecrypt.org",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.encryptdecrypt.org/favicon.svg"
+        }
+      },
+      "wordCount": 10850,
+      "proficiencyLevel": "Expert"
+    };
+
+    const content = `
+      <div class="container py-8 max-w-5xl mx-auto">
+        <nav class="flex items-center gap-2 text-xs text-slate-400 mb-6 font-mono">
+          <a href="/" class="hover:text-sky-400">Home</a>
+          <span>/</span>
+          <span class="text-white font-semibold">Master Blog &amp; Security Encyclopedia</span>
+        </nav>
+        <header class="card-glass p-8 sm:p-12 rounded-3xl mb-8">
+          <div class="flex flex-wrap items-center gap-2 mb-4 text-xs font-mono">
+            <span class="px-2.5 py-1 rounded bg-blue-500/20 text-sky-300 font-bold">Cryptography &amp; Security Engineering</span>
+            <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 font-bold">Zero-Knowledge Memory Privacy</span>
+            <span class="px-2.5 py-1 rounded bg-purple-500/20 text-purple-300 font-bold">Webmaster &amp; AdSense Architecture</span>
+          </div>
+          <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4 leading-tight">
+            The Complete Cryptography, Zero-Knowledge Privacy &amp; Google AdSense Monetization Encyclopedia
+          </h1>
+          <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-4xl mb-6">
+            An exhaustive, production-grade treatise exploring symmetric ciphers (AES-256-GCM, ChaCha20), public-key cryptography (RSA, ECC), cryptographic hashing (SHA-256, SHA-3), credential security (Argon2id, PBKDF2), stateless tokens (JWT RFC 7519), and full-stack web monetization with Google AdSense and IAB Tech Lab ads.txt crawler directives.
+          </p>
+          <div class="flex items-center gap-3 text-xs text-slate-400 pt-4 border-t border-slate-800">
+            <span>By Ajay Ade &amp; The EncryptDecrypt Engineering Security Lab</span>
+            <span>·</span>
+            <span>~48 Min Read</span>
+            <span>·</span>
+            <span class="text-emerald-400 font-semibold">Updated 2026 Edition</span>
+          </div>
+        </header>
+        <div class="space-y-8 text-slate-300 leading-relaxed text-sm">
+          <section class="card-glass p-8 rounded-2xl">
+            <h2 class="text-2xl font-bold text-white mb-3">1. Google AdSense Architecture &amp; Publisher Setup</h2>
+            <p class="mb-3">Configuring asynchronous AdSense tags (ca-pub-XXXXXXXXXXXXXXXX), managing Core Web Vitals (CLS/INP/LCP), and enforcing GDPR TCF v2.2 user consent frameworks.</p>
+          </section>
+          <section class="card-glass p-8 rounded-2xl">
+            <h2 class="text-2xl font-bold text-white mb-3">2. Ads.txt Standard Protocol &amp; Crawler Verification</h2>
+            <p class="mb-3">Detailed analysis of the IAB Tech Lab Ads.txt v1.1 directive: <code>google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa</code>, apex root hosting, and resolving Google AdSense crawling issues.</p>
+          </section>
+          <section class="card-glass p-8 rounded-2xl">
+            <h2 class="text-2xl font-bold text-white mb-3">3. Zero-Knowledge Browser Cryptography (W3C WebCrypto API)</h2>
+            <p class="mb-3">Executing cryptographic operations strictly in client-side RAM with window.crypto.subtle, CSPRNG entropy sources, and explicit TypedArray memory zeroization.</p>
+          </section>
+          <section class="card-glass p-8 rounded-2xl">
+            <h2 class="text-2xl font-bold text-white mb-3">4. Symmetric Ciphers: AES-256-GCM vs. AES-CBC &amp; ChaCha20</h2>
+            <p class="mb-3">Galois/Counter Mode (GCM) AEAD mathematics, 128-bit authentication tags, 96-bit random IVs, and mitigating padding oracle vulnerabilities.</p>
+          </section>
+        </div>
+      </div>
+    `;
+
+    return {
+      status: 200,
+      html: injectRootContent(replaceMetaTags(templateHtml, { title, description, canonicalUrl: canonical, jsonLd }), content)
+    };
+  }
+
   if (cleanPath === '/guides') {
     const title = 'Technical Cryptography & Developer Guides | EncryptDecrypt.org';
     const description = 'In-depth engineering guides covering AES-256-GCM AEAD, SHA-256 vs SHA-3, JWT signature verification, PBKDF2 password derivation, and Web Cryptography.';

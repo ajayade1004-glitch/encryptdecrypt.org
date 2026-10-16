@@ -64,9 +64,10 @@ const TermsPage = lazyWithRetry(() => import('./components/pages/TermsPage').the
 const DisclaimerPage = lazyWithRetry(() => import('./components/pages/DisclaimerPage').then(m => ({ default: m.DisclaimerPage })));
 const NotFoundPage = lazyWithRetry(() => import('./components/pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 const AdminPanel = lazyWithRetry(() => import('./components/admin/AdminPanel').then(m => ({ default: m.AdminPanel })));
+const MasterBlogPage = lazyWithRetry(() => import('./components/pages/MasterBlogPage').then(m => ({ default: m.MasterBlogPage })));
 // ------------------------------------------------------------------
 
-export type AppView = 'catalog' | 'category' | 'about' | 'contact' | 'guides' | 'privacy' | 'terms' | 'disclaimer' | 'admin' | 'notfound' | 'all-tools';
+export type AppView = 'catalog' | 'category' | 'about' | 'contact' | 'guides' | 'privacy' | 'terms' | 'disclaimer' | 'admin' | 'notfound' | 'all-tools' | 'blog';
 
 export const CATEGORY_HUBS_CONFIG = [
   { slug: 'json-developer-tools', name: 'JSON & Developer Tools', icon: Code, count: 9, desc: 'Minifier, Diff, Path Tester, Kotlin/Java/C#/Go, Schema' },
@@ -158,7 +159,7 @@ function getInitialRouteState(): {
     const match = INITIAL_TOP_TOOLS.find(t => t.slug === slug || t.id === slug);
     return { selectedTool: match || null, currentView: 'catalog', activeCategory: 'all' };
   }
-  if (['about', 'contact', 'guides', 'privacy', 'terms', 'disclaimer', 'admin', 'all-tools'].includes(hash)) {
+  if (['about', 'contact', 'guides', 'privacy', 'terms', 'disclaimer', 'admin', 'all-tools', 'blog'].includes(hash)) {
     return { selectedTool: null, currentView: hash as AppView, activeCategory: 'all' };
   }
   if (hash.startsWith('category=')) {
@@ -191,6 +192,7 @@ function getInitialRouteState(): {
   }
 
   if (pathname === '' || pathname === '/') return { selectedTool: null, currentView: 'catalog', activeCategory: 'all' };
+  if (pathname === '/blog' || pathname.startsWith('/blog')) return { selectedTool: null, currentView: 'blog', activeCategory: 'all' };
   if (pathname === '/all-tools' || pathname === '/tools') return { selectedTool: null, currentView: 'all-tools', activeCategory: 'all' };
   if (pathname === '/about') return { selectedTool: null, currentView: 'about', activeCategory: 'all' };
   if (pathname === '/contact') return { selectedTool: null, currentView: 'contact', activeCategory: 'all' };
@@ -1059,6 +1061,18 @@ export default function App() {
               <span>All Tools Directory ({tools.length || '1,380+'})</span>
             </button>
             <button
+              onClick={() => handleNavigateView('blog')}
+              aria-label="Navigate to Master Blog"
+              className={`px-3 py-2 min-h-[40px] rounded-lg text-xs font-semibold transition-colors duration-150 cursor-pointer flex items-center gap-1.5 ${
+                currentView === 'blog'
+                  ? 'text-sky-400 bg-blue-500/15 font-bold border border-blue-500/30'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]'
+              }`}
+            >
+              <BookOpen size={14} className="text-sky-400" />
+              <span>Master Blog &amp; Guides</span>
+            </button>
+            <button
               onClick={() => handleNavigateView('guides')}
               aria-label="Navigate to Tech Guides"
               className={`px-3 py-2 min-h-[40px] rounded-lg text-xs font-semibold transition-colors duration-150 cursor-pointer ${
@@ -1161,6 +1175,21 @@ export default function App() {
               <span className="flex items-center gap-2">
                 <Terminal size={14} className="text-[#2E9BFF]" />
                 <span>All Tools Directory ({tools.length || '1,380+'})</span>
+              </span>
+              <ChevronRight size={14} className="text-[var(--text-muted)]" />
+            </button>
+            <button
+              onClick={() => handleNavigateView('blog')}
+              aria-label="Navigate to Master Blog & Security Encyclopedia"
+              className={`w-full text-left px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-between cursor-pointer ${
+                currentView === 'blog'
+                  ? 'text-[#2E9BFF] bg-blue-500/15'
+                  : 'text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]'
+              }`}
+            >
+              <span className="flex items-center gap-2">
+                <BookOpen size={14} className="text-sky-400" />
+                <span>Master Blog &amp; Guides</span>
               </span>
               <ChevronRight size={14} className="text-[var(--text-muted)]" />
             </button>
@@ -1300,6 +1329,12 @@ export default function App() {
                 showToast={triggerToast}
               />
             </>
+          ) : currentView === 'blog' ? (
+            <MasterBlogPage 
+              onNavigateHome={handleBackToCatalog}
+              onSelectToolBySlug={handleSelectToolBySlug}
+              onNavigateGuides={() => handleNavigateView('guides')}
+            />
           ) : currentView === 'guides' ? (
             <>
               <SeoHead
@@ -2088,6 +2123,11 @@ export default function App() {
               <li>
                 <a href="/guides" onClick={(e) => { e.preventDefault(); handleNavigateView('guides'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">
                   Tech Guides
+                </a>
+              </li>
+              <li>
+                <a href="/blog" onClick={(e) => { e.preventDefault(); handleNavigateView('blog'); }} className="min-h-[48px] py-3 px-2 flex items-center text-amber-400 hover:text-amber-300 transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)] font-semibold">
+                  ★ Master Blog &amp; Guides
                 </a>
               </li>
               <li>
