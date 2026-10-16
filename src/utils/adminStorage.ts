@@ -22,8 +22,24 @@ export function getToolOverrides(toolId?: string): Record<string, Partial<ToolCo
 }
 
 export function getAdsSettings(): AdsSettings {
+  try {
+    const saved = localStorage.getItem('ed_ads_settings');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed && typeof parsed.adsensePublisherId === 'string' && parsed.adsensePublisherId) {
+        return parsed;
+      }
+    }
+  } catch (e) {}
+
   return {
-    enabled: false,
-    adsensePublisherId: '',
+    enabled: true,
+    adsensePublisherId: 'ca-pub-7730607896444632',
   };
+}
+
+export function saveAdsSettings(settings: AdsSettings): void {
+  try {
+    localStorage.setItem('ed_ads_settings', JSON.stringify(settings));
+  } catch (e) {}
 }
