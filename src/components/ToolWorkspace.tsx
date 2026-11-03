@@ -8508,6 +8508,30 @@ echo -n "${inputText.substring(0, 40) || 'sample-data'}" | wc -c`}
             </div>
           </div>
         </div>
+
+        {/* E-E-A-T Author Box & Editorial Review Signal */}
+        <div className="mt-8 pt-6 border-t border-[var(--border-subtle)] bg-[var(--bg-input)] p-5 rounded-2xl border border-[var(--border-subtle)] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5">
+            <div className="w-12 h-12 rounded-full bg-blue-500/15 border border-blue-500/30 text-[#2E9BFF] font-bold text-base flex items-center justify-center shrink-0">
+              AR
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-sm text-[var(--text-primary)]">Reviewed by Ajay Rathod</span>
+                <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                  Developer &amp; Security Enthusiast
+                </span>
+              </div>
+              <p className="text-xs text-[var(--text-secondary)] m-0 mt-0.5">
+                Full-Stack Engineer &amp; Privacy Advocate · Maharashtra, India
+              </p>
+            </div>
+          </div>
+          <div className="sm:text-right text-xs text-[var(--text-muted)] font-mono border-t sm:border-t-0 pt-2 sm:pt-0 border-[var(--border-subtle)]">
+            <div>Last Updated: <strong className="text-[var(--text-primary)]">October 2026</strong></div>
+            <div className="text-[11px] text-emerald-400 font-sans mt-0.5">100% In-Browser Execution Verified</div>
+          </div>
+        </div>
       </article>
 
       {/* AdSense Placement below article with clear boundary */}

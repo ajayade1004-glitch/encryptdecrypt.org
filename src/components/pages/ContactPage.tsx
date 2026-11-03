@@ -227,32 +227,46 @@ export const ContactPage: React.FC<ContactPageProps> = ({
             </h3>
 
             <div className="space-y-3 text-xs text-[var(--text-secondary)]">
-              <div className="flex items-start gap-3 p-3 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)]">
+              <div className="flex items-start gap-3 p-3.5 rounded-xl bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)]">
                 <Mail size={16} className="text-[#2E9BFF] shrink-0 mt-0.5" />
                 <div>
-                  <strong className="block text-[var(--text-primary)] mb-0.5">Technical Support & General Inquiries</strong>
-                  <div className="space-y-0.5">
-                    <a href="mailto:admin@EncryptDecrypt.org" className="font-mono text-[11px] text-[#2E9BFF] hover:underline block">admin@EncryptDecrypt.org</a>
-                    <a href="mailto:ajay.rathod8796@gmail.com" className="font-mono text-[11px] text-[#2E9BFF] hover:underline block">ajay.rathod8796@gmail.com</a>
+                  <strong className="block text-[var(--text-primary)] mb-1">Official Support &amp; Founder Desk</strong>
+                  <div className="space-y-1 font-mono text-[11px]">
+                    <div>
+                      <span className="text-[var(--text-muted)]">Primary: </span>
+                      <a href="mailto:support@encryptdecrypt.org" className="text-[#2E9BFF] hover:underline font-semibold">support@encryptdecrypt.org</a>
+                    </div>
+                    <div>
+                      <span className="text-[var(--text-muted)]">Founder &amp; Dev: </span>
+                      <a href="mailto:ajayade1004@gmail.com" className="text-[var(--text-secondary)] hover:underline">ajayade1004@gmail.com</a>
+                    </div>
                   </div>
-                  <p className="text-[11px] text-[var(--text-muted)] mt-1">For general utility troubleshooting, feedback, or custom tool requests.</p>
+                  <p className="text-[11px] text-[var(--text-muted)] mt-2 leading-relaxed">
+                    Direct desk of Ajay Rathod (Founder &amp; Developer, Maharashtra, India). For bug reports, tool feedback, or custom cryptography requests.
+                  </p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 p-3 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)]">
+              <div className="flex items-start gap-3 p-3.5 rounded-xl bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)]">
                 <Shield size={16} className="text-emerald-500 shrink-0 mt-0.5" />
                 <div>
-                  <strong className="block text-[var(--text-primary)] mb-0.5">Security & Vulnerability Reports</strong>
-                  <a href="mailto:admin@EncryptDecrypt.org" className="font-mono text-[11px] text-emerald-500 hover:underline block">admin@EncryptDecrypt.org</a>
-                  <p className="text-[11px] text-[var(--text-muted)] mt-1">For responsible security disclosures conforming to RFC 9116.</p>
+                  <strong className="block text-[var(--text-primary)] mb-1">Security &amp; Vulnerability Reports</strong>
+                  <div className="space-y-0.5 font-mono text-[11px]">
+                    <a href="mailto:support@encryptdecrypt.org" className="text-emerald-400 hover:underline block font-semibold">support@encryptdecrypt.org</a>
+                  </div>
+                  <p className="text-[11px] text-[var(--text-muted)] mt-1.5 leading-relaxed">
+                    For responsible algorithmic disclosures and client-side security questions.
+                  </p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 p-3 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)]">
+              <div className="flex items-start gap-3 p-3.5 rounded-xl bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)]">
                 <Clock size={16} className="text-purple-400 shrink-0 mt-0.5" />
                 <div>
-                  <strong className="block text-[var(--text-primary)] mb-0.5">Response Time SLA</strong>
-                  <p className="text-[11px] text-[var(--text-muted)]">Standard inquiries: 24–48 business hours.<br />Critical security reports: &lt; 12 hours.</p>
+                  <strong className="block text-[var(--text-primary)] mb-1">Response Time SLA</strong>
+                  <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                    We respond to all genuine user inquiries within <strong>24 business hours</strong>.
+                  </p>
                 </div>
               </div>
             </div>

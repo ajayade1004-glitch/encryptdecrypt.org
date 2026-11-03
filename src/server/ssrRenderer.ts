@@ -465,7 +465,7 @@ export function renderSsrRoute(rawPath: string, templateHtml: string): SsrResult
           </p>
           <h2 class="text-xl font-bold text-white mb-3">Lead Author &amp; Engineering Contributors</h2>
           <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
-            Maintained by Ajjay Ade (Lead Software &amp; Cryptographic Engineer) alongside open-source contributors. All algorithmic test harnesses are systematically verified against NIST Computer Security Division test vectors and IETF RFC specifications.
+            Maintained by Ajay Ade (Site Founder, Webmaster &amp; Cryptographic Engineer) alongside open-source contributors. All algorithmic test harnesses are systematically verified against NIST Computer Security Division test vectors and IETF RFC specifications. Direct contact: <a href="mailto:ajayade1004@gmail.com" class="text-sky-400">ajayade1004@gmail.com</a>.
           </p>
           <h2 class="text-xl font-bold text-white mb-3">Web Crypto API vs Local Memory Algorithms</h2>
           <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
@@ -499,9 +499,10 @@ export function renderSsrRoute(rawPath: string, templateHtml: string): SsrResult
             Have a question, feedback, or a security inquiry? Get in touch directly with our maintainers:
           </p>
           <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300 space-y-2">
-            <div>Email: <a href="mailto:admin@EncryptDecrypt.org" class="text-sky-400">admin@EncryptDecrypt.org</a></div>
-            <div>Secondary: <a href="mailto:ajay.rathod8796@gmail.com" class="text-sky-400">ajay.rathod8796@gmail.com</a></div>
-            <div>Platform: EncryptDecrypt.org Engineering Desk</div>
+            <div>Webmaster Email: <a href="mailto:ajayade1004@gmail.com" class="text-sky-400">ajayade1004@gmail.com</a></div>
+            <div>Official Desk: <a href="mailto:admin@EncryptDecrypt.org" class="text-sky-400">admin@EncryptDecrypt.org</a></div>
+            <div>Security Reports: <a href="mailto:security@encryptdecrypt.org" class="text-emerald-400">security@encryptdecrypt.org</a></div>
+            <div>Platform: EncryptDecrypt.org Engineering Desk, Ajay Ade (Webmaster)</div>
           </div>
         </div>
       </div>

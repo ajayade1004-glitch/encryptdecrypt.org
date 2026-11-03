@@ -735,6 +735,14 @@ app.get('/rss.xml', serveRssFeed);
 app.get('/feed.xml', serveRssFeed);
 app.get('/rss', serveRssFeed);
 
+// Direct Google AdSense ads.txt endpoint (UTF-8 Plain Text, Zero BOM)
+app.get('/ads.txt', (req: Request, res: Response) => {
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Cache-Control', 'public, max-age=3600');
+  res.send('google.com, pub-7730607896444632, DIRECT, f08c47fec0942fa\n');
+});
+
 // ==========================================
 // VITE DEV SERVER / PRODUCTION STATIC ASSETS
 // ==========================================

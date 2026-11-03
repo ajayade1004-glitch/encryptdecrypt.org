@@ -5,7 +5,8 @@ import {
   Terminal, ShieldCheck, Database, Zap, RefreshCw, X,
   ChevronRight, ArrowLeft, Binary, CheckCircle, FileText,
   Sliders, Wifi, Code, Sparkles, Menu, BookOpen, Info, Mail,
-  Globe, Clock, Palette, Eye, Gauge, ImageIcon, Calculator, Star, HelpCircle, Command, RotateCcw
+  Globe, Clock, Palette, Eye, Gauge, ImageIcon, Calculator, Star, HelpCircle, Command, RotateCcw,
+  UserCheck, User
 } from 'lucide-react';
 import { ToolItem, CategoryInfo } from './types';
 import { INITIAL_TOP_TOOLS } from './data/initialTools';
@@ -65,6 +66,8 @@ const DisclaimerPage = lazyWithRetry(() => import('./components/pages/Disclaimer
 const NotFoundPage = lazyWithRetry(() => import('./components/pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 const AdminPanel = lazyWithRetry(() => import('./components/admin/AdminPanel').then(m => ({ default: m.AdminPanel })));
 const MasterBlogPage = lazyWithRetry(() => import('./components/pages/MasterBlogPage').then(m => ({ default: m.MasterBlogPage })));
+const BlogPostPage = lazyWithRetry(() => import('./components/pages/BlogPostPage').then(m => ({ default: m.BlogPostPage })));
+import { BLOG_POSTS, BlogPost } from './data/blogPosts';
 // ------------------------------------------------------------------
 
 export type AppView = 'catalog' | 'category' | 'about' | 'contact' | 'guides' | 'privacy' | 'terms' | 'disclaimer' | 'admin' | 'notfound' | 'all-tools' | 'blog';
@@ -97,6 +100,21 @@ export const CATEGORY_HUBS_CONFIG = [
   { slug: 'math-design', name: 'Math & Design', icon: Sliders, count: 19, desc: 'HEX/RGB/HSL, Aspect Ratio, Prime, Bitwise' },
   { slug: 'network-online', name: 'Network & Online Tools', icon: Wifi, count: 10, desc: 'IP Subnet CIDR, DNS, Port Lookup, User Agent' },
   { slug: 'converters-utilities', name: 'Converters & Utilities', icon: Cpu, count: 6, desc: 'Chmod Calc, Data Units, Number Words, UTC Time' },
+];
+
+export const POPULAR_12_TOOLS = [
+  { name: 'AES-256 Encryption', slug: 'aes-encrypt-decrypt', category: 'Encryption', icon: Lock, desc: 'Military-grade authenticated symmetric encryption using browser Web Crypto API.' },
+  { name: 'Base64 Encode & Decode', slug: 'base64-encode-decode', category: 'Encoding', icon: Binary, desc: 'Instant ASCII text to RFC 4648 Radix-64 encoding with full UTF-8 support.' },
+  { name: 'SHA-256 Hash Generator', slug: 'sha-256-hash-generator', category: 'Hashing', icon: Hash, desc: 'Generate deterministic 256-bit cryptographic digest checksums for verification.' },
+  { name: 'JWT Token Debugger', slug: 'jwt-token-generator', category: 'API & Auth', icon: CheckCircle, desc: 'Decode JSON Web Token headers, payload claims, and check expiry safely.' },
+  { name: 'UUID / GUID Generator', slug: 'uuid-guid-generator', category: 'Generators', icon: Key, desc: 'Generate cryptographically random UUID v4 and timestamp-ordered UUID v7.' },
+  { name: 'Secure Password Generator', slug: 'secure-password-generator', category: 'Security', icon: ShieldCheck, desc: 'High-entropy random passwords using window.crypto.getRandomValues CSPRNG.' },
+  { name: 'URL Encode & Decode', slug: 'url-encode-decode', category: 'Web Dev', icon: Globe, desc: 'Convert percent-encoded query parameters and RFC 3986 URI components.' },
+  { name: 'RSA Key Generator', slug: 'rsa-key-generator-pem', category: 'Asymmetric', icon: Cpu, desc: 'Generate 2048-bit and 4096-bit RSA public and private key pairs in PEM format.' },
+  { name: 'MD5 Hash Generator', slug: 'md5-hash-generator', category: 'Hashing', icon: FileCode, desc: '128-bit legacy checksum calculation for database indexing and file integrity.' },
+  { name: 'HMAC-SHA256 Generator', slug: 'hmac-generator', category: 'Security', icon: Sliders, desc: 'Compute keyed-hash message authentication codes for API webhooks.' },
+  { name: 'QR Code Generator', slug: 'qr-code-generator', category: 'Utilities', icon: Terminal, desc: 'Create high-resolution scannable QR codes with custom error correction levels.' },
+  { name: 'JSON Formatter & Validator', slug: 'json-formatter-beautifier', category: 'Dev Tools', icon: Layers, desc: 'Beautify, indent, format, and validate complex JSON strings with syntax error detection.' }
 ];
 
 function synthesizeToolFromSlug(slug: string): ToolItem {
@@ -245,6 +263,16 @@ export default function App() {
   const [toastMsg, setToastMsg] = useState<string | null>(null);
   const [categorySearchQuery, setCategorySearchQuery] = useState<string>('');
   const [showAllCategories, setShowAllCategories] = useState<boolean>(false);
+  const [selectedBlogPost, setSelectedBlogPost] = useState<BlogPost | null>(() => {
+    if (typeof window !== 'undefined') {
+      const p = window.location.pathname.replace(/\/+$/, '');
+      if (p.startsWith('/blog/')) {
+        const slug = p.replace('/blog/', '').split('/')[0];
+        return BLOG_POSTS.find(b => b.slug === slug) || null;
+      }
+    }
+    return null;
+  });
 
   // Pro Feature States: Favorites, Recently Used, Keyboard Shortcuts
   const [starredToolIds, setStarredToolIds] = useState<string[]>(() => {
@@ -956,11 +984,10 @@ export default function App() {
               </div>
             </div>
 
-            {/* Instant Live Search Results Dropdown - Full width and non-collapsing layout */}
+            {/* Instant Live Search Results Dropdown - Fully Responsive & Mobile Viewport Safe */}
             {searchFocused && searchQuery.trim().length > 0 && (
               <div 
-                style={{ minWidth: 'min(480px, calc(100vw - 32px))', width: 'max(480px, 100%)', maxWidth: 'min(580px, calc(100vw - 24px))' }}
-                className="absolute left-0 top-full mt-1.5 bg-[var(--bg-surface)] border border-blue-500/30 rounded-xl shadow-2xl overflow-hidden z-50 max-h-[440px] overflow-y-auto divide-y divide-[var(--border-subtle)]"
+                className="fixed left-2 right-2 sm:absolute sm:left-0 sm:right-auto top-[58px] sm:top-full mt-1.5 bg-[var(--bg-surface)] border border-blue-500/30 rounded-xl shadow-2xl overflow-hidden z-50 max-h-[70vh] sm:max-h-[440px] sm:w-[500px] sm:max-w-[calc(100vw-32px)] overflow-y-auto divide-y divide-[var(--border-subtle)]"
               >
                 <div className="p-2.5 text-[11px] font-mono text-[var(--text-muted)] bg-[var(--bg-surface-hover)] flex items-center justify-between">
                   <span className="font-semibold text-[var(--text-secondary)]">
@@ -1108,22 +1135,22 @@ export default function App() {
           </nav>
 
           {/* Action Controls */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <a
               href="https://www.buymeacoffee.com/encryptdecrypt" 
               target="_blank" 
               rel="noopener noreferrer"
               aria-label="Support this free project on Buy Me a Coffee"
-              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-[#FFDD00] text-black font-bold text-[11px] sm:text-xs hover:bg-[#FFEA4C] transition shadow-sm border border-[#E5C700] cursor-pointer"
+              className="hidden sm:flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-[#FFDD00] text-black font-bold text-[11px] sm:text-xs hover:bg-[#FFEA4C] transition shadow-sm border border-[#E5C700] cursor-pointer"
               title="Support this free project"
             >
               <span className="text-base leading-none">☕</span>
-              <span className="hidden sm:inline tracking-tight text-black">Buy me a coffee</span>
+              <span className="hidden md:inline tracking-tight text-black">Buy me a coffee</span>
             </a>
 
             <button
               onClick={toggleAppTheme}
-              className="p-2.5 min-h-[44px] min-w-[44px] rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-blue-400 transition-colors duration-150 cursor-pointer flex items-center justify-center gap-1.5 shadow-sm"
+              className="p-2 sm:p-2.5 min-h-[40px] min-w-[40px] sm:min-h-[44px] sm:min-w-[44px] rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-blue-400 transition-colors duration-150 cursor-pointer flex items-center justify-center gap-1.5 shadow-sm"
               title={`Switch to ${theme === 'dark' ? 'White' : 'Dark'} Mode`}
               aria-label={`Switch to ${theme === 'dark' ? 'White' : 'Dark'} Mode`}
               id="theme-toggle-btn"
@@ -1144,7 +1171,7 @@ export default function App() {
             <button
               onClick={() => setMobileMenuOpen(prev => !prev)}
               aria-label="Toggle navigation menu"
-              className="p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] lg:hidden cursor-pointer"
+              className="p-2 min-h-[40px] min-w-[40px] rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] lg:hidden cursor-pointer flex items-center justify-center shadow-sm"
               title="Toggle Menu"
             >
               {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -1154,21 +1181,25 @@ export default function App() {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-[var(--border-subtle)] bg-[var(--bg-surface)] px-4 py-3 space-y-1 shadow-lg">
+          <div className="lg:hidden border-t border-[var(--border-subtle)] bg-[var(--bg-surface)] px-4 py-3.5 space-y-1.5 shadow-2xl">
             <button
               onClick={handleBackToCatalog}
               aria-label="Navigate to Home"
-              className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)] flex items-center justify-between cursor-pointer"
+              className={`w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-semibold flex items-center justify-between cursor-pointer ${
+                !selectedTool && currentView === 'catalog'
+                  ? 'text-sky-400 bg-blue-500/15 border border-blue-500/30'
+                  : 'text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]'
+              }`}
             >
-              <span>Home</span>
+              <span>Home (All Tools)</span>
               <ChevronRight size={14} className="text-[var(--text-muted)]" />
             </button>
             <button
               onClick={() => handleNavigateView('all-tools')}
               aria-label="Navigate to All Tools Directory"
-              className={`w-full text-left px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-between cursor-pointer ${
+              className={`w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-semibold flex items-center justify-between cursor-pointer ${
                 currentView === 'all-tools'
-                  ? 'text-[#2E9BFF] bg-blue-500/15'
+                  ? 'text-sky-400 bg-blue-500/15 border border-blue-500/30'
                   : 'text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]'
               }`}
             >
@@ -1180,64 +1211,89 @@ export default function App() {
             </button>
             <button
               onClick={() => handleNavigateView('blog')}
-              aria-label="Navigate to Master Blog & Security Encyclopedia"
-              className={`w-full text-left px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-between cursor-pointer ${
+              aria-label="Navigate to Master Blog"
+              className={`w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-semibold flex items-center justify-between cursor-pointer ${
                 currentView === 'blog'
-                  ? 'text-[#2E9BFF] bg-blue-500/15'
+                  ? 'text-amber-400 bg-amber-500/15 border border-amber-500/30 font-bold'
                   : 'text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]'
               }`}
             >
               <span className="flex items-center gap-2">
-                <BookOpen size={14} className="text-sky-400" />
-                <span>Master Blog &amp; Guides</span>
+                <BookOpen size={14} className="text-amber-400" />
+                <span className="text-amber-400 font-bold">★ Master Blog &amp; Guides</span>
               </span>
               <ChevronRight size={14} className="text-[var(--text-muted)]" />
             </button>
             <button
               onClick={() => handleNavigateView('guides')}
               aria-label="Navigate to Tech Guides"
-              className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)] flex items-center justify-between cursor-pointer"
+              className={`w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-semibold flex items-center justify-between cursor-pointer ${
+                currentView === 'guides'
+                  ? 'text-sky-400 bg-blue-500/15 border border-blue-500/30'
+                  : 'text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]'
+              }`}
             >
-              <span>Tech Guides & Cryptography Docs</span>
+              <span>Tech Guides &amp; Whitepapers</span>
               <ChevronRight size={14} className="text-[var(--text-muted)]" />
             </button>
             <button
               onClick={() => handleNavigateView('about')}
               aria-label="Navigate to About Us"
-              className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)] flex items-center justify-between cursor-pointer"
+              className={`w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-semibold flex items-center justify-between cursor-pointer ${
+                currentView === 'about'
+                  ? 'text-sky-400 bg-blue-500/15 border border-blue-500/30'
+                  : 'text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]'
+              }`}
             >
-              <span>About Us & Zero-Knowledge Architecture</span>
+              <span>About Us (Ajay Ade &amp; Mission)</span>
               <ChevronRight size={14} className="text-[var(--text-muted)]" />
             </button>
             <button
               onClick={() => handleNavigateView('contact')}
               aria-label="Navigate to Contact Us"
-              className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)] flex items-center justify-between cursor-pointer"
+              className={`w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-semibold flex items-center justify-between cursor-pointer ${
+                currentView === 'contact'
+                  ? 'text-sky-400 bg-blue-500/15 border border-blue-500/30'
+                  : 'text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]'
+              }`}
             >
-              <span>Contact Us & Technical Support</span>
+              <span>Contact Us &amp; Technical Support</span>
               <ChevronRight size={14} className="text-[var(--text-muted)]" />
             </button>
+
+            {/* Mobile Buy Me a Coffee Callout */}
+            <a
+              href="https://www.buymeacoffee.com/encryptdecrypt" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="Support this free project on Buy Me a Coffee"
+              className="w-full px-3.5 py-2.5 rounded-lg bg-[#FFDD00] text-black font-bold text-xs flex items-center justify-center gap-2 shadow-sm border border-[#E5C700] my-2 cursor-pointer hover:bg-[#FFEA4C] transition"
+            >
+              <span className="text-sm">☕</span>
+              <span>Support EncryptDecrypt on Buy Me a Coffee</span>
+            </a>
+
             <button
               onClick={() => {
                 toggleAppTheme();
               }}
               aria-label={`Switch to ${theme === 'dark' ? 'White' : 'Dark'} Mode`}
-              className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)] flex items-center justify-between cursor-pointer border-t border-[var(--border-subtle)] my-1 pt-2"
+              className="w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)] flex items-center justify-between cursor-pointer border-t border-[var(--border-subtle)] my-1 pt-2.5"
             >
               <span className="flex items-center gap-2">
                 {theme === 'dark' ? <Sun size={15} className="text-amber-400" /> : <Moon size={15} className="text-[#2563EB]" />}
-                <span>Switch to {theme === 'dark' ? 'White' : 'Dark'} Mode</span>
+                <span>Theme: {theme === 'dark' ? 'Dark' : 'White'} Mode</span>
               </span>
-              <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-[#2563EB] dark:text-[#60A5FA]">
-                {theme === 'dark' ? 'Dark' : 'White'}
+              <span className="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-blue-500/15 text-[#2563EB] dark:text-[#60A5FA]">
+                Switch to {theme === 'dark' ? 'White' : 'Dark'}
               </span>
             </button>
             <div className="pt-2 border-t border-[var(--border-subtle)] flex items-center justify-around text-xs text-[var(--text-muted)]">
-              <button onClick={() => handleNavigateView('privacy')} aria-label="Navigate to Privacy Policy" className="hover:text-[#2E9BFF] cursor-pointer py-1">Privacy</button>
+              <button onClick={() => handleNavigateView('privacy')} aria-label="Navigate to Privacy Policy" className="hover:text-[#2E9BFF] cursor-pointer py-1.5 px-2">Privacy</button>
               <span>·</span>
-              <button onClick={() => handleNavigateView('terms')} aria-label="Navigate to Terms of Service" className="hover:text-[#2E9BFF] cursor-pointer py-1">Terms</button>
+              <button onClick={() => handleNavigateView('terms')} aria-label="Navigate to Terms of Service" className="hover:text-[#2E9BFF] cursor-pointer py-1.5 px-2">Terms</button>
               <span>·</span>
-              <button onClick={() => handleNavigateView('disclaimer')} aria-label="Navigate to Legal Disclaimer" className="hover:text-[#2E9BFF] cursor-pointer py-1">Disclaimer</button>
+              <button onClick={() => handleNavigateView('disclaimer')} aria-label="Navigate to Legal Disclaimer" className="hover:text-[#2E9BFF] cursor-pointer py-1.5 px-2">Disclaimer</button>
             </div>
           </div>
         )}
@@ -1330,11 +1386,24 @@ export default function App() {
               />
             </>
           ) : currentView === 'blog' ? (
-            <MasterBlogPage 
-              onNavigateHome={handleBackToCatalog}
-              onSelectToolBySlug={handleSelectToolBySlug}
-              onNavigateGuides={() => handleNavigateView('guides')}
-            />
+            selectedBlogPost ? (
+              <BlogPostPage
+                post={selectedBlogPost}
+                onBackToBlog={() => {
+                  setSelectedBlogPost(null);
+                  window.history.pushState({}, '', '/blog');
+                  window.scrollTo({ top: 0, behavior: 'instant' });
+                }}
+                onNavigateHome={handleBackToCatalog}
+                onSelectToolBySlug={handleSelectToolBySlug}
+              />
+            ) : (
+              <MasterBlogPage 
+                onNavigateHome={handleBackToCatalog}
+                onSelectToolBySlug={handleSelectToolBySlug}
+                onNavigateGuides={() => handleNavigateView('guides')}
+              />
+            )
           ) : currentView === 'guides' ? (
             <>
               <SeoHead
@@ -1427,37 +1496,43 @@ export default function App() {
                 <div className="absolute -right-10 -bottom-10 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
                 <div className="max-w-3xl mb-6">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#2E9BFF] text-xs font-mono mb-3">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#2E9BFF] text-xs font-semibold mb-3">
                     <ShieldCheck size={14} />
-                    <span>NIST & RFC Compliant · {tools.length || '1,380'}+ Separate Developer Utilities</span>
+                    <span>100% Client-Side Privacy · Browser Web Crypto API</span>
                   </div>
-                  <h1 className="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight leading-tight">
-                    Free Client-Side Developer, Cryptographic &amp; Security Utilities
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--text-primary)] tracking-tight leading-tight mb-4">
+                    Free Client-Side Encryption, Hashing &amp; Developer Tools
                   </h1>
-                  <p className="text-[var(--text-secondary)] text-sm sm:text-base mt-2 leading-relaxed">
-                    Client-side cryptographic hashing, ciphers, encoders, and developer utilities execute locally inside your browser memory. Server-assisted diagnostic utilities (DNS, Whois, Ping, HTTP Headers) query external endpoints only upon request. Click on any of the <strong>{tools.length || '1,380'}+ separate tools</strong> below to open its dedicated workspace.
+                  <p className="text-[var(--text-secondary)] text-sm sm:text-base leading-relaxed">
+                    Welcome to EncryptDecrypt.org. We built this website to give developers, students, and security professionals a simple, fast, and completely safe place to <strong>encrypt decrypt</strong> text, generate hashes, decode tokens, and convert data without risking sensitive information.
+                  </p>
+                  <p className="text-[var(--text-secondary)] text-sm sm:text-base mt-2.5 leading-relaxed">
+                    Unlike typical online utilities that transmit your passwords or keys across the web to remote servers, every cryptographic tool on our platform runs entirely inside your browser using the native Web Cryptography API. Whether you need to <strong>encrypt decrypt</strong> payloads with AES-256, compute a SHA-256 checksum, inspect a JWT, or generate a random password, your data never leaves your computer.
+                  </p>
+                  <p className="text-[var(--text-secondary)] text-sm sm:text-base mt-2.5 leading-relaxed">
+                    No user accounts, no hidden tracking, and no cloud uploads. You can even disconnect your internet and use our tools offline. It is completely free, transparent, and designed for genuine privacy.
                   </p>
                 </div>
 
                 <div className="theme-subcard rounded-xl p-4 sm:p-6 shadow-xl">
                   <div className="flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-[var(--border-subtle)]">
-                    <div className="flex items-center gap-1.5 bg-[var(--bg-input)] p-1 rounded-lg border border-[var(--border-subtle)] text-xs">
+                    <div className="grid grid-cols-4 w-full sm:w-auto sm:flex items-center gap-1 sm:gap-1.5 bg-[var(--bg-input)] p-1 rounded-lg border border-[var(--border-subtle)] text-xs">
                       {(['base64', 'url', 'hash', 'password'] as const).map(tab => (
                         <button
                           key={tab}
                           onClick={() => setHeroTab(tab)}
-                          className={`min-h-[44px] min-w-[72px] px-3.5 py-2 rounded-md font-semibold capitalize transition-colors duration-150 cursor-pointer flex items-center justify-center ${
+                          className={`min-h-[40px] sm:min-h-[44px] px-2 sm:px-3.5 py-2 rounded-md font-semibold capitalize text-center text-[11px] sm:text-xs transition-colors duration-150 cursor-pointer flex items-center justify-center ${
                             heroTab === tab 
                               ? 'bg-[#1d4ed8] text-white font-bold shadow-xs' 
                               : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-hover)]'
                           }`}
                         >
-                          {tab === 'hash' ? 'SHA-256' : tab === 'password' ? 'Password Gen' : tab.toUpperCase()}
+                          {tab === 'hash' ? 'SHA-256' : tab === 'password' ? 'Password' : tab.toUpperCase()}
                         </button>
                       ))}
                     </div>
 
-                    <span className="text-xs font-mono text-emerald-500 flex items-center gap-1 font-semibold">
+                    <span className="text-[11px] sm:text-xs font-mono text-emerald-500 flex items-center gap-1 font-semibold w-full sm:w-auto justify-end sm:justify-start">
                       <ShieldCheck size={14} /> Instant Client-Side Preview
                     </span>
                   </div>
@@ -1509,6 +1584,277 @@ export default function App() {
                   </div>
                 </div>
               </div>
+
+              {/* 🛡️ Section 1: Why Our Tools Are Safe (100% Browser-Side) */}
+              <section className="card-glass p-6 sm:p-8 mb-10 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl shadow-xs" id="why-safe">
+                <div className="max-w-3xl mb-6">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-2">
+                    <ShieldCheck size={14} />
+                    <span>Zero-Knowledge Privacy</span>
+                  </div>
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[var(--text-primary)] tracking-tight">
+                    Why Our Tools Are Safe (100% Browser-Side)
+                  </h2>
+                  <p className="text-xs sm:text-sm text-[var(--text-secondary)] mt-1.5 leading-relaxed">
+                    Most converter and utility websites send your secret keys or sensitive tokens to remote servers. EncryptDecrypt.org operates differently.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="p-4 sm:p-5 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)] flex flex-col justify-between">
+                    <div>
+                      <div className="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/20 text-[#2E9BFF] flex items-center justify-center mb-3">
+                        <Cpu size={20} />
+                      </div>
+                      <h3 className="font-bold text-sm text-[var(--text-primary)] mb-1.5">
+                        Native Web Crypto API
+                      </h3>
+                      <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                        All encryption, decryption, and hashing routines use standard browser-native cryptographic primitives (<code>crypto.subtle</code>) for hardware-accelerated execution.
+                      </p>
+                    </div>
+                    <span className="text-[11px] font-mono text-emerald-400 font-semibold mt-3">
+                      ✓ No external plugins
+                    </span>
+                  </div>
+
+                  <div className="p-4 sm:p-5 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)] flex flex-col justify-between">
+                    <div>
+                      <div className="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mb-3">
+                        <ShieldCheck size={20} />
+                      </div>
+                      <h3 className="font-bold text-sm text-[var(--text-primary)] mb-1.5">
+                        Zero Server Uploads
+                      </h3>
+                      <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                        Your plaintexts, secret keys, passwords, and sensitive files never leave your computer. We do not store, log, or transmit any user input data.
+                      </p>
+                    </div>
+                    <span className="text-[11px] font-mono text-emerald-400 font-semibold mt-3">
+                      ✓ 0 bytes sent over network
+                    </span>
+                  </div>
+
+                  <div className="p-4 sm:p-5 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)] flex flex-col justify-between">
+                    <div>
+                      <div className="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center mb-3">
+                        <Wifi size={20} />
+                      </div>
+                      <h3 className="font-bold text-sm text-[var(--text-primary)] mb-1.5">
+                        Works 100% Offline
+                      </h3>
+                      <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                        You can test our privacy guarantee: turn off your Wi-Fi or inspect DevTools Network tab (F12). Our cryptographic tools continue running smoothly offline.
+                      </p>
+                    </div>
+                    <span className="text-[11px] font-mono text-emerald-400 font-semibold mt-3">
+                      ✓ Air-gap verifiable
+                    </span>
+                  </div>
+
+                  <div className="p-4 sm:p-5 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)] flex flex-col justify-between">
+                    <div>
+                      <div className="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center mb-3">
+                        <Eye size={20} />
+                      </div>
+                      <h3 className="font-bold text-sm text-[var(--text-primary)] mb-1.5">
+                        No Cookies &amp; No Logins
+                      </h3>
+                      <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                        No accounts required, no hidden trackers for tools, and zero paywalls. Everything is open, transparent, and completely free for developers worldwide.
+                      </p>
+                    </div>
+                    <span className="text-[11px] font-mono text-emerald-400 font-semibold mt-3">
+                      ✓ Instant open access
+                    </span>
+                  </div>
+                </div>
+              </section>
+
+              {/* ⚡ Section 2: Popular Tools (12 Featured Tools with Icons) */}
+              <section className="card-glass p-6 sm:p-8 mb-10 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl shadow-xs" id="popular-tools">
+                <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+                  <div>
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#2E9BFF] text-xs font-semibold mb-2">
+                      <Star size={14} />
+                      <span>Most Frequently Used</span>
+                    </div>
+                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[var(--text-primary)] tracking-tight m-0">
+                      Popular Tools
+                    </h2>
+                    <p className="text-xs sm:text-sm text-[var(--text-muted)] mt-1">
+                      Quickly access our 12 most-used client-side encryption, encoding, and developer utilities.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => handleNavigateView('all-tools')}
+                    className="btn btn-secondary text-xs py-2 px-3.5 flex items-center gap-1.5 cursor-pointer font-semibold"
+                  >
+                    <span>View All Tools</span>
+                    <ArrowRight size={14} />
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5">
+                  {POPULAR_12_TOOLS.map(pTool => {
+                    const IconComponent = pTool.icon;
+                    return (
+                      <div
+                        key={pTool.slug}
+                        onClick={() => handleSelectToolBySlug(pTool.slug)}
+                        onMouseEnter={preloadToolWorkspace}
+                        onTouchStart={preloadToolWorkspace}
+                        className="p-3.5 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)] hover:border-[#2E9BFF] hover:bg-[var(--bg-surface-hover)] transition flex flex-col justify-between cursor-pointer group shadow-2xs"
+                      >
+                        <div>
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="w-8 h-8 rounded-lg bg-blue-500/10 text-[#2E9BFF] group-hover:bg-[#2E9BFF] group-hover:text-white transition flex items-center justify-center shrink-0">
+                              <IconComponent size={16} />
+                            </div>
+                            <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-[var(--bg-surface)] text-[var(--text-muted)] border border-[var(--border-subtle)]">
+                              {pTool.category}
+                            </span>
+                          </div>
+
+                          <h3 className="text-xs font-bold text-[var(--text-primary)] group-hover:text-[#2E9BFF] transition line-clamp-1 mb-1">
+                            {pTool.name}
+                          </h3>
+                          <p className="text-[11px] text-[var(--text-muted)] line-clamp-2 leading-relaxed mb-3">
+                            {pTool.desc}
+                          </p>
+                        </div>
+
+                        <span className="text-[11px] font-semibold text-[#2E9BFF] flex items-center gap-1 group-hover:translate-x-1 transition pt-1 border-t border-[var(--border-subtle)]">
+                          Open Tool <ArrowRight size={11} />
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </section>
+
+              {/* 👥 Section 3: Who Uses Our Tools? */}
+              <section className="card-glass p-6 sm:p-8 mb-10 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl shadow-xs" id="who-uses">
+                <div className="max-w-3xl mb-6">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-semibold mb-2">
+                    <UserCheck size={14} />
+                    <span>Trusted Community</span>
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
+                    Who Uses Our Tools?
+                  </h2>
+                  <p className="text-xs sm:text-sm text-[var(--text-secondary)] mt-1.5 leading-relaxed">
+                    Over 100,000 developers, students, and engineers rely on EncryptDecrypt.org each month to inspect, transform, and protect data without risking confidentiality.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+                    <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 text-[#2E9BFF] flex items-center justify-center font-bold text-xs mb-3">
+                      FE
+                    </div>
+                    <h3 className="font-bold text-sm text-[var(--text-primary)] mb-1">Frontend Developers</h3>
+                    <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                      Formatting JSON payloads, inspecting JWT auth claims, testing Base64 strings, and generating UUIDs during day-to-day web development.
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs mb-3">
+                      BE
+                    </div>
+                    <h3 className="font-bold text-sm text-[var(--text-primary)] mb-1">Backend &amp; DevOps</h3>
+                    <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                      Validating HMAC API webhooks, computing SHA-256 release checksums, generating strong passphrases, and calculating chmod octal masks.
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+                    <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-xs mb-3">
+                      SEC
+                    </div>
+                    <h3 className="font-bold text-sm text-[var(--text-primary)] mb-1">Security Analysts</h3>
+                    <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                      Inspecting SSL/TLS certificates, validating cipher modes (GCM vs CBC), and testing encoding anomalies safely without external leaks.
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+                    <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs mb-3">
+                      EDU
+                    </div>
+                    <h3 className="font-bold text-sm text-[var(--text-primary)] mb-1">Students &amp; Learners</h3>
+                    <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                      Gaining a hands-on understanding of cryptographic algorithms, hash collisions, and mathematical standards for college and university courses.
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              {/* 📚 Section 4: From Our Blog: Security & Cryptography Guides */}
+              <section className="card-glass p-6 sm:p-8 mb-10 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl shadow-xs" id="blog-guides">
+                <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+                  <div>
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#2E9BFF] text-xs font-semibold mb-2">
+                      <BookOpen size={14} />
+                      <span>Educational Tutorials</span>
+                    </div>
+                    <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight m-0">
+                      From Our Blog: Security &amp; Cryptography Guides
+                    </h2>
+                    <p className="text-xs sm:text-sm text-[var(--text-muted)] mt-1">
+                      Detailed, human-written tutorials with practical code examples. Reviewed by Ajay Rathod.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => handleNavigateView('blog')}
+                    className="btn btn-secondary text-xs py-2 px-3.5 flex items-center gap-1.5 cursor-pointer font-semibold"
+                  >
+                    <span>View All 5 Guides</span>
+                    <ArrowRight size={14} />
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {BLOG_POSTS.slice(0, 3).map(post => (
+                    <article
+                      key={post.slug}
+                      onClick={() => {
+                        setSelectedBlogPost(post);
+                        setCurrentView('blog');
+                        window.history.pushState({}, '', `/blog/${post.slug}`);
+                        window.scrollTo({ top: 0, behavior: 'instant' });
+                      }}
+                      className="p-5 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)] hover:border-blue-500/50 hover:shadow-md transition flex flex-col justify-between cursor-pointer group"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between text-xs text-[var(--text-muted)] mb-2.5">
+                          <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-500/10 text-sky-400 border border-blue-500/20">
+                            {post.category}
+                          </span>
+                          <span className="text-[11px] font-mono flex items-center gap-1">
+                            <Clock size={11} /> {post.readTime}
+                          </span>
+                        </div>
+                        <h3 className="font-bold text-sm sm:text-base text-[var(--text-primary)] group-hover:text-[#2E9BFF] transition leading-snug mb-2">
+                          {post.title}
+                        </h3>
+                        <p className="text-xs text-[var(--text-secondary)] line-clamp-3 leading-relaxed mb-4">
+                          {post.excerpt}
+                        </p>
+                      </div>
+                      <div className="pt-3 border-t border-[var(--border-subtle)] flex items-center justify-between text-xs">
+                        <span className="text-[11px] text-[var(--text-muted)] flex items-center gap-1">
+                          <User size={11} /> {post.author}
+                        </span>
+                        <span className="text-xs font-semibold text-[#2E9BFF] flex items-center gap-1 group-hover:translate-x-0.5 transition">
+                          Read Guide →
+                        </span>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
 
               {/* Dedicated Hubs Section */}
               <div className="my-8" id="category-hubs">
@@ -1862,80 +2208,127 @@ export default function App() {
                         </div>
 
                         {/* ⚡ E-E-A-T Author & Freshness Metadata Signal */}
-                        <div className="mb-10 p-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] flex flex-wrap items-center justify-between gap-3 text-xs text-slate-300">
-                          <div className="flex items-center gap-2">
-                            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0"></span>
-                            <span>Author: <strong className="text-white">Ajjay Ade &amp; Open-Source Contributors</strong> · Verified against official NIST FIPS &amp; IETF RFC test vectors</span>
+                        <div className="mb-10 p-4 sm:p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] flex flex-wrap items-center justify-between gap-3 text-xs text-[var(--text-secondary)] shadow-xs">
+                          <div className="flex items-center gap-3">
+                            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0 ring-4 ring-emerald-500/10"></span>
+                            <div>
+                              <span>Authored &amp; Maintained by: <strong className="text-[var(--text-primary)]">Ajay Rathod</strong> (Founder &amp; Developer · Maharashtra, India) · </span>
+                              <span className="text-[var(--text-muted)] font-mono">Peer-reviewed against NIST FIPS &amp; IETF RFC benchmarks</span>
+                            </div>
                           </div>
-                          <div className="flex items-center gap-3 font-mono text-[11px] text-slate-400 shrink-0">
-                            <span>Published: <time dateTime="2024-01-15">Jan 15, 2024</time></span>
+                          <div className="flex items-center gap-3 font-mono text-[11px] text-[var(--text-muted)] shrink-0">
+                            <a href="mailto:support@encryptdecrypt.org" className="text-[#2E9BFF] hover:underline">support@encryptdecrypt.org</a>
                             <span>·</span>
-                            <span>Updated: <time dateTime="2026-10-08">Oct 8, 2026</time></span>
+                            <span>Updated: <time dateTime="2026-11-01">October 2026</time></span>
                           </div>
                         </div>
 
+                        {/* ⚡ Architectural Deep Dive: Zero-Knowledge Client-Side Computing */}
+                        <section className="card-glass p-6 sm:p-8 mb-10 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl shadow-xs" id="architecture-overview">
+                          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#2E9BFF] text-xs font-semibold mb-3">
+                            <Shield size={14} />
+                            <span>Security Architecture &amp; Privacy Model</span>
+                          </div>
+                          <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] mb-3">
+                            In-Browser Client-Side Cryptography: Zero-Knowledge Architecture
+                          </h2>
+                          <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
+                            Most conventional online converters and formatting websites process user data by transmitting payloads over the internet to remote backend servers (typically running PHP, Python, or Node.js). Even with HTTPS encryption in transit, this cloud-centric model exposes sensitive tokens, database passwords, confidential SQL dumps, and private cryptographic keys to server-side access logs, edge CDN caches, cloud provider telemetry, and potential intermediate process compromise.
+                          </p>
+                          <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mb-5">
+                            <strong>EncryptDecrypt.org operates on an uncompromising zero-knowledge architecture:</strong> Every cryptographic calculation, hashing routine, format transformation, and encoding operation executes natively within the volatile memory (RAM) of your web browser via standard ECMAScript engines and the hardware-accelerated W3C Web Cryptography API (<code>window.crypto.subtle</code>). Zero bytes of cryptographic plaintext, ciphertexts, secret keys, or hashes are transmitted across the network.
+                          </p>
+
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                            <div className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+                              <h3 className="text-xs font-bold text-[var(--text-primary)] mb-1.5 flex items-center gap-1.5">
+                                <span className="w-2 h-2 rounded-full bg-emerald-400"></span> Hardware Acceleration
+                              </h3>
+                              <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                                Modern browsers delegate WebCrypto primitives to native CPU instructions (such as Intel AES-NI and ARM Cryptography Extensions), achieving constant-time execution and gigabit-per-second encryption throughput.
+                              </p>
+                            </div>
+                            <div className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+                              <h3 className="text-xs font-bold text-[var(--text-primary)] mb-1.5 flex items-center gap-1.5">
+                                <span className="w-2 h-2 rounded-full bg-blue-400"></span> Memory Sandbox Isolation
+                              </h3>
+                              <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                                Tool calculations reside inside browser tab memory sandboxes. Once you refresh or close the tab, the volatile RAM buffers are garbage collected, leaving zero persistent storage or server disk traces.
+                              </p>
+                            </div>
+                            <div className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+                              <h3 className="text-xs font-bold text-[var(--text-primary)] mb-1.5 flex items-center gap-1.5">
+                                <span className="w-2 h-2 rounded-full bg-purple-400"></span> Verifiable Offline Mode
+                              </h3>
+                              <p className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                                You can test our zero-log guarantee: disconnect your workstation from Wi-Fi or monitor DevTools Network tab (F12). All cryptographic tools execute seamlessly offline without network packets.
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* Key Statistics */}
+                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center pt-2 border-t border-[var(--border-subtle)]">
+                            <div className="p-3 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+                              <div className="text-xl font-bold text-sky-400 font-mono">1,380+</div>
+                              <div className="text-[11px] text-[var(--text-muted)] mt-0.5">Separate Utilities</div>
+                            </div>
+                            <div className="p-3 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+                              <div className="text-xl font-bold text-emerald-400 font-mono">0 Bytes</div>
+                              <div className="text-[11px] text-[var(--text-muted)] mt-0.5">Crypto Network Transit</div>
+                            </div>
+                            <div className="p-3 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+                              <div className="text-xl font-bold text-amber-400 font-mono">256 Bits</div>
+                              <div className="text-[11px] text-[var(--text-muted)] mt-0.5">AES Military Strength</div>
+                            </div>
+                            <div className="p-3 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+                              <div className="text-xl font-bold text-purple-400 font-mono">100% Free</div>
+                              <div className="text-[11px] text-[var(--text-muted)] mt-0.5">Open Developer Access</div>
+                            </div>
+                          </div>
+                        </section>
+
                         {/* ⚡ Section 1: Core Cryptographic Standards & Verified Academic Citations */}
-                        <section className="card-glass p-6 sm:p-8 mb-10" id="cryptographic-standards">
-                          <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">
+                        <section className="card-glass p-6 sm:p-8 mb-10 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl shadow-xs" id="cryptographic-standards">
+                          <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] mb-3">
                             Core Cryptographic Standards &amp; Verified Citations
                           </h2>
-                          <p className="text-sm text-slate-300 leading-relaxed mb-4">
+                          <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
                             EncryptDecrypt.org operates strictly under peer-reviewed international standards defined by the National Institute of Standards and Technology (NIST), the Internet Engineering Task Force (IETF), and the World Wide Web Consortium (W3C). Standard ciphers execute natively through the browser&rsquo;s hardware-accelerated Web Cryptography API.
                           </p>
 
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
-                            <blockquote className="p-4 rounded-lg bg-[var(--bg-input)] border-l-4 border-blue-500 text-xs text-slate-300 italic" cite="https://csrc.nist.gov/publications/detail/sp/800-38d/final">
+                            <blockquote className="p-4 rounded-xl bg-[var(--bg-input)] border-l-4 border-blue-500 text-xs text-[var(--text-secondary)] italic" cite="https://csrc.nist.gov/publications/detail/sp/800-38d/final">
                               <p className="mb-2">&ldquo;Galois/Counter Mode (GCM) is an authenticated encryption algorithm designed to provide both data authenticity (integrity) and confidentiality with high throughput in hardware and software implementations.&rdquo;</p>
-                              <cite className="block not-italic font-semibold text-sky-400">— NIST Special Publication 800-38D (Recommendation for Block Cipher Modes of Operation: Galois/Counter Mode)</cite>
+                              <cite className="block not-italic font-semibold text-sky-400">— NIST Special Publication 800-38D (Block Cipher Modes of Operation: Galois/Counter Mode)</cite>
                             </blockquote>
 
-                            <blockquote className="p-4 rounded-lg bg-[var(--bg-input)] border-l-4 border-emerald-500 text-xs text-slate-300 italic" cite="https://www.w3.org/TR/WebCryptoAPI/">
+                            <blockquote className="p-4 rounded-xl bg-[var(--bg-input)] border-l-4 border-emerald-500 text-xs text-[var(--text-secondary)] italic" cite="https://www.w3.org/TR/WebCryptoAPI/">
                               <p className="mb-2">&ldquo;The Web Cryptography API provides cryptographic operations in web applications, such as hash generation, digital signatures, key generation, and symmetric/asymmetric encryption, executing natively within the browser host without network exposure.&rdquo;</p>
                               <cite className="block not-italic font-semibold text-emerald-400">— W3C Web Cryptography API Recommendation (W3C Consortium)</cite>
                             </blockquote>
                           </div>
 
-                          <div className="p-4 rounded-lg bg-[var(--bg-input)] border border-[var(--border-subtle)] text-xs text-slate-300 mb-5">
+                          <div className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)] text-xs text-[var(--text-secondary)] mb-5">
                             <blockquote className="italic" cite="https://datatracker.ietf.org/doc/html/rfc4648">
                               <p className="mb-1">&ldquo;The Base 64, Base 32, and Base 16 Data Encodings represent arbitrary sequences of binary octets in a form that is human-readable and safe for text-only transfer systems.&rdquo;</p>
                               <cite className="block not-italic font-semibold text-purple-400">— IETF RFC 4648 (Internet Standards Track Specification)</cite>
                             </blockquote>
                           </div>
-
-                          {/* Key Verifiable Statistics */}
-                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center pt-2">
-                            <div className="p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
-                              <div className="text-xl font-bold text-sky-400 font-mono">1,360+</div>
-                              <div className="text-[11px] text-slate-400 mt-0.5">Client-Side Tools</div>
-                            </div>
-                            <div className="p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
-                              <div className="text-xl font-bold text-emerald-400 font-mono">0 Bytes</div>
-                              <div className="text-[11px] text-slate-400 mt-0.5">Crypto Network Transmission</div>
-                            </div>
-                            <div className="p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
-                              <div className="text-xl font-bold text-amber-400 font-mono">256 Bits</div>
-                              <div className="text-[11px] text-slate-400 mt-0.5">AES Security Strength</div>
-                            </div>
-                            <div className="p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
-                              <div className="text-xl font-bold text-purple-400 font-mono">Zero-Server</div>
-                              <div className="text-[11px] text-slate-400 mt-0.5">Local RAM Latency</div>
-                            </div>
-                          </div>
                         </section>
 
                         {/* ⚡ Section 2: Comparative Algorithm Reference Matrix (Table) */}
-                        <section className="card-glass p-6 sm:p-8 mb-10" id="algorithm-matrix">
-                          <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">
+                        <section className="card-glass p-6 sm:p-8 mb-10 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl shadow-xs" id="algorithm-matrix">
+                          <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] mb-2">
                             Comparative Cryptographic Algorithm Reference Matrix
                           </h2>
-                          <p className="text-sm text-slate-300 leading-relaxed mb-5">
+                          <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mb-5">
                             Compare core cryptographic algorithms supported natively in your browser. All algorithms adhere to official RFC and NIST FIPS specifications.
                           </p>
 
                           <div className="overflow-x-auto">
-                            <table className="w-full text-left text-xs text-slate-300 border-collapse">
+                            <table className="w-full text-left text-xs text-[var(--text-secondary)] border-collapse">
                               <thead>
-                                <tr className="border-b border-slate-700 bg-slate-800/60 text-slate-100 font-semibold">
+                                <tr className="border-b border-[var(--border-subtle)] bg-[var(--bg-input)] text-[var(--text-primary)] font-semibold">
                                   <th className="p-3">Cryptographic Algorithm</th>
                                   <th className="p-3">Standard Specification</th>
                                   <th className="p-3">Key / Digest Length</th>
@@ -1943,58 +2336,58 @@ export default function App() {
                                   <th className="p-3">Cryptographic Status &amp; Application</th>
                                 </tr>
                               </thead>
-                              <tbody className="divide-y divide-slate-800">
-                                <tr className="hover:bg-slate-800/30">
-                                  <td className="p-3 font-semibold text-white">AES-256-GCM</td>
+                              <tbody className="divide-y divide-[var(--border-subtle)]">
+                                <tr className="hover:bg-[var(--bg-surface-hover)]">
+                                  <td className="p-3 font-semibold text-[var(--text-primary)]">AES-256-GCM</td>
                                   <td className="p-3 font-mono text-sky-400">NIST SP 800-38D</td>
                                   <td className="p-3 font-mono">256 bits</td>
                                   <td className="p-3">Authenticated Symmetric Encryption (AEAD)</td>
                                   <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">NIST SP 800-38D (AEAD)</span></td>
                                 </tr>
-                                <tr className="hover:bg-slate-800/30">
-                                  <td className="p-3 font-semibold text-white">AES-256-CBC</td>
+                                <tr className="hover:bg-[var(--bg-surface-hover)]">
+                                  <td className="p-3 font-semibold text-[var(--text-primary)]">AES-256-CBC</td>
                                   <td className="p-3 font-mono text-sky-400">NIST FIPS 197</td>
                                   <td className="p-3 font-mono">256 bits</td>
                                   <td className="p-3">Legacy Symmetric Encryption (Requires Separate MAC)</td>
                                   <td className="p-3"><span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-semibold">NIST FIPS 197 Approved</span></td>
                                 </tr>
-                                <tr className="hover:bg-slate-800/30">
-                                  <td className="p-3 font-semibold text-white">SHA-256</td>
+                                <tr className="hover:bg-[var(--bg-surface-hover)]">
+                                  <td className="p-3 font-semibold text-[var(--text-primary)]">SHA-256</td>
                                   <td className="p-3 font-mono text-sky-400">FIPS PUB 180-4 / RFC 6234</td>
                                   <td className="p-3 font-mono">256-bit Digest</td>
                                   <td className="p-3">Cryptographic Checksum, Digital Signatures</td>
                                   <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">NIST FIPS 180-4 Approved</span></td>
                                 </tr>
-                                <tr className="hover:bg-slate-800/30">
-                                  <td className="p-3 font-semibold text-white">SHA-512</td>
+                                <tr className="hover:bg-[var(--bg-surface-hover)]">
+                                  <td className="p-3 font-semibold text-[var(--text-primary)]">SHA-512</td>
                                   <td className="p-3 font-mono text-sky-400">FIPS PUB 180-4 / RFC 6234</td>
                                   <td className="p-3 font-mono">512-bit Digest</td>
                                   <td className="p-3">High-Security Collision-Resistant Hashing</td>
                                   <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">NIST FIPS 180-4 Approved</span></td>
                                 </tr>
-                                <tr className="hover:bg-slate-800/30">
-                                  <td className="p-3 font-semibold text-white">HMAC-SHA256</td>
+                                <tr className="hover:bg-[var(--bg-surface-hover)]">
+                                  <td className="p-3 font-semibold text-[var(--text-primary)]">HMAC-SHA256</td>
                                   <td className="p-3 font-mono text-sky-400">IETF RFC 2104</td>
                                   <td className="p-3 font-mono">Variable Secret Key</td>
                                   <td className="p-3">Keyed-Hash Message Authentication (API Signatures)</td>
                                   <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">IETF RFC 2104 Standard</span></td>
                                 </tr>
-                                <tr className="hover:bg-slate-800/30">
-                                  <td className="p-3 font-semibold text-white">ChaCha20-Poly1305</td>
+                                <tr className="hover:bg-[var(--bg-surface-hover)]">
+                                  <td className="p-3 font-semibold text-[var(--text-primary)]">ChaCha20-Poly1305</td>
                                   <td className="p-3 font-mono text-sky-400">IETF RFC 8439</td>
                                   <td className="p-3 font-mono">256-bit Key</td>
                                   <td className="p-3">High-Speed AEAD Stream Cipher for Mobile</td>
                                   <td className="p-3"><span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">IETF RFC 8439 Standard</span></td>
                                 </tr>
-                                <tr className="hover:bg-slate-800/30">
-                                  <td className="p-3 font-semibold text-white">Base64 / Hex</td>
+                                <tr className="hover:bg-[var(--bg-surface-hover)]">
+                                  <td className="p-3 font-semibold text-[var(--text-primary)]">Base64 / Hex</td>
                                   <td className="p-3 font-mono text-sky-400">IETF RFC 4648</td>
                                   <td className="p-3 font-mono">Radix-64 / Radix-16</td>
                                   <td className="p-3">Binary-to-Text Encoding (Not Encryption)</td>
                                   <td className="p-3"><span className="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 font-semibold">IETF RFC 4648 Standard</span></td>
                                 </tr>
-                                <tr className="hover:bg-slate-800/30">
-                                  <td className="p-3 font-semibold text-white">JWT Debugger</td>
+                                <tr className="hover:bg-[var(--bg-surface-hover)]">
+                                  <td className="p-3 font-semibold text-[var(--text-primary)]">JWT Debugger</td>
                                   <td className="p-3 font-mono text-sky-400">IETF RFC 7519</td>
                                   <td className="p-3 font-mono">HS256 / RS256 / ES256</td>
                                   <td className="p-3">Claims-based Identity Token Inspection</td>
@@ -2005,69 +2398,117 @@ export default function App() {
                           </div>
                         </section>
 
-                        {/* ⚡ Section 3: Question-Style Headings with Answer-First Structure */}
-                        <section className="card-glass p-6 sm:p-8 mb-10" id="faq-section">
-                          <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">
+                        {/* ⚡ Section 3: Developer Security Guidelines & Anti-Pattern Prevention */}
+                        <section className="card-glass p-6 sm:p-8 mb-10 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl shadow-xs" id="security-guidelines">
+                          <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] mb-3">
+                            Developer Implementation Guidelines &amp; Anti-Pattern Prevention
+                          </h2>
+                          <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mb-5">
+                            Building secure software systems requires understanding not just what algorithms do, but how common implementation mistakes introduce vulnerabilities:
+                          </p>
+
+                          <div className="space-y-4 text-xs sm:text-sm">
+                            <div className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+                              <h3 className="font-bold text-[var(--text-primary)] mb-1.5 flex items-center gap-2">
+                                <span className="text-rose-400 font-mono">1.</span> Never Reuse Nonces or IVs with AES-GCM or ChaCha20
+                              </h3>
+                              <p className="text-[var(--text-secondary)] leading-relaxed">
+                                In Galois/Counter Mode (AES-GCM), reusing the same 96-bit Initialization Vector (IV) with the identical secret key catastrophic reveals the internal GHASH authentication subkey. Once compromised, an active attacker can forge arbitrary ciphertexts without knowing the secret key. Always generate a fresh 12-byte cryptographically random IV via <code>crypto.getRandomValues(new Uint8Array(12))</code> for every distinct encryption operation.
+                              </p>
+                            </div>
+
+                            <div className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+                              <h3 className="font-bold text-[var(--text-primary)] mb-1.5 flex items-center gap-2">
+                                <span className="text-rose-400 font-mono">2.</span> Base64 is Data Encoding, NOT Encryption
+                              </h3>
+                              <p className="text-[var(--text-secondary)] leading-relaxed">
+                                A frequent antipattern among junior developers is treating Base64, Hex, or URL encoding as a security layer. RFC 4648 encodings represent binary data in printable ASCII characters to prevent corruption over text-only protocols (e.g., SMTP or JSON). Encodings possess zero secrecy and can be decoded instantaneously by any observer without a key. Confidentiality requires true symmetric ciphers (AES-256-GCM) or asymmetric cryptography (RSA-OAEP).
+                              </p>
+                            </div>
+
+                            <div className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+                              <h3 className="font-bold text-[var(--text-primary)] mb-1.5 flex items-center gap-2">
+                                <span className="text-rose-400 font-mono">3.</span> Never Use Fast Hashes (MD5, SHA-1, SHA-256) for Password Storage
+                              </h3>
+                              <p className="text-[var(--text-secondary)] leading-relaxed">
+                                General-purpose cryptographic hashes (like SHA-256) are designed for maximum hardware throughput (verifying gigabyte files in seconds). A consumer GPU can compute billions of SHA-256 hashes per second, making raw hashed passwords trivially vulnerable to offline dictionary and rainbow table attacks. For password authentication, NIST SP 800-63B mandates memory-hard, computationally expensive key derivation functions: <strong>Argon2id</strong> (preferred), <strong>bcrypt</strong>, or <strong>PBKDF2</strong> with at least 600,000 iterations.
+                              </p>
+                            </div>
+
+                            <div className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
+                              <h3 className="font-bold text-[var(--text-primary)] mb-1.5 flex items-center gap-2">
+                                <span className="text-rose-400 font-mono">4.</span> Constant-Time Comparison to Prevent Timing Side-Channels
+                              </h3>
+                              <p className="text-[var(--text-secondary)] leading-relaxed">
+                                When verifying HMAC signatures, API authentication tokens, or password hashes, never use standard string equality operators (e.g. <code>===</code> or <code>strcmp</code>). Standard equality checks terminate early on the first mismatched byte, allowing attackers to deduce valid signatures byte-by-byte via microsecond timing measurements. Use constant-time comparison algorithms (such as <code>crypto.timingSafeEqual()</code>) that examine every byte regardless of mismatch location.
+                              </p>
+                            </div>
+                          </div>
+                        </section>
+
+                        {/* ⚡ Section 4: Question-Style Headings with Answer-First Structure (FAQ) */}
+                        <section className="card-glass p-6 sm:p-8 mb-10 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl shadow-xs" id="faq-section">
+                          <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] mb-6">
                             Frequently Asked Questions: Browser-Based Cryptography &amp; Security
                           </h2>
 
-                          <div className="space-y-5">
+                          <div className="space-y-4">
                             <article className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
-                              <h3 className="text-base font-bold text-white mb-2">
+                              <h3 className="text-sm sm:text-base font-bold text-[var(--text-primary)] mb-2">
                                 How does client-side Web Cryptography guarantee zero server transmission?
                               </h3>
-                              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-2">
+                              <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mb-2">
                                 <strong>Direct Answer:</strong> Client-side Web Cryptography operates exclusively within the isolated sandbox memory (RAM) of your web browser via the W3C Web Cryptography API. Zero bytes of sensitive plaintext, encryption keys, or cryptographic hashes are transmitted across the internet to any external server.
                               </p>
-                              <p className="text-xs text-slate-400 leading-relaxed">
+                              <p className="text-xs text-[var(--text-muted)] leading-relaxed">
                                 Unlike traditional cloud-based encryption utilities that process user data on remote backends, EncryptDecrypt.org utilizes browser-native primitives (such as <code>window.crypto.subtle</code>). This ensures complete zero-knowledge architecture: even if the network connection is disconnected, tools function identically offline.
                               </p>
                             </article>
 
                             <article className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
-                              <h3 className="text-base font-bold text-white mb-2">
+                              <h3 className="text-sm sm:text-base font-bold text-[var(--text-primary)] mb-2">
                                 What is the difference between AES-256-GCM and AES-256-CBC?
                               </h3>
-                              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-2">
+                              <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mb-2">
                                 <strong>Direct Answer:</strong> AES-256-GCM (Galois/Counter Mode) provides Authenticated Encryption with Associated Data (AEAD), combining encryption and cryptographic integrity verification in a single pass. In contrast, AES-256-CBC requires a separate HMAC computation to prevent padding oracle attacks.
                               </p>
-                              <p className="text-xs text-slate-400 leading-relaxed">
+                              <p className="text-xs text-[var(--text-muted)] leading-relaxed">
                                 NIST Special Publication 800-38D explicitly designates GCM as the preferred mode for modern communications and storage because any unauthorized modification of the ciphertext immediately invalidates the authentication tag during decryption.
                               </p>
                             </article>
 
                             <article className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
-                              <h3 className="text-base font-bold text-white mb-2">
+                              <h3 className="text-sm sm:text-base font-bold text-[var(--text-primary)] mb-2">
                                 Are client-side SHA-256 and SHA-512 hashes mathematically reversible?
                               </h3>
-                              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-2">
+                              <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mb-2">
                                 <strong>Direct Answer:</strong> No. SHA-256 and SHA-512 are cryptographic one-way compression functions compliant with FIPS PUB 180-4 and RFC 6234 that cannot be mathematically inverted or reversed into the original plaintext.
                               </p>
-                              <p className="text-xs text-slate-400 leading-relaxed">
+                              <p className="text-xs text-[var(--text-muted)] leading-relaxed">
                                 Cryptographic hashes map variable-length inputs into a deterministic, fixed-size digest (256 bits or 512 bits). They possess pre-image resistance and strong collision resistance, making them ideal for verifying file checksums, digital signatures, and data integrity verification. Note: SHA-256 alone is not recommended for password storage; modern cryptographic standards (such as NIST SP 800-63B) mandate memory-hard algorithms like Argon2id, bcrypt, or PBKDF2.
                               </p>
                             </article>
 
                             <article className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
-                              <h3 className="text-base font-bold text-white mb-2">
+                              <h3 className="text-sm sm:text-base font-bold text-[var(--text-primary)] mb-2">
                                 Why is browser-based password generation superior to server-side generators?
                               </h3>
-                              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-2">
+                              <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mb-2">
                                 <strong>Direct Answer:</strong> Browser-based password generators use the local cryptographically secure pseudorandom number generator (CSPRNG) <code>crypto.getRandomValues()</code> to generate entropy locally without ever transmitting the generated password across network transit logs.
                               </p>
-                              <p className="text-xs text-slate-400 leading-relaxed">
+                              <p className="text-xs text-[var(--text-muted)] leading-relaxed">
                                 Server-side generators risk intercepting or caching generated credentials in web server access logs, reverse proxies, or cloud telemetry. EncryptDecrypt.org guarantees that passwords exist solely in volatile client device RAM.
                               </p>
                             </article>
 
                             <article className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)]">
-                              <h3 className="text-base font-bold text-white mb-2">
+                              <h3 className="text-sm sm:text-base font-bold text-[var(--text-primary)] mb-2">
                                 Which standards govern Base64, Hex, and Base32 data encoding?
                               </h3>
-                              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-2">
+                              <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mb-2">
                                 <strong>Direct Answer:</strong> IETF RFC 4648 officially specifies the Base64, Base32, Base16 (Hex), and URL-safe Base64 data encoding schemes used across modern internet communication.
                               </p>
-                              <p className="text-xs text-slate-400 leading-relaxed">
+                              <p className="text-xs text-[var(--text-muted)] leading-relaxed">
                                 Data encoding is distinct from encryption: encoding converts binary data into ASCII text representations for safe transport over channels designed strictly for textual transmission, requiring no secret key.
                               </p>
                             </article>
@@ -2126,8 +2567,8 @@ export default function App() {
                 </a>
               </li>
               <li>
-                <a href="/blog" onClick={(e) => { e.preventDefault(); handleNavigateView('blog'); }} className="min-h-[48px] py-3 px-2 flex items-center text-amber-400 hover:text-amber-300 transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)] font-semibold">
-                  ★ Master Blog &amp; Guides
+                <a href="/blog" onClick={(e) => { e.preventDefault(); handleNavigateView('blog'); }} className="min-h-[48px] py-3 px-2 flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">
+                  Blog &amp; Tutorials (5 Guides)
                 </a>
               </li>
               <li>
@@ -2187,6 +2628,7 @@ export default function App() {
         <div className="container border-t border-[var(--border-subtle)] mt-8 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[var(--text-muted)]">
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 font-medium">
             <span className="text-[var(--text-primary)] font-semibold px-2 py-3">© 2026 EncryptDecrypt.org</span>
+            <span className="text-[var(--text-muted)] hidden lg:inline">· Founded by Ajay Rathod (Maharashtra, India)</span>
             <a href="/privacy" onClick={(e) => { e.preventDefault(); handleNavigateView('privacy'); }} className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">Privacy Policy</a>
             <a href="/terms" onClick={(e) => { e.preventDefault(); handleNavigateView('terms'); }} className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">Terms of Service</a>
             <a href="/disclaimer" onClick={(e) => { e.preventDefault(); handleNavigateView('disclaimer'); }} className="min-h-[48px] px-3.5 py-3 inline-flex items-center text-[var(--text-secondary)] hover:text-[#2E9BFF] transition-colors cursor-pointer rounded-lg hover:bg-[var(--bg-surface-hover)]">Legal Disclaimer</a>

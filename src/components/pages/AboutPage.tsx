@@ -132,21 +132,54 @@ export const AboutPage: React.FC<AboutPageProps> = ({
         </ul>
 
         <h2 className="text-xl font-bold text-[var(--text-primary)] pt-4 border-t border-[var(--border-subtle)]">
-          Engineering Team &amp; Author Credentials
+          About the Founder: Ajay Rathod
         </h2>
-        <div className="p-4 rounded-xl bg-[var(--bg-input)] border border-[var(--border-subtle)] space-y-3">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-blue-500/20 text-[#2E9BFF] flex items-center justify-center font-bold text-sm shrink-0">
-              AA
+        <div className="p-5 sm:p-6 rounded-2xl bg-[var(--bg-input)] border border-[var(--border-subtle)] space-y-4">
+          <div className="flex items-start sm:items-center gap-4">
+            <div className="w-14 h-14 rounded-2xl bg-blue-500/20 text-[#2E9BFF] flex items-center justify-center font-bold text-lg shrink-0 border border-blue-500/30 shadow-sm">
+              AR
             </div>
             <div>
-              <div className="font-bold text-[var(--text-primary)]">Ajjay Ade</div>
-              <div className="text-xs text-[var(--text-muted)]">Lead Software &amp; Cryptographic Engineer · Open-Source Maintainer</div>
+              <div className="font-bold text-base sm:text-lg text-[var(--text-primary)] flex items-center gap-2">
+                <span>Ajay Rathod</span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-sky-400 border border-blue-500/20 font-semibold">
+                  Founder &amp; Developer
+                </span>
+              </div>
+              <div className="text-xs text-[var(--text-muted)] mt-0.5">
+                Full-Stack Web Developer · Maharashtra, India
+              </div>
+              <div className="text-xs font-mono text-[#2E9BFF] mt-1.5 flex flex-wrap items-center gap-3">
+                <a href="mailto:support@encryptdecrypt.org" className="hover:underline">support@encryptdecrypt.org</a>
+                <span className="text-[var(--text-muted)]">·</span>
+                <a href="https://github.com/ajayrathod-dev" target="_blank" rel="noopener noreferrer" className="hover:underline text-[var(--text-secondary)]">GitHub</a>
+                <span className="text-[var(--text-muted)]">·</span>
+                <a href="https://linkedin.com/in/ajay-rathod" target="_blank" rel="noopener noreferrer" className="hover:underline text-[var(--text-secondary)]">LinkedIn</a>
+              </div>
             </div>
           </div>
-          <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-            Maintained alongside dedicated open-source security contributors. All algorithmic test harnesses are systematically validated against official NIST Computer Security Division (CSD) test vectors, Known Answer Tests (KAT), and IETF RFC test suites.
+
+          <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
+            Hi, I’m Ajay Rathod, a software developer from Maharashtra, India. As a developer building web applications and working with sensitive APIs, I often needed to quickly format a JSON file, test an AES key, decode a JWT token, or generate a hash.
           </p>
+          <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
+            I noticed that almost every popular online tool sent the text back to a backend server. That meant production tokens, customer IDs, and database passwords were being logged on someone else’s machine. I built <strong>EncryptDecrypt.org</strong> to fix this: a suite of free, fast developer tools where <strong>100% of the computations run locally in your browser memory</strong> using the Web Crypto API.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-[11px] font-mono">
+            <div className="p-3 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
+              <span className="text-[var(--text-muted)] block text-[10px] uppercase font-semibold">Location</span>
+              <strong className="text-[var(--text-primary)]">Maharashtra, India</strong>
+            </div>
+            <div className="p-3 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
+              <span className="text-[var(--text-muted)] block text-[10px] uppercase font-semibold">Core Principle</span>
+              <strong className="text-emerald-400">Zero Server Uploads</strong>
+            </div>
+            <div className="p-3 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
+              <span className="text-[var(--text-muted)] block text-[10px] uppercase font-semibold">Support Guarantee</span>
+              <strong className="text-sky-400">Response &lt; 24 Hours</strong>
+            </div>
+          </div>
         </div>
 
         <h2 className="text-xl font-bold text-[var(--text-primary)] pt-4 border-t border-[var(--border-subtle)]">
